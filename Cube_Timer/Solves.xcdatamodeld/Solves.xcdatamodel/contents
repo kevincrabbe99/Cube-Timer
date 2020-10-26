@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="20A5384c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class">
+        <fetchedProperty name="fetchedProperty" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Entity"/>
+        </fetchedProperty>
+        <fetchedProperty name="fetchedProperty1" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Entity"/>
+        </fetchedProperty>
+        <fetchedProperty name="fetchedProperty2" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Entity"/>
+        </fetchedProperty>
+        <userInfo>
+            <entry key="timeMS" value="1548"/>
+        </userInfo>
+    </entity>
+    <entity name="Entity1" representedClassName="Entity1" syncable="YES" codeGenerationType="class"/>
+    <entity name="Solves" representedClassName="Solves" syncable="YES" codeGenerationType="class">
+        <attribute name="attribute" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <userInfo>
+            <entry key="key" value="value"/>
+        </userInfo>
+    </entity>
+    <elements>
+        <element name="Entity" positionX="-45" positionY="0" width="128" height="20"/>
+        <element name="Entity1" positionX="-18" positionY="45" width="128" height="14"/>
+        <element name="Solves" positionX="9" positionY="63" width="128" height="14"/>
+    </elements>
+</model>
