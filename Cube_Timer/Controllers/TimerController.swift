@@ -7,11 +7,16 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 class TimerController: ObservableObject {
     
-    @Published var  type: ConfigType = .a3x3x3
-    @Published var  brand: ConfigBrand = .rubiks
+    //@Environment(\.managedObjectContext) private var viewContext
+   // @Environment (\.presentationMode) var presentationMode
+    
+    
+    @Published var  type: PuzzleType = .a3x3x3
+    @Published var  brand: PuzzleBrand = .rubiks
     
     var leftActivated: Bool = false
     var rightActivated: Bool = true
@@ -27,17 +32,19 @@ class TimerController: ObservableObject {
     
     var startTime: Double = 0
     var time: Double = 0
-    var lastRecordedTime:Double = 0
+    @Published var lastRecordedTime:Double = 0
     var elapsed: Double = 0
     
     @Published var lblMin: String = "00"
     @Published var lblSec: String = "00"
     @Published var lblMS: String = "00"
     
-    @Published var solveHandler: SolveHandler = SolveHandler()
+    @ObservedObject var solveHandler: SolveHandler = SolveHandler()
     
     init() {
-        }
+        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
+        solveHandler.timer = self
+    }
     
     @objc func UpdateTimer() {
         
@@ -126,11 +133,30 @@ class TimerController: ObservableObject {
     }
     
     func stopTimer() {
-        UIApplication.shared.isIdleTimerDisabled = false // enable the sleep
-        print("time stopped")
+        //UIApplication.shared.isIdleTimerDisabled = false // enable the sleep
+        //print("time stopped")
+        /*
+        let newSolve = SolveItem(type: type, brand: brand, timeMS: lastRecordedTime)
+         */
         
-        let newSolve = Solve(type: type, brand: brand, timeMS: lastRecordedTime)
+        //let newSolve = SolveItem(context: PersistenceController.shared.container.viewContext)
+        let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
+        newSolve.brand = brand.rawValue
+        newSolve.cubeType = type
+        newSolve.id = UUID().uuidString
+        newSolve.timeMS = lastRecordedTime
+        newSolve.timestamp = Date()
+        newSolve.type = type.rawValue
+        
         solveHandler.add(newSolve)
+        
+        do {
+            try PersistenceController.shared.container.viewContext.save()
+                print("Solve Saved!")
+            //presentationMode.wrappedValue.dismiss()  //idk
+        } catch {
+            print("SAVE ERROR: ", error.localizedDescription)
+        }
         
         startTime = 0
         oneActivated = false
@@ -145,6 +171,9 @@ class TimerController: ObservableObject {
     }
     
 }
+
+
+
 extension TimeInterval {
     var minuteSecondMS: String {
         return String(format:"%d:%02d.%03d", minute, second, millisecond)
@@ -158,4 +187,7 @@ extension TimeInterval {
     var millisecond: Int {
         return Int((self*1000).truncatingRemainder(dividingBy: 1000))
     }
+    
+    
+    
 }

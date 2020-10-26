@@ -6,16 +6,18 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct Cube_TimerApp: App {
 
-    let persistanceContainer = PersistanceController.shared
+    let persistanceContainer = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistanceContainer.container.viewContext)
+            
         }
     }
 }

@@ -12,7 +12,7 @@ struct ContentView: View {
     
     
     @ObservedObject var timer: TimerController = TimerController()
-    @ObservedObject var solveHandler: SolveHandler = SolveHandler()
+    //@ObservedObject var solveHandler: SolveHandler = SolveHandler()
 
     var peripheralOpacity: Double  {
         if timer.startApproved || timer.timerGoing || timer.oneActivated{
@@ -21,6 +21,12 @@ struct ContentView: View {
             return 0.5
         }
     }
+    /*
+    init() {
+        self.timer.solveHandler = solveHandler
+        self.solveHandler.timer = timer
+    }
+     */
     
     var body: some View {
         GeometryReader { geo in
@@ -32,7 +38,7 @@ struct ContentView: View {
                     .position(x: geo.size.width/2, y: geo.size.height-50)
                     .opacity(peripheralOpacity + 0.3)
                     .animation(.easeIn)
-                StatsPreviewView(timer: timer)
+                StatsPreviewView(timer: timer /*solveHandler: solveHandler*/)
                     .offset(y:-30)
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
@@ -47,6 +53,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().previewLayout(PreviewLayout.fixed(width: 568, height: 320))
+            //.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             
     }
 }
