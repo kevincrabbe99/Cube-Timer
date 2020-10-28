@@ -62,7 +62,27 @@ struct StatsPreviewView: View {
         }
     }
 
+    @State var slvsBarWidth: CGFloat = 250
+    @State var slvsBarHeight: CGFloat = 20
+    @State var slvsOffsetY: CGFloat = 0
+    @State var slvsOpacity: Double = 0.65
+    @State var slvsTextOpacity: Double = 1
+    func openShowAllSolves() {
+        slvsBarWidth = UIScreen.main.bounds.width
+        slvsBarHeight = UIScreen.main.bounds.height
+        slvsOffsetY = 30
+        slvsOpacity = 1
+        slvsTextOpacity = 0
+    }
     
+    func closeShowAllSolves() {
+        slvsBarWidth = 250
+        slvsBarHeight = 20
+        slvsOffsetY = 0
+        slvsOpacity = 0.65
+        slvsTextOpacity = 1
+        
+    }
     
     
     var body: some View {
@@ -103,9 +123,20 @@ struct StatsPreviewView: View {
             
             
             ZStack {
-                Color.init("very_dark_black")
-                    .cornerRadius(5)
-                    .opacity(0.65)
+                
+                Button(action: { // background / label
+                    openShowAllSolves()
+                }, label: {
+                    Color.init("very_dark_black")
+                        .cornerRadius(5)
+                        .offset(y: slvsOffsetY)
+                        .opacity(slvsOpacity)
+                        .frame(width: slvsBarWidth, height: slvsBarHeight)
+                        .animation(
+                            Animation.easeOut(duration: 0.17)
+                        )
+                })
+                
                 HStack(spacing: 30.0) {
                     
                     ForEach(timer.solveHandler.last3) { s in
@@ -113,7 +144,7 @@ struct StatsPreviewView: View {
                             .fontWeight(.bold)
                             .opacity(peripheralOpacity)
                             .font(.system(size: 13))
-                            //.animation(.easeIn)
+                            
                             .gesture(
                                 TapGesture()
                                     .onEnded { _ in
@@ -121,12 +152,18 @@ struct StatsPreviewView: View {
                                         self.timer.solveHandler.delete(s)
                                     }
                             )
+                            
                     }
                     
                 }
+                .opacity(slvsTextOpacity)
             }
             .frame(width: 250, height: 20)
             .offset(y: -30)
+            .zIndex(90)
+            .animation(
+                Animation.easeOut(duration: 0.17)
+            )
             
             
             StatsBarView(timer: timer)

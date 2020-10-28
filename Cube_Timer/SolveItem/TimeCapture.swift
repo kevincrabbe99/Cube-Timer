@@ -62,7 +62,7 @@ struct TimeCapture {
         
         res.append(" \(seconds)s")
         
-        return res
+        return res.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     func getAsReadable() -> String {

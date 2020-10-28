@@ -143,6 +143,16 @@ class SolvesFromTimeframe: ObservableObject {
         return si
     }
     
+    func getAverage() -> TimeCapture  {
+        var max: Double = 0
+        for s in solves {
+            let solve = s as SolveItem
+            max += solve.timeMS
+        }
+        
+        return TimeCapture(max / Double(size))
+    }
+    
     func getRange() -> Double {
         return getMax().timeMS - getMin().timeMS
     }

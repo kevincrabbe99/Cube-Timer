@@ -38,10 +38,18 @@ struct StatsBarView: View {
         }
     }
     
+    
     var body: some View {
         
         ZStack {
             //if !timer.solveHandler.isTimeframeNil(timer.currentTimeframe) {
+            
+            if timeframe == 0 { // in last 3 mode
+                
+                StatsLast3View(timer: timer)
+                
+            } else {
+            
                 VStack {
                     
                         
@@ -93,7 +101,7 @@ struct StatsBarView: View {
                 }
                 .opacity(visibility)
                 .animation(.easeOut)
-            
+            } // end if (last3Mode)
         }
     }
 }
