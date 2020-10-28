@@ -41,6 +41,8 @@ class TimerController: ObservableObject {
     
     @ObservedObject var solveHandler: SolveHandler = SolveHandler()
     
+    @Published var currentTimeframe: Timeframe = .Today
+    
     init() {
         print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
         solveHandler.timer = self

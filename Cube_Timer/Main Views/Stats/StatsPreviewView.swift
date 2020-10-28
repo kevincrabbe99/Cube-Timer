@@ -33,8 +33,8 @@ struct StatsPreviewView: View {
     
     var overUnderTime: String {
         
-        var average = timer.solveHandler.average.timeInMS
-        var currentTime = timer.lastRecordedTime
+        let average = timer.solveHandler.average.timeInMS
+        let currentTime = timer.lastRecordedTime
         
         if average > currentTime {
             return "- \(TimeCapture( average - currentTime ).getInSolidForm())"
@@ -129,7 +129,10 @@ struct StatsPreviewView: View {
             .offset(y: -30)
             
             
+            StatsBarView(timer: timer)
+                .offset(y: -15)
             
+            /*
             VStack {
                 HStack {
                     Text("Average")
@@ -151,7 +154,7 @@ struct StatsPreviewView: View {
             .font(.system(size: 15))
             .opacity(peripheralOpacity - 0.1)
             .animation(.easeIn)
-            
+            */
  
         }
         .foregroundColor(.white)

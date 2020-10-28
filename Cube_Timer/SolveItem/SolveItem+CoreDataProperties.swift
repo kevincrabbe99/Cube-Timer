@@ -34,9 +34,10 @@ extension SolveItem: Identifiable {
     @NSManaged public var timestamp: Date
 
     
-    func getTimeCapture() -> TimeCapture {
-        return TimeCapture.init(timeMS)
+    func getTimeCapture() -> TimeCapture? {
+            return TimeCapture.init(timeMS)
     }
+    
     
     public func equals(_ s: SolveItem) -> Bool {
         if self.id == s.id {

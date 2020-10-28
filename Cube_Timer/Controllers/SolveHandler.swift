@@ -20,7 +20,14 @@ class SolveHandler: ObservableObject {
     @Published var best: TimeCapture = TimeCapture()
 
     @Published var last3: [SolveItem] = []
-    
+    @Published var solvesByTimeframe: [SolvesFromTimeframe] = [
+        SolvesFromTimeframe(.LastThree),
+        SolvesFromTimeframe(.Today),
+        SolvesFromTimeframe(.OneMonth),
+        SolvesFromTimeframe(.ThreeMonths),
+        SolvesFromTimeframe(.Year),
+        SolvesFromTimeframe(.All)
+    ]
     //var container: NSPersistentContainer
     
     
@@ -63,12 +70,14 @@ class SolveHandler: ObservableObject {
         
     }
     
+    /* update last 3 as best 3
     func updateLast3() {
+        let orderedSolves = solves.sorted(by:{ $0.timeMS < $1.timeMS })
         if timer != nil {
             self.timer.objectWillChange.send()
         }
         if size > 2 {
-            self.last3 = [solves[size-3], solves[size-2], solves[size-1]]
+            self.last3 = [orderedSolves[0], orderedSolves[1], orderedSolves[2]]
         }else if size <= 2 {
             self.last3 = []
             for s in solves {
@@ -76,6 +85,153 @@ class SolveHandler: ObservableObject {
             }
         }
     }
+ */
+    
+    func updateLast3() {
+        //let orderedSolves = solves.sorted(by:{ $0.timeMS < $1.timeMS })
+        if timer != nil {
+            self.timer.objectWillChange.send()
+        }
+        if size > 2 {
+            self.last3 = [solves[size - 1], solves[size - 2], solves[size - 3]]
+        }else if size <= 2 {
+            self.last3 = []
+            for s in solves {
+                self.last3.append(s)
+            }
+        }
+    }
+    
+    func isTimeframeNil(_ tf: Timeframe) -> Bool {
+        switch tf {
+        case .LastThree:
+            if solvesByTimeframe[0].size > 1 {
+                return false
+            }
+        case .Today:
+            if solvesByTimeframe[1].size > 1 {
+                return false
+            }
+        case .OneMonth:
+            if solvesByTimeframe[2].size > 1 {
+                return false
+            }
+        case .ThreeMonths:
+            if solvesByTimeframe[3].size > 1 {
+                return false
+            }
+        case .Year:
+            if solvesByTimeframe[4].size > 1 {
+                return false
+            }
+        case .All:
+            if solvesByTimeframe[5].size > 1 {
+                return false
+            }
+        default:
+            if solvesByTimeframe[1].size > 1 {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func updateTimeframes() {
+        for (index, tf) in solvesByTimeframe.enumerated() {
+            switch(index) {
+            
+            case 0: // last 3
+                
+                updateLast3()
+                self.solvesByTimeframe[index].replaceWith(last3)
+                
+                break
+            case 1:     // one day
+                
+                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .Today))
+                
+                break
+            case 2:     // one month
+                
+                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .OneMonth))
+                
+                break
+            case 3:
+                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .ThreeMonths))
+                break
+            case 4:
+                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .Year))
+                break
+            case 5:
+                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .All))
+                break
+            default:
+                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .Today))
+                break
+            
+            }
+        }
+    }
+    
+    
+    func getTodaySolves() -> [SolveItem] {
+        var res: [SolveItem] = []
+        for s in solves {
+            if Calendar.current.isDateInToday(s.timestamp) {
+                res.append(s)
+            }
+        }
+        return res
+    }
+    
+    func getSolvesFrom(timeframe: Timeframe) -> [SolveItem] {
+        var res: [SolveItem] = []
+        let now = Date()
+        switch timeframe {
+        case .LastThree:
+            if solves.count >= 3 {
+                res = last3
+            }
+        case .Today:
+            for s in solves {
+                if Calendar.current.isDateInToday(s.timestamp) {
+                    res.append(s)
+                }
+            }
+        case .OneMonth:
+            
+            let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+            let range = monthAgo...now
+            for s in solves {
+                if range.contains(s.timestamp) {
+                    res.append(s)
+                }
+            }
+            
+        case .ThreeMonths:
+            let threeMonthAgo: Date = Calendar.current.date(byAdding: .month, value: -3, to: now)!
+            let range = threeMonthAgo...now
+            for s in solves {
+                if range.contains(s.timestamp) {
+                    res.append(s)
+                }
+            }
+        case .Year:
+            let yearAgo: Date = Calendar.current.date(byAdding: .year, value: -1, to: now)!
+            let range = yearAgo...now
+            for s in solves {
+                if range.contains(s.timestamp) {
+                    res.append(s)
+                }
+            }
+        case .All:
+            res = solves
+        default:
+            print("fuck")
+        }
+        return res
+    }
+    
     
     func delete(_ s: SolveItem) -> Bool{
         let deleteIndex = getIndexOf(s)
@@ -106,6 +262,7 @@ class SolveHandler: ObservableObject {
         updateBest()
         updateLast3()
         updateAverage()
+        updateTimeframes()
     }
     
     func getIndexOf(_ match: SolveItem) -> Int {
@@ -121,7 +278,9 @@ class SolveHandler: ObservableObject {
     func add(_ s: SolveItem) {
         
         //let newSolve = SolveItem()
-     
+        
+        
+        
         size += 1
         print("added: ", s.timeMS)
         solves.append(s)

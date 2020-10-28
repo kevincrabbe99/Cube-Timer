@@ -34,7 +34,7 @@ struct ContentView: View {
             ZStack {
                 
                 ButtonsView(timer: timer)
-                TopBar()
+                TopBar(tc: timer)
                     .position(x: geo.size.width/2, y: geo.size.height-50)
                     .opacity(peripheralOpacity + 0.3)
                     .animation(.easeIn)

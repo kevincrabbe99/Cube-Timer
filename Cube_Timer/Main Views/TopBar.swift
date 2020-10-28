@@ -7,15 +7,61 @@
 
 import SwiftUI
 
+class SelectedPos: ObservableObject {
+    @Published var selectedPos: CGFloat = 0
+    init(_ pos: CGFloat) {
+        selectedPos = pos
+    }
+    func set(_ pos: CGFloat) {
+        selectedPos = pos
+    }
+    func set(_ pos: Timeframe) {
+        switch pos {
+        case .LastThree:
+            self.selectedPos = 0
+        case .Today:
+            self.selectedPos = 1
+        case .OneMonth:
+            self.selectedPos = 2
+        case .ThreeMonths:
+            self.selectedPos = 3
+        case .Year:
+            self.selectedPos = 4
+        case .All:
+            self.selectedPos = 5
+        default:
+            self.selectedPos = 1
+        }
+        print("selectedPos ", selectedPos)
+    }
+}
+
 struct TopBar: View {
     
-    var selectedTimeFrame: Int = 0
-    let timeFrames: [STDButton] = [ STDButton(title: "3X", id: 0, selected: false),
-                                    STDButton(title: "1D", id: 1, selected: true),
-                                    STDButton(title: "1W", id: 2),
-                                    STDButton(title: "1M", id: 3, selected: false),
-                                    STDButton(title: "1Y", id: 4),
-                                    STDButton(title: "AT", id: 5)]
+    @ObservedObject var timer: TimerController
+    
+    @State var selectedPos: CGFloat = 0
+    
+    //var selectedTimeFrame: Int = 0
+    //var timeFrames: [STDButton] = []
+    
+    init(tc: TimerController) {
+        self.timer = tc
+        /*
+        timeFrames = [ STDButton(label: .LastThree, id: 0, selection: selectedPos, parent: self),
+                       STDButton(label: .Today, id: 1, selection: selectedPos, parent: self),
+                       STDButton(label: .OneMonth, id: 2, selection: selectedPos, parent: self),
+                       STDButton(label: .ThreeMonths, id: 3, selection: selectedPos, parent: self),
+                       STDButton(label: .Year, id: 4, selection: selectedPos, parent: self),
+                       STDButton(label: .All, id: 5, selection: selectedPos, parent: self)]
+        */
+    }
+    
+    func switchTimeFrameTo(_ tf: Timeframe) {
+        timer.currentTimeframe = tf
+        print("sp: ", selectedPos)
+    }
+    
     
     var body: some View {
         GeometryReader { geometry in
@@ -23,10 +69,92 @@ struct TopBar: View {
                 Color.init("very_dark_black")
                     .cornerRadius(5)
                     .opacity(0.65)
+                
+                RoundedRectangle(cornerRadius: 4)
+                    .frame(width: 35, height: 25)
+                    .foregroundColor(.white)
+                    .position( x: 42.5, y: 12.5 )
+                    .offset(x: selectedPos * 55)
+                    .animation(.default)
+                
                 HStack(spacing: 20.0) {
                     
+                    /*
                     ForEach(timeFrames, id: \.id) { btn in
                         btn
+                    }
+                    */
+                    
+                    Button(action: {
+                        self.selectedPos = 0
+                        timer.currentTimeframe = .LastThree
+                    }) {
+                        ZStack {
+                            Text("3X")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 35, height: 25)
+                    }
+                    
+                    Button(action: {
+                        self.selectedPos = 1
+                        timer.currentTimeframe = .Today
+                    }) {
+                        ZStack {
+                            Text("1D")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 35, height: 25)
+                    }
+                    
+                    Button(action: {
+                        self.selectedPos = 2
+                        timer.currentTimeframe = .OneMonth
+                    }) {
+                        ZStack {
+                            Text("1M")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 35, height: 25)
+                    }
+                    
+                    Button(action: {
+                        self.selectedPos = 3
+                        timer.currentTimeframe = .ThreeMonths
+                    }) {
+                        ZStack {
+                            Text("3M")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 35, height: 25)
+                    }
+                    
+                    Button(action: {
+                        self.selectedPos = 4
+                        timer.currentTimeframe = .Year
+                    }) {
+                        ZStack {
+                            Text("1Y")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 35, height: 25)
+                    }
+                    
+                    Button(action: {
+                        self.selectedPos = 5
+                        timer.currentTimeframe = .All
+                    }) {
+                        ZStack {
+                            Text("ALL")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 35, height: 25)
                     }
                     
                 }
@@ -39,32 +167,36 @@ struct TopBar: View {
 
 struct STDButton: View {
     
-    var title: String
+    var label: Timeframe
     var id: Int
-    var selected: Bool = false
+    var selection: SelectedPos
+    var parent: TopBar
+    
     
     var body: some View {
         Button(action: {
-            
+            print("tapped: ", label.rawValue)
+            parent.switchTimeFrameTo(label)
+            selection.set(label)
         }) {
-            if selected {
+            /*if selected {
                 ZStack {
                     Color.white
                         .cornerRadius(5)
-                    Text(self.title)
+                    Text(self.label.rawValue)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                 }
                 .frame(width: 35, height: 25)
                 
-            }else {
+            }else {*/
                 ZStack {
-                    Text(self.title)
+                    Text(self.label.rawValue)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                 }
                 .frame(width: 35, height: 25)
-            }
+            //}
         }
     }
 }
@@ -82,7 +214,7 @@ struct selectedButton: ViewModifier {
 
 struct TopBar_Previews: PreviewProvider {
     static var previews: some View {
-        TopBar()
+        TopBar(tc: TimerController())
             .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/400.0/*@END_MENU_TOKEN@*/, height: 25))
     }
 }
