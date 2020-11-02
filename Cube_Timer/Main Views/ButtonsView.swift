@@ -14,14 +14,14 @@ struct ButtonsView: View {
     @State var leftBtnOpacity: Double = 1
     @State var rightBtnOpacity: Double = 1
     
-    @State var leftIconOpacity: Double = 0.2
-    @State var rightIconOpacity: Double = 0.2
+    @State var leftIconOpacity: Double = 0.1
+    @State var rightIconOpacity: Double = 0.1
     
     var iconOpacity: Double  {
         if timer.startApproved || timer.timerGoing {
             return 0
         }else {
-            return 0.2
+            return 0.1
         }
     }
         
@@ -38,7 +38,7 @@ struct ButtonsView: View {
                         Image("two_fingers")
                             .resizable()
                             .frame(width: 75, height: 75)
-                            .offset(x: -20)
+                            .offset(x: -50, y: 20)
                             .aspectRatio(contentMode: .fit)
                             .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
                             .foregroundColor(.white)
@@ -74,7 +74,7 @@ struct ButtonsView: View {
                         Image("two_fingers")
                             .resizable()
                             .frame(width: 75, height: 75)
-                            .offset(x: 20)
+                            .offset(x: 50, y: 20)
                             .aspectRatio(contentMode: .fit)
                             .rotation3DEffect(.degrees(330), axis: (x: 0, y: 0, z: 1))
                             .foregroundColor(.white)

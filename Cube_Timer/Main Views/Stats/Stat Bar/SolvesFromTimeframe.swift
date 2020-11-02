@@ -43,13 +43,19 @@ class SolvesFromTimeframe: ObservableObject {
     
     func getBars() -> [SingleStatBar] {
         
+        if size < 1 {
+            return []
+        }
+        
         var numOfBars: Int {
+            /*
             if size <= 9 {
-                return size
-            } else if size < 25 {
-                return size / 2
+                return size * 2
+            } else if size < 20 {
+                return 30
             }
-            return 25
+ */
+            return 30
         }
         
         let orderedSolves = solves.sorted(by:{ $0.timeMS < $1.timeMS })
@@ -70,10 +76,10 @@ class SolvesFromTimeframe: ObservableObject {
             if ms < barIntervals[currentBar] {
                 heightArray[currentBar].append(s)
             } else {
-                if currentBar < heightArray.count - 1 { // guart incase we go over
+                while (currentBar < heightArray.count - 1) && (ms > barIntervals[currentBar]){ // guart incase we go over
                     currentBar += 1
-                        heightArray[currentBar].append(s)
                 }
+                heightArray[currentBar].append(s)
             }
         }
         
@@ -94,7 +100,7 @@ class SolvesFromTimeframe: ObservableObject {
         
         print("==================== HEIGHT ARRAY ==================")
         for (index, h) in heightArray.enumerated() {
-            print("Bar \(index), which is solves under \(barIntervals[index]) has \(h.count) solves")
+            //print("Bar \(index), which is solves under \(barIntervals[index]) has \(h.count) solves")
         }
         
         return res

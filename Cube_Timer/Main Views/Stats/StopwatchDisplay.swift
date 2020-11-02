@@ -17,14 +17,17 @@ struct StopwatchDisplay: View {
             Text(timer.lblMin)
                 .fontWeight(.black)
                 .font(.system(size: 50))
+                .frame(width: 80)
             Text(":")
             Text(timer.lblSec)
                 .fontWeight(.black)
                 .font(.system(size: 50))
+                .frame(width: 80)
             Text(":")
             Text(timer.lblMS)
                 .fontWeight(.black)
                 .font(.system(size: 50))
+                .frame(width: 80)
         }
         .frame(width: 300.0)
         

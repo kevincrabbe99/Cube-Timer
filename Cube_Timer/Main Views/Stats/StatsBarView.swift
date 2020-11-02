@@ -10,9 +10,10 @@ import SwiftUI
 struct StatsBarView: View {
     
     @ObservedObject var timer: TimerController
+    var solveHandler: SolveHandler
     
     var timeframe: Int {
-        switch timer.currentTimeframe {
+        switch solveHandler.currentTimeframe {
         case .LastThree:
             return 0
         case .Today:
@@ -31,7 +32,7 @@ struct StatsBarView: View {
     }
     
     var visibility: Double! {
-        if !timer.solveHandler.isTimeframeNil(timer.currentTimeframe) {
+        if !solveHandler.isTimeframeNil(solveHandler.currentTimeframe) {
             return 1
         }else {
             return 0
@@ -42,11 +43,11 @@ struct StatsBarView: View {
     var body: some View {
         
         ZStack {
-            //if !timer.solveHandler.isTimeframeNil(timer.currentTimeframe) {
+            //if !solveHandler.isTimeframeNil(timer.currentTimeframe) {
             
             if timeframe == 0 { // in last 3 mode
                 
-                StatsLast3View(timer: timer)
+                StatsLast3View(timer: timer, solveHandler: solveHandler)
                 
             } else {
             
@@ -57,7 +58,7 @@ struct StatsBarView: View {
                         HStack(alignment: .bottom, spacing: 4) {
                             
                             
-                            ForEach( timer.solveHandler.solvesByTimeframe[timeframe].getBars(), id: \.id ) { bar in
+                            ForEach( solveHandler.solvesByTimeframe[timeframe].getBars(), id: \.id ) { bar in
                                 bar
                             }
                             
@@ -68,35 +69,37 @@ struct StatsBarView: View {
                     }
                     .frame(width: 250, height: 50)
                 
-                    HStack {
-                        Text( timer.solveHandler.solvesByTimeframe[timeframe].getMin().getTimeCapture()?.getAsReadable() ?? "-" )
-                            .font(.system(size: 8))
-                            .fontWeight(.bold)
-                            .frame(width: 100, alignment: .leading)
-                        
-                        ZStack {
-                            Color.white
-                                .cornerRadius(5)
-                                .opacity(0.7)
-                                .foregroundColor(.init("very_dark_black"))
-                                .frame(width: 25, height: 12)
-                            
-                            Text( String(timer.solveHandler.solvesByTimeframe[timeframe].size) )
-                                .font(.system(size: 9))
+                    if solveHandler.solvesByTimeframe[timeframe].size > 0 { // guard incase there are no solves
+                        HStack {
+                            Text( solveHandler.solvesByTimeframe[timeframe].getMin().getTimeCapture()?.getAsReadable() ?? "-" )
+                                .font(.system(size: 8))
                                 .fontWeight(.bold)
-                                .frame(width: 50, alignment: .center)
+                                .frame(width: 100, alignment: .leading)
+                            
+                            ZStack {
+                                Color.white
+                                    .cornerRadius(5)
+                                    .opacity(0.7)
+                                    .foregroundColor(.init("very_dark_black"))
+                                    .frame(width: 60, height: 12)
+                                
+                                Text( String(solveHandler.solvesByTimeframe[timeframe].size) + ": " + solveHandler.solvesByTimeframe[timeframe].getAverage().getInSolidForm())
+                                    .font(.system(size: 9))
+                                    .fontWeight(.bold)
+                                    .frame(width: 50, alignment: .center)
+                            }
+                            .frame(width: 60, height: 10)
+                            .offset(y: 3)
+                            
+                            Text( solveHandler.solvesByTimeframe[timeframe].getMax().getTimeCapture()?.getAsReadable() ?? "-" )
+                                .font(.system(size: 8))
+                                .fontWeight(.bold)
+                                .frame(width: 100, alignment: .trailing)
                         }
-                        .frame(width: 15, height: 10)
-                        .offset(y: 3)
-                        
-                        Text( timer.solveHandler.solvesByTimeframe[timeframe].getMax().getTimeCapture()?.getAsReadable() ?? "-" )
-                            .font(.system(size: 8))
-                            .fontWeight(.bold)
-                            .frame(width: 100, alignment: .trailing)
+                        .frame(width: 270, height: 20, alignment: .center)
+                        .offset(y: -15)
+                        .opacity(0.9)
                     }
-                    .frame(width: 270, height: 20, alignment: .center)
-                    .offset(y: -15)
-                    .opacity(0.7)
                
                 }
                 .opacity(visibility)
@@ -111,7 +114,7 @@ struct StatsBarView_Previews: PreviewProvider {
         ZStack {
             Color.init("very_dark_black")
             
-            StatsBarView(timer: TimerController())
+            StatsBarView(timer: TimerController(), solveHandler: SolveHandler())
             
         }
         .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/300.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/250.0/*@END_MENU_TOKEN@*/))

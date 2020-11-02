@@ -10,19 +10,20 @@ import SwiftUI
 struct StatsLast3View: View {
     
     @ObservedObject var timer: TimerController
+    var solveHandler: SolveHandler
     
     var bestDiff: String {
         let lrc = timer.lastRecordedTime
-        let best = timer.solveHandler.solvesByTimeframe[0].getMin().timeMS
+        let best = solveHandler.solvesByTimeframe[0].getMin().timeMS
         
         if lrc == 0 {
             return ""
         } else if lrc < best { // if under best
-            var diffMS = timer.solveHandler.solvesByTimeframe[0].getMin().timeMS - timer.lastRecordedTime
+            var diffMS = solveHandler.solvesByTimeframe[0].getMin().timeMS - timer.lastRecordedTime
             diffMS *= 1
             return "(-\(TimeCapture(diffMS).getInSolidForm()))"
         } else { // if over best
-            var diffMS = timer.lastRecordedTime - timer.solveHandler.solvesByTimeframe[0].getMin().timeMS
+            var diffMS = timer.lastRecordedTime - solveHandler.solvesByTimeframe[0].getMin().timeMS
             diffMS *= 1
             return "(+\(TimeCapture(diffMS).getInSolidForm()))"
         }
@@ -30,16 +31,16 @@ struct StatsLast3View: View {
     
     var worstDiff: String {
         let lrc = timer.lastRecordedTime
-        let worst = timer.solveHandler.solvesByTimeframe[0].getMax().timeMS
+        let worst = solveHandler.solvesByTimeframe[0].getMax().timeMS
         
         if lrc == 0 {
             return ""
         } else if lrc < worst { // if under best
-            var diffMS = timer.solveHandler.solvesByTimeframe[0].getMax().timeMS - timer.lastRecordedTime
+            var diffMS = solveHandler.solvesByTimeframe[0].getMax().timeMS - timer.lastRecordedTime
             diffMS *= 1
             return "(-\(TimeCapture(diffMS).getInSolidForm()))"
         } else { // if over best
-            var diffMS = timer.lastRecordedTime - timer.solveHandler.solvesByTimeframe[0].getMax().timeMS
+            var diffMS = timer.lastRecordedTime - solveHandler.solvesByTimeframe[0].getMax().timeMS
             diffMS *= 1
             return "(+\(TimeCapture(diffMS).getInSolidForm()))"
         }
@@ -47,16 +48,16 @@ struct StatsLast3View: View {
     
     var averageDiff: String {
         let lrc = timer.lastRecordedTime
-        let worst = timer.solveHandler.solvesByTimeframe[0].getAverage().timeInMS
+        let worst = solveHandler.solvesByTimeframe[0].getAverage().timeInMS
         
         if lrc == 0 {
             return ""
         } else if lrc < worst { // if under best
-            var diffMS = timer.solveHandler.solvesByTimeframe[0].getAverage().timeInMS - timer.lastRecordedTime
+            var diffMS = solveHandler.solvesByTimeframe[0].getAverage().timeInMS - timer.lastRecordedTime
             diffMS *= 1
             return "(-\(TimeCapture(diffMS).getInSolidForm()))"
         } else { // if over best
-            var diffMS = timer.lastRecordedTime - timer.solveHandler.solvesByTimeframe[0].getAverage().timeInMS
+            var diffMS = timer.lastRecordedTime - solveHandler.solvesByTimeframe[0].getAverage().timeInMS
             diffMS *= 1
             return "(+\(TimeCapture(diffMS).getInSolidForm()))"
         }
@@ -71,7 +72,7 @@ struct StatsLast3View: View {
                     Text("Best")
                         .frame(width: 50, alignment: .trailing)
                     HStack {
-                        Text( timer.solveHandler.solvesByTimeframe[0].getMin().getTimeCapture()?.getAsReadable() ?? "-" )
+                        Text( solveHandler.solvesByTimeframe[0].getMin().getTimeCapture()?.getAsReadable() ?? "-" )
                             .fontWeight(.bold)
                         Text(bestDiff)
                             .font(.system(size: 10))
@@ -83,7 +84,7 @@ struct StatsLast3View: View {
                     Text("Worst")
                         .frame(width: 50, alignment: .trailing)
                     HStack {
-                        Text( timer.solveHandler.solvesByTimeframe[0].getMax().getTimeCapture()?.getAsReadable() ?? "-" )
+                        Text( solveHandler.solvesByTimeframe[0].getMax().getTimeCapture()?.getAsReadable() ?? "-" )
                             .fontWeight(.bold)
                         Text(worstDiff)
                             .font(.system(size: 10))
@@ -95,7 +96,7 @@ struct StatsLast3View: View {
                     Text("Average")
                         .frame(width: 50, alignment: .trailing)
                     HStack {
-                        Text(    timer.solveHandler.solvesByTimeframe[0].getAverage().getAsReadable() )
+                        Text(    solveHandler.solvesByTimeframe[0].getAverage().getAsReadable() )
                             .fontWeight(.bold)
                         Text(averageDiff)
                             .font(.system(size: 10))
@@ -117,7 +118,7 @@ struct StatsLast3View_Previews: PreviewProvider {
         ZStack {
             Color.init("very_dark_black")
             
-            StatsLast3View(timer: TimerController())
+            StatsLast3View(timer: TimerController(), solveHandler: SolveHandler())
         }
         .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/250.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/250.0/*@END_MENU_TOKEN@*/))
         

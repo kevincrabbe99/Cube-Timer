@@ -16,12 +16,14 @@ struct StatsPreviewView: View {
     var fetchedSolves: FetchedResults<SolveItem>
     */
     
+    var parent: MainView!
+    
     var type: PuzzleType = .a3x3x3
     var brand: PuzzleBrand = .rubiks
     
     @ObservedObject var timer: TimerController
-    //@ObservedObject var solveHandler: SolveHandler
-    
+    @ObservedObject var solveHandler: SolveHandler
+
     
     var peripheralOpacity: Double  {
         if timer.oneActivated || timer.timerGoing || timer.startApproved {
@@ -31,9 +33,17 @@ struct StatsPreviewView: View {
         }
     }
     
+    var statBarGraphOpacity: Double  {
+        if timer.oneActivated || timer.timerGoing || timer.startApproved {
+            return 0
+        }else {
+            return 0.9
+        }
+    }
+    
     var overUnderTime: String {
         
-        let average = timer.solveHandler.average.timeInMS
+        let average = solveHandler.average.timeInMS
         let currentTime = timer.lastRecordedTime
         
         if average > currentTime {
@@ -45,14 +55,14 @@ struct StatsPreviewView: View {
     }
 
     var overUnderPercentage: Double {
-        let average = timer.solveHandler.average.timeInMS
+        let average = solveHandler.average.timeInMS
         let currentTime = timer.lastRecordedTime
         
             return (currentTime / average) * 100
     }
     
     var statColor: Color {
-        let average = timer.solveHandler.average.timeInMS
+        let average = solveHandler.average.timeInMS
         let currentTime = timer.lastRecordedTime
         
         if average > currentTime {
@@ -73,6 +83,8 @@ struct StatsPreviewView: View {
         slvsOffsetY = 30
         slvsOpacity = 1
         slvsTextOpacity = 0
+        
+        parent.gotoPage(.showAll)
     }
     
     func closeShowAllSolves() {
@@ -99,6 +111,7 @@ struct StatsPreviewView: View {
             .frame(width: 245, alignment: .leading)
             .offset(y: 5)
             .foregroundColor(statColor)
+            .animation(Animation.spring())
             
             
             /*
@@ -119,6 +132,7 @@ struct StatsPreviewView: View {
             
             StopwatchDisplay(timer: timer)
                 .frame(width: 250)
+                .animation(.spring())
             
             
             
@@ -139,7 +153,7 @@ struct StatsPreviewView: View {
                 
                 HStack(spacing: 30.0) {
                     
-                    ForEach(timer.solveHandler.last3) { s in
+                    ForEach(solveHandler.last3) { s in
                         Text(TimeCapture.init(s.timeMS).getAsReadable() )
                             .fontWeight(.bold)
                             .opacity(peripheralOpacity)
@@ -149,7 +163,7 @@ struct StatsPreviewView: View {
                                 TapGesture()
                                     .onEnded { _ in
                                         print("tapped")
-                                        self.timer.solveHandler.delete(s)
+                                        self.solveHandler.delete(s)
                                     }
                             )
                             
@@ -166,8 +180,10 @@ struct StatsPreviewView: View {
             )
             
             
-            StatsBarView(timer: timer)
+            StatsBarView(timer: timer, solveHandler: solveHandler)
                 .offset(y: -15)
+                .opacity(statBarGraphOpacity)
+                .animation(Animation.easeOut(duration: 0.5).delay(0.4))
             
             /*
             VStack {
@@ -175,7 +191,7 @@ struct StatsPreviewView: View {
                     Text("Average")
                         .fontWeight(.bold)
                         .frame(width: 75, alignment: .leading)
-                    Text(timer.solveHandler.average.getAsReadable())
+                    Text(solveHandler.average.getAsReadable())
                         .frame(width: 100, alignment: .trailing)
                 }
                 .frame(width: 200)
@@ -183,7 +199,7 @@ struct StatsPreviewView: View {
                     Text("Best")
                         .fontWeight(.bold)
                         .frame(width: 75, alignment: .leading)
-                    Text(timer.solveHandler.best.getAsReadable())
+                    Text(solveHandler.best.getAsReadable())
                         .frame(width: 100, alignment: .trailing)
                 }
                 .frame(width: 200)
@@ -203,7 +219,7 @@ struct StatsPreviewView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
         Color.black
-            StatsPreviewView(type: .a3x3x3, brand: .rubiks, timer: TimerController() )
+            StatsPreviewView(type: .a3x3x3, brand: .rubiks, timer: TimerController(), solveHandler: SolveHandler() )
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
         .previewLayout(.fixed(width: 250, height: 150))

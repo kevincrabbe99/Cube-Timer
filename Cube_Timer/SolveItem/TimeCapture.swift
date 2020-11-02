@@ -78,7 +78,7 @@ struct TimeCapture {
         time -= TimeInterval(seconds)
         
         // calculate ms
-        let milliseconds = UInt8(time * 100)
+        let milliseconds = Int(time * 100)
         
         let strMin = String(format: "%02d", minutes)
         let strSec = String(format: "%02d", seconds)

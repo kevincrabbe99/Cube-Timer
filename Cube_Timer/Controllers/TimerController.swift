@@ -39,13 +39,13 @@ class TimerController: ObservableObject {
     @Published var lblSec: String = "00"
     @Published var lblMS: String = "00"
     
-    @ObservedObject var solveHandler: SolveHandler = SolveHandler()
+    var solveHandler: SolveHandler!
     
-    @Published var currentTimeframe: Timeframe = .Today
+    
     
     init() {
         print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
-        solveHandler.timer = self
+        //solveHandler.timer = self
     }
     
     @objc func UpdateTimer() {

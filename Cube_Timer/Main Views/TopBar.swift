@@ -38,15 +38,15 @@ class SelectedPos: ObservableObject {
 
 struct TopBar: View {
     
-    @ObservedObject var timer: TimerController
+    @ObservedObject var solveHandler: SolveHandler
     
-    @State var selectedPos: CGFloat = 0
+    @State var selectedPos: CGFloat = 1
     
     //var selectedTimeFrame: Int = 0
     //var timeFrames: [STDButton] = []
     
-    init(tc: TimerController) {
-        self.timer = tc
+    init(sh: SolveHandler) {
+        self.solveHandler = sh
         /*
         timeFrames = [ STDButton(label: .LastThree, id: 0, selection: selectedPos, parent: self),
                        STDButton(label: .Today, id: 1, selection: selectedPos, parent: self),
@@ -58,7 +58,7 @@ struct TopBar: View {
     }
     
     func switchTimeFrameTo(_ tf: Timeframe) {
-        timer.currentTimeframe = tf
+        solveHandler.currentTimeframe = tf
         print("sp: ", selectedPos)
     }
     
@@ -87,7 +87,7 @@ struct TopBar: View {
                     
                     Button(action: {
                         self.selectedPos = 0
-                        timer.currentTimeframe = .LastThree
+                        solveHandler.currentTimeframe = .LastThree
                     }) {
                         ZStack {
                             Text("3X")
@@ -99,7 +99,7 @@ struct TopBar: View {
                     
                     Button(action: {
                         self.selectedPos = 1
-                        timer.currentTimeframe = .Today
+                        solveHandler.currentTimeframe = .Today
                     }) {
                         ZStack {
                             Text("1D")
@@ -111,7 +111,7 @@ struct TopBar: View {
                     
                     Button(action: {
                         self.selectedPos = 2
-                        timer.currentTimeframe = .OneMonth
+                        solveHandler.currentTimeframe = .OneMonth
                     }) {
                         ZStack {
                             Text("1M")
@@ -123,7 +123,7 @@ struct TopBar: View {
                     
                     Button(action: {
                         self.selectedPos = 3
-                        timer.currentTimeframe = .ThreeMonths
+                        solveHandler.currentTimeframe = .ThreeMonths
                     }) {
                         ZStack {
                             Text("3M")
@@ -135,7 +135,7 @@ struct TopBar: View {
                     
                     Button(action: {
                         self.selectedPos = 4
-                        timer.currentTimeframe = .Year
+                        solveHandler.currentTimeframe = .Year
                     }) {
                         ZStack {
                             Text("1Y")
@@ -147,7 +147,7 @@ struct TopBar: View {
                     
                     Button(action: {
                         self.selectedPos = 5
-                        timer.currentTimeframe = .All
+                        solveHandler.currentTimeframe = .All
                     }) {
                         ZStack {
                             Text("ALL")
@@ -214,7 +214,7 @@ struct selectedButton: ViewModifier {
 
 struct TopBar_Previews: PreviewProvider {
     static var previews: some View {
-        TopBar(tc: TimerController())
+        TopBar(sh: SolveHandler())
             .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/400.0/*@END_MENU_TOKEN@*/, height: 25))
     }
 }

@@ -12,6 +12,7 @@ import CoreData
 class SolveHandler: ObservableObject {
     
     var timer: TimerController!
+    var solveHandler: SolveHandler!
     
     @Published var solves: [SolveItem]
     var size: Int = 0
@@ -29,7 +30,7 @@ class SolveHandler: ObservableObject {
         SolvesFromTimeframe(.All)
     ]
     //var container: NSPersistentContainer
-    
+    @Published var currentTimeframe: Timeframe = .Today
     
     init() {
         solves = []
@@ -249,6 +250,7 @@ class SolveHandler: ObservableObject {
             } catch {
                 print("error deleting solve")
             }
+            updateTimeframes()
             
             
             return true
@@ -346,4 +348,7 @@ class SolveHandler: ObservableObject {
         }
     }
     */
+    
+    
 }
+
