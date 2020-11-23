@@ -21,6 +21,8 @@ class SolveHandler: ObservableObject {
     @Published var best: TimeCapture = TimeCapture()
 
     @Published var last3: [SolveItem] = []
+    
+   //  The old way of doing things
     @Published var solvesByTimeframe: [SolvesFromTimeframe] = [
         SolvesFromTimeframe(.LastThree),
         SolvesFromTimeframe(.Today),
@@ -29,12 +31,16 @@ class SolveHandler: ObservableObject {
         SolvesFromTimeframe(.Year),
         SolvesFromTimeframe(.All)
     ]
+  //  * New way below :) */
+   // var solvesByTimeFrame: SolvesFromTimeframe = SolvesFromTimeframe(); // initiates an empty solves by timeframe object
+ 
     //var container: NSPersistentContainer
-    @Published var currentTimeframe: Timeframe = .Today
+    @Published var currentTimeframe: Timeframe = .Today  // the current timeframe selected by the bottom bar
     
     init() {
         solves = []
-       
+        
+        // setup for CoreData
         let solveRequest = NSFetchRequest<SolveItem>(entityName: "SolveItem")
         solveRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         
@@ -58,37 +64,12 @@ class SolveHandler: ObservableObject {
         //print("Solves: ", fetchedSolves)
         
         
-        /*
-        container = NSPersistentContainer(name: "Cube_Timer")
-
-        container.loadPersistentStores { storeDescription, error in
-            if let error = error {
-                print("Unresolved error \(error)")
-            }else {
-                print("worked: ", storeDescription)
-            }
-        }
- */
-        
     }
     
-    /* update last 3 as best 3
-    func updateLast3() {
-        let orderedSolves = solves.sorted(by:{ $0.timeMS < $1.timeMS })
-        if timer != nil {
-            self.timer.objectWillChange.send()
-        }
-        if size > 2 {
-            self.last3 = [orderedSolves[0], orderedSolves[1], orderedSolves[2]]
-        }else if size <= 2 {
-            self.last3 = []
-            for s in solves {
-                self.last3.append(s)
-            }
-        }
-    }
- */
-    
+    /*
+     *  Updates the last 3 display preview via self.last3
+     *  Called by self.updateDisplay & self.updateTimeFrames()
+     */
     func updateLast3() {
         //let orderedSolves = solves.sorted(by:{ $0.timeMS < $1.timeMS })
         if timer != nil {
@@ -104,6 +85,12 @@ class SolveHandler: ObservableObject {
         }
     }
     
+    /*
+     *  returns whether the provided .TimeFrame has any values in it
+     *  Called by StatsBarView.visibility
+     
+     *  THIS WILL NEED TO BE UPDATED
+     */
     func isTimeframeNil(_ tf: Timeframe) -> Bool {
         switch tf {
         case .LastThree:
@@ -138,6 +125,12 @@ class SolveHandler: ObservableObject {
         return true
     }
     
+    /*
+     *  Updated every solvesByTimeFrame by replacing contents with self.getSolvesFrom(timeframe: .TimeFrame)
+     *  Called when a solve is added or deleted via self.delete() & self.updateDisplay()
+     
+     *  NEEDS TO BE REPLACED, change so that it only needs to update 1 solvesByTimeFrame object
+     */
     func updateTimeframes() {
         for (index, tf) in solvesByTimeframe.enumerated() {
             switch(index) {
@@ -175,17 +168,12 @@ class SolveHandler: ObservableObject {
         }
     }
     
-    
-    func getTodaySolves() -> [SolveItem] {
-        var res: [SolveItem] = []
-        for s in solves {
-            if Calendar.current.isDateInToday(s.timestamp) {
-                res.append(s)
-            }
-        }
-        return res
-    }
-    
+    /*
+     *  Returns an array of the solves from the requested timeframe
+     *  Called by self.updateTimeFrame
+     
+     *  NEED TO UPDATE: make i tso it just gets the data from the solvesByTimeFrame object
+     */
     func getSolvesFrom(timeframe: Timeframe) -> [SolveItem] {
         var res: [SolveItem] = []
         let now = Date()
@@ -234,7 +222,26 @@ class SolveHandler: ObservableObject {
         return res
     }
     
+    /*
+     *  Returns an array of all the solves from the current day
+     *  IDK about the callers
+     *  made redudant by the method above
+     
+    func getTodaySolves() -> [SolveItem] {
+        var res: [SolveItem] = []
+        for s in solves {
+            if Calendar.current.isDateInToday(s.timestamp) {
+                res.append(s)
+            }
+        }
+        return res
+    }
+     */
     
+    
+    /*
+     *  Deleted a solveItem, returns false if was not able to
+     */
     func delete(_ s: SolveItem) -> Bool{
         let deleteIndex = getIndexOf(s)
         if deleteIndex != -1 {
@@ -259,6 +266,9 @@ class SolveHandler: ObservableObject {
         return false
     }
     
+    /*
+     *  Calls all the methods to update the dispaly.
+     */
     public func updateDisplay(){
         print("updating display, size = ", size)
         print("updating display, solve count = ", solves.count)
@@ -268,6 +278,9 @@ class SolveHandler: ObservableObject {
         updateTimeframes()
     }
     
+    /*
+     *  Returns the index of a SolveItem from with self.solves
+     */
     func getIndexOf(_ match: SolveItem) -> Int {
         var i: Int = -1
         for (index, s) in solves.enumerated() {
@@ -278,11 +291,13 @@ class SolveHandler: ObservableObject {
         return i
     }
     
+    /*
+     *  Adds a solve to the solve array then calls self.updateDisplay()
+     *  Called by TimerController().stopTimer()
+     */
     func add(_ s: SolveItem) {
         
         //let newSolve = SolveItem()
-        
-        
         
         size += 1
         print("added: ", s.timeMS)
@@ -290,6 +305,10 @@ class SolveHandler: ObservableObject {
         updateDisplay()
     }
     
+    /*
+     *  Finds the best solve and sets it as best time
+     *  Called by self.updateDisplay()
+     */
     func updateBest() {
         
         if size == 0 {
@@ -307,6 +326,10 @@ class SolveHandler: ObservableObject {
         self.best = TimeCapture.init(b)
     }
     
+    /*
+     *  Calculates the average and sets it
+     *  Called by self.updateDisplay()
+     */
     func updateAverage()  {
         
         if size == 0 {
@@ -321,34 +344,6 @@ class SolveHandler: ObservableObject {
         //average =  convertTime(ms: (total / Double(solves.count)))
         average = TimeCapture.init(total / Double(size))
     }
-    /*
-    func convertTime(ms: Double) -> String{
-        
-        
-        var time = ms
-        
-        // calculate min
-        let minutes = UInt8(time / 60.0)
-        time -= (TimeInterval(minutes) * 60)
-        
-        // calculate sec
-        let seconds = UInt8(time)
-        time -= TimeInterval(seconds)
-        
-        // calculate ms
-        let milliseconds = UInt8(time * 100)
-        
-        let strMin = String(format: "%02d", minutes)
-        let strSec = String(format: "%02d", seconds)
-        let strMS = String(format: "%02d",milliseconds)
-        
-        if minutes < 1 {
-            return strSec + "." + strMS + " sec"
-        }else {
-            return strMin + "m " + strSec + "sec"
-        }
-    }
-    */
     
     
 }

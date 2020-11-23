@@ -20,27 +20,49 @@ enum Timeframe: String {
 }
 class SolvesFromTimeframe: ObservableObject {
     
-    var solves: [SolveItem]
-    var size: Int
-    var timeframe: Timeframe
+    var solves: [SolveItem] // array of all the solves
+    var size: Int   // amount of solves
     
+    //WILL NEED TO BE UPDATED: should be redundant
+    var timeframe: Timeframe // current timeframe
+    
+    /*
+     *  Inits an empty object
+     *  No callers
+     */
     init() {
         self.solves = []
         self.size = 0
         self.timeframe = .Unknown
     }
     
+    /*
+     *  Inits and sets a timeframe
+     *  No known callers
+     */
     init(_ tf: Timeframe) {
         self.solves = []
         self.size = 0
         self.timeframe = tf
     }
     
+    /*
+     *  Replaces contents of self.solves with priveded array
+     *  Called by SolveHandler().updateTimeFrames();
+     
+     *  THIS SHOHLD BE DELETED
+     */
     func replaceWith(_ ar: [SolveItem]) {
         self.solves = ar
         self.size = ar.count
     }
     
+    /*
+     *  Returns an array of SingleStatBar objects corresponding to this timeframe
+     *  Called by StatsBarView.swift -> body from within a foreach loop
+     
+     *  THIS SHOULD BE MOVED TO SOLVEHANDLER: and be renamed updateBars()
+     */
     func getBars() -> [SingleStatBar] {
         
         if size < 1 {
@@ -98,14 +120,22 @@ class SolvesFromTimeframe: ObservableObject {
             
         }
         
+        /* prints the height array
         print("==================== HEIGHT ARRAY ==================")
         for (index, h) in heightArray.enumerated() {
-            //print("Bar \(index), which is solves under \(barIntervals[index]) has \(h.count) solves")
+            print("Bar \(index), which is solves under \(barIntervals[index]) has \(h.count) solves")
         }
+        */
         
         return res
     }
     
+    /*
+     *  Returns a double representing the number of solves in the heighest bar
+     *  Called by self.getBars()
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
     private func getMaxBarHeight(_ ar: [[SolveItem]]) -> Double {
         var maxCount:Double = -1
         for i in ar {
@@ -115,12 +145,14 @@ class SolvesFromTimeframe: ObservableObject {
         }
         return maxCount
     }
+  
     
     /*
-    func getSolvesOrderedByTimeStamp() -> [SolveItem] {
-        return solves.sorted
-    }
-    */
+     *  Returns the SolveItem with the max solve time
+     *  Called by self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
     func getMax() -> SolveItem {
         var max: Double = -1
         var si: SolveItem = SolveItem()
@@ -135,6 +167,12 @@ class SolvesFromTimeframe: ObservableObject {
         return si
     }
     
+    /*
+     *  Returns the SolveItem with the min solve time
+     *  Called by self.getBars() & self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
     func getMin() -> SolveItem {
         var min: Double = 99999999999
         var si: SolveItem = SolveItem()
@@ -149,6 +187,12 @@ class SolvesFromTimeframe: ObservableObject {
         return si
     }
     
+    /*
+     *  Returns a TimeCapture of the average solve time
+     *  Called 1 thing in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
     func getAverage() -> TimeCapture  {
         var max: Double = 0
         for s in solves {
@@ -159,10 +203,18 @@ class SolvesFromTimeframe: ObservableObject {
         return TimeCapture(max / Double(size))
     }
     
+    /*
+     *  Returns the range of solve times as a Double
+     *  Called by self.getBars()
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
     func getRange() -> Double {
         return getMax().timeMS - getMin().timeMS
     }
     
+    /*  No known callers
+     *  IDK what this is or does
     func add(_ ar: [SolveItem]) {
         for s in ar {
             add(s)
@@ -173,5 +225,6 @@ class SolvesFromTimeframe: ObservableObject {
         solves.append(s)
         self.size += 1
     }
+     */
     
 }
