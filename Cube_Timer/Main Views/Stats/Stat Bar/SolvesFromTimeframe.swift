@@ -9,22 +9,13 @@ import Foundation
 import SwiftUI
 
 
-enum Timeframe: String {
-    case Unknown = "unknown"
-    case LastThree = "3X"
-    case Today = "1D"
-    case OneMonth = "1M"
-    case ThreeMonths = "3M"
-    case Year = "1Y"
-    case All = "ALL"
-}
 class SolvesFromTimeframe: ObservableObject {
     
-    var solves: [SolveItem] // array of all the solves
-    var size: Int   // amount of solves
+    @Published var solves: [SolveItem] // array of all the solves
+    @Published var size: Int   // amount of solves
     
     //WILL NEED TO BE UPDATED: should be redundant
-    var timeframe: Timeframe // current timeframe
+    //var timeframe: Timeframe // current timeframe
     
     /*
      *  Inits an empty object
@@ -33,198 +24,196 @@ class SolvesFromTimeframe: ObservableObject {
     init() {
         self.solves = []
         self.size = 0
-        self.timeframe = .Unknown
+        //self.timeframe = .Unknown
     }
     
     /*
      *  Inits and sets a timeframe
      *  No known callers
-     */
+     #1 Removed constructor, no need to set self.timeframe
+     
     init(_ tf: Timeframe) {
         self.solves = []
         self.size = 0
         self.timeframe = tf
     }
+     */
+    
+    
+    
     
     /*
-     *  Replaces contents of self.solves with priveded array
-     *  Called by SolveHandler().updateTimeFrames();
+     *  Returns an array of the solves from the requested timeframe
+     *  Called by self.updateTimeFrame
      
-     *  THIS SHOHLD BE DELETED
+     *  NEED TO UPDATE: make it so it just gets the data from the solvesByTimeFrame object
+     #1 moved from SolveHandler.swift to (here) SolvesFromTimeframe.swift
      */
-    func replaceWith(_ ar: [SolveItem]) {
-        self.solves = ar
-        self.size = ar.count
-    }
-    
-    /*
-     *  Returns an array of SingleStatBar objects corresponding to this timeframe
-     *  Called by StatsBarView.swift -> body from within a foreach loop
-     
-     *  THIS SHOULD BE MOVED TO SOLVEHANDLER: and be renamed updateBars()
-     */
-    func getBars() -> [SingleStatBar] {
+    func getSolvesFrom(timeframe: Timeframe) -> [SolveItem] {
+        var res: [SolveItem] = []
         
-        if size < 1 {
-            return []
-        }
+        let now = Date()
+        // needed for test .Week calculation
+        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
         
-        var numOfBars: Int {
-            /*
-            if size <= 9 {
-                return size * 2
-            } else if size < 20 {
-                return 30
-            }
- */
-            return 30
-        }
-        
-        let orderedSolves = solves.sorted(by:{ $0.timeMS < $1.timeMS })
-        
-        let singleBarRepresentation: Double = getRange() / Double(numOfBars)
-        
-        var heightArray = [[SolveItem]](repeating: [], count: numOfBars)
-        var barIntervals = [Double](repeating: -1, count: numOfBars)
-        
-        for i in 0...numOfBars - 1 { // fills the barInterval array with solvetimes
-            barIntervals[i] = (getMin().timeMS /* +c is the minimum solve time */ ) + singleBarRepresentation * Double(i)
-        }
-        
-        // place the solveItems in the corresponding heightArray index
-        var currentBar: Int = 0
-        for s in orderedSolves {
-            let ms = s.timeMS
-            if ms < barIntervals[currentBar] {
-                heightArray[currentBar].append(s)
-            } else {
-                while (currentBar < heightArray.count - 1) && (ms > barIntervals[currentBar]){ // guart incase we go over
-                    currentBar += 1
+        switch timeframe {
+        case .LastThree:
+            // * New Way!
+            var i = 0; while (i < 3) {   // loop 3 times
+                if solves.count > (i+1) {   // check if solves has a value
+                    res.append(solves[i]);  // add solve to return value
+                }else { // if there are no more solves
+                    i = 3 // cancel while loop
                 }
-                heightArray[currentBar].append(s)
+                
+                i+=1 // increment i for the while loop
             }
-        }
-        
-        // fill the heightArray with the corresponding solveTimes
-        var res: [SingleStatBar] = []
-        var min: Double = getMin().timeMS
-        var range: Double = getRange()
-        let maxheight: CGFloat = CGFloat(range)
-    
-        for height in heightArray {
+            /* The old way of doing things
+            if solves.count >= 3 {
+                res = last3
+            }
+            */
+        case .Today:
+            for s in solves {
+                if Calendar.current.isDateInToday(s.timestamp) {
+                    res.append(s)
+                }
+            }
+        case .Week:
             
-            let pct: Double = Double(height.count) / getMaxBarHeight(heightArray)
-            let bar: SingleStatBar = SingleStatBar(maxHeight: maxheight, percentage: pct)
-            //print("pct: ", pct)
-            res.append(bar)
+            let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+            let range = weekAgo...now
+            for s in solves {
+                if range.contains(s.timestamp) {
+                    res.append(s)
+                }
+            }
             
+        case .OneMonth:
+            
+            let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+            let range = monthAgo...now
+            for s in solves {
+                if range.contains(s.timestamp) {
+                    res.append(s)
+                }
+            }
+            
+        case .ThreeMonths:
+            let threeMonthAgo: Date = Calendar.current.date(byAdding: .month, value: -3, to: now)!
+            let range = threeMonthAgo...now
+            for s in solves {
+                if range.contains(s.timestamp) {
+                    res.append(s)
+                }
+            }
+        case .Year:
+            let yearAgo: Date = Calendar.current.date(byAdding: .year, value: -1, to: now)!
+            let range = yearAgo...now
+            for s in solves {
+                if range.contains(s.timestamp) {
+                    res.append(s)
+                }
+            }
+        case .All:
+            res = solves
+        default:
+            print("fuck")
         }
         
-        /* prints the height array
-        print("==================== HEIGHT ARRAY ==================")
-        for (index, h) in heightArray.enumerated() {
-            print("Bar \(index), which is solves under \(barIntervals[index]) has \(h.count) solves")
-        }
-        */
-        
+        print("getSolvesFrom(tf: Timeframe) tf = ", timeframe.rawValue);
+        print("getSolvesFrom(tf: Timeframe) was called, ", res.count, " items returned!")
         return res
     }
     
     /*
-     *  Returns a double representing the number of solves in the heighest bar
-     *  Called by self.getBars()
-     
-     *  SHOULD BE MOVED TO SolveHandler.swift
+     *  Returns an array of the timeframs which are needed for all the solves
      */
-    private func getMaxBarHeight(_ ar: [[SolveItem]]) -> Double {
-        var maxCount:Double = -1
-        for i in ar {
-            if i.count > Int(maxCount) {
-                maxCount = Double(i.count)
-            }
-        }
-        return maxCount
-    }
-  
-    
-    /*
-     *  Returns the SolveItem with the max solve time
-     *  Called by self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
-     
-     *  SHOULD BE MOVED TO SolveHandler.swift
-     */
-    func getMax() -> SolveItem {
-        var max: Double = -1
-        var si: SolveItem = SolveItem()
+    func getApplicableTimeframes() -> [Timeframe] {
+        var res: [Timeframe] = [.LastThree, .Today, .All] // the array to be returned
+        let now = Date()
+        
+        // needed for test .Week calculation
+        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
+        
+        // test .Week
+        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        let rangeW = weekAgo...dayAgo
         for s in solves {
-            let solve = s as SolveItem
-            if max < solve.timeMS {
-                max = solve.timeMS
-                si = solve
+            if rangeW.contains(s.timestamp) {
+                res.append(.Week)
+                break
             }
         }
         
-        return si
-    }
-    
-    /*
-     *  Returns the SolveItem with the min solve time
-     *  Called by self.getBars() & self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
-     
-     *  SHOULD BE MOVED TO SolveHandler.swift
-     */
-    func getMin() -> SolveItem {
-        var min: Double = 99999999999
-        var si: SolveItem = SolveItem()
+        // test .OneMonth
+        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+        let rangeM = monthAgo...weekAgo
         for s in solves {
-            let solve = s as SolveItem
-            if min > solve.timeMS {
-                min = solve.timeMS
-                si = solve
+            if rangeM.contains(s.timestamp) {
+                res.append(.OneMonth)
+                break
             }
         }
         
-        return si
-    }
-    
-    /*
-     *  Returns a TimeCapture of the average solve time
-     *  Called 1 thing in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
-     
-     *  SHOULD BE MOVED TO SolveHandler.swift
-     */
-    func getAverage() -> TimeCapture  {
-        var max: Double = 0
+        // test .ThreeMonths
+        let threeMonthAgo: Date = Calendar.current.date(byAdding: .month, value: -3, to: now)!
+        let range3M = threeMonthAgo...monthAgo
         for s in solves {
-            let solve = s as SolveItem
-            max += solve.timeMS
+            if range3M.contains(s.timestamp) {
+                res.append(.ThreeMonths)
+                break
+            }
         }
         
-        return TimeCapture(max / Double(size))
+        // test .Year
+        let yearAgo: Date = Calendar.current.date(byAdding: .year, value: -1, to: now)!
+        let rangeY = yearAgo...threeMonthAgo
+        for s in solves {
+            if rangeY.contains(s.timestamp) {
+                res.append(.Year)
+                break
+            }
+        }
+        
+        // delete the last one added so last and all are not redundant
+        // ONLY IF: we have more than 3 and less than 7 buttons active
+        if res.count > 3 && res.count < 7 { // if we should delete one
+            res.remove(at: res.count - 1) // delete the second to last button
+        }
+        
+        return res
+        
     }
+    
+
     
     /*
-     *  Returns the range of solve times as a Double
-     *  Called by self.getBars()
-     
-     *  SHOULD BE MOVED TO SolveHandler.swift
+     *  Adds an array of SolveItems to self.solves
      */
-    func getRange() -> Double {
-        return getMax().timeMS - getMin().timeMS
-    }
-    
-    /*  No known callers
-     *  IDK what this is or does
     func add(_ ar: [SolveItem]) {
         for s in ar {
             add(s)
         }
     }
     
+    /*
+     *  Adds a solve to self.solves
+     */
     func add(_ s: SolveItem) {
         solves.append(s)
         self.size += 1
     }
+    
+    /*
+     *  Deletes a provided SolveItem given it exists
+     *  Called by: SolveHandler().delete(_s: SolveItem)
      */
+    func delete(_ s: SolveItem) {
+        solves = solves.filter { $0 != s }
+        size -= 1
+        print("Deleted from SolvesFromTimeframe.swift reference")
+    }
+     
     
 }

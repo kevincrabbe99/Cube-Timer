@@ -14,16 +14,16 @@ struct StatsLast3View: View {
     
     var bestDiff: String {
         let lrc = timer.lastRecordedTime
-        let best = solveHandler.solvesByTimeframe[0].getMin().timeMS
+        let best = solveHandler.getMin().timeMS
         
         if lrc == 0 {
             return ""
         } else if lrc < best { // if under best
-            var diffMS = solveHandler.solvesByTimeframe[0].getMin().timeMS - timer.lastRecordedTime
+            var diffMS = solveHandler.getMin().timeMS - timer.lastRecordedTime
             diffMS *= 1
             return "(-\(TimeCapture(diffMS).getInSolidForm()))"
         } else { // if over best
-            var diffMS = timer.lastRecordedTime - solveHandler.solvesByTimeframe[0].getMin().timeMS
+            var diffMS = timer.lastRecordedTime - solveHandler.getMin().timeMS
             diffMS *= 1
             return "(+\(TimeCapture(diffMS).getInSolidForm()))"
         }
@@ -31,16 +31,16 @@ struct StatsLast3View: View {
     
     var worstDiff: String {
         let lrc = timer.lastRecordedTime
-        let worst = solveHandler.solvesByTimeframe[0].getMax().timeMS
+        let worst = solveHandler.getMax().timeMS
         
         if lrc == 0 {
             return ""
         } else if lrc < worst { // if under best
-            var diffMS = solveHandler.solvesByTimeframe[0].getMax().timeMS - timer.lastRecordedTime
+            var diffMS = solveHandler.getMax().timeMS - timer.lastRecordedTime
             diffMS *= 1
             return "(-\(TimeCapture(diffMS).getInSolidForm()))"
         } else { // if over best
-            var diffMS = timer.lastRecordedTime - solveHandler.solvesByTimeframe[0].getMax().timeMS
+            var diffMS = timer.lastRecordedTime - solveHandler.getMax().timeMS
             diffMS *= 1
             return "(+\(TimeCapture(diffMS).getInSolidForm()))"
         }
@@ -48,16 +48,16 @@ struct StatsLast3View: View {
     
     var averageDiff: String {
         let lrc = timer.lastRecordedTime
-        let worst = solveHandler.solvesByTimeframe[0].getAverage().timeInMS
+        let worst = solveHandler.getAverage().timeInMS
         
         if lrc == 0 {
             return ""
         } else if lrc < worst { // if under best
-            var diffMS = solveHandler.solvesByTimeframe[0].getAverage().timeInMS - timer.lastRecordedTime
+            var diffMS = solveHandler.getAverage().timeInMS - timer.lastRecordedTime
             diffMS *= 1
             return "(-\(TimeCapture(diffMS).getInSolidForm()))"
         } else { // if over best
-            var diffMS = timer.lastRecordedTime - solveHandler.solvesByTimeframe[0].getAverage().timeInMS
+            var diffMS = timer.lastRecordedTime - solveHandler.getAverage().timeInMS
             diffMS *= 1
             return "(+\(TimeCapture(diffMS).getInSolidForm()))"
         }
@@ -66,50 +66,56 @@ struct StatsLast3View: View {
     
     var body: some View {
     
-        ZStack {
-            VStack {
-                HStack {
-                    Text("Best")
-                        .frame(width: 50, alignment: .trailing)
+        if solveHandler.size > 0 { // EXIT: if no solves
+            
+            
+            ZStack {
+                VStack {
                     HStack {
-                        Text( solveHandler.solvesByTimeframe[0].getMin().getTimeCapture()?.getAsReadable() ?? "-" )
-                            .fontWeight(.bold)
-                        Text(bestDiff)
-                            .font(.system(size: 10))
+                        Text("Best")
+                            .frame(width: 50, alignment: .trailing)
+                        HStack {
+                            Text( solveHandler.getMin().getTimeCapture()?.getAsReadable() ?? "-" )
+                                .fontWeight(.bold)
+                            Text(bestDiff)
+                                .font(.system(size: 10))
+                        }
+                        .frame(width: 140, alignment: .trailing)
                     }
-                    .frame(width: 140, alignment: .trailing)
-                }
-                .frame(width: 200, alignment: .leading)
-                HStack {
-                    Text("Worst")
-                        .frame(width: 50, alignment: .trailing)
+                    .frame(width: 200, alignment: .leading)
                     HStack {
-                        Text( solveHandler.solvesByTimeframe[0].getMax().getTimeCapture()?.getAsReadable() ?? "-" )
-                            .fontWeight(.bold)
-                        Text(worstDiff)
-                            .font(.system(size: 10))
+                        Text("Worst")
+                            .frame(width: 50, alignment: .trailing)
+                        HStack {
+                            Text( solveHandler.getMax().getTimeCapture()?.getAsReadable() ?? "-" )
+                                .fontWeight(.bold)
+                            Text(worstDiff)
+                                .font(.system(size: 10))
+                        }
+                        .frame(width: 140, alignment: .trailing)
                     }
-                    .frame(width: 140, alignment: .trailing)
-                }
-                .frame(width: 200, alignment: .leading)
-                HStack {
-                    Text("Average")
-                        .frame(width: 50, alignment: .trailing)
+                    .frame(width: 200, alignment: .leading)
                     HStack {
-                        Text(    solveHandler.solvesByTimeframe[0].getAverage().getAsReadable() )
-                            .fontWeight(.bold)
-                        Text(averageDiff)
-                            .font(.system(size: 10))
+                        Text("Average")
+                            .frame(width: 50, alignment: .trailing)
+                        HStack {
+                            Text(    solveHandler.getAverage().getAsReadable() )
+                                .fontWeight(.bold)
+                            Text(averageDiff)
+                                .font(.system(size: 10))
+                        }
+                        .frame(width: 140, alignment: .trailing)
                     }
-                    .frame(width: 140, alignment: .trailing)
+                    .frame(width: 200, alignment: .leading)
                 }
-                .frame(width: 200, alignment: .leading)
+                .frame(width: 200)
+                .font(.system(size: 12))
             }
-            .frame(width: 200)
-            .font(.system(size: 12))
-        }
-        .foregroundColor(.white)
+            .foregroundColor(.white)
         
+            
+        }
+            
     }
 }
 

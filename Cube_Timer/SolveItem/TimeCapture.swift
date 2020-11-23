@@ -70,11 +70,11 @@ struct TimeCapture {
         var time = timeInMS
         
         // calculate min
-        let minutes = UInt8(timeInMS / 60.0)
+        let minutes = Int(timeInMS / 60.0)
         time -= (TimeInterval(minutes) * 60)
         
         // calculate sec
-        let seconds = UInt8(time)
+        let seconds = Int(time)
         time -= TimeInterval(seconds)
         
         // calculate ms

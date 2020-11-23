@@ -7,30 +7,37 @@
 
 import SwiftUI
 
-struct SingleStatBar: View {
+struct SingleStatBar: View, Identifiable {
     
     var id: String
     
-    var maxHeight: CGFloat
-    var percentage: Double
+    @ObservedObject var SSBController: SingleStatBarController = SingleStatBarController()
     
     init() {
         id = UUID().uuidString
-        maxHeight = -1
-        percentage = -1
     }
     
-    init(maxHeight: CGFloat, percentage: Double) {
-        self.maxHeight = 30
-        self.percentage = percentage
+    init(pct: Double) {
         id = UUID().uuidString
+        SSBController.percentage = pct
     }
+    
+    /*
+     *  Used to get the Controller when initiating initiating
+     *  NOTE: This should not be used to get the controller
+     *          Use SingleStatBar().SSBController instead
+     
+    func getController() -> SingleStatBarController {
+        return SSBController
+    }
+     */
     
     var body: some View {
         RoundedRectangle(cornerRadius: 1)
             .frame(width: 4)
-            .frame(height: (maxHeight * CGFloat(percentage)) + 3.5 )
+            .frame(height: (SSBController.maxHeight * CGFloat(SSBController.percentage)) + 3.5 )
             .foregroundColor(.white)
+            .animation(.spring())
     }
 }
 
@@ -38,7 +45,7 @@ struct SingleStatBar_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.init("very_dark_black")
-            SingleStatBar(maxHeight: 30, percentage: 0.25)
+            SingleStatBar(pct: 0.25)
         }
         .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/))
         .frame(width: 100, height: 100)

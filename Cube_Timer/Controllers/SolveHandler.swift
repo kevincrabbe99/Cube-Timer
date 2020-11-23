@@ -7,38 +7,56 @@
 
 import Foundation
 import CoreData
+import SwiftUI
+
+enum Timeframe: String {
+    case Unknown = "unknown"
+    case LastThree = "3X"
+    case Today = "1D"
+    case Week = "1W"
+    case OneMonth = "1M"
+    case ThreeMonths = "3M"
+    case Year = "1Y"
+    case All = "ALL"
+}
 
 
+/*
+ *  Class which holds the solves array which represents the solves which can be found within the current timeframe
+ *  MAIN PURPOSE: Facilitate self.solves
+ */
 class SolveHandler: ObservableObject {
     
     var timer: TimerController!
-    var solveHandler: SolveHandler!
+    //var solveHandler: SolveHandler!
     
-    @Published var solves: [SolveItem]
-    var size: Int = 0
+    @Published var solves: [SolveItem] // array which changes to correspond with timeframe
+    @Published var size: Int = 0
     
+    // STATS to be displayed
     @Published var average: TimeCapture = TimeCapture()
     @Published var best: TimeCapture = TimeCapture()
-
     @Published var last3: [SolveItem] = []
     
-   //  The old way of doing things
-    @Published var solvesByTimeframe: [SolvesFromTimeframe] = [
-        SolvesFromTimeframe(.LastThree),
-        SolvesFromTimeframe(.Today),
-        SolvesFromTimeframe(.OneMonth),
-        SolvesFromTimeframe(.ThreeMonths),
-        SolvesFromTimeframe(.Year),
-        SolvesFromTimeframe(.All)
-    ]
-  //  * New way below :) */
-   // var solvesByTimeFrame: SolvesFromTimeframe = SolvesFromTimeframe(); // initiates an empty solves by timeframe object
- 
-    //var container: NSPersistentContainer
-    @Published var currentTimeframe: Timeframe = .Today  // the current timeframe selected by the bottom bar
+    
+    // sets the initial timeframe
+    @Published var currentTimeframe: Timeframe = .Today   // sets .Today as initial timeFrame
+    
+    /* New way below :) */
+    // initiates an empty solves by timeframe object
+    @ObservedObject var solvesByTimeFrame: SolvesFromTimeframe = SolvesFromTimeframe();
+    // self.barGraphController is a instance of a bar graph
+    //  this is for the homescreen standard deviation graph preview
+    @ObservedObject var barGraphController: BarGraphController = BarGraphController()
+    
     
     init() {
+        
+        // initialize solves to be empty
         solves = []
+        
+        // initialize self.barGraphController with a new instance of a bar graph (BarGraphController.swift)
+        barGraphController = BarGraphController(parent: self)
         
         // setup for CoreData
         let solveRequest = NSFetchRequest<SolveItem>(entityName: "SolveItem")
@@ -49,234 +67,118 @@ class SolveHandler: ObservableObject {
             
             //print("worked fetched: ", results)
             for (index, re) in results.enumerated() {
-                print("Item \(index) = ", re.timeMS);
-                //print("Item as SolveItem = ", re as SolveItem)
+                //print("Item \(index) = ", re.timeMS);
+                print("Solve Item IMPORTED: ", re as SolveItem)
                 
                 self.add(re as SolveItem)
             }
            
-            updateDisplay()
+            updateSolves(to: currentTimeframe) // sets timeframe and updates everything
             
         }catch  {
             print("error fetching solves: ")
         }
-            
-        //print("Solves: ", fetchedSolves)
         
-        
+        /*
+         for testing add a solve from yesterday
+         
+        self.addCostumSolve(sec: 33)
+        self.addCostumSolve(sec: 34)
+        self.addCostumSolve(sec: 35)
+        self.addCostumSolve(sec: 36)
+//      */
     }
     
     /*
-     *  Updates the last 3 display preview via self.last3
-     *  Called by self.updateDisplay & self.updateTimeFrames()
+     *  Adds a costum defined solve to the dataset
+     *  FOR DEV PURPOSES ONLY
      */
-    func updateLast3() {
-        //let orderedSolves = solves.sorted(by:{ $0.timeMS < $1.timeMS })
-        if timer != nil {
-            self.timer.objectWillChange.send()
+    private func addCostumSolve(sec: Double) {
+        let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
+        newSolve.brand = "Rubiks Brand"
+        newSolve.cubeType = .a3x3x3
+        newSolve.id = UUID().uuidString
+        newSolve.timeMS = sec
+        newSolve.timestamp = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
+        newSolve.type = "3x3x3"
+        
+        // add the new solve
+        self.add(newSolve)
+        
+        // save the new solve
+        do {
+            try PersistenceController.shared.container.viewContext.save()
+                print("Solve Saved!")
+            //presentationMode.wrappedValue.dismiss()  //idk
+        } catch {
+            print("SAVE ERROR: ", error.localizedDescription)
         }
-        if size > 2 {
-            self.last3 = [solves[size - 1], solves[size - 2], solves[size - 3]]
-        }else if size <= 2 {
-            self.last3 = []
-            for s in solves {
-                self.last3.append(s)
-            }
-        }
+        
     }
+    
     
     /*
      *  returns whether the provided .TimeFrame has any values in it
+     *  Determins whether the Standard Deviation is shown
      *  Called by StatsBarView.visibility
      
      *  THIS WILL NEED TO BE UPDATED
+     #1 simple check if size > 0 implementation
      */
     func isTimeframeNil(_ tf: Timeframe) -> Bool {
-        switch tf {
-        case .LastThree:
-            if solvesByTimeframe[0].size > 1 {
-                return false
-            }
-        case .Today:
-            if solvesByTimeframe[1].size > 1 {
-                return false
-            }
-        case .OneMonth:
-            if solvesByTimeframe[2].size > 1 {
-                return false
-            }
-        case .ThreeMonths:
-            if solvesByTimeframe[3].size > 1 {
-                return false
-            }
-        case .Year:
-            if solvesByTimeframe[4].size > 1 {
-                return false
-            }
-        case .All:
-            if solvesByTimeframe[5].size > 1 {
-                return false
-            }
-        default:
-            if solvesByTimeframe[1].size > 1 {
-                return false
-            }
+        
+        // the new way of doing things
+        if self.size < 1 {
+            return true
         }
-        return true
+        return false;
+        
     }
     
     /*
      *  Updated every solvesByTimeFrame by replacing contents with self.getSolvesFrom(timeframe: .TimeFrame)
      *  Called when a solve is added or deleted via self.delete() & self.updateDisplay()
      
-     *  NEEDS TO BE REPLACED, change so that it only needs to update 1 solvesByTimeFrame object
-     */
+     *  NEEDS TO BE REPLACED, change it so that it updates the SolveFromTimeframe().solves
+     #1 DELETED: idk why this is needed
+     
     func updateTimeframes() {
-        for (index, tf) in solvesByTimeframe.enumerated() {
-            switch(index) {
-            
-            case 0: // last 3
-                
-                updateLast3()
-                self.solvesByTimeframe[index].replaceWith(last3)
-                
-                break
-            case 1:     // one day
-                
-                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .Today))
-                
-                break
-            case 2:     // one month
-                
-                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .OneMonth))
-                
-                break
-            case 3:
-                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .ThreeMonths))
-                break
-            case 4:
-                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .Year))
-                break
-            case 5:
-                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .All))
-                break
-            default:
-                self.solvesByTimeframe[index].replaceWith(self.getSolvesFrom(timeframe: .Today))
-                break
-            
-            }
-        }
-    }
-    
-    /*
-     *  Returns an array of the solves from the requested timeframe
-     *  Called by self.updateTimeFrame
-     
-     *  NEED TO UPDATE: make i tso it just gets the data from the solvesByTimeFrame object
-     */
-    func getSolvesFrom(timeframe: Timeframe) -> [SolveItem] {
-        var res: [SolveItem] = []
-        let now = Date()
-        switch timeframe {
-        case .LastThree:
-            if solves.count >= 3 {
-                res = last3
-            }
-        case .Today:
-            for s in solves {
-                if Calendar.current.isDateInToday(s.timestamp) {
-                    res.append(s)
-                }
-            }
-        case .OneMonth:
-            
-            let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
-            let range = monthAgo...now
-            for s in solves {
-                if range.contains(s.timestamp) {
-                    res.append(s)
-                }
-            }
-            
-        case .ThreeMonths:
-            let threeMonthAgo: Date = Calendar.current.date(byAdding: .month, value: -3, to: now)!
-            let range = threeMonthAgo...now
-            for s in solves {
-                if range.contains(s.timestamp) {
-                    res.append(s)
-                }
-            }
-        case .Year:
-            let yearAgo: Date = Calendar.current.date(byAdding: .year, value: -1, to: now)!
-            let range = yearAgo...now
-            for s in solves {
-                if range.contains(s.timestamp) {
-                    res.append(s)
-                }
-            }
-        case .All:
-            res = solves
-        default:
-            print("fuck")
-        }
-        return res
-    }
-    
-    /*
-     *  Returns an array of all the solves from the current day
-     *  IDK about the callers
-     *  made redudant by the method above
-     
-    func getTodaySolves() -> [SolveItem] {
-        var res: [SolveItem] = []
-        for s in solves {
-            if Calendar.current.isDateInToday(s.timestamp) {
-                res.append(s)
-            }
-        }
-        return res
+        
+        // this is assuming that the solves in solvesByTimeFrame were already updated
+        self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: currentTimeframe)
+        
     }
      */
-    
     
     /*
      *  Deleted a solveItem, returns false if was not able to
      */
     func delete(_ s: SolveItem) -> Bool{
+        
         let deleteIndex = getIndexOf(s)
         if deleteIndex != -1 {
             
+            print("Deleting from CoreData")
             
+            // this deletes
             PersistenceController.shared.container.viewContext.delete(s)
             
-            do {
+            do { // saving it 
                 try PersistenceController.shared.container.viewContext.save()
-                print("Deleted")
-                solves = solves.filter { $0 != s }
-                size -= 1
-                updateDisplay()
+                self.solvesByTimeFrame.delete(s) // delete SolvesFromTimeframe() reference
+                //updateEverything() // updates EVERYTHING
             } catch {
                 print("error deleting solve")
             }
-            updateTimeframes()
             
+            // update solves gets called upon success ^
+            self.updateSolves()
             
             return true
         }
         return false
     }
     
-    /*
-     *  Calls all the methods to update the dispaly.
-     */
-    public func updateDisplay(){
-        print("updating display, size = ", size)
-        print("updating display, solve count = ", solves.count)
-        updateBest()
-        updateLast3()
-        updateAverage()
-        updateTimeframes()
-    }
     
     /*
      *  Returns the index of a SolveItem from with self.solves
@@ -292,17 +194,133 @@ class SolveHandler: ObservableObject {
     }
     
     /*
-     *  Adds a solve to the solve array then calls self.updateDisplay()
+     *  Adds a solve to the solve array (in SolvesFromTimeframe()) then calls self.updateDisplay()
      *  Called by TimerController().stopTimer()
+     *          & self.init() when loading in solves from CoreData
      */
     func add(_ s: SolveItem) {
         
-        //let newSolve = SolveItem()
+        print("adding new solve: ", s.timeMS)
         
+        /*
         size += 1
-        print("added: ", s.timeMS)
         solves.append(s)
-        updateDisplay()
+        */
+        // (new way) adds to SolveFromTimeframe().solves
+        self.solvesByTimeFrame.add(s)
+        
+        
+        updateSolves()
+    }
+    
+    func getSolvesOrderedByTime() -> [SolveItem] {
+        return solves.sorted(by:{ $0.timestamp < $1.timestamp })
+    }
+    
+/*
+ *  THIS IS ALL UPDATING DISPLAY METHODS
+*/
+    
+    /*
+     *  Updates the solves and the display
+     *  CALLED BY: self.add() & self.delete()
+     *  CALLS: self.updateSolves(), then self.updateDisplay()
+    func updateEverything() {
+        self.updateSolves()
+        //self.updateDisplayStats()
+    }
+    /*              OVERLOAD METHOD FOR ^
+     *  Sets the currentTimeframe, then Updates the solves and the display stats
+     *  CALLED BY:
+     *  CALLS: self.updateSolves(), then self.updateDisplay()
+     */
+    func updateEverything(to: Timeframe) {
+        self.updateSolves(to: currentTimeframe)
+        //self.updateDisplayStats()
+    }
+     */
+    
+    /*
+     *  Sets the solves array based on the PROVIDED TIMEFRAME
+     *  CALLED BY: self.updateEverything(to: Timeframe)
+     *  CALLS: NOTHING
+     */
+    func updateSolves(to: Timeframe) {
+        print("Updating solves (& tf) from ", self.size, "elements")
+                
+        self.currentTimeframe = to
+        self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: to) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
+        self.size = solves.count // update count
+        
+        print("Updating (& tf) solves to ", self.size, "elements")
+        
+        self.updateDisplayStats()
+    }
+    /*          OVERLOAD METHOD FOR ^
+     *  Sets the solves array BASED ON self.currentTimeframe
+     *  CALLED BY: updateEverything()
+     *  CALLS: NOTHING
+     */
+    func updateSolves() {
+        print("Updating just solves from ", self.size, "elements")
+        
+        self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: currentTimeframe) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
+        self.size = solves.count
+        
+        print("Updating just solves to ", self.size, "elements")
+        
+        self.updateDisplayStats()
+    }
+    
+    
+    
+    /*
+     *  Calls all the methods to update the dispaly.
+     *  CALLERS: self.init(), self.add(), self.delete()
+     *  NOTE: Must be called after self.solves is updated
+     */
+    public func updateDisplayStats(){
+        //print("updating display, size = ", size)
+        //print("updating display, solve count = ", solves.count)
+        
+        //updateTimeframes()  // updates self.solves to solves based on current timeframe
+        /*updateSolves(from: currentTimeframe) // updates SolveFromTimeFrame().solves array based on current timeframe
+         *  Deleted because updateTimeFrames() called (this method) updateDisplay() */
+        
+        // animate the bars
+        if self.currentTimeframe == .LastThree { // hide the bars if it is last3
+            barGraphController.animateOut()
+        }else {
+            barGraphController.updateBars()        // updates self.bars to be the correct height
+        }
+
+        updateBest()        // updates self.best
+        updateLast3()       // updates self.last3
+        updateAverage()     // updates self.average
+    }
+    
+    /*
+     *  Updates the last 3 display preview via self.last3
+     *  Called by self.updateDisplay & self.updateTimeFrames()
+     
+     *  Needs to be updated to update the SolveFromTimeframe.swift instead of this.solves
+     */
+    func updateLast3() {
+        self.last3 = [] // clear the last3 display
+        let orderedSolves = getSolvesOrderedByTime() // get the solves ordered
+        if timer != nil { // housekeeping
+            self.timer.objectWillChange.send()
+        }
+        if self.size > 2 { // if more than 2 solves
+            self.last3 = [orderedSolves[size - 1],
+                          orderedSolves[size - 2],
+                          orderedSolves[size - 3]] // set all 3 values
+        }else if size <= 2 { // set less than 3 values
+            self.last3 = []
+            for s in orderedSolves {
+                self.last3.append(s)
+            }
+        }
     }
     
     /*
@@ -344,7 +362,80 @@ class SolveHandler: ObservableObject {
         //average =  convertTime(ms: (total / Double(solves.count)))
         average = TimeCapture.init(total / Double(size))
     }
+
     
+    /*
+     *  Returns the SolveItem with the max solve time
+     *  Called by self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
+    func getMax() -> SolveItem {
+        var max: Double = -1
+        var si: SolveItem = SolveItem()
+        for s in solves {
+            let solve = s as SolveItem
+            if max < solve.timeMS {
+                max = solve.timeMS
+                si = solve
+            }
+        }
+        
+        return si
+    }
+    
+    /*
+     *  Returns the SolveItem with the min solve time
+     *  Called by self.getBars() & self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
+    func getMin() -> SolveItem {
+        var min: Double = 99999999999
+        var si: SolveItem = SolveItem()
+        for s in solves {
+            let solve = s as SolveItem
+            if min > solve.timeMS {
+                min = solve.timeMS
+                si = solve
+            }
+        }
+        
+        return si
+    }
+    
+    /*
+     *  Returns a TimeCapture of the average solve time
+     *  Called 1 thing in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
+    func getAverage() -> TimeCapture  {
+        var max: Double = 0
+        for s in solves {
+            let solve = s as SolveItem
+            max += solve.timeMS
+        }
+        
+        return TimeCapture(max / Double(size))
+    }
+    
+    /*
+     *  Returns the range of solve times as a Double
+     *  Called by self.getBars()
+     
+     *  SHOULD BE MOVED TO SolveHandler.swift
+     */
+    func getRange() -> Double {
+        return getMax().timeMS - getMin().timeMS
+    }
+    
+    /*
+     *  Returns an array of the timeframs which are needed for all the solves
+     */
+    func getApplicableTimeframes() -> [Timeframe] {
+        return solvesByTimeFrame.getApplicableTimeframes()
+    }
     
 }
 

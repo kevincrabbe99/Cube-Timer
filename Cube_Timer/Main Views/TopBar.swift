@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+/*
 class SelectedPos: ObservableObject {
+    
     @Published var selectedPos: CGFloat = 0
     init(_ pos: CGFloat) {
         selectedPos = pos
@@ -15,46 +17,45 @@ class SelectedPos: ObservableObject {
     func set(_ pos: CGFloat) {
         selectedPos = pos
     }
+    
+    /*
+     *  Used to calculate the position of the slider
+     */
     func set(_ pos: Timeframe) {
         switch pos {
         case .LastThree:
             self.selectedPos = 0
         case .Today:
             self.selectedPos = 1
-        case .OneMonth:
+        case .Week:
             self.selectedPos = 2
-        case .ThreeMonths:
+        case .OneMonth:
             self.selectedPos = 3
-        case .Year:
+        case .ThreeMonths:
             self.selectedPos = 4
-        case .All:
+        case .Year:
             self.selectedPos = 5
+        case .All:
+            self.selectedPos = 6
         default:
-            self.selectedPos = 1
+            self.selectedPos = 7
         }
         print("selectedPos ", selectedPos)
     }
 }
+ */
 
 struct TopBar: View {
     
     @ObservedObject var solveHandler: SolveHandler
     
-    @State var selectedPos: CGFloat = 1
+    @State var selectedPos: Int = 1
     
     //var selectedTimeFrame: Int = 0
     //var timeFrames: [STDButton] = []
     
     init(sh: SolveHandler) {
         self.solveHandler = sh
-        /*
-        timeFrames = [ STDButton(label: .LastThree, id: 0, selection: selectedPos, parent: self),
-                       STDButton(label: .Today, id: 1, selection: selectedPos, parent: self),
-                       STDButton(label: .OneMonth, id: 2, selection: selectedPos, parent: self),
-                       STDButton(label: .ThreeMonths, id: 3, selection: selectedPos, parent: self),
-                       STDButton(label: .Year, id: 4, selection: selectedPos, parent: self),
-                       STDButton(label: .All, id: 5, selection: selectedPos, parent: self)]
-        */
     }
     
     func switchTimeFrameTo(_ tf: Timeframe) {
@@ -73,98 +74,168 @@ struct TopBar: View {
                 RoundedRectangle(cornerRadius: 4)
                     .frame(width: 35, height: 25)
                     .foregroundColor(.white)
-                    .position( x: 42.5, y: 12.5 )
-                    .offset(x: selectedPos * 55)
+                    .position( x: 31.5, y: 12.5 ) // THIS X VALUE: is the initial left constraint
+                    .offset(x: CGFloat(selectedPos * 55))
                     .animation(.default)
                 
                 HStack(spacing: 20.0) {
                     
                     /*
-                    ForEach(timeFrames, id: \.id) { btn in
-                        btn
-                    }
+                    *   NEEDS TO BE UPDATED: make it so it shows only needed timeframes
                     */
                     
+                    
                     Button(action: {
-                        self.selectedPos = 0
-                        solveHandler.currentTimeframe = .LastThree
+                        self.selectedPos = getIndexOfTfButton(.LastThree)
+                        solveHandler.updateSolves(to: .LastThree)
                     }) {
                         ZStack {
                             Text("3X")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                         }
-                        .frame(width: 35, height: 25)
+                        .frame(width: 35, height: 100)
                     }
                     
                     Button(action: {
-                        self.selectedPos = 1
-                        solveHandler.currentTimeframe = .Today
+                        self.selectedPos = getIndexOfTfButton(.Today)
+                        solveHandler.updateSolves(to: .Today)
                     }) {
                         ZStack {
                             Text("1D")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                         }
-                        .frame(width: 35, height: 25)
+                        .frame(width: 35, height: 100)
                     }
                     
-                    Button(action: {
-                        self.selectedPos = 2
-                        solveHandler.currentTimeframe = .OneMonth
-                    }) {
-                        ZStack {
-                            Text("1M")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+                    if solveHandler.getApplicableTimeframes().contains(.Week) { // guard to check if solves in timeframe exist
+                        Button(action: {
+                            self.selectedPos = getIndexOfTfButton(.Week)
+                            solveHandler.updateSolves(to: .Week)
+                        }) {
+                            ZStack {
+                                Text("1W")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .frame(width: 35, height: 100)
                         }
-                        .frame(width: 35, height: 25)
                     }
                     
-                    Button(action: {
-                        self.selectedPos = 3
-                        solveHandler.currentTimeframe = .ThreeMonths
-                    }) {
-                        ZStack {
-                            Text("3M")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+                    if solveHandler.getApplicableTimeframes().contains(.OneMonth) { // guard to check if solves in timeframe exist
+                        Button(action: {
+                            self.selectedPos = getIndexOfTfButton(.OneMonth)
+                            solveHandler.updateSolves(to: .OneMonth)
+                        }) {
+                            ZStack {
+                                Text("1M")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .frame(width: 35, height: 100)
                         }
-                        .frame(width: 35, height: 25)
                     }
                     
-                    Button(action: {
-                        self.selectedPos = 4
-                        solveHandler.currentTimeframe = .Year
-                    }) {
-                        ZStack {
-                            Text("1Y")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+                    if solveHandler.getApplicableTimeframes().contains(.ThreeMonths) { // guard to check if solves in timeframe exist
+                        Button(action: {
+                            self.selectedPos = getIndexOfTfButton(.ThreeMonths)
+                            solveHandler.updateSolves(to: .ThreeMonths)
+                        }) {
+                            ZStack {
+                                Text("3M")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .frame(width: 35, height: 100)
                         }
-                        .frame(width: 35, height: 25)
+                    }
+                    
+                    if solveHandler.getApplicableTimeframes().contains(.Year) { // guard to check if solves in timeframe exist
+                        Button(action: {
+                            self.selectedPos = getIndexOfTfButton(.Year)
+                            solveHandler.updateSolves(to: .Year)
+                        }) {
+                            ZStack {
+                                Text("1Y")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .frame(width: 35, height: 100)
+                        }
                     }
                     
                     Button(action: {
-                        self.selectedPos = 5
-                        solveHandler.currentTimeframe = .All
+                        self.selectedPos = Int(CGFloat((solveHandler.getApplicableTimeframes().count - 1))) // the count is the total of solveHandler.getApplicabletimeFrames().count + ( -1 )
+                        solveHandler.updateSolves(to: .All)
                     }) {
                         ZStack {
                             Text("ALL")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                         }
-                        .frame(width: 35, height: 25)
+                        .frame(width: 35, height: 100)
                     }
                     
                 }
+                .frame(height: 25) // needed to set the height of the dark bar
             }.position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-            .frame(width: 360)
+            .frame(width: 57 * CGFloat(solveHandler.getApplicableTimeframes().count)) // this is wht width of the dark bar: NEEDS UPDATING: to conform to needed timeframes
         }
-        .frame(width: 400, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+        .frame(width: 390, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
     }
+    
+    /*
+     *  Returns an INT representing the position of that timeframe button within the bottom bar
+        CALLED BY: self.body
+     
+     *  NEEDS UPDATING: wtf is going on here
+     */
+    private func getIndexOfTfButton(_ tf: Timeframe) -> Int {
+        
+        let applicableTimeframes = solveHandler.getApplicableTimeframes()
+        
+        switch tf {
+        case .LastThree:
+            return 0
+        case .Today:
+            return 1
+        case .Week:
+            return 2
+        case .OneMonth:
+            if applicableTimeframes.contains(.Week) {
+                return 3
+            }
+            return 4
+        case .ThreeMonths:
+            if  applicableTimeframes.contains(.Week) &&
+                applicableTimeframes.contains(.OneMonth){
+                return 4
+            } else if   applicableTimeframes.contains(.Week) ||
+                        applicableTimeframes.contains(.OneMonth) {
+                return 5
+            }
+            return 3
+        case .Year:
+            if applicableTimeframes.count <= 7 {
+                return applicableTimeframes.count - 1
+            } else  {
+                return applicableTimeframes.count - 1
+            }
+        
+        case .All:
+            return applicableTimeframes.count
+        
+        
+        default:
+            return 0
+        }
+        
+    }
+    
 }
 
+/*
 struct STDButton: View {
     
     var label: Timeframe
@@ -200,6 +271,7 @@ struct STDButton: View {
         }
     }
 }
+ */
 
 struct selectedButton: ViewModifier {
     func body(content: Content) -> some View {

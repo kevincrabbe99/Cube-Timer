@@ -35,9 +35,50 @@ extension SolveItem: Identifiable {
 
     
     func getTimeCapture() -> TimeCapture? {
-            return TimeCapture.init(timeMS)
+        return TimeCapture.init(timeMS )
     }
     
+    /*
+     *  Returns a formatted date
+     */
+    func getDateString() -> String {
+        let formatter1 = DateFormatter()
+        formatter1.dateStyle = .short
+        return formatter1.string(from: timestamp)
+    }
+    
+    func getApplicableTimeframes() -> [Timeframe] {
+        var res: [Timeframe] = []
+        let now = Date()
+        
+        // check for today
+        if Calendar.current.isDateInToday(timestamp) {
+            res.append(.Today)
+        }
+        
+        // check for this month
+        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+        let rangeM = monthAgo...now
+        if rangeM.contains(timestamp) {
+            res.append(.OneMonth)
+        }
+        
+        // check for last 3 months
+        let threeMonthAgo: Date = Calendar.current.date(byAdding: .month, value: -3, to: now)!
+        let range3M = threeMonthAgo...now
+        if range3M.contains(timestamp) {
+            res.append(.ThreeMonths)
+        }
+        
+        // check for one year
+        let yearAgo: Date = Calendar.current.date(byAdding: .year, value: -1, to: now)!
+        let rangeY = yearAgo...now
+        if rangeY.contains(timestamp) {
+            res.append(.Year)
+        }
+        
+        return res
+    }
     
     public func equals(_ s: SolveItem) -> Bool {
         if self.id == s.id {

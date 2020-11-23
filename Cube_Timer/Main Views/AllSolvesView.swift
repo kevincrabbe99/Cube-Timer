@@ -30,11 +30,17 @@ struct AllSolvesView: View {
                             Button(action: {
                                 self.deleteFromCell(s)
                             }, label: {
-                                Text( s.getTimeCapture()?.getAsReadable() ?? "-" )
+                                HStack {
+                                    Text( s.getTimeCapture()?.getAsReadable() ?? "-" )
+                                    Spacer()
+                                    Text( s.getDateString() )
+                                    
+                                }
                             })
                             Spacer()
                         }
                     }
+                    .frame(width: 300)
                 }
                 
                 HStack {

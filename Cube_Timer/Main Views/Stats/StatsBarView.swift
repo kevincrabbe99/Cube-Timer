@@ -58,20 +58,19 @@ struct StatsBarView: View {
                         HStack(alignment: .bottom, spacing: 4) {
                             
                             
-                            ForEach( solveHandler.solvesByTimeframe[timeframe].getBars(), id: \.id ) { bar in
+                            ForEach( solveHandler.barGraphController.bars, id: \.id ) { bar in
                                 bar
                             }
                             
                         }
                         .foregroundColor(.white)
-                        .frame(width: 250, height: 50)
-                        .animation(.spring())
+                        .frame(width: 250, height: 30, alignment: .bottom)
                     }
-                    .frame(width: 250, height: 50)
+                    .frame(width: 250, height: 50, alignment: .bottom)
                 
-                    if solveHandler.solvesByTimeframe[timeframe].size > 0 { // guard incase there are no solves
+                    if solveHandler.size > 0 { // guard incase there are no solves
                         HStack {
-                            Text( solveHandler.solvesByTimeframe[timeframe].getMin().getTimeCapture()?.getAsReadable() ?? "-" )
+                            Text( solveHandler.getMin().getTimeCapture()?.getAsReadable() ?? "-" )
                                 .font(.system(size: 8))
                                 .fontWeight(.bold)
                                 .frame(width: 100, alignment: .leading)
@@ -83,7 +82,7 @@ struct StatsBarView: View {
                                     .foregroundColor(.init("very_dark_black"))
                                     .frame(width: 60, height: 12)
                                 
-                                Text( String(solveHandler.solvesByTimeframe[timeframe].size) + ": " + solveHandler.solvesByTimeframe[timeframe].getAverage().getInSolidForm())
+                                Text( String(solveHandler.size) + ": " + solveHandler.getAverage().getInSolidForm())
                                     .font(.system(size: 9))
                                     .fontWeight(.bold)
                                     .frame(width: 50, alignment: .center)
@@ -91,21 +90,23 @@ struct StatsBarView: View {
                             .frame(width: 60, height: 10)
                             .offset(y: 3)
                             
-                            Text( solveHandler.solvesByTimeframe[timeframe].getMax().getTimeCapture()?.getAsReadable() ?? "-" )
+                            Text( solveHandler.getMax().getTimeCapture()?.getAsReadable() ?? "-" )
                                 .font(.system(size: 8))
                                 .fontWeight(.bold)
                                 .frame(width: 100, alignment: .trailing)
                         }
                         .frame(width: 270, height: 20, alignment: .center)
-                        .offset(y: -15)
+                        .offset(y: -22)
                         .opacity(0.9)
                     }
                
                 }
                 .opacity(visibility)
                 .animation(.easeOut)
+                //.frame(height:30, alignment: .bottom)
             } // end if (last3Mode)
-        }
+        } // parent ZStack
+        //.frame(height:50, alignment: .bottom)
     }
 }
 

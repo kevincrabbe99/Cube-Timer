@@ -183,7 +183,7 @@ struct StatsPreviewView: View {
             StatsBarView(timer: timer, solveHandler: solveHandler)
                 .offset(y: -15)
                 .opacity(statBarGraphOpacity)
-                .animation(Animation.easeOut(duration: 0.5).delay(0.4))
+                .animation(Animation.easeOut(duration: 0.5))
             
             /*
             VStack {
