@@ -49,6 +49,7 @@ class SolveHandler: ObservableObject {
                 self.add(re as SolveItem)
             }
            
+            updateDisplay()
             
         }catch  {
             print("error fetching solves: ")

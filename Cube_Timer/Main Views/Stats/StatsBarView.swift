@@ -10,7 +10,7 @@ import SwiftUI
 struct StatsBarView: View {
     
     @ObservedObject var timer: TimerController
-    var solveHandler: SolveHandler
+    @ObservedObject var solveHandler: SolveHandler
     
     var timeframe: Int {
         switch solveHandler.currentTimeframe {
