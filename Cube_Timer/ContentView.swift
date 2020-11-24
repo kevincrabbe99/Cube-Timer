@@ -35,6 +35,9 @@ struct ContentView: View {
     init() {
         self.timer.solveHandler = solveHandler
         self.solveHandler.timer = timer
+        
+        // update the stopwatch display to show the last solve time
+        self.timer.setDisplayToLastSolve()
     }
     
     

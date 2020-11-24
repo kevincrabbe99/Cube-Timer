@@ -36,7 +36,7 @@ struct SingleStatBar: View, Identifiable {
         RoundedRectangle(cornerRadius: 1)
             .frame(width: 4)
             .frame(height: (SSBController.maxHeight * CGFloat(SSBController.percentage)) + 3.5 )
-            .foregroundColor(.white)
+            .foregroundColor(SSBController.color)
             .animation(.spring())
     }
 }

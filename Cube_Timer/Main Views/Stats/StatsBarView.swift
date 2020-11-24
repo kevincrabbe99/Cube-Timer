@@ -71,9 +71,9 @@ struct StatsBarView: View {
                     if solveHandler.size > 0 { // guard incase there are no solves
                         HStack {
                             Text( solveHandler.getMin().getTimeCapture()?.getAsReadable() ?? "-" )
-                                .font(.system(size: 8))
+                                .font(.system(size: 9))
                                 .fontWeight(.bold)
-                                .frame(width: 100, alignment: .leading)
+                                .frame(width: 100, height: 10, alignment: .leading)
                             
                             ZStack {
                                 Color.white
@@ -91,9 +91,9 @@ struct StatsBarView: View {
                             .offset(y: 3)
                             
                             Text( solveHandler.getMax().getTimeCapture()?.getAsReadable() ?? "-" )
-                                .font(.system(size: 8))
+                                .font(.system(size: 9))
                                 .fontWeight(.bold)
-                                .frame(width: 100, alignment: .trailing)
+                                .frame(width: 100, height: 10, alignment: .trailing)
                         }
                         .frame(width: 270, height: 20, alignment: .center)
                         .offset(y: -22)

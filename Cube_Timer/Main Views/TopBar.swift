@@ -69,14 +69,17 @@ struct TopBar: View {
             ZStack {
                 Color.init("very_dark_black")
                     .cornerRadius(5)
-                    .opacity(0.65)
+                    .shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
+                    //.opacity(0.65)
                 
                 RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.init("dark_white"))
                     .frame(width: 35, height: 25)
                     .foregroundColor(.white)
                     .position( x: 31.5, y: 12.5 ) // THIS X VALUE: is the initial left constraint
                     .offset(x: CGFloat(selectedPos * 55))
                     .animation(.default)
+                
                 
                 HStack(spacing: 20.0) {
                     

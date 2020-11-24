@@ -25,6 +25,8 @@ class BarGraphController: ObservableObject {
      * get initiated in self.init() */
     var barControllers: [SingleStatBarController] = [SingleStatBarController](repeating: SingleStatBarController(), count: 30)
     
+    @Published var highlightedBarIndex: Int = -1
+    
     /*
      *  Default constructor used as a placeholder before self can be initialized with a parent: SolveHandler.swift attribute
      *  CALLED BY: SolveHandler.swift (before initialized)
@@ -59,15 +61,8 @@ class BarGraphController: ObservableObject {
         }
     }
     func animateIn() {
-        for bar in self.barControllers {
-            bar.set(pct: 0)
-        }
+        updateBars()
     }
-    
-/*
- *  THIS CODE HAS BEEN BROUGHT OVER FROM SolveHandler.swift
- *  IT ALL HAS TODO WITH CREATING THE Standard Curve Dispaly
- */
     
     /*
      *  Sets self.solves to an array of SingleStatBar objects corresponding to this timeframe
@@ -75,6 +70,8 @@ class BarGraphController: ObservableObject {
      
      *  THIS WAS MOVED FROM SolvesFromTimeframe.swift to (this) SolveHandler.swift
      */
+    let numOfBars: Int = 30
+    var heightArray = [[SolveItem]](repeating: [], count: 30) // gets accessed in heightArray & highlightLastSolvesBar
     func updateBars()  {
         
         //print("Running: SolveHandler().updateBars()")
@@ -83,15 +80,14 @@ class BarGraphController: ObservableObject {
         if solveHandler.size < 1 {   // EXIT if there are no solves
             return
         }
- 
         
-        var numOfBars: Int = 30
+        unhighlightAll() // unhighlight all the bars ( basically a reset )
         
         let orderedSolves = solveHandler.solves.sorted(by:{ $0.timeMS < $1.timeMS })
         
         let singleBarRepresentation: Double = solveHandler.getRange() / Double(numOfBars)
         
-        var heightArray = [[SolveItem]](repeating: [], count: numOfBars)
+        heightArray = [[SolveItem]](repeating: [], count: numOfBars) // reset the height array
         var barIntervals = [Double](repeating: -1, count: numOfBars)
         
         for i in 0...numOfBars - 1 { // fills the barInterval array with solvetimes
@@ -153,15 +149,15 @@ class BarGraphController: ObservableObject {
          */
         
         
+        highlightLastSolvesBar() // highlight the last bar added
+        
         // set the result to the self.bars
         //self.bars = res
     }
     
     /*
      *  Returns a double representing the number of solves in the heighest bar
-     *  Called by self.getBars()
-     
-     *  SHOULD BE MOVED TO SolveHandler.swift
+     *  Called by self.updateBars()
      */
     private func getMaxBarHeight(_ ar: [[SolveItem]]) -> Double {
         var maxCount:Double = -1
@@ -171,6 +167,41 @@ class BarGraphController: ObservableObject {
             }
         }
         return maxCount
+    }
+    
+    /*
+     *  Updates the dispaly, highlighting the last bar
+     */
+    private func highlightLastSolvesBar() {
+        let lastSolve = solveHandler.getLastSolve() // get the last solve from self.solveHandler
+        let barIndex = self.getBarIndexWhichIncludes(solve: lastSolve)  // get the index of the bar with that solve
+        
+        // highlight the bar
+        barControllers[barIndex].highlight(Color.init("green"));
+    }
+    
+    /*
+     *  gets the bar index which includes the provided solve item
+     */
+    private func getBarIndexWhichIncludes(solve: SolveItem) -> Int {
+        for (index, barSolves) in heightArray.enumerated() {
+            for s in barSolves {
+                if s.equals(solve) {
+                    return index
+                }
+            }
+        }
+        return -1
+    }
+    
+    /*
+     * used when reseting the bars
+     *  CALLED BY: self.updateBars()
+     */
+    private func unhighlightAll() {
+        for (index, barSolves) in barControllers.enumerated() {
+            barControllers[index].unhighlight()
+        }
     }
   
     

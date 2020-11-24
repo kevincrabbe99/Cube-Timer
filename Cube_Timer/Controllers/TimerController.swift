@@ -19,9 +19,9 @@ class TimerController: ObservableObject {
     @Published var  brand: PuzzleBrand = .rubiks
     
     var leftActivated: Bool = false
-    var rightActivated: Bool = true
+    var rightActivated: Bool = false
     
-    var acceptInput: Bool = true
+    var acceptInput: Bool = true // used as a guard for pressing the buttons
     
     @Published var startApproved: Bool = false
     @Published var oneActivated: Bool = false
@@ -31,13 +31,20 @@ class TimerController: ObservableObject {
     var timer: Timer?
     
     var startTime: Double = 0
-    var time: Double = 0
+    @Published var time: Double = 0
     @Published var lastRecordedTime:Double = 0
     var elapsed: Double = 0
     
     @Published var lblMin: String = "00"
     @Published var lblSec: String = "00"
     @Published var lblMS: String = "00"
+    
+    @Published var overUnderTime: String = "0s"
+    @Published var overUnderPercentage: Double = 0
+    @Published var statColor: Color = Color.init("green")
+    
+    @Published var peripheralOpacity: Double = 1
+    
     
     var solveHandler: SolveHandler!
     
@@ -46,35 +53,111 @@ class TimerController: ObservableObject {
     init() {
         print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
         //solveHandler.timer = self
+        
     }
     
+    /*
+     * Gets the last solve from solveHandler then displays it
+     * Called upon initiation of app
+     * CALLED BY: ContentView.init()
+     */
+    public func setDisplayToLastSolve() {
+        // get the last time from solveHandler
+        time = solveHandler.getLastSolve().timeMS
+        updateOverUnderDisplay() // update the O/U display
+        updateTimerFromTime() // update from just set time
+    }
+    private func setTimeToLastSolve() {
+        time = solveHandler.getLastSolve().timeMS
+        self.updateOverUnderDisplay()
+        updateTimerFromTime(updateDisplay: false)
+    }
+    
+    /*
+     *  This gets called every milisecond
+     *  CALLS: self.updateTimerFromTime()
+     */
+    var minutes: Int = 0
+    var seconds: Int = 0
+    var milliseconds: Int = 0
     @objc func UpdateTimer() {
         
-       // timerALLMS += 1
-        lastRecordedTime = Date().timeIntervalSinceReferenceDate - startTime
+        // update vars which control the timer
+        lastRecordedTime = Date().timeIntervalSinceReferenceDate - startTime // calculates the new time (every milisecond)
         time = lastRecordedTime
         
+        self.updateOverUnderDisplay() // update O/U display
+        self.updateTimerFromTime() // update timer display
+        
+    }
+    
+    /*
+     *  Used to update the over/under display
+     */
+    private func updateOverUnderDisplay() {
+        // SET: O/U Time
+        if solveHandler.average.timeInMS > self.time {
+            self.overUnderTime = TimeCapture( solveHandler.average.timeInMS - self.time ).getInSolidForm()
+        }else {
+            self.overUnderTime = TimeCapture( self.time - solveHandler.average.timeInMS ).getInSolidForm()
+        }
+        
+        // SET: O/U Percentage
+        self.overUnderPercentage = (time / solveHandler.average.timeInMS) * 100
+        
+        // SET: O/U Color
+        if solveHandler.average.timeInMS > self.time {
+            self.statColor = Color.init("green")
+        }else  {
+            self.statColor = Color.init("red")
+        }
+    }
+    
+    /*
+     *  Updates the timer display based on self.time rather than self.lastRecordedTime (used in self.updateTimer())
+     *  CALLS: self.updateLabels()
+     *  CALLED by: this.updateTimer()
+     */
+    func updateTimerFromTime(updateDisplay: Bool = true) {
         // calculate min
-        let minutes = UInt8(time / 60.0)
+        minutes = Int(time / 60.0)
         time -= (TimeInterval(minutes) * 60)
         
         // calculate sec
-        let seconds = UInt8(time)
+        seconds = Int(time)
         time -= TimeInterval(seconds)
         
         // calculate ms
-        let milliseconds = UInt8(time * 100)
+        milliseconds = Int(time * 100)
         
+        
+        
+        // calls method below to update the display
+        if updateDisplay { // true by default
+            self.updateLabels()
+        }
+    }
+    
+    /*
+     *  Updates the stopwatch display based on self.minutes, self.seconds, sellf.miliseconds.
+     */
+    func updateLabels() {
         let strMin = String(format: "%02d", minutes)
         let srtSec = String(format: "%02d", seconds)
         let srcMS = String(format: "%02d",milliseconds)
         
-        self.lblMin = strMin
-        self.lblSec = srtSec
-        self.lblMS = srcMS
+        self.lblMin = String(strMin.prefix(2))
+        self.lblSec = String(srtSec.prefix(2))
+        self.lblMS = String(srcMS.prefix(2))
     }
     
+    
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
+    let heavyTap = UIImpactFeedbackGenerator(style: .heavy)
+    let startTap = UINotificationFeedbackGenerator()
+    
     func activateRight() {
+        lightTap.impactOccurred()
         print("Right Activated")
         rightActivated = true
         testStart()
@@ -87,6 +170,7 @@ class TimerController: ObservableObject {
     }
     
     func activateLeft() {
+        lightTap.impactOccurred()
         print("Left Activated")
         leftActivated = true
         testStart()
@@ -102,29 +186,44 @@ class TimerController: ObservableObject {
         if !acceptInput {
             return
         }
-        if leftActivated && rightActivated {
+        if leftActivated && rightActivated { // both are pressed
             if timerGoing {
                 stopTimer()
             }else {
                 startApproved = true
             }
-        }else {
-            if leftActivated || rightActivated {
-                oneActivated = true
-                if timerGoing {
-                    stopTimer()
+        }else { // both are not pressed, either could be pressed
+            if leftActivated || rightActivated { // one is pressed
+                // update display stuff
+                solveHandler.barGraphController.animateOut()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.peripheralOpacity = 0 // hide the peripherals
                 }
-            }else {
+                
+                oneActivated = true
+                if timerGoing { // one is pressed & timer is going
+                    stopTimer()
+                }else { // one is pressed & timer is stopped
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.resetTimerStart()
+                    }
+                }
+            }else { // none are pressed
+                peripheralOpacity = 1 // show the peripherals
+                solveHandler.barGraphController.animateIn()
+                
                 oneActivated = false
+                abortResettingTimer() // bring timer back to last solve
             }
-            if startApproved {
+            if startApproved { // if both WERE pressed this get set to true
                 startTimer()
             }
-            startApproved = false
+            startApproved = false // reset
         }
     }
     
     func startTimer() {
+        startTap.notificationOccurred(.success) // tap the phone when starting
         
         UIApplication.shared.isIdleTimerDisabled = true // disable the sleep
         print("time started")
@@ -135,13 +234,10 @@ class TimerController: ObservableObject {
     }
     
     func stopTimer() {
-        //UIApplication.shared.isIdleTimerDisabled = false // enable the sleep
-        //print("time stopped")
-        /*
-        let newSolve = SolveItem(type: type, brand: brand, timeMS: lastRecordedTime)
-         */
         
-        //let newSolve = SolveItem(context: PersistenceController.shared.container.viewContext)
+        solveHandler.barGraphController.animateIn()
+        self.peripheralOpacity = 1 // show the peripherals
+        
         let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
         newSolve.brand = brand.rawValue
         newSolve.cubeType = type
@@ -171,6 +267,76 @@ class TimerController: ObservableObject {
     @objc func acceptInputNow() {
         acceptInput = true
     }
+    
+    
+    //var lastTime: Double! = nil
+    var abortTimerReset: Bool = false
+    let iterations: Int = 20 // amount of times the value will change
+    let iterationDelay: Double = 0.02 // initial delay before timeFactor is applies
+    let timeFactor: Double = 30 // the higher this number the faster
+    private func resetTimerStart() {
+        
+        abortTimerReset = false // reset abort var
+        
+        var timeQuotient: Double = 0
+        var minQuotient: Double = 0
+        var secQuotient: Double = 0
+        var milliQuotient: Double = 0
+        
+        if self.time != 0 {
+            timeQuotient = Double(( (time * 100) / Double(iterations))) // divide minutes by iterations
+            print("set tQ: ", timeQuotient)
+        }
+        if self.minutes != 0 {
+            minQuotient = Double((minutes / iterations)) // divide minutes by iterations
+        }
+        if self.seconds != 0 {
+            secQuotient = Double((seconds / iterations)) // divide minutes by iterations
+        }
+        if self.milliseconds != 0 {
+            milliQuotient = Double((milliseconds / iterations)) // divide minutes by iterations
+        }
+        
+        // create array with every number wich will be displayed on the way down
+        var tQArray: [Double] = []
+        var mQArray: [Int] = []
+        var sQArray: [Int] = []
+        var mlQArray: [Int] = []
+        // assign values
+        for i in stride(from: (iterations-1), through: 0, by: -1) {
+            tQArray.append(timeQuotient * Double(i)) // set total time (effects over/under display
+            mQArray.append(Int(minQuotient * Double(i))) // set minutes
+            sQArray.append(Int(secQuotient * Double(i))) // set seconds
+            mlQArray.append(Int(milliQuotient * Double(i)))  // set milliseconds
+        }
+        
+        for i in 0...(iterations-1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + ((iterationDelay*(1+(Double(i)/timeFactor))) * Double(i))) {
+                self.timerResetIteration(tQ: tQArray[i], mQ: mQArray[i], sQ: sQArray[i], mlQ: mlQArray[i])
+            }
+        }
+        
+    }
+    /*
+     * A single iteration of reseting the timer
+     */
+    private func timerResetIteration(tQ: Double, mQ: Int, sQ: Int, mlQ: Int) {
+        if !abortTimerReset {
+            self.time = Double(tQ) // sets the overall time var
+            self.minutes = mQ // set minutes
+            self.seconds = sQ // set seconds
+            self.milliseconds = mlQ // set milliseconds
+            
+        }
+        updateOverUnderDisplay() // update the O/U display
+        updateLabels() // update just the labels
+    }
+    
+    private func abortResettingTimer() {
+        abortTimerReset = true
+        setDisplayToLastSolve()
+    }
+    
     
 }
 

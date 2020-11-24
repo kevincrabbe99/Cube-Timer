@@ -17,6 +17,9 @@ struct ButtonsView: View {
     @State var leftIconOpacity: Double = 0.1
     @State var rightIconOpacity: Double = 0.1
     
+    
+    let gradient = Gradient(colors: [.init("dark_black"), .clear])
+    
     var iconOpacity: Double  {
         if timer.startApproved || timer.timerGoing {
             return 0
@@ -29,21 +32,31 @@ struct ButtonsView: View {
         GeometryReader { geometry in
             HStack {
                 ZStack {
+                    /*
                     Color.init("dark_black")
                         .cornerRadius(35, corners: [.topLeft])
                         .cornerRadius(4, corners: [.bottomRight, .topRight])
                         .cornerRadius(10, corners: [.bottomLeft])
                         .opacity(leftBtnOpacity)
-              
-                        Image("two_fingers")
-                            .resizable()
-                            .frame(width: 75, height: 75)
-                            .offset(x: -50, y: 20)
-                            .aspectRatio(contentMode: .fit)
-                            .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
-                            .foregroundColor(.white)
-                            .opacity(leftIconOpacity)
-                            .animation(.easeIn)
+                    */
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .cornerRadius(35, corners: [.topLeft])
+                        .cornerRadius(4, corners: [.bottomRight, .topRight])
+                        .cornerRadius(10, corners: [.bottomLeft])
+                        .opacity(leftBtnOpacity)
+                    
+                    
+          
+                    Image("two_fingers")
+                        .resizable()
+                        .frame(width: 75, height: 75)
+                        .offset(x: -50, y: 20)
+                        .aspectRatio(contentMode: .fit)
+                        .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
+                        .foregroundColor(.white)
+                        .opacity(leftIconOpacity)
+                        .animation(.easeIn)
                   
                     
                 }
@@ -65,7 +78,11 @@ struct ButtonsView: View {
                                 }, perform: { })
                 
                 ZStack {
+                    /* Redundany by setting gradient background
                     Color.init("dark_black")
+                    */
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(LinearGradient(gradient: gradient, startPoint: .topTrailing, endPoint: .bottomLeading))
                         .cornerRadius(35, corners: [.topRight])
                         .cornerRadius(4, corners: [.bottomLeft, .topLeft])
                         .cornerRadius(10, corners: [.bottomRight])

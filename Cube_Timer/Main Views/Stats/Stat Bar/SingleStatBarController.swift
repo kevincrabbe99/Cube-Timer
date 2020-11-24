@@ -17,6 +17,7 @@ class SingleStatBarController: ObservableObject, Identifiable {
     
     @Published var maxHeight: CGFloat = 30 // this sets the height of the standard deviation bar graph
     @Published var percentage: Double = 0
+    @Published var color: Color = .white
     
     /*
      *  updated the bar on the display
@@ -26,5 +27,12 @@ class SingleStatBarController: ObservableObject, Identifiable {
         //print("set to percentage: ", self.percentage)
     }
     
+    func highlight(_ c: Color) {
+        self.color = c
+    }
+    
+    func unhighlight() {
+        self.color = .white
+    }
     
 }

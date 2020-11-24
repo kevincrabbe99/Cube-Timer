@@ -41,10 +41,13 @@ struct StatsPreviewView: View {
         }
     }
     
+    /*
+     *  Got replaced by updateTimerFromTime in TimerController.swift
+     
     var overUnderTime: String {
         
         let average = solveHandler.average.timeInMS
-        let currentTime = timer.lastRecordedTime
+        let currentTime = timer.time
         
         if average > currentTime {
             return "- \(TimeCapture( average - currentTime ).getInSolidForm())"
@@ -53,6 +56,7 @@ struct StatsPreviewView: View {
         }
 
     }
+     
 
     var overUnderPercentage: Double {
         let average = solveHandler.average.timeInMS
@@ -60,7 +64,7 @@ struct StatsPreviewView: View {
         
             return (currentTime / average) * 100
     }
-    
+     
     var statColor: Color {
         let average = solveHandler.average.timeInMS
         let currentTime = timer.lastRecordedTime
@@ -71,11 +75,13 @@ struct StatsPreviewView: View {
             return Color.init("red")
         }
     }
+     */
+    
 
     @State var slvsBarWidth: CGFloat = 250
     @State var slvsBarHeight: CGFloat = 20
     @State var slvsOffsetY: CGFloat = 0
-    @State var slvsOpacity: Double = 0.65
+    @State var slvsOpacity: Double = 1
     @State var slvsTextOpacity: Double = 1
     func openShowAllSolves() {
         slvsBarWidth = UIScreen.main.bounds.width
@@ -91,7 +97,7 @@ struct StatsPreviewView: View {
         slvsBarWidth = 250
         slvsBarHeight = 20
         slvsOffsetY = 0
-        slvsOpacity = 0.65
+        slvsOpacity = 1
         slvsTextOpacity = 1
         
     }
@@ -101,113 +107,90 @@ struct StatsPreviewView: View {
 
         VStack {
             
-            HStack {
-                Text("\(overUnderTime)")
-                    .font(.system(size: 12))
-                    .fontWeight(.bold)
-                Text("(\(overUnderPercentage, specifier: "%.0f")%)")
-                    .font(.system(size: 12))
-            }
-            .frame(width: 245, alignment: .leading)
-            .offset(y: 5)
-            .foregroundColor(statColor)
-            .animation(Animation.spring())
+            /*
+             *  compared to average display (above stopwatch)
+             */
+                HStack {
+                    Text("\(timer.overUnderTime)")
+                        .font(.system(size: 12))
+                        .fontWeight(.bold)
+                    Text("(\(timer.overUnderPercentage, specifier: "%.0f")%)")
+                        .font(.system(size: 12))
+                
+                }
+                .frame(width: 260, alignment: .leading)
+                .offset(y: 5)
+                .foregroundColor(timer.statColor)
+            
+            /*
+             *  THE ACTUAL TIMER
+             */
+            StopwatchDisplay(timer: timer)
+                .frame(width: 250)
+               // .animation(.spring())
             
             
             /*
-            HStack {
-                Text(type.getType())
-                    .fontWeight(.bold)
-                    .padding(.leading, 8.0)
-                    .font(.system(size: 12))
-                Text(brand.getType())
-                    .fontWeight(.bold)
-                    .font(.system(size: 12))
-            }
-            .frame(width: 250.0, alignment: .leading)
-            .opacity(peripheralOpacity)
-            .animation(.easeIn)
-            */
-            
-            
-            StopwatchDisplay(timer: timer)
-                .frame(width: 250)
-                .animation(.spring())
-            
-            
-            
-            ZStack {
-                
-                Button(action: { // background / label
-                    openShowAllSolves()
-                }, label: {
-                    Color.init("very_dark_black")
-                        .cornerRadius(5)
-                        .offset(y: slvsOffsetY)
-                        .opacity(slvsOpacity)
-                        .frame(width: slvsBarWidth, height: slvsBarHeight)
-                        .animation(
-                            Animation.easeOut(duration: 0.17)
-                        )
-                })
-                
-                HStack(spacing: 30.0) {
+             *  displays the last 3 bar under the timer
+             */
+                /*
+            if (!timer.timerGoing || !timer.oneActivated) &&
+                !solveHandler.isTimeframeNil(solveHandler.currentTimeframe) {
+                */
+                ZStack {
                     
-                    ForEach(solveHandler.last3) { s in
-                        Text(TimeCapture.init(s.timeMS).getAsReadable() )
-                            .fontWeight(.bold)
-                            .opacity(peripheralOpacity)
-                            .font(.system(size: 13))
-                            
-                            .gesture(
-                                TapGesture()
-                                    .onEnded { _ in
-                                        print("tapped")
-                                        self.solveHandler.delete(s)
-                                    }
+                    Button(action: { // background / label
+                        openShowAllSolves()
+                    }, label: {
+                        Color.init("very_dark_black")
+                            .cornerRadius(5)
+                            .offset(y: slvsOffsetY)
+                            .opacity(slvsOpacity)
+                            .frame(width: slvsBarWidth, height: slvsBarHeight)
+                            .animation(
+                                Animation.easeOut(duration: 0.17)
                             )
-                            
-                    }
+                    })
                     
+                    HStack(spacing: 30.0) {
+                        
+                        ForEach(solveHandler.last3) { s in
+                            Text(TimeCapture.init(s.timeMS).getAsReadable() )
+                                .fontWeight(.bold)
+                                .opacity(peripheralOpacity)
+                                .font(.system(size: 13))
+                                
+                                .gesture(
+                                    TapGesture()
+                                        .onEnded { _ in
+                                            print("tapped")
+                                            self.solveHandler.delete(s)
+                                        }
+                                )
+                                
+                        }
+                        
+                    }
+                    //.opacity(slvsTextOpacity)
                 }
-                .opacity(slvsTextOpacity)
-            }
-            .frame(width: 250, height: 20)
-            .offset(y: -30)
-            .zIndex(90)
-            .animation(
-                Animation.easeOut(duration: 0.17)
-            )
+                .frame(width: 250, height: 20)
+                .offset(y: -30)
+                .zIndex(90)
+                .opacity(timer.peripheralOpacity)
+                .animation(
+                    Animation.easeOut(duration: 0.15)
+                )
+                
+            //} // end if
             
-            
+            /*
+             *  Displays the bar graph at all times
+             */
             StatsBarView(timer: timer, solveHandler: solveHandler)
                 .offset(y: -15)
                 .opacity(statBarGraphOpacity)
-                .animation(Animation.easeOut(duration: 0.5))
+                .animation(Animation.easeOut(duration: 0.15))
             
-            /*
-            VStack {
-                HStack {
-                    Text("Average")
-                        .fontWeight(.bold)
-                        .frame(width: 75, alignment: .leading)
-                    Text(solveHandler.average.getAsReadable())
-                        .frame(width: 100, alignment: .trailing)
-                }
-                .frame(width: 200)
-                HStack {
-                    Text("Best")
-                        .fontWeight(.bold)
-                        .frame(width: 75, alignment: .leading)
-                    Text(solveHandler.best.getAsReadable())
-                        .frame(width: 100, alignment: .trailing)
-                }
-                .frame(width: 200)
-            }
-            .font(.system(size: 15))
-            .opacity(peripheralOpacity - 0.1)
-            .animation(.easeIn)
-            */
  
         }
         .foregroundColor(.white)

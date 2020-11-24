@@ -31,10 +31,16 @@ struct MainView: View {
             ZStack {
                 
                 ButtonsView(timer: timer)
+                
+                if !(timer.timerGoing || timer.startApproved || timer.oneActivated) { // only show when there is no timer active
                 TopBar(sh: solveHandler)
                     .position(x: geo.size.width/2, y: geo.size.height-50)
+                    //.opacity(0.9)
                     .opacity(peripheralOpacity + 0.3)
                     .animation(.easeIn)
+                    .transition(.move(edge: .bottom))
+                }
+
                 StatsPreviewView(parent: self, timer: timer, solveHandler: solveHandler /*solveHandler: solveHandler*/)
                     .offset(y:-30)
             }

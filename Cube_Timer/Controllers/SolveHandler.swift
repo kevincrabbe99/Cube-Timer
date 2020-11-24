@@ -118,6 +118,12 @@ class SolveHandler: ObservableObject {
     
     
     /*
+     *  Returns an array of the timeframs which are needed for all the solves
+     */
+    func getApplicableTimeframes() -> [Timeframe] {
+        return solvesByTimeFrame.getApplicableTimeframes()
+    }
+    /*
      *  returns whether the provided .TimeFrame has any values in it
      *  Determins whether the Standard Deviation is shown
      *  Called by StatsBarView.visibility
@@ -173,6 +179,7 @@ class SolveHandler: ObservableObject {
             
             // update solves gets called upon success ^
             self.updateSolves()
+            timer.setDisplayToLastSolve()
             
             return true
         }
@@ -215,6 +222,10 @@ class SolveHandler: ObservableObject {
     
     func getSolvesOrderedByTime() -> [SolveItem] {
         return solves.sorted(by:{ $0.timestamp < $1.timestamp })
+    }
+    
+    func getSolvesNewestFirst() -> [SolveItem] {
+        return solves.sorted(by:{ $0.timestamp > $1.timestamp })
     }
     
 /*
@@ -430,12 +441,11 @@ class SolveHandler: ObservableObject {
         return getMax().timeMS - getMin().timeMS
     }
     
-    /*
-     *  Returns an array of the timeframs which are needed for all the solves
-     */
-    func getApplicableTimeframes() -> [Timeframe] {
-        return solvesByTimeFrame.getApplicableTimeframes()
+    func getLastSolve() -> SolveItem {
+        let orderedSolves = self.getSolvesNewestFirst()
+        return orderedSolves[0]
     }
+    
     
 }
 
