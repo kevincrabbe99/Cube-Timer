@@ -41,7 +41,7 @@ struct MainView: View {
                     .transition(.move(edge: .bottom))
                 }
 
-                StatsPreviewView(parent: self, timer: timer, solveHandler: solveHandler /*solveHandler: solveHandler*/)
+                StopwatchView(parent: self, timer: timer, solveHandler: solveHandler /*solveHandler: solveHandler*/)
                     .offset(y:-30)
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)

@@ -8,7 +8,12 @@
 import SwiftUI
 import CoreData
 
-struct StatsPreviewView: View {
+/*(
+ * INCLUDES:    over/under stats
+ *              stopwatch display
+ *              last 3 solve bar
+ */
+struct StopwatchView: View {
     
    // @Environment(\.managedObjectContext) private var viewContext
     /*
@@ -133,55 +138,50 @@ struct StatsPreviewView: View {
             /*
              *  displays the last 3 bar under the timer
              */
-                /*
-            if (!timer.timerGoing || !timer.oneActivated) &&
-                !solveHandler.isTimeframeNil(solveHandler.currentTimeframe) {
-                */
-                ZStack {
-                    
-                    Button(action: { // background / label
-                        openShowAllSolves()
-                    }, label: {
-                        Color.init("very_dark_black")
-                            .cornerRadius(5)
-                            .offset(y: slvsOffsetY)
-                            .opacity(slvsOpacity)
-                            .frame(width: slvsBarWidth, height: slvsBarHeight)
-                            .animation(
-                                Animation.easeOut(duration: 0.17)
-                            )
-                    })
-                    
-                    HStack(spacing: 30.0) {
-                        
-                        ForEach(solveHandler.last3) { s in
-                            Text(TimeCapture.init(s.timeMS).getAsReadable() )
-                                .fontWeight(.bold)
-                                .opacity(peripheralOpacity)
-                                .font(.system(size: 13))
-                                
-                                .gesture(
-                                    TapGesture()
-                                        .onEnded { _ in
-                                            print("tapped")
-                                            self.solveHandler.delete(s)
-                                        }
-                                )
-                                
-                        }
-                        
-                    }
-                    //.opacity(slvsTextOpacity)
-                }
-                .frame(width: 250, height: 20)
-                .offset(y: -30)
-                .zIndex(90)
-                .opacity(timer.peripheralOpacity)
-                .animation(
-                    Animation.easeOut(duration: 0.15)
-                )
+        
+            ZStack {
                 
-            //} // end if
+                Button(action: { // background / label
+                    openShowAllSolves()
+                }, label: {
+                    Color.init("very_dark_black")
+                        .cornerRadius(5)
+                        .offset(y: slvsOffsetY)
+                        .opacity(slvsOpacity)
+                        .frame(width: slvsBarWidth, height: slvsBarHeight)
+                        .animation(
+                            Animation.easeOut(duration: 0.17)
+                        )
+                })
+                
+                HStack(spacing: 30.0) {
+                    
+                    ForEach(solveHandler.last3) { s in
+                        Text(TimeCapture.init(s.timeMS).getAsReadable() )
+                            .fontWeight(.bold)
+                            .opacity(peripheralOpacity)
+                            .font(.system(size: 13))
+                            
+                            .gesture(
+                                TapGesture()
+                                    .onEnded { _ in
+                                        print("tapped")
+                                        self.solveHandler.delete(s)
+                                    }
+                            )
+                            
+                    }
+                    
+                }
+                //.opacity(slvsTextOpacity)
+            }
+            .frame(width: 250, height: 20)
+            .offset(y: -30)
+            .zIndex(90)
+            .opacity(timer.peripheralOpacity)
+            .animation(
+                Animation.easeOut(duration: 0.15)
+            )
             
             /*
              *  Displays the bar graph at all times
@@ -202,7 +202,7 @@ struct StatsPreviewView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
         Color.black
-            StatsPreviewView(type: .a3x3x3, brand: .rubiks, timer: TimerController(), solveHandler: SolveHandler() )
+            StopwatchView(type: .a3x3x3, brand: .rubiks, timer: TimerController(), solveHandler: SolveHandler() )
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
         .previewLayout(.fixed(width: 250, height: 150))
