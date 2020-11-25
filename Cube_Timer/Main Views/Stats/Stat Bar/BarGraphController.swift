@@ -19,11 +19,11 @@ class BarGraphController: ObservableObject {
     var id: String = UUID().uuidString
     var solveHandler: SolveHandler!
     
-    // array of SingleStatBar objects corresponding to this timeframe
-    @Published var bars: [SingleStatBar] = [SingleStatBar](repeating: SingleStatBar(), count: 30)
-    /* array of SingleStatBarController objects corresponding to the array above
+    // array of Bar objects corresponding to this timeframe
+    @Published var bars: [Bar] = [Bar](repeating: Bar(), count: 30)
+    /* array of BarController objects corresponding to the array above
      * get initiated in self.init() */
-    var barControllers: [SingleStatBarController] = [SingleStatBarController](repeating: SingleStatBarController(), count: 30)
+    var barControllers: [BarController] = [BarController](repeating: BarController(), count: 30)
     
     @Published var highlightedBarIndex: Int = -1
     
@@ -40,12 +40,12 @@ class BarGraphController: ObservableObject {
         self.solveHandler = parent
         
         // fill self.bars by generating blank bars
-        for (i, _) in self.bars.enumerated() {  // loop through SingleStatBar view array (self.bars)
-            self.bars[i] = SingleStatBar(pct: 0.1)
+        for (i, _) in self.bars.enumerated() {  // loop through Bar view array (self.bars)
+            self.bars[i] = Bar(pct: 0.1)
         }
         
         // fill self.barControllers based on self.bars
-        for (i, v) in self.bars.enumerated() { // loop through SingleStatBar view array (self.bars)
+        for (i, v) in self.bars.enumerated() { // loop through Bar view array (self.bars)
             self.barControllers[i] = v.SSBController // assign v.controller to the array spot
             print("Iteration: ", i, " ID: ", self.barControllers[i].id)
         }
@@ -65,7 +65,7 @@ class BarGraphController: ObservableObject {
     }
     
     /*
-     *  Sets self.solves to an array of SingleStatBar objects corresponding to this timeframe
+     *  Sets self.solves to an array of Bar objects corresponding to this timeframe
      *  CALLED BY: self.updateDisplay()
      
      *  THIS WAS MOVED FROM SolvesFromTimeframe.swift to (this) SolveHandler.swift
@@ -109,7 +109,7 @@ class BarGraphController: ObservableObject {
         }
         
         // fill the heightArray with the corresponding solveTimes
-        var res: [SingleStatBar] = []
+        var res: [Bar] = []
         //var min: Double = getMin().timeMS
         //var range: Double = getRange()
         //et maxheight: CGFloat = CGFloat(getRange())
@@ -126,7 +126,7 @@ class BarGraphController: ObservableObject {
             }else { // regular implementation
                 percentage = Double(height.count) / maxBarCount
             }
-            //let bar: SingleStatBar = SingleStatBar(pct: percentage)
+            //let bar: Bar = Bar(pct: percentage)
             //print("pct: ", percentage)
             //res.append(bar)
             

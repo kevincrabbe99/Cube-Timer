@@ -1,5 +1,5 @@
 //
-//  SingleStatBar.swift
+//  Bar.swift
 //  Cube Timer
 //
 //  Created by Kevin Crabbe on 10/26/20.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct SingleStatBar: View, Identifiable {
+struct Bar: View, Identifiable {
     
     var id: String
     
-    @ObservedObject var SSBController: SingleStatBarController = SingleStatBarController()
+    @ObservedObject var SSBController: BarController = BarController()
     
     init() {
         id = UUID().uuidString
@@ -25,9 +25,9 @@ struct SingleStatBar: View, Identifiable {
     /*
      *  Used to get the Controller when initiating initiating
      *  NOTE: This should not be used to get the controller
-     *          Use SingleStatBar().SSBController instead
+     *          Use Bar().SSBController instead
      
-    func getController() -> SingleStatBarController {
+    func getController() -> BarController {
         return SSBController
     }
      */
@@ -41,11 +41,11 @@ struct SingleStatBar: View, Identifiable {
     }
 }
 
-struct SingleStatBar_Previews: PreviewProvider {
+struct Bar_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.init("very_dark_black")
-            SingleStatBar(pct: 0.25)
+            Bar(pct: 0.25)
         }
         .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/))
         .frame(width: 100, height: 100)

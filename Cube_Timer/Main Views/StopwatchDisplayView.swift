@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StopwatchDisplay: View {
+struct StopwatchDisplayView: View {
     
     @ObservedObject var timer: TimerController
     
@@ -36,6 +36,6 @@ struct StopwatchDisplay: View {
 
 struct StopwatchDisplay_Previews: PreviewProvider {
     static var previews: some View {
-        StopwatchDisplay(timer: TimerController()).previewLayout(PreviewLayout.fixed(width: 300, height: 250))
+        StopwatchDisplayView(timer: TimerController()).previewLayout(PreviewLayout.fixed(width: 300, height: 250))
     }
 }

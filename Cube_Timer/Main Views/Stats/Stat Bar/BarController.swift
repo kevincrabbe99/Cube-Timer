@@ -1,5 +1,5 @@
 //
-//  SingleStatBarController.swift
+//  BarController.swift
 //  Cube Timer
 //
 //  Created by Kevin Crabbe on 11/23/20.
@@ -11,7 +11,7 @@ import SwiftUI
 /*
  *  This class controls a single stat bar used in the standard deviation bar graph
  */
-class SingleStatBarController: ObservableObject, Identifiable {
+class BarController: ObservableObject, Identifiable {
     
     var id: String = UUID().uuidString
     

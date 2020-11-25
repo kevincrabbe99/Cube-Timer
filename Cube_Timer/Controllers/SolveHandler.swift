@@ -377,7 +377,7 @@ class SolveHandler: ObservableObject {
     
     /*
      *  Returns the SolveItem with the max solve time
-     *  Called by self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     *  Called by self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in BestOfThreeView.swift->body
      
      *  SHOULD BE MOVED TO SolveHandler.swift
      */
@@ -397,7 +397,7 @@ class SolveHandler: ObservableObject {
     
     /*
      *  Returns the SolveItem with the min solve time
-     *  Called by self.getBars() & self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     *  Called by self.getBars() & self.getRange() and 1 thigs in StatsBarView.swift->body & 2 things in BestOfThreeView.swift->body
      
      *  SHOULD BE MOVED TO SolveHandler.swift
      */
@@ -417,7 +417,7 @@ class SolveHandler: ObservableObject {
     
     /*
      *  Returns a TimeCapture of the average solve time
-     *  Called 1 thing in StatsBarView.swift->body & 2 things in StatsLast3View.swift->body
+     *  Called 1 thing in StatsBarView.swift->body & 2 things in BestOfThreeView.swift->body
      
      *  SHOULD BE MOVED TO SolveHandler.swift
      */

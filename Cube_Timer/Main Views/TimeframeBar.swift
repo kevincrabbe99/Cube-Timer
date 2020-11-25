@@ -45,7 +45,7 @@ class SelectedPos: ObservableObject {
 }
  */
 
-struct TopBar: View {
+struct TimeframeBar: View {
     
     @ObservedObject var solveHandler: SolveHandler
     
@@ -289,7 +289,7 @@ struct selectedButton: ViewModifier {
 
 struct TopBar_Previews: PreviewProvider {
     static var previews: some View {
-        TopBar(sh: SolveHandler())
+        TimeframeBar(sh: SolveHandler())
             .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/400.0/*@END_MENU_TOKEN@*/, height: 25))
     }
 }

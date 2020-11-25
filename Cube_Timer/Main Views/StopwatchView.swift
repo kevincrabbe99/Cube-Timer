@@ -130,7 +130,7 @@ struct StopwatchView: View {
             /*
              *  THE ACTUAL TIMER
              */
-            StopwatchDisplay(timer: timer)
+            StopwatchDisplayView(timer: timer)
                 .frame(width: 250)
                // .animation(.spring())
             

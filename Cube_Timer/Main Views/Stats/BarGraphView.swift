@@ -47,7 +47,7 @@ struct StatsBarView: View {
             
             if timeframe == 0 { // in last 3 mode
                 
-                StatsLast3View(timer: timer, solveHandler: solveHandler)
+                BestOfThreeView(timer: timer, solveHandler: solveHandler)
                 
             } else {
             

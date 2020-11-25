@@ -1,5 +1,5 @@
 //
-//  StatsLast3View.swift
+//  BestOfThreeView.swift
 //  Cube Timer
 //
 //  Created by Kevin Crabbe on 10/27/20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StatsLast3View: View {
+struct BestOfThreeView: View {
     
     @ObservedObject var timer: TimerController
     var solveHandler: SolveHandler
@@ -119,12 +119,12 @@ struct StatsLast3View: View {
     }
 }
 
-struct StatsLast3View_Previews: PreviewProvider {
+struct BestOfThreeView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.init("very_dark_black")
             
-            StatsLast3View(timer: TimerController(), solveHandler: SolveHandler())
+            BestOfThreeView(timer: TimerController(), solveHandler: SolveHandler())
         }
         .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/250.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/250.0/*@END_MENU_TOKEN@*/))
         
