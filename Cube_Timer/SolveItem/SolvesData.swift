@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 
+
 class SolvesFromTimeframe: ObservableObject {
     
     @Published var solves: [SolveItem] // array of all the solves
@@ -58,7 +59,14 @@ class SolvesFromTimeframe: ObservableObject {
         
         switch timeframe {
         case .LastThree:
-            // * New Way!
+            let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+            let range = monthAgo...now
+            for s in solves {
+                if range.contains(s.timestamp) {
+                    res.append(s)
+                }
+            }
+            /* New Way!
             var i = 0; while (i < 3) {   // loop 3 times
                 if solves.count > (i+1) {   // check if solves has a value
                     res.append(solves[i]);  // add solve to return value
@@ -68,6 +76,7 @@ class SolvesFromTimeframe: ObservableObject {
                 
                 i+=1 // increment i for the while loop
             }
+ */
             /* The old way of doing things
             if solves.count >= 3 {
                 res = last3

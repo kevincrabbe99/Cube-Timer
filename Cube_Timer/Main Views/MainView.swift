@@ -12,9 +12,10 @@ struct MainView: View {
     var parent: ContentView
     @ObservedObject var timer: TimerController
     @ObservedObject var solveHandler: SolveHandler
+    @ObservedObject var bo3Controller: BO3Controller
 
     var peripheralOpacity: Double  {
-        if timer.startApproved || timer.timerGoing || timer.oneActivated{
+        if timer.timerGoing {
             return -0.3
         }else {
             return 0.5
@@ -32,7 +33,7 @@ struct MainView: View {
                 
                 ButtonsView(timer: timer)
                 
-                if !(timer.timerGoing || timer.startApproved || timer.oneActivated) { // only show when there is no timer active
+                if !(timer.timerGoing || timer.oneActivated) { // only show when there is no timer active
                 TimeframeBar(sh: solveHandler)
                     .position(x: geo.size.width/2, y: geo.size.height-50)
                     //.opacity(0.9)
@@ -41,7 +42,7 @@ struct MainView: View {
                     .transition(.move(edge: .bottom))
                 }
 
-                StopwatchView(parent: self, timer: timer, solveHandler: solveHandler /*solveHandler: solveHandler*/)
+                TimerView(p: self, t: timer, s: solveHandler, bo3c: bo3Controller /*solveHandler: solveHandler*/)
                     .offset(y:-30)
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
@@ -52,6 +53,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(parent: ContentView(), timer: TimerController(), solveHandler: SolveHandler())
+        MainView(parent: ContentView(), timer: TimerController(), solveHandler: SolveHandler(), bo3Controller: BO3Controller())
     }
 }

@@ -20,24 +20,29 @@ class TimerController: ObservableObject {
     
     var leftActivated: Bool = false
     var rightActivated: Bool = false
+    var neitherActivated: Bool = true
     
     var acceptInput: Bool = true // used as a guard for pressing the buttons
     
-    @Published var startApproved: Bool = false
-    @Published var oneActivated: Bool = false
+    @Published var startApproved: Bool = false  // true when all the factors which initail the timer are true
+    @Published var oneActivated: Bool = false   // true when one of the buttons is pressed
+    @Published var bothActivated: Bool = false
     
-    @Published var timerGoing: Bool = false
-    var timerALLMS:Double = 0
-    var timer: Timer?
+    @Published var timerGoing: Bool = false // true when the timer is counting up
+    var timer: Timer? // the actual timer
     
-    var startTime: Double = 0
-    @Published var time: Double = 0
-    @Published var lastRecordedTime:Double = 0
-    var elapsed: Double = 0
+    var startTime: Double = 0 // timestamp of when the timer starts
+    @Published var time: Double = 0 // the current time displayed
+    @Published var lastRecordedTime:Double = 0 // the timestamp of when the timer is canceled
     
+    // the labels which are dislpayed
     @Published var lblMin: String = "00"
     @Published var lblSec: String = "00"
     @Published var lblMS: String = "00"
+    var minutes: Int = 0
+    var seconds: Int = 0
+    var milliseconds: Int = 0
+
     
     @Published var overUnderTime: String = "0s"
     @Published var overUnderPercentage: Double = 0
@@ -46,7 +51,8 @@ class TimerController: ObservableObject {
     @Published var peripheralOpacity: Double = 1
     
     
-    var solveHandler: SolveHandler!
+    var solveHandler: SolveHandler! // solve handler
+    var bo3Controller: BO3Controller!
     
     
     
@@ -62,80 +68,23 @@ class TimerController: ObservableObject {
      * CALLED BY: ContentView.init()
      */
     public func setDisplayToLastSolve() {
+        if solveHandler.size <= 0 {
+            return
+        }
         // get the last time from solveHandler
         time = solveHandler.getLastSolve().timeMS
         updateOverUnderDisplay() // update the O/U display
         updateTimerFromTime() // update from just set time
+        //bo3Controller.update() // update bo3 view
     }
     private func setTimeToLastSolve() {
+        if solveHandler.size <= 0 {
+            return
+        }
         time = solveHandler.getLastSolve().timeMS
-        self.updateOverUnderDisplay()
+        updateOverUnderDisplay()
         updateTimerFromTime(updateDisplay: false)
-    }
-    
-    /*
-     *  This gets called every milisecond
-     *  CALLS: self.updateTimerFromTime()
-     */
-    var minutes: Int = 0
-    var seconds: Int = 0
-    var milliseconds: Int = 0
-    @objc func UpdateTimer() {
-        
-        // update vars which control the timer
-        lastRecordedTime = Date().timeIntervalSinceReferenceDate - startTime // calculates the new time (every milisecond)
-        time = lastRecordedTime
-        
-        self.updateOverUnderDisplay() // update O/U display
-        self.updateTimerFromTime() // update timer display
-        
-    }
-    
-    /*
-     *  Used to update the over/under display
-     */
-    private func updateOverUnderDisplay() {
-        // SET: O/U Time
-        if solveHandler.average.timeInMS > self.time {
-            self.overUnderTime = TimeCapture( solveHandler.average.timeInMS - self.time ).getInSolidForm()
-        }else {
-            self.overUnderTime = TimeCapture( self.time - solveHandler.average.timeInMS ).getInSolidForm()
-        }
-        
-        // SET: O/U Percentage
-        self.overUnderPercentage = (time / solveHandler.average.timeInMS) * 100
-        
-        // SET: O/U Color
-        if solveHandler.average.timeInMS > self.time {
-            self.statColor = Color.init("green")
-        }else  {
-            self.statColor = Color.init("red")
-        }
-    }
-    
-    /*
-     *  Updates the timer display based on self.time rather than self.lastRecordedTime (used in self.updateTimer())
-     *  CALLS: self.updateLabels()
-     *  CALLED by: this.updateTimer()
-     */
-    func updateTimerFromTime(updateDisplay: Bool = true) {
-        // calculate min
-        minutes = Int(time / 60.0)
-        time -= (TimeInterval(minutes) * 60)
-        
-        // calculate sec
-        seconds = Int(time)
-        time -= TimeInterval(seconds)
-        
-        // calculate ms
-        milliseconds = Int(time * 100)
-        
-        
-        
-        // calls method below to update the display
-        if updateDisplay { // true by default
-            self.updateLabels()
-        }
+       // bo3Controller.update() // update bo3 view
     }
     
     /*
@@ -183,46 +132,69 @@ class TimerController: ObservableObject {
     }
     
     private func testStart() {
-        if !acceptInput {
-            return
+        
+        if acceptInput {
+        print("TS: called")
+            oneActivated = (leftActivated || rightActivated) && !(leftActivated && rightActivated) // bool expression for if one is active
+            bothActivated = (leftActivated && rightActivated)
+            neitherActivated = !(leftActivated && rightActivated)
+            
+            
+            // if both are activated
+            if bothActivated {
+                bothButtonsPressed()
+            } else if oneActivated { // if one is pressed
+                oneButtonPressed()
+            } else if neitherActivated { // none are pressed
+                neitherPressed()
+            }
+                
         }
-        if leftActivated && rightActivated { // both are pressed
-            if timerGoing {
-                stopTimer()
-            }else {
-                startApproved = true
-            }
-        }else { // both are not pressed, either could be pressed
-            if leftActivated || rightActivated { // one is pressed
-                // update display stuff
-                solveHandler.barGraphController.animateOut()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    self.peripheralOpacity = 0 // hide the peripherals
-                }
-                
-                oneActivated = true
-                if timerGoing { // one is pressed & timer is going
-                    stopTimer()
-                }else { // one is pressed & timer is stopped
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.resetTimerStart()
-                    }
-                }
-            }else { // none are pressed
-                peripheralOpacity = 1 // show the peripherals
-                solveHandler.barGraphController.animateIn()
-                
-                oneActivated = false
-                abortResettingTimer() // bring timer back to last solve
-            }
-            if startApproved { // if both WERE pressed this get set to true
-                startTimer()
-            }
-            startApproved = false // reset
+      
+    }
+
+    /*
+     *  Either stops or starts the timer  START APPROVED PROBLEM!
+     */
+    private func neitherPressed() {
+        //startApproved = false
+        self.oneActivated = false
+        self.bothActivated = false
+        if timerGoing { // stop timer
+            stopTimer()
+            startApproved = false // prevent from starting timer without both buttons pressed
+        } else if !startApproved { // dont abort if start is approved
+            abortResettingTimer()
+        } else if startApproved {
+            startTimer()
+        }
+    }
+    /*
+     *  Sets self.peripgeralOpacity
+     */
+    private func oneButtonPressed() {
+        //startApproved = false
+        //self.peripheralOpacity = 0
+        self.oneActivated = true
+        if !timerGoing { // if timer is not going
+            self.resetTimerStart()  // start reseting the timer
+        }
+    }
+    
+    private func bothButtonsPressed() {
+        self.oneActivated = false
+        if timerGoing {
+            stopTimer()
+        }else {
+            startApproved = true
         }
     }
     
     func startTimer() {
+        
+        
+        self.peripheralOpacity = 0 // show the peripherals
+        solveHandler.barGraphController.animateOut()
         startTap.notificationOccurred(.success) // tap the phone when starting
         
         UIApplication.shared.isIdleTimerDisabled = true // disable the sleep
@@ -231,12 +203,17 @@ class TimerController: ObservableObject {
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
         timerGoing = true
         
+        acceptInput = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.acceptInput = true
+        }
     }
     
     func stopTimer() {
         
-        solveHandler.barGraphController.animateIn()
+        self.solveHandler.barGraphController.animateIn()
         self.peripheralOpacity = 1 // show the peripherals
+        
         
         let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
         newSolve.brand = brand.rawValue
@@ -261,11 +238,85 @@ class TimerController: ObservableObject {
         timer?.invalidate()
         timerGoing = false
         acceptInput = false
-        let delayInputTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(acceptInputNow), userInfo: nil, repeats: false)
+        //let delayInputTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(acceptInputNow), userInfo: nil, repeats: false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.acceptInput = true
+        }
     }
     
     @objc func acceptInputNow() {
         acceptInput = true
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+     *  This gets called every milisecond
+     *  CALLS: self.updateTimerFromTime()
+     */
+    @objc func UpdateTimer() {
+        
+        // update vars which control the timer
+        lastRecordedTime = Date().timeIntervalSinceReferenceDate - startTime // calculates the new time (every milisecond)
+        time = lastRecordedTime
+        
+        self.updateOverUnderDisplay() // update O/U display
+        self.updateTimerFromTime() // update timer display
+        
+    }
+    
+    /*
+     *  Used to update the over/under display
+     *  NOTE: must be called after updating SolveHandler.average
+     */
+    public func updateOverUnderDisplay() {
+        // SET: O/U Time
+        if solveHandler.average.timeInMS > self.time {
+            self.overUnderTime = TimeCapture( solveHandler.average.timeInMS - self.time ).getInSolidForm()
+        }else {
+            self.overUnderTime = TimeCapture( self.time - solveHandler.average.timeInMS ).getInSolidForm()
+        }
+        
+        // SET: O/U Percentage
+        self.overUnderPercentage = (time / solveHandler.average.timeInMS) * 100
+        
+        // SET: O/U Color
+        if solveHandler.average.timeInMS > self.time {
+            self.statColor = Color.init("green")
+        }else  {
+            self.statColor = Color.init("red")
+        }
+    }
+    
+    /*
+     *  Updates the timer display based on self.time rather than self.lastRecordedTime (used in self.updateTimer())
+     *  CALLS: self.updateLabels()
+     *  CALLED by: this.updateTimer()
+     */
+    func updateTimerFromTime(updateDisplay: Bool = true) {
+        // calculate min
+        minutes = Int(time / 60.0)
+        time -= (TimeInterval(minutes) * 60)
+        
+        // calculate sec
+        seconds = Int(time)
+        time -= TimeInterval(seconds)
+        
+        // calculate ms
+        milliseconds = Int(time * 100)
+        
+        
+        
+        // calls method below to update the display
+        if updateDisplay { // true by default
+            self.updateLabels()
+        }
     }
     
     
@@ -277,6 +328,8 @@ class TimerController: ObservableObject {
     private func resetTimerStart() {
         
         abortTimerReset = false // reset abort var
+        peripheralOpacity = 0 // hide peripherals
+        solveHandler.barGraphController.animateOut() // hide bars
         
         var timeQuotient: Double = 0
         var minQuotient: Double = 0
@@ -334,7 +387,9 @@ class TimerController: ObservableObject {
     
     private func abortResettingTimer() {
         abortTimerReset = true
+        peripheralOpacity = 1
         setDisplayToLastSolve()
+        solveHandler.barGraphController.animateIn() // hide bars
     }
     
     

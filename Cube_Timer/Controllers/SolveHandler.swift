@@ -28,6 +28,7 @@ enum Timeframe: String {
 class SolveHandler: ObservableObject {
     
     var timer: TimerController!
+    var bo3Controller: BO3Controller!
     //var solveHandler: SolveHandler!
     
     @Published var solves: [SolveItem] // array which changes to correspond with timeframe
@@ -156,6 +157,10 @@ class SolveHandler: ObservableObject {
     }
      */
     
+    public func deleteLast() {
+        self.delete(getLastSolve())
+    }
+    
     /*
      *  Deleted a solveItem, returns false if was not able to
      */
@@ -215,7 +220,6 @@ class SolveHandler: ObservableObject {
         */
         // (new way) adds to SolveFromTimeframe().solves
         self.solvesByTimeFrame.add(s)
-        
         
         updateSolves()
     }
@@ -304,10 +308,18 @@ class SolveHandler: ObservableObject {
         }else {
             barGraphController.updateBars()        // updates self.bars to be the correct height
         }
-
         updateBest()        // updates self.best
         updateLast3()       // updates self.last3
         updateAverage()     // updates self.average
+        // must be called after updating average
+        if (timer != nil) {
+            timer.updateOverUnderDisplay() // update the timer over/under display
+        }
+        // update BO3 view
+        if self.bo3Controller != nil {
+            print("updating bo4Controller")
+            self.bo3Controller.update()
+        }
     }
     
     /*

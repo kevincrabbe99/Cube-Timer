@@ -19,6 +19,7 @@ struct ContentView: View {
     
     @ObservedObject var timer: TimerController = TimerController()
     @ObservedObject var solveHandler: SolveHandler = SolveHandler()
+    @ObservedObject var bo3Controller: BO3Controller = BO3Controller()
 
     var peripheralOpacity: Double  {
         if timer.startApproved || timer.timerGoing || timer.oneActivated{
@@ -32,9 +33,22 @@ struct ContentView: View {
         self.onPage = p
     }
     
+    /*
+     *  This is thie first init, we link all the controller and handlers here
+     */
     init() {
+        // set timer controllers
         self.timer.solveHandler = solveHandler
+        self.timer.bo3Controller = bo3Controller
+        
+        // set solveHandler controllers
         self.solveHandler.timer = timer
+        self.solveHandler.bo3Controller = bo3Controller
+        
+        // set the timers BO3 Controller
+        //self.timer.bo3Controller = bo3Controller
+        self.bo3Controller.solveHandler = solveHandler
+        self.bo3Controller.timerController = timer
         
         // update the stopwatch display to show the last solve time
         self.timer.setDisplayToLastSolve()
@@ -45,11 +59,11 @@ struct ContentView: View {
         
         switch onPage {
         case .Main:
-            MainView(parent: self, timer: timer, solveHandler: solveHandler)
+            MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
         case .showAll:
             AllSolvesView(parent: self, solveHandler: solveHandler)
         default:
-            MainView(parent: self, timer: timer, solveHandler: solveHandler)
+            MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
         }
         
     }

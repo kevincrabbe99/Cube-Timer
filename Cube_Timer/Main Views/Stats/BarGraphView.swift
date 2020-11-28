@@ -47,13 +47,17 @@ struct StatsBarView: View {
             
             if timeframe == 0 { // in last 3 mode
                 
-                BestOfThreeView(timer: timer, solveHandler: solveHandler)
+                Rectangle() // a placeholder for BestOfThreeView which is located in TimerView
+                    .fill(Color.clear)
+                    .frame(height: 77) // for some reason it is 78 not 82
                 
             } else {
             
                 VStack {
                     
-                        
+                    /*
+                     *  The actual bars
+                     */
                     GeometryReader { geo in
                         HStack(alignment: .bottom, spacing: 4) {
                             
@@ -68,6 +72,9 @@ struct StatsBarView: View {
                     }
                     .frame(width: 250, height: 50, alignment: .bottom)
                 
+                    /*
+                     *  The labels under the bars
+                     */
                     if solveHandler.size > 0 { // guard incase there are no solves
                         HStack {
                             Text( solveHandler.getMin().getTimeCapture()?.getAsReadable() ?? "-" )
