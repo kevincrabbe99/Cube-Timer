@@ -16,10 +16,12 @@ enum Page: String {
 struct ContentView: View {
     
     @State var onPage: Page = .Main
+    @State var sidebar: Bool = false
     
     @ObservedObject var timer: TimerController = TimerController()
     @ObservedObject var solveHandler: SolveHandler = SolveHandler()
     @ObservedObject var bo3Controller: BO3Controller = BO3Controller()
+    @ObservedObject var sbController: SidebarController = SidebarController()
 
     var peripheralOpacity: Double  {
         if timer.startApproved || timer.timerGoing || timer.oneActivated{
@@ -44,11 +46,15 @@ struct ContentView: View {
         // set solveHandler controllers
         self.solveHandler.timer = timer
         self.solveHandler.bo3Controller = bo3Controller
+        self.solveHandler.sbController = sbController
         
         // set the timers BO3 Controller
         //self.timer.bo3Controller = bo3Controller
         self.bo3Controller.solveHandler = solveHandler
         self.bo3Controller.timerController = timer
+        
+        // side bar controller stuff
+        self.sbController.solveHandler = solveHandler
         
         // update the stopwatch display to show the last solve time
         self.timer.setDisplayToLastSolve()
@@ -57,13 +63,19 @@ struct ContentView: View {
     
     var body: some View {
         
-        switch onPage {
-        case .Main:
-            MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
-        case .showAll:
-            AllSolvesView(parent: self, solveHandler: solveHandler)
-        default:
-            MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
+        ZStack {
+            switch onPage {
+            case .Main:
+                MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
+            case .showAll:
+                AllSolvesView(parent: self, solveHandler: solveHandler)
+            default:
+                MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
+            }
+            
+            // add stuff for sidebar
+            
+            
         }
         
     }

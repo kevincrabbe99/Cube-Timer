@@ -21,6 +21,8 @@ enum Timeframe: String {
 }
 
 
+
+
 /*
  *  Class which holds the solves array which represents the solves which can be found within the current timeframe
  *  MAIN PURPOSE: Facilitate self.solves
@@ -29,7 +31,10 @@ class SolveHandler: ObservableObject {
     
     var timer: TimerController!
     var bo3Controller: BO3Controller!
-    //var solveHandler: SolveHandler!
+    /*  controller for the sidebar,
+        handles the cube types */
+    var sbController: SidebarController!
+
     
     @Published var solves: [SolveItem] // array which changes to correspond with timeframe
     @Published var size: Int = 0
@@ -49,7 +54,6 @@ class SolveHandler: ObservableObject {
     // self.barGraphController is a instance of a bar graph
     //  this is for the homescreen standard deviation graph preview
     @ObservedObject var barGraphController: BarGraphController = BarGraphController()
-    
     
     init() {
         
