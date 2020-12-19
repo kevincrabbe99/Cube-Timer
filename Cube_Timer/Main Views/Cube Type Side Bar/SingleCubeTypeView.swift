@@ -11,22 +11,38 @@ import SwiftUI
 
 struct SingleCubeTypeView: View {
     
+    var parent: SidebarView
+    var d: Int // dimensions of the cube
     var configuration: String
     var brand: String
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(configuration)
-                .font(.system(size: 14))
-                .fontWeight(.bold)
-            Text(brand)
-                .font(.system(size: 10))
-        }.frame(height: 50)
+        HStack {
+            CubeIcon(d,d,d, width: 15)
+                //.frame(width: 30, height:30)
+                .foregroundColor(Color.init("mint_cream"))
+                .opacity(0.8)
+            VStack(alignment: .leading) {
+                Text(configuration)
+                    .font(.system(size: 14))
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.init("mint_cream"))
+                Text(brand)
+                    .font(.system(size: 9))
+                    .foregroundColor(Color.init("mint_cream"))
+            }
+            .offset(x: 8)
+        }.frame(width: 200, height: 40, alignment: .leading)
+        //.offset(x: 20)
     }
 }
 
 struct SingleCubeTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleCubeTypeView(configuration: "3x3x3", brand: "Rubiks Origional Brand")
+        ZStack {
+            Color.init("black_chocolate")
+            SingleCubeTypeView(d: 5, configuration: "3x3x3", brand: "Rubiks Origional Brand")
+       
+        }
     }
 }
