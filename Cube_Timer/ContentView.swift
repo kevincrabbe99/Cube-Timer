@@ -35,6 +35,33 @@ struct ContentView: View {
     @ObservedObject var bo3Controller: BO3Controller = BO3Controller()
     @ObservedObject var sbController: SidebarController = SidebarController()
 
+    
+    // vars for popup
+    @State var popupShowing: Bool = false
+   // @State var shaderOpacity: Double = 0
+    
+    
+    /*
+     *  This is triggered when the user taps new Cube Type Icon
+            * called by onClick listener in SidebarView.swift
+     */
+    public func tappedAddCT() {
+        showPopup()
+        print("popup showing")
+    }
+    
+    private func showPopup() {
+        popupShowing = true
+        //shaderOpacity = 0.8
+        print("popup showing")
+    }
+    
+    public func hidePopup() {
+        popupShowing = false
+       // shaderOpacity = 0
+        print("popup hidden")
+    }
+    
     /*
      *  The drag gesture for the sidebar
             This is called by SidebarView.swift
@@ -151,10 +178,13 @@ struct ContentView: View {
                 switch onPage {
                 case .Main:
                     MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
+                        .zIndex(0)
                 case .showAll:
                     AllSolvesView(parent: self, solveHandler: solveHandler)
+                        .zIndex(0)
                 default:
                     MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
+                        .zIndex(0)
                 }
                 
                 // add stuff for sidebar
@@ -166,12 +196,37 @@ struct ContentView: View {
                     .animation(.spring())
                     .frame(width: geo.size.width, height: geo.size.height)
                     .position(x: geo.size.width/2, y: geo.size.height/2)
+                    .zIndex(1)
+                    .onTapGesture { // close sidebar when tapped
+                        self.pushOutSidebar()
+                    }
                 
                 SidebarView(contentView: self)
                     .frame(width: geo.size.width / 3, height: geo.size.height)
                     //.position(x: geo.size.width / 6, y: geo.size.height/2)
                     .position(x: sbXPos, y: geo.size.height/2)
                     .animation(.spring())
+                    .zIndex(3)
+                
+                
+                /*
+                 *  popup stuff
+                 */
+                if popupShowing {
+                    Color.black
+                        .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.2)))
+                        .zIndex(6)
+                        .opacity(0.5)
+                        .onTapGesture {
+                            self.hidePopup()
+                        }
+                    
+                    PopupView(contentView: self)
+                        .transition(AnyTransition.move(edge: .top))
+                        .animation(.spring())
+                        // .transition(AnyTransition.opacity.combined(with: .slide).animation(.spring()))
+                        .zIndex(9)
+                }
                 
             }
         

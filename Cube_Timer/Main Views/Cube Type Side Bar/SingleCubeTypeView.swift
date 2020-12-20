@@ -41,7 +41,7 @@ struct SingleCubeTypeView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.init("black_chocolate")
-            SingleCubeTypeView(d: 5, configuration: "3x3x3", brand: "Rubiks Origional Brand")
+            SingleCubeTypeView(parent: SidebarView(contentView: ContentView()), d: 5, configuration: "3x3x3", brand: "Rubiks Origional Brand")
        
         }
     }
