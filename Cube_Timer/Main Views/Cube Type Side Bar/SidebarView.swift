@@ -10,6 +10,9 @@ import SwiftUI
 struct SidebarView: View {
     
     var contentView: ContentView
+    var cTypeHandler: CTypeHandler
+    
+    @State var editMode: Bool = false
     
     
     var body: some View {
@@ -38,8 +41,15 @@ struct SidebarView: View {
                             .font(.system(size: 22))
                         Spacer()
                         HStack {
-                            Image(systemName: "square.and.pencil")
-                                .frame(width: 40, height: 50, alignment: .center)
+                            
+                            Button(action: {
+                                print("edit mode toggle" )
+                                self.editModeToggle()
+                            }, label: {
+                                Image(systemName: "square.and.pencil")
+                            })
+                            .frame(width: 40, height: 50, alignment: .center)
+                            
                             Button(action: { // listener for new cube type
                                 print("work")
                                 self.contentView.tappedAddCT()
@@ -57,15 +67,19 @@ struct SidebarView: View {
                     
                     ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false) {
                         VStack { // cube list
-                            SingleCubeTypeView(parent: self, d: 3, configuration: "3x3x3", brand: "Rubiks Origional Brand")
-                            SingleCubeTypeView(parent: self, d: 4, configuration: "4x4x4", brand: "Rubiks Brand")
-                            SingleCubeTypeView(parent: self, d: 5, configuration: "5x5x5", brand: "Rubiks Origional Brand")
-                            SingleCubeTypeView(parent: self, d: 3, configuration: "3x3x3", brand: "Xe Ping Dau Brand")
-                            SingleCubeTypeView(parent: self, d: 4, configuration: "4x4x4", brand: "Xe Ping Dau Brand")
-                            SingleCubeTypeView(parent: self, d: 5, configuration: "5x5x5", brand: "Xe Ping Dau")
+                            ForEach(/*cTypeHandler.views*/cTypeHandler.getAllAsViews(parentToPass: self)) { t in
+                                t
+                                
+                                // the plan:
+                                /*
+                                 *  use the foreach to being all of the CT's in as CubeTypeController objects (initied and stored in CTypeHandler
+                                 *  The CTController objects will store the corresponind view to be displayed
+                                 *  When the SingleCubeTypeView receives a tap gesture it calls the Controller and the controller will have a reference to CTypeHandler (as thats where it was created)
+                                 */
+                            
+                            }
                         }
                         .frame(width: geo.size.width - 75, alignment: .leading)
-                        .offset(x:20)
                     }
                     .frame(width: geo.size.width - 75, height: geo.size.height - 120, alignment: .topLeading)
                     .offset(y:5)
@@ -122,6 +136,12 @@ struct SidebarView: View {
         
     }
     
+    public func editModeToggle() {
+        let lightTap = UIImpactFeedbackGenerator(style: .light)
+        lightTap.impactOccurred()
+        self.editMode.toggle()
+    }
+    
     
     
 }
@@ -131,7 +151,7 @@ struct SidebarView_Previews: PreviewProvider {
         ZStack {
             Color(.init("very_dark_black"))
             
-            SidebarView(contentView: ContentView())
+            SidebarView(contentView: ContentView(), cTypeHandler: CTypeHandler())
         }
         .previewLayout(.fixed(width: 300, height: 350))
     }

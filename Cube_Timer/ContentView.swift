@@ -17,6 +17,7 @@ enum Page: String {
 
 struct ContentView: View {
     
+    
     @State var onPage: Page = .Main
     @State var sidebar: Bool = false
     
@@ -34,33 +35,101 @@ struct ContentView: View {
     @ObservedObject var solveHandler: SolveHandler = SolveHandler()
     @ObservedObject var bo3Controller: BO3Controller = BO3Controller()
     @ObservedObject var sbController: SidebarController = SidebarController()
-
+    @ObservedObject var cTypeHandler: CTypeHandler = CTypeHandler()
+    @ObservedObject var popupController: PopupController = PopupController()
+    @ObservedObject var ctEditController: CTEditController = CTEditController()
+    
     
     // vars for popup
     @State var popupShowing: Bool = false
+    
+    // vars for edit ct mode
+    
+    
+    
    // @State var shaderOpacity: Double = 0
     
+    
+    /*
+     *  This is thie first init, we link all the controller and handlers here
+     */
+    init() {
+        // set timer controllers
+        self.timer.solveHandler = solveHandler
+        self.timer.bo3Controller = bo3Controller
+        self.timer.CTypeHandler = cTypeHandler
+        
+        // set solveHandler controllers
+        self.solveHandler.timer = timer
+        self.solveHandler.bo3Controller = bo3Controller
+        self.solveHandler.sbController = sbController
+        self.solveHandler.CTypeHandler = cTypeHandler
+        
+        // set the timers BO3 Controller
+        //self.timer.bo3Controller = bo3Controller
+        self.bo3Controller.solveHandler = solveHandler
+        self.bo3Controller.timerController = timer
+        self.bo3Controller.CTypeHandler = cTypeHandler
+        
+        // side bar controller stuff
+        self.sbController.solveHandler = solveHandler
+        self.sbController.cTypeHandler = cTypeHandler
+        
+        // popu controller stuff
+        self.popupController.contentView = self
+        self.popupController.cTypeHandler = cTypeHandler
+        
+        // cube type editor controller
+        self.ctEditController.cTypeHandler = cTypeHandler
+        
+        
+        // set popupview
+      
+        
+        // update the stopwatch display to show the last solve time
+        self.timer.setDisplayToLastSolve()
+    }
+    
+    
+    /*
+     *  When editing a CT we bring up the add CT view and change it a lil
+     */
+    public func showCTPopupFor(id: UUID) {
+        let ct = cTypeHandler.getFrom(id: id)
+        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, contentView: self, setCT: ct)))
+    }
+    
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
+    public func showPopup(v: AnyView) {
+        lightTap.impactOccurred()
+        popupController.set(v)
+        popupShowing = true
+    }
+    
+    public func hidePopup() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        lightTap.impactOccurred()
+        popupShowing = false
+       // shaderOpacity = 0
+        print("popup hidden")
+    }
     
     /*
      *  This is triggered when the user taps new Cube Type Icon
             * called by onClick listener in SidebarView.swift
      */
     public func tappedAddCT() {
-        showPopup()
+        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController, contentView: self)))
         print("popup showing")
     }
     
+    /*
     private func showPopup() {
         popupShowing = true
         //shaderOpacity = 0.8
         print("popup showing")
     }
-    
-    public func hidePopup() {
-        popupShowing = false
-       // shaderOpacity = 0
-        print("popup hidden")
-    }
+    */
     
     /*
      *  The drag gesture for the sidebar
@@ -141,31 +210,7 @@ struct ContentView: View {
     func setPageTo(_ p: Page) {
         self.onPage = p
     }
-    
-    /*
-     *  This is thie first init, we link all the controller and handlers here
-     */
-    init() {
-        // set timer controllers
-        self.timer.solveHandler = solveHandler
-        self.timer.bo3Controller = bo3Controller
-        
-        // set solveHandler controllers
-        self.solveHandler.timer = timer
-        self.solveHandler.bo3Controller = bo3Controller
-        self.solveHandler.sbController = sbController
-        
-        // set the timers BO3 Controller
-        //self.timer.bo3Controller = bo3Controller
-        self.bo3Controller.solveHandler = solveHandler
-        self.bo3Controller.timerController = timer
-        
-        // side bar controller stuff
-        self.sbController.solveHandler = solveHandler
-        
-        // update the stopwatch display to show the last solve time
-        self.timer.setDisplayToLastSolve()
-    }
+
     
     
     var body: some View {
@@ -201,7 +246,7 @@ struct ContentView: View {
                         self.pushOutSidebar()
                     }
                 
-                SidebarView(contentView: self)
+                SidebarView(contentView: self, cTypeHandler: cTypeHandler)
                     .frame(width: geo.size.width / 3, height: geo.size.height)
                     //.position(x: geo.size.width / 6, y: geo.size.height/2)
                     .position(x: sbXPos, y: geo.size.height/2)
@@ -221,7 +266,7 @@ struct ContentView: View {
                             self.hidePopup()
                         }
                     
-                    PopupView(contentView: self)
+                    PopupView(contentView: self, ctEditController: ctEditController, popupController: popupController)
                         .transition(AnyTransition.move(edge: .top))
                         .animation(.spring())
                         // .transition(AnyTransition.opacity.combined(with: .slide).animation(.spring()))

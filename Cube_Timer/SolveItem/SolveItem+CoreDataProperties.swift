@@ -91,19 +91,19 @@ extension SolveItem: Identifiable {
 }
 
 extension SolveItem {
-  static var defaultSortDescriptors: [NSSortDescriptor] {
-    return [NSSortDescriptor(key: "timestamp", ascending: true)]
-  }
-static var sortedFetchRequest: NSFetchRequest<SolveItem> {
-    let request: NSFetchRequest<SolveItem> = SolveItem.fetchRequest()
-    request.sortDescriptors = SolveItem.defaultSortDescriptors
-    return request
-  }
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        return [NSSortDescriptor(key: "timestamp", ascending: true)]
+    }
+    static var sortedFetchRequest: NSFetchRequest<SolveItem> {
+        let request: NSFetchRequest<SolveItem> = SolveItem.fetchRequest()
+        request.sortDescriptors = SolveItem.defaultSortDescriptors
+        return request
+    }
     static var solvesFetchRequest: NSFetchRequest<SolveItem> {
         let request = SolveItem.sortedFetchRequest
-       // request.predicate = NSPredicate(format: "visited == true")
+        // request.predicate = NSPredicate(format: "visited == true")
         return request
-      }
+    }
 }
 
 extension SolveItem {

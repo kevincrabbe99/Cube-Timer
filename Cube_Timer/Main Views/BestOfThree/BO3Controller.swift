@@ -10,6 +10,8 @@ import SwiftUI
 
 class BO3Controller: ObservableObject {
     
+    
+    var CTypeHandler: CTypeHandler!
     var solveHandler: SolveHandler!
     var timerController: TimerController!
     

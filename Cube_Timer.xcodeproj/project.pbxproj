@@ -16,6 +16,14 @@
 		7B6073F4258E4FFF00D188CF /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073F3258E4FFF00D188CF /* PopupController.swift */; };
 		7B6073FC258E500700D188CF /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073FB258E500700D188CF /* PopupView.swift */; };
 		7B607402258ED68300D188CF /* NewCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607401258ED68300D188CF /* NewCubeTypeView.swift */; };
+		7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607409258EF7ED00D188CF /* CubeType+CoreDataClass.swift */; };
+		7B60740C258EF7ED00D188CF /* CubeType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B60740A258EF7ED00D188CF /* CubeType+CoreDataProperties.swift */; };
+		7B607411258F0B5700D188CF /* CTypeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607410258F0B5700D188CF /* CTypeHandler.swift */; };
+		7B60741F258F28ED00D188CF /* PopupViewGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B60741E258F28ED00D188CF /* PopupViewGeneric.swift */; };
+		7B607424258F29D000D188CF /* PopupError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607423258F29D000D188CF /* PopupError.swift */; };
+		7B607442258F30D200D188CF /* CTEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607441258F30D200D188CF /* CTEditController.swift */; };
+		7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */; };
+		7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */; };
 		7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */; };
 		7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */; };
 		7B8B62F5254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */; };
@@ -72,6 +80,14 @@
 		7B6073F3258E4FFF00D188CF /* PopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupController.swift; sourceTree = "<group>"; };
 		7B6073FB258E500700D188CF /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		7B607401258ED68300D188CF /* NewCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCubeTypeView.swift; sourceTree = "<group>"; };
+		7B607409258EF7ED00D188CF /* CubeType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CubeType+CoreDataClass.swift"; path = "Cube_Timer/CubeType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7B60740A258EF7ED00D188CF /* CubeType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CubeType+CoreDataProperties.swift"; path = "Cube_Timer/CubeType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7B607410258F0B5700D188CF /* CTypeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTypeHandler.swift; sourceTree = "<group>"; };
+		7B60741E258F28ED00D188CF /* PopupViewGeneric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewGeneric.swift; sourceTree = "<group>"; };
+		7B607423258F29D000D188CF /* PopupError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupError.swift; sourceTree = "<group>"; };
+		7B607441258F30D200D188CF /* CTEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTEditController.swift; sourceTree = "<group>"; };
+		7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCubeTypeView.swift; sourceTree = "<group>"; };
+		7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCubeTypeViewController.swift; sourceTree = "<group>"; };
 		7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDisplayView.swift; sourceTree = "<group>"; };
 		7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SolveItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SolveItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -171,14 +187,47 @@
 		7B607400258ED65F00D188CF /* views */ = {
 			isa = PBXGroup;
 			children = (
-				7B607401258ED68300D188CF /* NewCubeTypeView.swift */,
+				7B607440258F30A000D188CF /* Cube_Type_Editor */,
+				7B60741E258F28ED00D188CF /* PopupViewGeneric.swift */,
+				7B607423258F29D000D188CF /* PopupError.swift */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		7B607440258F30A000D188CF /* Cube_Type_Editor */ = {
+			isa = PBXGroup;
+			children = (
+				7B607401258ED68300D188CF /* NewCubeTypeView.swift */,
+				7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */,
+				7B607441258F30D200D188CF /* CTEditController.swift */,
+			);
+			path = Cube_Type_Editor;
+			sourceTree = "<group>";
+		};
+		7B7DDCFF259076E800E2197F /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				7B7DDD0825907D3700E2197F /* Single_CubeType_Components */,
+				7BBA7198258D356600FED3A2 /* SidebarShape.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		7B7DDD0825907D3700E2197F /* Single_CubeType_Components */ = {
+			isa = PBXGroup;
+			children = (
+				7BCC6DD9257242A6001663B1 /* SingleCubeTypeView.swift */,
+				7BBA7185258C763300FED3A2 /* CubeIcon.swift */,
+				7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */,
+			);
+			path = Single_CubeType_Components;
 			sourceTree = "<group>";
 		};
 		7B984CE2253E02D900BC6402 = {
 			isa = PBXGroup;
 			children = (
+				7B607409258EF7ED00D188CF /* CubeType+CoreDataClass.swift */,
+				7B60740A258EF7ED00D188CF /* CubeType+CoreDataProperties.swift */,
 				7B984CED253E02D900BC6402 /* Cube_Timer */,
 				7B984D04253E02DC00BC6402 /* Cube_TimerTests */,
 				7B984D0F253E02DC00BC6402 /* Cube_TimerUITests */,
@@ -251,12 +300,10 @@
 		7BCC6DCB25723833001663B1 /* Cube Type Side Bar */ = {
 			isa = PBXGroup;
 			children = (
+				7B7DDCFF259076E800E2197F /* Shapes */,
 				7BCC6DCC2572385F001663B1 /* SidebarController.swift */,
 				7BCC6DD4257238B8001663B1 /* SidebarView.swift */,
-				7BCC6DD9257242A6001663B1 /* SingleCubeTypeView.swift */,
-				7BBA7185258C763300FED3A2 /* CubeIcon.swift */,
 				7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */,
-				7BBA7198258D356600FED3A2 /* SidebarShape.swift */,
 			);
 			path = "Cube Type Side Bar";
 			sourceTree = "<group>";
@@ -266,6 +313,7 @@
 			children = (
 				7B984D44253E550300BC6402 /* TimerController.swift */,
 				7B984D59253E72D700BC6402 /* SolveHandler.swift */,
+				7B607410258F0B5700D188CF /* CTypeHandler.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -436,8 +484,10 @@
 				7B2929D8254790B3009A5B90 /* Bar.swift in Sources */,
 				7B984D38253E226B00BC6402 /* TimerView.swift in Sources */,
 				7B2929C925477C51009A5B90 /* BarGraphView.swift in Sources */,
+				7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */,
 				7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */,
 				7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */,
+				7B607424258F29D000D188CF /* PopupError.swift in Sources */,
 				7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */,
 				7B984CFB253E02DC00BC6402 /* Cube_Timer.xcdatamodeld in Sources */,
 				7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */,
@@ -454,10 +504,16 @@
 				7B4719E2256BBBEB009FFFEA /* BarController.swift in Sources */,
 				7BCC6DD5257238B8001663B1 /* SidebarView.swift in Sources */,
 				7B984CEF253E02D900BC6402 /* Cube_TimerApp.swift in Sources */,
+				7B607411258F0B5700D188CF /* CTypeHandler.swift in Sources */,
+				7B60740C258EF7ED00D188CF /* CubeType+CoreDataProperties.swift in Sources */,
 				7BCC6DB2256EC61B001663B1 /* BO3Controller.swift in Sources */,
 				7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */,
 				7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */,
+				7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */,
+				7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */,
+				7B607442258F30D200D188CF /* CTEditController.swift in Sources */,
 				7BCC6DCD25723860001663B1 /* SidebarController.swift in Sources */,
+				7B60741F258F28ED00D188CF /* PopupViewGeneric.swift in Sources */,
 				7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */,
 				7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */,
 			);

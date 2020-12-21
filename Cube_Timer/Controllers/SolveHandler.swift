@@ -34,6 +34,7 @@ class SolveHandler: ObservableObject {
     /*  controller for the sidebar,
         handles the cube types */
     var sbController: SidebarController!
+    var CTypeHandler: CTypeHandler!
 
     
     @Published var solves: [SolveItem] // array which changes to correspond with timeframe

@@ -11,5 +11,8 @@ import SwiftUI
 class SidebarController: ObservableObject {
  
     var solveHandler: SolveHandler! // initiated in ContentView.swift
+    var cTypeHandler: CTypeHandler!
+    
+    
     
 }

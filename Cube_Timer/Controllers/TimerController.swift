@@ -53,6 +53,7 @@ class TimerController: ObservableObject {
     
     var solveHandler: SolveHandler! // solve handler
     var bo3Controller: BO3Controller!
+    var CTypeHandler: CTypeHandler!
     
     
     

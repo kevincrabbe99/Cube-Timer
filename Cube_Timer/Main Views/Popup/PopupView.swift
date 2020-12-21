@@ -10,7 +10,11 @@ import SwiftUI
 struct PopupView: View {
     
     var contentView: ContentView
+    var ctEditController: CTEditController // used to move the fucking box
+    var popupController: PopupController
     
+    /*
+     * this got moved to CTEditController.swift (fuck me)
     @State var popupOffsetY: CGFloat = 0
     @State var popupOffsetX: CGFloat = 0
 
@@ -23,9 +27,10 @@ struct PopupView: View {
         self.popupOffsetX = 0
         self.popupOffsetY = 0
     }
+     */
     
     public func hide() {
-        unfocusTextField()
+        ctEditController.unfocusTextField()
         contentView.hidePopup()
     }
     
@@ -42,7 +47,7 @@ struct PopupView: View {
                         .cornerRadius(10)
                         .shadow(radius: 15)
                         .onTapGesture {
-                            self.unfocusTextField()
+                            ctEditController.unfocusTextField()
                         }
                     
                     
@@ -61,13 +66,13 @@ struct PopupView: View {
                     /*
                      * this area will implement the choosing of what view to display for the popup
                      */
-                    NewCubeTypeView(parent: self)
-                    
+                    //NewCubeTypeView(parent: self)
+                    popupController.currentView
                     
                 }
                 .frame(width: geo.size.width/2, height: popupHeight, alignment: .center)
                 .animation(.spring())
-                .offset(x: popupOffsetX, y:popupOffsetY)
+                .offset(x: ctEditController.popupOffsetX, y:ctEditController.popupOffsetY)
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
         }
@@ -82,7 +87,7 @@ struct PopupView_Previews: PreviewProvider {
             Color.black
                 .opacity(0.8)
             
-            PopupView(contentView: ContentView())
+            PopupView(contentView: ContentView(), ctEditController: CTEditController(), popupController: PopupController())
             
             
         }.previewLayout(PreviewLayout.fixed(width: 568, height: 320))
