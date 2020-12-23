@@ -77,6 +77,7 @@ struct NewCubeTypeView: View, PopupViewGeneric {
                     Picker(selection: $d1, label: Text("")) {
                         ForEach(0..<configDimensionOptions.count) {
                             Text(String(self.configDimensionOptions[$0]))
+                                .foregroundColor(.white)
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
@@ -92,6 +93,7 @@ struct NewCubeTypeView: View, PopupViewGeneric {
                     Picker(selection: $d2, label: Text("")) {
                         ForEach(0..<configDimensionOptions.count) {
                             Text(String(self.configDimensionOptions[$0]))
+                                .foregroundColor(.white)
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
@@ -107,6 +109,7 @@ struct NewCubeTypeView: View, PopupViewGeneric {
                     Picker(selection: $d3, label: Text("")) {
                         ForEach(0..<configDimensionOptions.count) {
                             Text(String(self.configDimensionOptions[$0]))
+                                .foregroundColor(.white)
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
@@ -187,6 +190,7 @@ struct NewCubeTypeView: View, PopupViewGeneric {
             }
             .frame(width: (w-20), height: (h-20), alignment: .topLeading)
             .position(x: w/2, y: h/2)
+            .foregroundColor(.init("mint_cream"))
         }
         
     }

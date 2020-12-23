@@ -69,24 +69,28 @@ class TimerController: ObservableObject {
      * CALLED BY: ContentView.init()
      */
     public func setDisplayToLastSolve() {
-        if solveHandler.size <= 0 {
-            return
-        }
         // get the last time from solveHandler
-        time = solveHandler.getLastSolve().timeMS
+        if solveHandler.size > 0  {
+            time = solveHandler.getLastSolve()!.timeMS
+        }else  {
+            time = 0
+        }
+        
         updateOverUnderDisplay() // update the O/U display
         updateTimerFromTime() // update from just set time
         //bo3Controller.update() // update bo3 view
     }
+    /* this was made redundant by the method above
     private func setTimeToLastSolve() {
         if solveHandler.size <= 0 {
             return
         }
-        time = solveHandler.getLastSolve().timeMS
+        time = solveHandler.getLastSolve()!.timeMS
         updateOverUnderDisplay()
-        updateTimerFromTime(updateDisplay: false)
+        updateTimerFromTime()
        // bo3Controller.update() // update bo3 view
     }
+ */
     
     /*
      *  Updates the stopwatch display based on self.minutes, self.seconds, sellf.miliseconds.
@@ -301,6 +305,7 @@ class TimerController: ObservableObject {
      *  CALLED by: this.updateTimer()
      */
     func updateTimerFromTime(updateDisplay: Bool = true) {
+        
         // calculate min
         minutes = Int(time / 60.0)
         time -= (TimeInterval(minutes) * 60)

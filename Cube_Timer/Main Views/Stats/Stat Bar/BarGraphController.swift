@@ -174,7 +174,7 @@ class BarGraphController: ObservableObject {
      */
     private func highlightLastSolvesBar() {
         let lastSolve = solveHandler.getLastSolve() // get the last solve from self.solveHandler
-        let barIndex = self.getBarIndexWhichIncludes(solve: lastSolve)  // get the index of the bar with that solve
+        let barIndex = self.getBarIndexWhichIncludes(solve: lastSolve!)  // get the index of the bar with that solve
         
         // highlight the bar
         barControllers[barIndex].highlight(Color.init("green"));

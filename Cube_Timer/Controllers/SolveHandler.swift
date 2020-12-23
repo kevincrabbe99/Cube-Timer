@@ -23,6 +23,36 @@ enum Timeframe: String {
 
 
 
+
+
+
+
+/*
+ 
+ IDEAS FOR INTEGRATING ALL THE NECESSARY VIEW COMPONENTS
+ SolveHandler will need
+ 
+ get all solves count [done].size
+ get average [done].average
+ get standard deviation
+ get best [done].best
+ get worst
+ get median
+ 
+ WIll also need to figure out how tf to integrate the solveType
+ 
+ 
+ 
+ */
+
+
+
+
+
+
+
+
+
 /*
  *  Class which holds the solves array which represents the solves which can be found within the current timeframe
  *  MAIN PURPOSE: Facilitate self.solves
@@ -163,7 +193,7 @@ class SolveHandler: ObservableObject {
      */
     
     public func deleteLast() {
-        self.delete(getLastSolve())
+        self.delete(getLastSolve()!)
     }
     
     /*
@@ -263,7 +293,7 @@ class SolveHandler: ObservableObject {
     /*
      *  Sets the solves array based on the PROVIDED TIMEFRAME
      *  CALLED BY: self.updateEverything(to: Timeframe)
-     *  CALLS: NOTHING
+     *  CALLS: updateDisplayStats()
      */
     func updateSolves(to: Timeframe) {
         print("Updating solves (& tf) from ", self.size, "elements")
@@ -318,7 +348,8 @@ class SolveHandler: ObservableObject {
         updateAverage()     // updates self.average
         // must be called after updating average
         if (timer != nil) {
-            timer.updateOverUnderDisplay() // update the timer over/under display
+            //timer.updateOverUnderDisplay() // update the timer over/under display
+            timer.setDisplayToLastSolve()
         }
         // update BO3 view
         if self.bo3Controller != nil {
@@ -458,9 +489,12 @@ class SolveHandler: ObservableObject {
         return getMax().timeMS - getMin().timeMS
     }
     
-    func getLastSolve() -> SolveItem {
+    func getLastSolve() -> SolveItem? {
         let orderedSolves = self.getSolvesNewestFirst()
-        return orderedSolves[0]
+        if solves.count > 0 {
+            return orderedSolves[0]
+        }
+        return nil
     }
     
     

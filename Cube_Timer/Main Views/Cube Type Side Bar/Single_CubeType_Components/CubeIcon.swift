@@ -31,12 +31,13 @@ struct CubeIcon: View {
     
     }
     
+    
     var body: some View {
         
         ZStack {
             
-            ForEach( 0..<d1 ){ i in
-                ForEach( 0..<d2 ) { k in
+            ForEach( 0..<d1, id: \.self ){ i in
+                ForEach( 0..<d2, id: \.self ) { k in
                     RoundedRectangle(cornerRadius: cr)
                         .frame(width: blockWidth, height: blockWidth)
                         .offset(x: CGFloat(CGFloat(i)*widthNoPadding))

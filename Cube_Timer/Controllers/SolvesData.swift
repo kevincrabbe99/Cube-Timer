@@ -15,6 +15,8 @@ class SolvesFromTimeframe: ObservableObject {
     @Published var solves: [SolveItem] // array of all the solves
     @Published var size: Int   // amount of solves
     
+    
+    
     //WILL NEED TO BE UPDATED: should be redundant
     //var timeframe: Timeframe // current timeframe
     

@@ -12,6 +12,8 @@ struct SidebarView: View {
     var contentView: ContentView
     var cTypeHandler: CTypeHandler
     
+    //@State var tabIcon: CubeIcon = CubeIcon(3, 3, 3, width: 15)
+    
     @State var editMode: Bool = false
     
     
@@ -29,6 +31,25 @@ struct SidebarView: View {
                     .position(x: geo.size.width / 2, y: geo.size.height / 2)
                     .shadow(radius: 20)
                     
+                
+                
+                /*
+                 * the icon on the tab
+                 *  also used as the dragger
+                 */
+                ZStack {
+                    Color.clear
+                     // i need to be able to render a CubeIcon even if any of the dimensions are not set
+                   // CubeIcon(3, 3, 3, width: 15)
+                   cTypeHandler.tabIcon
+                    .foregroundColor(Color.init("mint_cream"))
+                }
+                .contentShape(Rectangle())
+                .gesture(contentView.sbDrag)
+                .gesture(contentView.sbTab)
+                .frame(width: 50, height: 200, alignment: .center)
+                .position(x: geo.size.width - 29, y: geo.size.height / 2)
+                
                 
                 VStack {
                     
@@ -67,14 +88,39 @@ struct SidebarView: View {
                     
                     ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false) {
                         VStack { // cube list
-                            ForEach(/*cTypeHandler.views*/cTypeHandler.getAllAsViews(parentToPass: self)) { t in
-                                t
+                            ForEach(/*cTypeHandler.views*/cTypeHandler.typeControllers) { t in
+                                
+                                HStack {
+                                    t.view
+                                    
+                                    /*
+                                     *  the edit button
+                                     */
+                                    if self.editMode {
+                                         Button(action: {
+                                            // toggle edit mode
+                                            self.editMode.toggle()
+                                            // show popup for currently iterated t.ct.id
+                                            contentView.showCTPopupFor(id: t.ct.id!)
+                                         }, label: {
+                                             Image(systemName: "pencil.tip.crop.circle")
+                                         })
+                                         .frame(width:50, height: 40, alignment: .center)
+                                    }
+                                }
+                                .frame(width: geo.size.width - 150, alignment: .leading)
+                                
+                               // plan is to show the edit button here and see if that works
                                 
                                 // the plan:
                                 /*
-                                 *  use the foreach to being all of the CT's in as CubeTypeController objects (initied and stored in CTypeHandler
-                                 *  The CTController objects will store the corresponind view to be displayed
-                                 *  When the SingleCubeTypeView receives a tap gesture it calls the Controller and the controller will have a reference to CTypeHandler (as thats where it was created)
+                                 *  [] use the foreach to being all of the CT's in as CubeTypeController objects (initied and stored in CTypeHandler
+                                 
+                                 *  [done] The CTController objects will store the corresponind view to be displayed
+                                 
+                                 *  [done] CTypeHandler also has to store each SingleCubeTypeController rather than the views
+                                    
+                                 *  [half done] When the SingleCubeTypeView receives a tap gesture it calls the Controller and the controller will have a reference to CTypeHandler (as thats where it was created)
                                  */
                             
                             }
@@ -114,23 +160,12 @@ struct SidebarView: View {
             .foregroundColor(.white)
             .frame(width: geo.size.width - 50)
             
-            
-            /*
-             * the icon on the tab
-             *  also used as the dragger
-             */
-            ZStack {
-                Color.clear
-                
-               CubeIcon(3,3,3,width: 15)
-                .foregroundColor(Color.init("mint_cream"))
-            }
-            .contentShape(Rectangle())
-            .gesture(contentView.sbDrag)
-            .gesture(contentView.sbTab)
-            .position(x: geo.size.width - 32, y: geo.size.height / 2)
-            .frame(width: 100, height: 200, alignment: .center)
 
+            
+        }.onAppear() {
+            
+            // set selections
+            cTypeHandler.setDefaultSelection()
             
         }
         
@@ -139,6 +174,7 @@ struct SidebarView: View {
     public func editModeToggle() {
         let lightTap = UIImpactFeedbackGenerator(style: .light)
         lightTap.impactOccurred()
+        //self.cTypeHandler.toggleEditMode()
         self.editMode.toggle()
     }
     

@@ -127,50 +127,60 @@ struct TimerView: View {
         VStack {
             
             /*
-             *  The stuff above the timer
+             *  Timer elements
              */
-            HStack {
+            VStack {
                 
-                /*
-                 *  compared to average display (above stopwatch)
-                 */
-                HStack {
-                    Text("\(timer.overUnderTime)")
-                        .font(.system(size: 12))
-                        .fontWeight(.bold)
-                    Text("(\(timer.overUnderPercentage, specifier: "%.0f")%)")
-                        .font(.system(size: 12))
-                
-                }
-                .frame(width: 210, alignment: .leading)
-                //.frame(width: 260, alignment: .leading)
-                .foregroundColor(timer.statColor)
-                
-                /*
-                 *  The delete last button
-                 */
-                Button(action: {
-                    solveHandler.deleteLast()
-                }, label: {
-                    ZStack {
-                        Image(systemName: "delete.left.fill")
-                            .font(.system(size: 14))
+                /* only show upper stuff if there is a solve */
+               if solveHandler.size > 0 {
+                    /*
+                     *  The stuff above the timer
+                     */
+                    HStack {
                         
+                        /*
+                         *  compared to average display (above stopwatch)
+                         */
+                        HStack {
+                            Text("\(timer.overUnderTime)")
+                                .font(.system(size: 12))
+                                .fontWeight(.bold)
+                            Text("(\(timer.overUnderPercentage, specifier: "%.0f")%)")
+                                .font(.system(size: 12))
+                        
+                        }
+                        .frame(width: 210, alignment: .leading)
+                        //.frame(width: 260, alignment: .leading)
+                        .foregroundColor(timer.statColor)
+                        
+                        /*
+                         *  The delete last button
+                         */
+                            Button(action: {
+                                solveHandler.deleteLast()
+                            }, label: {
+                                ZStack {
+                                    Image(systemName: "delete.left.fill")
+                                        .font(.system(size: 14))
+                                    
+                                }
+                                .frame(width: 50, height: 50, alignment: .trailing)
+                            })
+                            
                     }
-                    .frame(width: 50, height: 50, alignment: .trailing)
-                })
-                    
+                    .offset(y: 5)
+                    .frame(width: 260, height: 20)
+                
+                
+               }// end if
+                
+                /*
+                 *  THE ACTUAL TIMER
+                 */
+                StopwatchDisplayView(timer: timer)
+                    .frame(width: 250)
+                   // .animation(.spring())`
             }
-            .offset(y: 5)
-            .frame(width: 260, height: 20)
-            
-            /*
-             *  THE ACTUAL TIMER
-             */
-            StopwatchDisplayView(timer: timer)
-                .frame(width: 250)
-               // .animation(.spring())
-            
             
             /*
              *  displays the last 3 bar under the timer
@@ -256,9 +266,11 @@ struct TimerView: View {
  
         }
         .foregroundColor(.white)
-        .onAppear(perform: {
-            //self.setControllers()
-        })
+        .animation(.spring())
+        .offset(y: solveHandler.size == 0 ? 50 : 0)
+        .onAppear() {
+            timer.setDisplayToLastSolve()
+        }
     }
     
 }

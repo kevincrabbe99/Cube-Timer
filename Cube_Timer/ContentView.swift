@@ -31,11 +31,11 @@ struct ContentView: View {
     @State var sbBgOpacity: Double = 0
     @State var sbXPos: CGFloat = -1 * (UIScreen.main.bounds.width/6)+45 // initialize it to sidebarOutPos x value
     
+    @ObservedObject var cTypeHandler: CTypeHandler = CTypeHandler()
     @ObservedObject var timer: TimerController = TimerController()
     @ObservedObject var solveHandler: SolveHandler = SolveHandler()
     @ObservedObject var bo3Controller: BO3Controller = BO3Controller()
     @ObservedObject var sbController: SidebarController = SidebarController()
-    @ObservedObject var cTypeHandler: CTypeHandler = CTypeHandler()
     @ObservedObject var popupController: PopupController = PopupController()
     @ObservedObject var ctEditController: CTEditController = CTEditController()
     
@@ -43,8 +43,7 @@ struct ContentView: View {
     // vars for popup
     @State var popupShowing: Bool = false
     
-    // vars for edit ct mode
-    
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
     
     
    // @State var shaderOpacity: Double = 0
@@ -54,6 +53,12 @@ struct ContentView: View {
      *  This is thie first init, we link all the controller and handlers here
      */
     init() {
+        
+        
+        // set CTypeHandler
+        self.cTypeHandler.contentView = self
+        
+        
         // set timer controllers
         self.timer.solveHandler = solveHandler
         self.timer.bo3Controller = bo3Controller
@@ -82,46 +87,46 @@ struct ContentView: View {
         // cube type editor controller
         self.ctEditController.cTypeHandler = cTypeHandler
         
-        
-        // set popupview
-      
-        
         // update the stopwatch display to show the last solve time
         self.timer.setDisplayToLastSolve()
     }
     
     
-    /*
-     *  When editing a CT we bring up the add CT view and change it a lil
-     */
-    public func showCTPopupFor(id: UUID) {
-        let ct = cTypeHandler.getFrom(id: id)
-        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, contentView: self, setCT: ct)))
-    }
-    
-    let lightTap = UIImpactFeedbackGenerator(style: .light)
-    public func showPopup(v: AnyView) {
-        lightTap.impactOccurred()
-        popupController.set(v)
-        popupShowing = true
-    }
-    
-    public func hidePopup() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        lightTap.impactOccurred()
-        popupShowing = false
-       // shaderOpacity = 0
-        print("popup hidden")
-    }
     
     /*
      *  This is triggered when the user taps new Cube Type Icon
             * called by onClick listener in SidebarView.swift
      */
     public func tappedAddCT() {
+        print("creating new Cube Type view")
         showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController, contentView: self)))
-        print("popup showing")
     }
+    
+    /*
+     *  When editing a CT we bring up the add CT view and change it a lil
+     */
+    public func showCTPopupFor(id: UUID) {
+        let ct = cTypeHandler.getControllerFrom(id: id)!.ct
+        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, contentView: self, setCT: ct)))
+    }
+    
+    public func showPopup(v: AnyView) {
+        print("setting popupShowing to: true")
+        lightTap.impactOccurred()
+        popupController.set(v)
+        popupShowing = true
+        print("popupShowing = ", popupShowing)
+    }
+    
+    public func hidePopup() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        lightTap.impactOccurred()
+        print("setting popupShowing to: false")
+        popupShowing = false
+       // shaderOpacity = 0
+        print("popup hidden")
+    }
+    
     
     /*
     private func showPopup() {

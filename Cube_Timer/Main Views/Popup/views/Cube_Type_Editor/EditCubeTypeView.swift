@@ -33,6 +33,8 @@ struct EditCubeTypeView: View {
  */
     
     init(controller: CTEditController, contentView: ContentView, setCT: CubeType?) {
+        
+        
         self.controller = controller
         self.contentView = contentView
         self.setCT = setCT
@@ -90,6 +92,7 @@ struct EditCubeTypeView: View {
                     Picker(selection: $d1, label: Text("")) {
                         ForEach(0..<configDimensionOptions.count) {
                             Text(String(self.configDimensionOptions[$0]))
+                                .foregroundColor(.white)
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
@@ -105,6 +108,7 @@ struct EditCubeTypeView: View {
                     Picker(selection: $d2, label: Text("")) {
                         ForEach(0..<configDimensionOptions.count) {
                             Text(String(self.configDimensionOptions[$0]))
+                                .foregroundColor(.white)
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
@@ -120,6 +124,7 @@ struct EditCubeTypeView: View {
                     Picker(selection: $d3, label: Text("")) {
                         ForEach(0..<configDimensionOptions.count) {
                             Text(String(self.configDimensionOptions[$0]))
+                                .foregroundColor(.white)
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
@@ -213,6 +218,7 @@ struct EditCubeTypeView: View {
             }
             .frame(width: (w-20), height: (h-20), alignment: .topLeading)
             .position(x: w/2, y: h/2)
+            .foregroundColor(.init("mint_cream"))
                 
         }
         .onAppear {

@@ -207,7 +207,6 @@
 		7B7DDCFF259076E800E2197F /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
-				7B7DDD0825907D3700E2197F /* Single_CubeType_Components */,
 				7BBA7198258D356600FED3A2 /* SidebarShape.swift */,
 			);
 			path = Shapes;
@@ -217,8 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				7BCC6DD9257242A6001663B1 /* SingleCubeTypeView.swift */,
-				7BBA7185258C763300FED3A2 /* CubeIcon.swift */,
 				7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */,
+				7BBA7185258C763300FED3A2 /* CubeIcon.swift */,
 			);
 			path = Single_CubeType_Components;
 			sourceTree = "<group>";
@@ -300,6 +299,7 @@
 		7BCC6DCB25723833001663B1 /* Cube Type Side Bar */ = {
 			isa = PBXGroup;
 			children = (
+				7B7DDD0825907D3700E2197F /* Single_CubeType_Components */,
 				7B7DDCFF259076E800E2197F /* Shapes */,
 				7BCC6DCC2572385F001663B1 /* SidebarController.swift */,
 				7BCC6DD4257238B8001663B1 /* SidebarView.swift */,
@@ -313,6 +313,7 @@
 			children = (
 				7B984D44253E550300BC6402 /* TimerController.swift */,
 				7B984D59253E72D700BC6402 /* SolveHandler.swift */,
+				7B9B799925493D280088ECD5 /* SolvesData.swift */,
 				7B607410258F0B5700D188CF /* CTypeHandler.swift */,
 			);
 			path = Controllers;
@@ -338,7 +339,6 @@
 		7BE885AE2547669E00046D29 /* SolveItem */ = {
 			isa = PBXGroup;
 			children = (
-				7B9B799925493D280088ECD5 /* SolvesData.swift */,
 				7BE8859E25475F0000046D29 /* TimeCapture.swift */,
 				7B4A1730253E8D0A0036A30D /* Persistance.swift */,
 				7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */,

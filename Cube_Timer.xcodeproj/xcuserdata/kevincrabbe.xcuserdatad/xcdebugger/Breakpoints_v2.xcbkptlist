@@ -14,8 +14,8 @@
             filePath = "Cube_Timer/Controllers/SolveHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "updateSolves(to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -97,6 +97,22 @@
             startingLineNumber = "18"
             endingLineNumber = "18"
             landmarkName = "BarGraphController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "996C7EDA-FF27-4585-9D19-EEF4D4E42152"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cube_Timer/Main Views/Cube Type Side Bar/Single_CubeType_Components/SingleCubeTypeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "SingleCubeTypeViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
