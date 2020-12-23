@@ -16,10 +16,10 @@ struct PersistenceController {
         for _ in 0..<10 {
             let newItem = SolveItem(context: viewContext)
             newItem.timestamp = Date()
-            newItem.brand = "Rubiks Generic Brand"
+            //newItem.brand = "Rubiks Generic Brand"
             newItem.id = UUID().uuidString
             newItem.timeMS = 10000
-            newItem.type = "3x3x3"
+            //newItem.type = "3x3x3"
         }
         do {
             try viewContext.save()

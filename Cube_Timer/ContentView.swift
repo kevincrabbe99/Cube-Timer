@@ -57,18 +57,18 @@ struct ContentView: View {
         
         // set CTypeHandler
         self.cTypeHandler.contentView = self
-        
+        self.cTypeHandler.solveHandler = solveHandler
         
         // set timer controllers
         self.timer.solveHandler = solveHandler
         self.timer.bo3Controller = bo3Controller
-        self.timer.CTypeHandler = cTypeHandler
+        self.timer.cTypeHandler = cTypeHandler
         
         // set solveHandler controllers
         self.solveHandler.timer = timer
         self.solveHandler.bo3Controller = bo3Controller
         self.solveHandler.sbController = sbController
-        self.solveHandler.CTypeHandler = cTypeHandler
+        self.solveHandler.cTypeHandler = cTypeHandler
         
         // set the timers BO3 Controller
         //self.timer.bo3Controller = bo3Controller
@@ -282,6 +282,9 @@ struct ContentView: View {
         
         }
         .edgesIgnoringSafeArea(.all)
+        .onAppear() {
+            solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
+        }
     
     }
 

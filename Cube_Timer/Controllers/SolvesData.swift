@@ -139,7 +139,9 @@ class SolvesFromTimeframe: ObservableObject {
     
     /*
      *  Returns an array of the timeframs which are needed for all the solves
-     */
+     
+        * I am moving this to SolveHandler so it can take into account the cubeType
+ 
     func getApplicableTimeframes() -> [Timeframe] {
         var res: [Timeframe] = [.LastThree, .Today, .All] // the array to be returned
         let now = Date()
@@ -196,7 +198,8 @@ class SolvesFromTimeframe: ObservableObject {
         return res
         
     }
-    
+     
+  */
 
     
     /*

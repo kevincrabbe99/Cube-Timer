@@ -14,8 +14,8 @@
             filePath = "Cube_Timer/Controllers/SolveHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "updateSolves(to:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-
+/*
 enum PuzzleType: String {
     case pending = "pending..."
     case a3x3x3 = "3x3x3"
@@ -17,11 +17,14 @@ enum PuzzleType: String {
     case a5x5x5 = "5x5x5"
     case a6x6x6 = "6x6x6"
 }
+ */
 
+/*
 enum PuzzleBrand: String {
     case pending = "pending..."
     case rubiks = "Rubiks Brand"
 }
+ */
 
 extension SolveItem: Identifiable {
 
@@ -32,6 +35,9 @@ extension SolveItem: Identifiable {
     @NSManaged public var id: String
     @NSManaged public var timeMS: Double
     @NSManaged public var timestamp: Date
+    
+    @NSManaged public var cubeType: CubeType
+    
 
     
     func getTimeCapture() -> TimeCapture? {
@@ -108,6 +114,7 @@ extension SolveItem {
 
 extension SolveItem {
     
+    /*
     @NSManaged public var type: String
     
     var cubeType: PuzzleType {
@@ -129,6 +136,7 @@ extension SolveItem {
             PuzzleBrand(rawValue: brand) ?? .pending
         }
     }
+    */
     
     static func getAllItems() -> NSFetchRequest<SolveItem> {
         let request: NSFetchRequest<SolveItem> = NSFetchRequest<SolveItem>(entityName: "SolveItem")

@@ -64,7 +64,7 @@ class SolveHandler: ObservableObject {
     /*  controller for the sidebar,
         handles the cube types */
     var sbController: SidebarController!
-    var CTypeHandler: CTypeHandler!
+    var cTypeHandler: CTypeHandler!
 
     
     @Published var solves: [SolveItem] // array which changes to correspond with timeframe
@@ -109,7 +109,7 @@ class SolveHandler: ObservableObject {
                 self.add(re as SolveItem)
             }
            
-            updateSolves(to: currentTimeframe) // sets timeframe and updates everything
+            //updateSolves(to: currentTimeframe) // sets timeframe and updates everything
             
         }catch  {
             print("error fetching solves: ")
@@ -131,12 +131,12 @@ class SolveHandler: ObservableObject {
      */
     private func addCostumSolve(sec: Double) {
         let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
-        newSolve.brand = "Rubiks Brand"
-        newSolve.cubeType = .a3x3x3
+        //newSolve.brand = cTypeHandler.ct.rawName /*"Rubiks Brand"*/
+        //newSolve.cubeType = .a3x3x3
         newSolve.id = UUID().uuidString
         newSolve.timeMS = sec
         newSolve.timestamp = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
-        newSolve.type = "3x3x3"
+       // newSolve.type = "3x3x3"
         
         // add the new solve
         self.add(newSolve)
@@ -157,8 +157,61 @@ class SolveHandler: ObservableObject {
      *  Returns an array of the timeframs which are needed for all the solves
      */
     func getApplicableTimeframes() -> [Timeframe] {
-        return solvesByTimeFrame.getApplicableTimeframes()
+        var res: [Timeframe] = [.LastThree, .Today, .All] // the array to be returned
+        let now = Date()
+        
+        // needed for test .Week calculation
+        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
+        
+        // test .Week
+        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        let rangeW = weekAgo...dayAgo
+        for s in solves {
+            if rangeW.contains(s.timestamp) {
+                res.append(.Week)
+                break
+            }
+        }
+        
+        // test .OneMonth
+        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+        let rangeM = monthAgo...weekAgo
+        for s in solves {
+            if rangeM.contains(s.timestamp) {
+                res.append(.OneMonth)
+                break
+            }
+        }
+        
+        // test .ThreeMonths
+        let threeMonthAgo: Date = Calendar.current.date(byAdding: .month, value: -3, to: now)!
+        let range3M = threeMonthAgo...monthAgo
+        for s in solves {
+            if range3M.contains(s.timestamp) {
+                res.append(.ThreeMonths)
+                break
+            }
+        }
+        
+        // test .Year
+        let yearAgo: Date = Calendar.current.date(byAdding: .year, value: -1, to: now)!
+        let rangeY = yearAgo...threeMonthAgo
+        for s in solves {
+            if rangeY.contains(s.timestamp) {
+                res.append(.Year)
+                break
+            }
+        }
+        
+        // delete the last one added so last and all are not redundant
+        // ONLY IF: we have more than 3 and less than 7 buttons active
+        if res.count > 3 && res.count < 7 { // if we should delete one
+            res.remove(at: res.count - 1) // delete the second to last button
+        }
+        
+        return res
     }
+    
     /*
      *  returns whether the provided .TimeFrame has any values in it
      *  Determins whether the Standard Deviation is shown
@@ -300,6 +353,9 @@ class SolveHandler: ObservableObject {
                 
         self.currentTimeframe = to
         self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: to) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
+        
+        self.solves = solves.filter { $0.cubeType == cTypeHandler.selected }
+        
         self.size = solves.count // update count
         
         print("Updating (& tf) solves to ", self.size, "elements")
@@ -315,6 +371,11 @@ class SolveHandler: ObservableObject {
         print("Updating just solves from ", self.size, "elements")
         
         self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: currentTimeframe) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
+        
+        if cTypeHandler != nil { // will stop this from running on startup before cTypeHandler has been assigned
+            self.solves = solves.filter { $0.cubeType == cTypeHandler.selected }
+        }
+            
         self.size = solves.count
         
         print("Updating just solves to ", self.size, "elements")
@@ -336,6 +397,9 @@ class SolveHandler: ObservableObject {
         //updateTimeframes()  // updates self.solves to solves based on current timeframe
         /*updateSolves(from: currentTimeframe) // updates SolveFromTimeFrame().solves array based on current timeframe
          *  Deleted because updateTimeFrames() called (this method) updateDisplay() */
+        
+        // update the cubeType incase this was called via cTypeHandler
+        
         
         // animate the bars
         if self.currentTimeframe == .LastThree { // hide the bars if it is last3

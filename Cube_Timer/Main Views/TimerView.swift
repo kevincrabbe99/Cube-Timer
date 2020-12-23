@@ -24,8 +24,8 @@ struct TimerView: View {
     var parent: MainView!
     
     
-    var type: PuzzleType = .a3x3x3
-    var brand: PuzzleBrand = .rubiks
+    //var type: PuzzleType = .a3x3x3
+    //var brand: PuzzleBrand = .rubiks
     
     @ObservedObject var timer: TimerController
     @ObservedObject var solveHandler: SolveHandler

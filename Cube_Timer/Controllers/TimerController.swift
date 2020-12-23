@@ -15,8 +15,8 @@ class TimerController: ObservableObject {
    // @Environment (\.presentationMode) var presentationMode
     
     
-    @Published var  type: PuzzleType = .a3x3x3
-    @Published var  brand: PuzzleBrand = .rubiks
+    //@Published var  type: PuzzleType = .a3x3x3
+    //@Published var  brand: PuzzleBrand = .rubiks
     
     var leftActivated: Bool = false
     var rightActivated: Bool = false
@@ -53,7 +53,7 @@ class TimerController: ObservableObject {
     
     var solveHandler: SolveHandler! // solve handler
     var bo3Controller: BO3Controller!
-    var CTypeHandler: CTypeHandler!
+    var cTypeHandler: CTypeHandler!
     
     
     
@@ -221,12 +221,14 @@ class TimerController: ObservableObject {
         
         
         let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
-        newSolve.brand = brand.rawValue
-        newSolve.cubeType = type
+        //newSolve.brand = self.cTypeHandler.selected.desc /*brand.rawValue*/
+        //newSolve.cubeType = type
         newSolve.id = UUID().uuidString
         newSolve.timeMS = lastRecordedTime
         newSolve.timestamp = Date()
-        newSolve.type = type.rawValue
+        
+        newSolve.cubeType = cTypeHandler.selected!
+        //newSolve.type = type.rawValue
         
         solveHandler.add(newSolve)
         

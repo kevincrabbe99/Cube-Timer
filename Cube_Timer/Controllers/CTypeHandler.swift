@@ -13,6 +13,7 @@ import SwiftUI
 class CTypeHandler: ObservableObject {
     
     var contentView: ContentView!
+    var solveHandler: SolveHandler!
     
     @Published var typeControllers: [SingleCubeTypeViewController] // array with all saved cube types as keys and controllers as values
     @Published var size: Int = 0
@@ -106,7 +107,6 @@ class CTypeHandler: ObservableObject {
         // set selections
         newSelection( typeControllers[0] )
         
-        
     }
     
     public func getIndexFrom(id: UUID) -> Int {
@@ -148,9 +148,12 @@ class CTypeHandler: ObservableObject {
         ctController.select()
         
         // update tab icon
-        let tCT = ctController.ct
-        print("updating tab icon ", tCT.dim1, tCT.dim2, tCT.dim3)
-        self.tabIcon = AnyView(CubeIcon(tCT.dim1, tCT.dim2, tCT.dim3, width: 15))
+        self.selected = ctController.ct
+        print("updating tab icon ", selected!.dim1, selected!.dim2, selected!.dim3)
+        self.tabIcon = AnyView(CubeIcon(selected!.dim1, selected!.dim2, selected!.dim3, width: 15))
+        
+        // update the SolveHandler
+        solveHandler.updateSolves()
         
     }
     
