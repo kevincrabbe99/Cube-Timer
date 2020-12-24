@@ -8,9 +8,41 @@
 import Foundation
 import SwiftUI
 
+enum TimeGroup: String {
+    case Unknown = "unknown"
+    case today = "today"
+    case yesterday = "yesterday"
+    case lastWeek = "last week"
+    case thisMonth = "this month"
+    case lastMonth = "lastMonth"
+    
+    case jan = "January"
+    case feb = "Fubuary"
+    case mar = "March"
+    case apr = "April"
+    case may = "May"
+    case jun = "June"
+    case jul = "July"
+    case aug = "August"
+    case sep = "September"
+    case nov = "November"
+    case dev = "December"
+}
 
+extension Date {
+    var month: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "Mon"
+        return dateFormatter.string(from: self)
+    }
+}
 
 class SolvesFromTimeframe: ObservableObject {
+    
+    // parent is this clases outlet to the app
+        // the CubeType gets parced here
+            // timeframe is parced in parent: SolveHandler
+   var cTypeHandler: CTypeHandler!
     
     @Published var solves: [SolveItem] // array of all the solves
     @Published var size: Int   // amount of solves
@@ -134,8 +166,119 @@ class SolvesFromTimeframe: ObservableObject {
         
         print("getSolvesFrom(tf: Timeframe) tf = ", timeframe.rawValue);
         print("getSolvesFrom(tf: Timeframe) was called, ", res.count, " items returned!")
-        return res
+        
+        return res.filter { $0.cubeType == cTypeHandler.selected }
     }
+    
+    
+    /*
+     *  returns the timegroups needed for all views
+     */
+    public func getApplicableTimeGroups() -> [TimeGroup] {
+        
+        var res: [TimeGroup] = []
+        let now = Date()
+        let cal = Calendar.current
+        
+        // check today
+        for s in solves {
+            if cal.isDateInToday(s.timestamp) {
+                res.append(.today)
+                break
+            }
+        }
+        
+        // check yesterday
+        for s in solves {
+            if cal.isDateInYesterday(s.timestamp) {
+                res.append(.yesterday)
+                break
+            }
+        }
+        
+        
+        // check yesterday - lastweek
+        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
+        let rangeW = dayAgo...weekAgo
+        for s in solves {
+            if rangeW.contains(s.timestamp) {
+                res.append(.lastWeek)
+                break
+            }
+        }
+        
+        
+        // check last week - this month
+        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+        let rangeM = weekAgo...monthAgo
+        for s in solves {
+            if rangeM.contains(s.timestamp) {
+                res.append(.thisMonth)
+                break
+            }
+        }
+        
+        // check this month - last month
+        let monthAgo2: Date = Calendar.current.date(byAdding: .month, value: -2, to: now)!
+        let range2M = monthAgo...monthAgo2
+        for s in solves {
+            if range2M.contains(s.timestamp) {
+                res.append(.lastMonth)
+                break
+            }
+        }
+        
+        // add rest of the monts
+        res.append(contentsOf: getMonthsWithSolves(excludeLast: 2))
+        
+        return res
+        
+        // check last year
+        // yeah maybe some other time
+        
+    }
+    
+    /*
+     * returns enum of months with solves in them
+        
+     */
+    private func getMonthsWithSolves(excludeLast: Int = 0) -> [TimeGroup] {
+        
+        var res: [TimeGroup] = []
+        let now = Date()
+        let cal = Calendar.current
+
+        
+        // load in months with existing solves
+        var monthStrings: [String] = []
+        for s in solves {
+            let nM: String = s.timestamp.month
+            if !monthStrings.contains(nM) {
+                monthStrings.append(nM)
+            }
+        }
+        
+        // remove last 2 months
+        for i in 0..<excludeLast {
+            let m: String = cal.date(byAdding: .month, value: i, to: now)!.month // gets month - i
+            monthStrings = monthStrings.filter { $0 != m } // remove matching strings
+        }
+        
+        
+        // map strings to enum
+        for mString in monthStrings {
+            let mEnum = TimeGroup(rawValue: mString)
+            res.append(mEnum!)
+        }
+        
+        return res
+        
+    }
+    
+    
+    
+    
     
     /*
      *  Returns an array of the timeframs which are needed for all the solves

@@ -69,6 +69,7 @@ struct ContentView: View {
         self.solveHandler.bo3Controller = bo3Controller
         self.solveHandler.sbController = sbController
         self.solveHandler.cTypeHandler = cTypeHandler
+        self.solveHandler.solvesByTimeFrame.cTypeHandler = cTypeHandler
         
         // set the timers BO3 Controller
         //self.timer.bo3Controller = bo3Controller

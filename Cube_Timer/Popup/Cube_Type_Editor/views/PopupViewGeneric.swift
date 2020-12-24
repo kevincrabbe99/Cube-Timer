@@ -7,7 +7,8 @@
 
 import Foundation
 import SwiftUI
-
+/*
 protocol PopupViewGeneric {
     
 }
+ */

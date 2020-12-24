@@ -38,6 +38,20 @@ extension CubeType: Identifiable {
 
 extension CubeType {
     
+    /*
+     * the related solves
+     
+     * lets hope this is the solutions were looking for and we dont have to setup the relationship outself
+     */
+    @NSManaged public var solves: NSSet
+    public var solvesArray: [SolveItem] {
+        let set = solves as? Set<SolveItem> ?? []
+        return set.sorted {
+            $0.timestamp < $1.timestamp
+        }
+    }
+    
+    
     @NSManaged public var d1: Int16
     var dim1: Int {
         set {

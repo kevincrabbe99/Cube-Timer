@@ -91,6 +91,8 @@ class SolveHandler: ObservableObject {
         // initialize solves to be empty
         solves = []
         
+        //solvesByTimeFrame.cTypeHandler = cTypeHandler
+        
         // initialize self.barGraphController with a new instance of a bar graph (BarGraphController.swift)
         barGraphController = BarGraphController(parent: self)
         
@@ -354,7 +356,7 @@ class SolveHandler: ObservableObject {
         self.currentTimeframe = to
         self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: to) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
         
-        self.solves = solves.filter { $0.cubeType == cTypeHandler.selected }
+        //self.solves = solves.filter { $0.cubeType == cTypeHandler.selected }
         
         self.size = solves.count // update count
         
@@ -372,9 +374,11 @@ class SolveHandler: ObservableObject {
         
         self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: currentTimeframe) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
         
+        /*
         if cTypeHandler != nil { // will stop this from running on startup before cTypeHandler has been assigned
             self.solves = solves.filter { $0.cubeType == cTypeHandler.selected }
         }
+         */
             
         self.size = solves.count
         

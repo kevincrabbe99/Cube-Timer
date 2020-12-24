@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewCubeTypeView: View, PopupViewGeneric {
+struct NewCubeTypeView: View {
     
     //var parent: PopupView!
     var controller: CTEditController!
