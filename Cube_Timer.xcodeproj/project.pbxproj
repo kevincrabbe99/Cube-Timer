@@ -13,6 +13,7 @@
 		7B4719E2256BBBEB009FFFEA /* BarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E1256BBBEB009FFFEA /* BarController.swift */; };
 		7B4719E7256C2E8A009FFFEA /* BarGraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */; };
 		7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A1730253E8D0A0036A30D /* Persistance.swift */; };
+		7B55C62E2596F29C0076B913 /* AllSolvesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55C62D2596F29B0076B913 /* AllSolvesController.swift */; };
 		7B6073F4258E4FFF00D188CF /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073F3258E4FFF00D188CF /* PopupController.swift */; };
 		7B6073FC258E500700D188CF /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073FB258E500700D188CF /* PopupView.swift */; };
 		7B607402258ED68300D188CF /* NewCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607401258ED68300D188CF /* NewCubeTypeView.swift */; };
@@ -51,6 +52,14 @@
 		7BCC6DD5257238B8001663B1 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DD4257238B8001663B1 /* SidebarView.swift */; };
 		7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DD9257242A6001663B1 /* SingleCubeTypeView.swift */; };
 		7BE8859F25475F0000046D29 /* TimeCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE8859E25475F0000046D29 /* TimeCapture.swift */; };
+		7BFF31A82596FCB70029EA19 /* SolveElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31A72596FCB70029EA19 /* SolveElementView.swift */; };
+		7BFF31AE2596FCE90029EA19 /* SolvesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31AD2596FCE90029EA19 /* SolvesGridView.swift */; };
+		7BFF31B62596FCF60029EA19 /* SolvesGridController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31B52596FCF60029EA19 /* SolvesGridController.swift */; };
+		7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31BB2596FEBF0029EA19 /* SolveElementController.swift */; };
+		7BFF31D02597FC9A0029EA19 /* TimeGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31CF2597FC9A0029EA19 /* TimeGroupController.swift */; };
+		7BFF31D82597FCA60029EA19 /* TimeGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31D72597FCA60029EA19 /* TimeGroupView.swift */; };
+		7BFF31EF2598708E0029EA19 /* StatLabelVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31EE2598708E0029EA19 /* StatLabelVertical.swift */; };
+		7BFF31F4259874D10029EA19 /* StatLabelHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +86,7 @@
 		7B4719E1256BBBEB009FFFEA /* BarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarController.swift; sourceTree = "<group>"; };
 		7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarGraphController.swift; sourceTree = "<group>"; };
 		7B4A1730253E8D0A0036A30D /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		7B55C62D2596F29B0076B913 /* AllSolvesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesController.swift; sourceTree = "<group>"; };
 		7B6073F3258E4FFF00D188CF /* PopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupController.swift; sourceTree = "<group>"; };
 		7B6073FB258E500700D188CF /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		7B607401258ED68300D188CF /* NewCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCubeTypeView.swift; sourceTree = "<group>"; };
@@ -121,6 +131,14 @@
 		7BCC6DD4257238B8001663B1 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		7BCC6DD9257242A6001663B1 /* SingleCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCubeTypeView.swift; sourceTree = "<group>"; };
 		7BE8859E25475F0000046D29 /* TimeCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapture.swift; sourceTree = "<group>"; };
+		7BFF31A72596FCB70029EA19 /* SolveElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveElementView.swift; sourceTree = "<group>"; };
+		7BFF31AD2596FCE90029EA19 /* SolvesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvesGridView.swift; sourceTree = "<group>"; };
+		7BFF31B52596FCF60029EA19 /* SolvesGridController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvesGridController.swift; sourceTree = "<group>"; };
+		7BFF31BB2596FEBF0029EA19 /* SolveElementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveElementController.swift; sourceTree = "<group>"; };
+		7BFF31CF2597FC9A0029EA19 /* TimeGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGroupController.swift; sourceTree = "<group>"; };
+		7BFF31D72597FCA60029EA19 /* TimeGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGroupView.swift; sourceTree = "<group>"; };
+		7BFF31EE2598708E0029EA19 /* StatLabelVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLabelVertical.swift; sourceTree = "<group>"; };
+		7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLabelHorizontal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */,
+				7B55C62D2596F29B0076B913 /* AllSolvesController.swift */,
+				7BFF31A52596FC860029EA19 /* res */,
 			);
 			path = All_Solves;
 			sourceTree = "<group>";
@@ -356,6 +376,53 @@
 			path = SolveItem;
 			sourceTree = "<group>";
 		};
+		7BFF31A52596FC860029EA19 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF31DC25986EEB0029EA19 /* Stat_Card */,
+				7BFF31BA2596FE9D0029EA19 /* Solve_Element */,
+				7BFF31AC2596FCCA0029EA19 /* Solves_Grid */,
+				7BFF31A62596FCA60029EA19 /* Time_Group */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		7BFF31A62596FCA60029EA19 /* Time_Group */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF31CF2597FC9A0029EA19 /* TimeGroupController.swift */,
+				7BFF31D72597FCA60029EA19 /* TimeGroupView.swift */,
+			);
+			path = Time_Group;
+			sourceTree = "<group>";
+		};
+		7BFF31AC2596FCCA0029EA19 /* Solves_Grid */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF31AD2596FCE90029EA19 /* SolvesGridView.swift */,
+				7BFF31B52596FCF60029EA19 /* SolvesGridController.swift */,
+			);
+			path = Solves_Grid;
+			sourceTree = "<group>";
+		};
+		7BFF31BA2596FE9D0029EA19 /* Solve_Element */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF31A72596FCB70029EA19 /* SolveElementView.swift */,
+				7BFF31BB2596FEBF0029EA19 /* SolveElementController.swift */,
+			);
+			path = Solve_Element;
+			sourceTree = "<group>";
+		};
+		7BFF31DC25986EEB0029EA19 /* Stat_Card */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF31EE2598708E0029EA19 /* StatLabelVertical.swift */,
+				7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */,
+			);
+			path = Stat_Card;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -490,8 +557,12 @@
 				7B9B7966254908380088ECD5 /* MainView.swift in Sources */,
 				7B6073FC258E500700D188CF /* PopupView.swift in Sources */,
 				7B2929D8254790B3009A5B90 /* Bar.swift in Sources */,
+				7B55C62E2596F29C0076B913 /* AllSolvesController.swift in Sources */,
+				7BFF31B62596FCF60029EA19 /* SolvesGridController.swift in Sources */,
+				7BFF31A82596FCB70029EA19 /* SolveElementView.swift in Sources */,
 				7B984D38253E226B00BC6402 /* TimerView.swift in Sources */,
 				7B2929C925477C51009A5B90 /* BarGraphView.swift in Sources */,
+				7BFF31F4259874D10029EA19 /* StatLabelHorizontal.swift in Sources */,
 				7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */,
 				7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */,
 				7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */,
@@ -500,10 +571,13 @@
 				7B984CFB253E02DC00BC6402 /* Cube_Timer.xcdatamodeld in Sources */,
 				7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */,
 				7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */,
+				7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */,
 				7B984D5A253E72D700BC6402 /* SolveHandler.swift in Sources */,
 				7BBA7186258C763300FED3A2 /* CubeIcon.swift in Sources */,
+				7BFF31D82597FCA60029EA19 /* TimeGroupView.swift in Sources */,
 				7B607402258ED68300D188CF /* NewCubeTypeView.swift in Sources */,
 				7BE8859F25475F0000046D29 /* TimeCapture.swift in Sources */,
+				7BFF31EF2598708E0029EA19 /* StatLabelVertical.swift in Sources */,
 				7B984D30253E1CB400BC6402 /* TimeframeBar.swift in Sources */,
 				7B984D45253E550300BC6402 /* TimerController.swift in Sources */,
 				7B984D28253E19A900BC6402 /* ButtonsView.swift in Sources */,
@@ -518,7 +592,9 @@
 				7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */,
 				7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */,
 				7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */,
+				7BFF31D02597FC9A0029EA19 /* TimeGroupController.swift in Sources */,
 				7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */,
+				7BFF31AE2596FCE90029EA19 /* SolvesGridView.swift in Sources */,
 				7B607442258F30D200D188CF /* CTEditController.swift in Sources */,
 				7BCC6DCD25723860001663B1 /* SidebarController.swift in Sources */,
 				7B60741F258F28ED00D188CF /* PopupViewGeneric.swift in Sources */,

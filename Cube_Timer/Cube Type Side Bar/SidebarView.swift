@@ -133,23 +133,51 @@ struct SidebarView: View {
                     /*
                      *  bottom bar
                      */
-                    ZStack {
-                        HStack {
-                            Text("go back")
-                                .fontWeight(.bold)
-                                .font(.system(size: 12))
-                            Spacer()
-                            Image("two_fingers")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .aspectRatio(contentMode: .fit)
-                                .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
-                                .foregroundColor(.white)
+                    Button(action: {
+                        if contentView.onPage == .showAll {
+                            contentView.setPageTo(.Main)
+                        } else {
+                            contentView.setPageTo(.showAll)
                         }
-                        .frame(width: geo.size.width/3.5, alignment: .trailing)
-                    }
-                    .frame(width: geo.size.width - 100, height: 60, alignment: .trailing)
-                    .offset(y:-10)
+                    }, label: {
+                        ZStack {
+                            
+                            if contentView.onPage == .showAll {
+                                
+                                HStack {
+                                    Text("go back")
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 12))
+                                    Spacer()
+                                    Image("two_fingers")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .aspectRatio(contentMode: .fit)
+                                        .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
+                                        .foregroundColor(.white)
+                                }
+                                .frame(width: geo.size.width/3.5, alignment: .trailing)
+                            
+                            } else {
+                                
+                                HStack {
+                                    Text("show solves")
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 12))
+                                    Spacer()
+                                    Image.init(systemName: "square.grid.3x2")
+                                        .resizable()
+                                        .frame(width: 18, height: 13.5)
+                                        .foregroundColor(.white)
+                                }
+                                .frame(width: geo.size.width/2.4, alignment: .trailing)
+                                
+                            }
+                        }
+                        .frame(width: geo.size.width - 100, height: 60, alignment: .trailing)
+                        .offset(y:-10)
+                    })
+                    
                     
                     
                 }
@@ -165,7 +193,7 @@ struct SidebarView: View {
         }.onAppear() {
             
             // set selections
-            cTypeHandler.setDefaultSelection()
+            //cTypeHandler.setDefaultSelection()
             
         }
         

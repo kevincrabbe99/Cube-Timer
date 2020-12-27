@@ -14,10 +14,11 @@ class CTypeHandler: ObservableObject {
     
     var contentView: ContentView!
     var solveHandler: SolveHandler!
+    var allSolvesController: AllSolvesController!
     
     @Published var typeControllers: [SingleCubeTypeViewController] // array with all saved cube types as keys and controllers as values
     @Published var size: Int = 0
-    @Published var selected: CubeType? // empty placeholder
+    @Published var selected: CubeType! // empty placeholder
     @Published var views: [SingleCubeTypeView] = []
     @Published var tabIcon: AnyView = AnyView(CubeIcon(3, 3, 3, width: 15))
     
@@ -51,6 +52,7 @@ class CTypeHandler: ObservableObject {
         
         // set selections
         //newSelection( typeControllers[0] )
+        self.setDefaultSelection()
         
     }
     
@@ -62,45 +64,6 @@ class CTypeHandler: ObservableObject {
             I need to remove the parent and maybe even contentView from SidebarView and manage their functionality via CTypeHandler.views
          */
     }
-    
-    /*
-     *  needs to be updated, to update view instead of replacing the
-    public func updateAllViews(parentToPass: SidebarView) {
-        for t in typeControllers {
-            // create new view
-            
-            var nSCTV: SingleCubeTypeView = SingleCubeTypeView(id: t.id!, parent: parentToPass, contentView: parentToPass.contentView, d1: Int(t.d1), d2: Int(t.d2), d3: Int(t.d3), rawName: t.rawName ?? "er0134", desc: t.desc ?? "er0134")
-            
-            // check if t is currently selected
-            if isSelected(t) {
-                nSCTV.select() // if it is then mark it selected
-            }
-            self.views.append(nSCTV)
-        }
-    }
-     */
-    
-    /*
-     *  when updated this will only return what is stored in types array
- 
-    public func getAllAsViews(parentToPass: SidebarView) -> [SingleCubeTypeView] {
-        // return self.views
-        
-        var r: [SingleCubeTypeView] = []
-        for t in typeControllers {
-            // create new view
-            var nSCTV: SingleCubeTypeView = SingleCubeTypeView(id: t.id!, parent: parentToPass, contentView: parentToPass.contentView, d1: Int(t.d1), d2: Int(t.d2), d3: Int(t.d3), rawName: t.rawName ?? "er0134", desc: t.desc ?? "er0134")
-            
-            // check if t is currently selected
-            if isSelected(t) {
-                nSCTV.select() // if it is then mark it selected
-            }
-            r.append(nSCTV)
-        }
-        return r
-        
-    }
-     */
     
     public func setDefaultSelection() {
         
@@ -132,6 +95,7 @@ class CTypeHandler: ObservableObject {
         return nil
     }
     
+    
     /*
      *  this is called by SingleCubeTypeViewController and is used to refresh the view
      */
@@ -153,7 +117,10 @@ class CTypeHandler: ObservableObject {
         self.tabIcon = AnyView(CubeIcon(selected!.dim1, selected!.dim2, selected!.dim3, width: 15))
         
         // update the SolveHandler
-        solveHandler.updateSolves()
+        if solveHandler != nil {
+            solveHandler.updateSolves() // update for the solves handler
+            allSolvesController.updateSolves() // update for the grid view
+        }
         
     }
     

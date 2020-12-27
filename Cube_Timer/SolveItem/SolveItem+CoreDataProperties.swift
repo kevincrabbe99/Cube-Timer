@@ -44,6 +44,49 @@ extension SolveItem: Identifiable {
         return TimeCapture.init(timeMS )
     }
     
+    func getTimeGroup() -> TimeGroup {
+        
+        let now = Date()
+        let cal = Calendar.current
+        
+        // check today
+        if cal.isDateInToday(timestamp) {
+            return .today
+        }
+        
+        // check yesterday
+        if cal.isDateInYesterday(timestamp) {
+            return .yesterday
+        }
+        
+        // check yesterday - lastweek
+        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
+        let rangeW = weekAgo...dayAgo
+        if rangeW.contains(timestamp) {
+            return .thisWeek
+        }
+        
+        // check last week - this month
+        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+        let rangeM = monthAgo...weekAgo
+        if rangeM.contains(timestamp) {
+            return .thisMonth
+        }
+        
+        // check this month - last month
+        let monthAgo2: Date = Calendar.current.date(byAdding: .month, value: -2, to: now)!
+        let range2M = monthAgo2...monthAgo
+        if range2M.contains(timestamp) {
+            return .lastMonth
+        }
+        
+        // check the rest of the monts
+        let monthEnum = TimeGroup(rawValue: timestamp.month) ?? .Unknown
+        return monthEnum
+        
+    }
+    
     /*
      *  Returns a formatted date
      */

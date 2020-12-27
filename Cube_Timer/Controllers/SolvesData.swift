@@ -12,27 +12,28 @@ enum TimeGroup: String {
     case Unknown = "unknown"
     case today = "today"
     case yesterday = "yesterday"
-    case lastWeek = "last week"
+    case thisWeek = "last week"
     case thisMonth = "this month"
     case lastMonth = "lastMonth"
     
-    case jan = "January"
-    case feb = "Fubuary"
-    case mar = "March"
-    case apr = "April"
+    case jan = "Jan"
+    case feb = "Feb"
+    case mar = "Mar"
+    case apr = "Apr"
     case may = "May"
-    case jun = "June"
-    case jul = "July"
-    case aug = "August"
-    case sep = "September"
-    case nov = "November"
-    case dev = "December"
+    case jun = "Jun"
+    case jul = "Jul"
+    case aug = "Aug"
+    case sep = "Sep"
+    case oct = "Oct"
+    case nov = "Nov"
+    case dec = "Dec"
 }
 
 extension Date {
     var month: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "Mon"
+        dateFormatter.dateFormat = "MMM"
         return dateFormatter.string(from: self)
     }
 }
@@ -42,7 +43,7 @@ class SolvesFromTimeframe: ObservableObject {
     // parent is this clases outlet to the app
         // the CubeType gets parced here
             // timeframe is parced in parent: SolveHandler
-   var cTypeHandler: CTypeHandler!
+   var cTypeHandler: CTypeHandler?
     
     @Published var solves: [SolveItem] // array of all the solves
     @Published var size: Int   // amount of solves
@@ -164,11 +165,130 @@ class SolvesFromTimeframe: ObservableObject {
             print("fuck")
         }
         
+        if cTypeHandler != nil {
+            return res.filter { $0.cubeType == cTypeHandler!.selected }
+        } else {
+            return res
+        }
+        
         print("getSolvesFrom(tf: Timeframe) tf = ", timeframe.rawValue);
         print("getSolvesFrom(tf: Timeframe) was called, ", res.count, " items returned!")
-        
-        return res.filter { $0.cubeType == cTypeHandler.selected }
     }
+    
+    /*
+     *  returns all solves with a provided cubeType, not a based on timeframe
+     */
+    public func getSolvesFrom(ct: CubeType) -> [SolveItem] {
+        var res: [SolveItem] = []
+        
+        for s in solves {
+            if s.cubeType.equals(ct) {
+                res.append(s)
+            }
+        }
+        
+        return res
+    }
+    
+    
+    
+    
+    /*
+     *  Returns a list of solves from the provided timegroup
+     */
+    public func getSolvesFrom(tg: TimeGroup) -> [SolveItem] {
+        
+        var res: [SolveItem] = []
+        let sGroup = getSolvesFrom(ct: cTypeHandler!.selected!)
+        
+        for s in sGroup {
+            if s.getTimeGroup() == tg {
+                res.append(s)
+            }
+        }
+        
+        return res
+        
+        
+        /*
+        var res: [SolveItem] = []
+        let now = Date()
+        let cal = Calendar.current
+        
+        // the solves to be analyzed
+        let sGroup = getSolvesFrom(ct: cTypeHandler!.selected!)
+        
+        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
+        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+        
+        switch tg {
+            case .today:
+                for s in sGroup {
+                    if cal.isDateInToday(s.timestamp) {
+                        res.append(s)
+                    }
+                }
+            break
+            
+            case .Unknown:
+                break
+            case .yesterday:
+                for s in sGroup {
+                    if cal.isDateInYesterday(s.timestamp) {
+                        res.append(s)
+                    }
+                }
+            case .lastWeek:
+                // check yesterday - lastweek
+                let rangeW = dayAgo...weekAgo
+                for s in sGroup {
+                    if rangeW.contains(s.timestamp) {
+                        res.append(s)
+                    }
+                }
+            case .thisMonth:
+                // check last week - this month
+                let rangeM = weekAgo...monthAgo
+                for s in sGroup {
+                    if rangeM.contains(s.timestamp) {
+                        res.append(s)
+                    }
+                }
+            case .lastMonth:
+                // check this month - last month
+                let monthAgo2: Date = Calendar.current.date(byAdding: .month, value: -2, to: now)!
+                let range2M = monthAgo...monthAgo2
+                for s in sGroup {
+                    if range2M.contains(s.timestamp) {
+                        res.append(s)
+                    }
+                }
+            default:
+                res.append(contentsOf: getSolvesFrom(month: tg))
+                break
+        }
+        
+        return res
+        */
+    }
+    
+    
+    /*
+     * returns the solves within a given month
+     */
+    public func getSolvesFrom(month: TimeGroup) -> [SolveItem] {
+        let sGroup = getSolvesFrom(ct: cTypeHandler!.selected!)
+        var res: [SolveItem] = []
+        for s in sGroup {
+            if s.timestamp.month == month.rawValue {
+                res.append(s)
+            }
+        }
+        
+        return res
+    }
+    
     
     
     /*
@@ -176,12 +296,28 @@ class SolvesFromTimeframe: ObservableObject {
      */
     public func getApplicableTimeGroups() -> [TimeGroup] {
         
+        
+        let sGroup = getSolvesFrom(ct: cTypeHandler!.selected!)
+        var res: [TimeGroup] = []
+        for s in sGroup {
+            let tempTG = s.getTimeGroup()
+            if !res.contains(tempTG)  {
+                res.append(tempTG)
+            }
+        }
+        
+        return res
+        
+        /*
         var res: [TimeGroup] = []
         let now = Date()
         let cal = Calendar.current
         
+        // this is the group of solves we want to query
+        let sGroup = getSolvesFrom(ct: cTypeHandler!.selected!)
+        
         // check today
-        for s in solves {
+        for s in sGroup {
             if cal.isDateInToday(s.timestamp) {
                 res.append(.today)
                 break
@@ -189,7 +325,7 @@ class SolvesFromTimeframe: ObservableObject {
         }
         
         // check yesterday
-        for s in solves {
+        for s in sGroup {
             if cal.isDateInYesterday(s.timestamp) {
                 res.append(.yesterday)
                 break
@@ -200,8 +336,8 @@ class SolvesFromTimeframe: ObservableObject {
         // check yesterday - lastweek
         let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
         let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
-        let rangeW = dayAgo...weekAgo
-        for s in solves {
+        let rangeW = weekAgo...dayAgo
+        for s in sGroup {
             if rangeW.contains(s.timestamp) {
                 res.append(.lastWeek)
                 break
@@ -211,8 +347,8 @@ class SolvesFromTimeframe: ObservableObject {
         
         // check last week - this month
         let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
-        let rangeM = weekAgo...monthAgo
-        for s in solves {
+        let rangeM = monthAgo...weekAgo
+        for s in sGroup {
             if rangeM.contains(s.timestamp) {
                 res.append(.thisMonth)
                 break
@@ -221,8 +357,8 @@ class SolvesFromTimeframe: ObservableObject {
         
         // check this month - last month
         let monthAgo2: Date = Calendar.current.date(byAdding: .month, value: -2, to: now)!
-        let range2M = monthAgo...monthAgo2
-        for s in solves {
+        let range2M = monthAgo2...monthAgo
+        for s in sGroup {
             if range2M.contains(s.timestamp) {
                 res.append(.lastMonth)
                 break
@@ -236,12 +372,13 @@ class SolvesFromTimeframe: ObservableObject {
         
         // check last year
         // yeah maybe some other time
-        
+        */
     }
+    
+    
     
     /*
      * returns enum of months with solves in them
-        
      */
     private func getMonthsWithSolves(excludeLast: Int = 0) -> [TimeGroup] {
         

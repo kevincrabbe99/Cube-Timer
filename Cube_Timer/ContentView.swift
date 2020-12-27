@@ -39,6 +39,9 @@ struct ContentView: View {
     @ObservedObject var popupController: PopupController = PopupController()
     @ObservedObject var ctEditController: CTEditController = CTEditController()
     
+    @ObservedObject var allSolvesController: AllSolvesController = AllSolvesController()
+   // @ObservedObject var solvesGridController: SolvesGridController = SolvesGridController()
+    
     
     // vars for popup
     @State var popupShowing: Bool = false
@@ -58,6 +61,7 @@ struct ContentView: View {
         // set CTypeHandler
         self.cTypeHandler.contentView = self
         self.cTypeHandler.solveHandler = solveHandler
+        self.cTypeHandler.allSolvesController = allSolvesController
         
         // set timer controllers
         self.timer.solveHandler = solveHandler
@@ -88,8 +92,18 @@ struct ContentView: View {
         // cube type editor controller
         self.ctEditController.cTypeHandler = cTypeHandler
         
+        // all solves controller stuff
+        self.allSolvesController.contentView = self
+        self.allSolvesController.solvesData = solveHandler.solvesByTimeFrame
+        self.allSolvesController.cTypeHandler = cTypeHandler
+       // self.allSolvesController.solvesGridController = solvesGridController
+        
+        // solves grid stuff
+      //  self.solvesGridController.solvesData = solveHandler.solvesByTimeFrame
+        
         // update the stopwatch display to show the last solve time
         self.timer.setDisplayToLastSolve()
+        
     }
     
     
@@ -214,6 +228,10 @@ struct ContentView: View {
     }
     
     func setPageTo(_ p: Page) {
+        if p == .showAll { // load solves before going there 
+            // update solves in
+            self.allSolvesController.updateSolves()
+        }
         self.onPage = p
     }
 
@@ -231,7 +249,8 @@ struct ContentView: View {
                     MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
                         .zIndex(0)
                 case .showAll:
-                    AllSolvesView(parent: self, solveHandler: solveHandler)
+                    //AllSolvesView(parent: self, solvesData: solveHandler.solvesByTimeFrame, solvesGridController: solvesGridController)
+                    AllSolvesView(controller: allSolvesController)
                         .zIndex(0)
                 default:
                     MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
