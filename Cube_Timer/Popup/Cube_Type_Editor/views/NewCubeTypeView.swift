@@ -11,7 +11,7 @@ struct NewCubeTypeView: View {
     
     //var parent: PopupView!
     var controller: CTEditController!
-    var contentView: ContentView!
+    var parent: PopupController!
     
    // var setCT: CubeType?
     
@@ -25,9 +25,9 @@ struct NewCubeTypeView: View {
     let configDimensionOptions: [Int] = [2,3,4,5,6,7,8,9]
     
     
-    init(controller: CTEditController, contentView: ContentView) {
+    init(controller: CTEditController, parent: PopupController) {
        self.controller = controller
-        self.contentView = contentView
+        self.parent = parent
        //self.setCT = nil
    }
     /*
@@ -132,9 +132,9 @@ struct NewCubeTypeView: View {
                     TextField("enter a description", text: $description, onEditingChanged: { editing in
                         if editing {
                             let offset:CGFloat = -1*(h/2)
-                            controller.offsetPopup(y: offset) // moves the popup up a little so they can see what they are typing
+                            parent.offsetPopup(y: offset) // moves the popup up a little so they can see what they are typing
                         }else {
-                            controller.offsetPopup(y: 0) // moves the popup back to the center
+                            parent.offsetPopup(y: 0) // moves the popup back to the center
                         }
                     })
                     .frame(width: w-120)
@@ -148,11 +148,10 @@ struct NewCubeTypeView: View {
                 /*
                  *  Go button
                  */
-                //createButton(w: w)
                 ZStack {
                     Button(action: {
                         controller.addCT(d1: (d1+2), d2: (d2+2), d3: (d3+2), desc: description) // we add 2 to offset for the Picker start point
-                        contentView.hidePopup()
+                        parent.hidePopup()
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
@@ -172,19 +171,7 @@ struct NewCubeTypeView: View {
                     })
                 }
                 .frame(width: w-100, alignment: .trailing)
-                
-                /*
-                if !isEditing() {
-                } else {
-                    HStack {
-                        
-                        deleteButton(controller: controller, contentView: contentView, w: w, id: setCT!.id!)
-                    updateButton(w: w)
-                        
-                    }
-                    .frame(width: innerW, alignment: .trailing)
-                }
-                */
+ 
                 
                 
             }
@@ -194,146 +181,16 @@ struct NewCubeTypeView: View {
         }
         
     }
-    /*
-    private func updateValuesFromSetCT() {
-        if setCT != nil {
-            print("setting to ", setCT)
-            self.title = "EDIT CUBE"
-            self.description = setCT!.descrip
-            self.d1 = Int(setCT!.d1 - 2)
-            self.d2 = Int(setCT!.d1 - 2)
-            self.d3 = Int(setCT!.d1 - 2)
-        }else {
-            self.title = "ENTER A NEW CUBE"
-            self.description = "Description"
-            self.d1 = 1
-            self.d2 = 1
-            self.d3 = 1
-        }
-    }
- 
-    
-    private func isEditing() -> Bool {
-        if setCT == nil {
-            return false
-        }
-        return true
-    }
- */
+
 }
 
-/*
-struct createButton: View {
-    
-    var w: CGFloat
-    
-    var body: some View {
-        /*
-         ZStack {
-             Button(action: {
-                 
-             }, label: {
-                 ZStack {
-                     RoundedRectangle(cornerRadius: 5)
-                         .fill(LinearGradient(
-                             gradient: .init(colors: [Color.init("very_dark_black"), Color.init("dark_black")]),
-                               startPoint: .init(x: 0, y: 1),
-                             endPoint: .init(x: 1.5, y: -0.5)
-                             ))
-                         //.shadow(radius: 5)
-                     
-                     Text("CREATE!")
-                         .foregroundColor(.white)
-                         .font(.system(size:13))
-                         .fontWeight(.bold)
-                 }
-                 .frame(width: 90, height: 35, alignment: .center)
-             })
-         }
-         .frame(width: w-100, alignment: .trailing)
-         */
-    }
-    
-}
-*/
- 
-/*
-struct deleteButton: View {
-    
-    var controller: CTEditController
-    var cv: ContentView
-    var w: CGFloat
-    var id: UUID
-    
-    var body: some View {
-        /*
-         *  BUTTON DELETE
-         */
-        Button(action: {
-            controller.deleteCT(id: id);
-        }, label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(LinearGradient(
-                        gradient: .init(colors: [Color.init("very_dark_black"), Color.init("dark_black")]),
-                          startPoint: .init(x: 0, y: 1),
-                        endPoint: .init(x: 1.5, y: -0.5)
-                        ))
-                    //.shadow(radius: 5)
-                
-                Text("DELETE")
-                    .foregroundColor(.white)
-                    .font(.system(size:13))
-                    .fontWeight(.bold)
-            }
-            .frame(width: 90, height: 35, alignment: .center)
-            
-        })
-    }
-    
-}
- */
- 
-/*
-struct updateButton: View {
-    
-    var w: CGFloat
-    
-    var body: some View {
-        /*
-         *      BUTTON UPDATE
-         */
-        Button(action: {
-            
-        }, label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(LinearGradient(
-                        gradient: .init(colors: [Color.init("very_dark_black"), Color.init("dark_black")]),
-                          startPoint: .init(x: 0, y: 1),
-                        endPoint: .init(x: 1.5, y: -0.5)
-                        ))
-                    //.shadow(radius: 5)
-                
-                Text("UPDATE")
-                    .foregroundColor(.white)
-                    .font(.system(size:13))
-                    .fontWeight(.bold)
-            }
-            .frame(width: 90, height: 35, alignment: .center)
-            
-        })
-    }
-    
-}
- */
 
 struct NewCubeTypeView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.init("very_dark_black")
             
-            NewCubeTypeView(controller: CTEditController(), contentView: ContentView())
+            NewCubeTypeView(controller: CTEditController(), parent: PopupController())
         }
         .previewLayout(PreviewLayout.fixed(width: 350, height: 200))
     }

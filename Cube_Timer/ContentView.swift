@@ -41,6 +41,7 @@ struct ContentView: View {
     
     @ObservedObject var allSolvesController: AllSolvesController = AllSolvesController()
    // @ObservedObject var solvesGridController: SolvesGridController = SolvesGridController()
+    @ObservedObject var editSolveController: EditSolveController = EditSolveController()
     
     
     // vars for popup
@@ -96,7 +97,11 @@ struct ContentView: View {
         self.allSolvesController.contentView = self
         self.allSolvesController.solvesData = solveHandler.solvesByTimeFrame
         self.allSolvesController.cTypeHandler = cTypeHandler
-       // self.allSolvesController.solvesGridController = solvesGridController
+        
+        // edit popup controller stuff
+        self.editSolveController.cTypeHandler = cTypeHandler
+        self.editSolveController.solvesData = solveHandler.solvesByTimeFrame
+        self.editSolveController.allSolvesController = allSolvesController
         
         // solves grid stuff
       //  self.solvesGridController.solvesData = solveHandler.solvesByTimeFrame
@@ -107,6 +112,12 @@ struct ContentView: View {
     }
     
     
+    /*
+     *  this is triggered when user wants to edit solves from AllSolvesView
+     */
+    public func tappedEditSolves(solves: [SolveItem]) {
+        showPopup(v: AnyView(EditSolveView(controller: editSolveController, parent: popupController, solves: solves, selection: 1)))
+    }
     
     /*
      *  This is triggered when the user taps new Cube Type Icon
@@ -114,7 +125,7 @@ struct ContentView: View {
      */
     public func tappedAddCT() {
         print("creating new Cube Type view")
-        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController, contentView: self)))
+        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController, parent: popupController)))
     }
     
     /*
@@ -122,7 +133,7 @@ struct ContentView: View {
      */
     public func showCTPopupFor(id: UUID) {
         let ct = cTypeHandler.getControllerFrom(id: id)!.ct
-        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, contentView: self, setCT: ct)))
+        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, parent: popupController, setCT: ct)))
     }
     
     public func showPopup(v: AnyView) {
@@ -250,7 +261,7 @@ struct ContentView: View {
                         .zIndex(0)
                 case .showAll:
                     //AllSolvesView(parent: self, solvesData: solveHandler.solvesByTimeFrame, solvesGridController: solvesGridController)
-                    AllSolvesView(controller: allSolvesController)
+                    AllSolvesView(parent: self, controller: allSolvesController)
                         .zIndex(0)
                 default:
                     MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)

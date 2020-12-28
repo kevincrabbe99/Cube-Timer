@@ -13,9 +13,11 @@ struct TimeGroupView: View {
     
     var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 5), count: 8)
     
+    
+    
     var body: some View {
         
-        if controller.solves.count != 0 {
+        if controller.allSolvesController.count != 0 { // only show group if there are existing solves
             
             GeometryReader { geo in
                 
@@ -42,8 +44,11 @@ struct TimeGroupView: View {
                      *  the grid of solves
                      */
                     LazyVGrid(columns: gridItemLayout, alignment: .trailing) {
-                        ForEach(controller.solves) { s in
-                            SolveElementView(si: s)
+                        ForEach(controller.solveElementControllers) { sec in
+                            
+                            SolveElementView(/*controller: sec*/)
+                                .environmentObject(sec)
+                           // SolveElementView(si: s, parentController: controller)
                                 //.border(Color.green)
                         }
                     }

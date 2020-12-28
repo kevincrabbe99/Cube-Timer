@@ -20,7 +20,6 @@
 		7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607409258EF7ED00D188CF /* CubeType+CoreDataClass.swift */; };
 		7B60740C258EF7ED00D188CF /* CubeType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B60740A258EF7ED00D188CF /* CubeType+CoreDataProperties.swift */; };
 		7B607411258F0B5700D188CF /* CTypeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607410258F0B5700D188CF /* CTypeHandler.swift */; };
-		7B60741F258F28ED00D188CF /* PopupViewGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B60741E258F28ED00D188CF /* PopupViewGeneric.swift */; };
 		7B607424258F29D000D188CF /* PopupError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607423258F29D000D188CF /* PopupError.swift */; };
 		7B607442258F30D200D188CF /* CTEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607441258F30D200D188CF /* CTEditController.swift */; };
 		7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */; };
@@ -60,6 +59,8 @@
 		7BFF31D82597FCA60029EA19 /* TimeGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31D72597FCA60029EA19 /* TimeGroupView.swift */; };
 		7BFF31EF2598708E0029EA19 /* StatLabelVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31EE2598708E0029EA19 /* StatLabelVertical.swift */; };
 		7BFF31F4259874D10029EA19 /* StatLabelHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */; };
+		7BFF3203259986B80029EA19 /* EditSolveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF3202259986B80029EA19 /* EditSolveView.swift */; };
+		7BFF32082599870F0029EA19 /* EditSolveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF32072599870F0029EA19 /* EditSolveController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +94,6 @@
 		7B607409258EF7ED00D188CF /* CubeType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CubeType+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7B60740A258EF7ED00D188CF /* CubeType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CubeType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7B607410258F0B5700D188CF /* CTypeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTypeHandler.swift; sourceTree = "<group>"; };
-		7B60741E258F28ED00D188CF /* PopupViewGeneric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewGeneric.swift; sourceTree = "<group>"; };
 		7B607423258F29D000D188CF /* PopupError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupError.swift; sourceTree = "<group>"; };
 		7B607441258F30D200D188CF /* CTEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTEditController.swift; sourceTree = "<group>"; };
 		7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCubeTypeView.swift; sourceTree = "<group>"; };
@@ -139,6 +139,8 @@
 		7BFF31D72597FCA60029EA19 /* TimeGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGroupView.swift; sourceTree = "<group>"; };
 		7BFF31EE2598708E0029EA19 /* StatLabelVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLabelVertical.swift; sourceTree = "<group>"; };
 		7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLabelHorizontal.swift; sourceTree = "<group>"; };
+		7BFF3202259986B80029EA19 /* EditSolveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSolveView.swift; sourceTree = "<group>"; };
+		7BFF32072599870F0029EA19 /* EditSolveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSolveController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 			children = (
 				7B6073F3258E4FFF00D188CF /* PopupController.swift */,
 				7B6073FB258E500700D188CF /* PopupView.swift */,
+				7BFF31FB25997D800029EA19 /* Solve_Item_Editor */,
 				7B607440258F30A000D188CF /* Cube_Type_Editor */,
 			);
 			path = Popup;
@@ -221,7 +224,6 @@
 				7B607401258ED68300D188CF /* NewCubeTypeView.swift */,
 				7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */,
 				7B607423258F29D000D188CF /* PopupError.swift */,
-				7B60741E258F28ED00D188CF /* PopupViewGeneric.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -229,8 +231,8 @@
 		7B607440258F30A000D188CF /* Cube_Type_Editor */ = {
 			isa = PBXGroup;
 			children = (
-				7B607400258ED65F00D188CF /* views */,
 				7B607441258F30D200D188CF /* CTEditController.swift */,
+				7B607400258ED65F00D188CF /* views */,
 			);
 			path = Cube_Type_Editor;
 			sourceTree = "<group>";
@@ -423,6 +425,15 @@
 			path = Stat_Card;
 			sourceTree = "<group>";
 		};
+		7BFF31FB25997D800029EA19 /* Solve_Item_Editor */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF3202259986B80029EA19 /* EditSolveView.swift */,
+				7BFF32072599870F0029EA19 /* EditSolveController.swift */,
+			);
+			path = Solve_Item_Editor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -566,6 +577,7 @@
 				7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */,
 				7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */,
 				7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */,
+				7BFF32082599870F0029EA19 /* EditSolveController.swift in Sources */,
 				7B607424258F29D000D188CF /* PopupError.swift in Sources */,
 				7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */,
 				7B984CFB253E02DC00BC6402 /* Cube_Timer.xcdatamodeld in Sources */,
@@ -592,12 +604,12 @@
 				7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */,
 				7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */,
 				7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */,
+				7BFF3203259986B80029EA19 /* EditSolveView.swift in Sources */,
 				7BFF31D02597FC9A0029EA19 /* TimeGroupController.swift in Sources */,
 				7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */,
 				7BFF31AE2596FCE90029EA19 /* SolvesGridView.swift in Sources */,
 				7B607442258F30D200D188CF /* CTEditController.swift in Sources */,
 				7BCC6DCD25723860001663B1 /* SidebarController.swift in Sources */,
-				7B60741F258F28ED00D188CF /* PopupViewGeneric.swift in Sources */,
 				7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */,
 				7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */,
 			);

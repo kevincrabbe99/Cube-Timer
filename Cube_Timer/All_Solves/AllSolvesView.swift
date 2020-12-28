@@ -14,7 +14,8 @@ struct AllSolvesView: View {
     var solvesData: SolvesFromTimeframe
  `` */
     
-    @ObservedObject var controller: AllSolvesController
+    var parent: ContentView
+    var controller: AllSolvesController
     
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     
@@ -48,6 +49,8 @@ struct AllSolvesView: View {
                      */
                     VStack {
                         
+                   
+                            
                         VStack(alignment:.trailing) {
                             Text(controller.cTypeHandler.selected.name)
                                 .font(.system(size: 30))
@@ -70,6 +73,8 @@ struct AllSolvesView: View {
                         Spacer()
                         
                         StatLabelVertical(label: "MEDIAN", value: controller.median)
+                            
+                        
                         
  
                         
@@ -90,9 +95,28 @@ struct AllSolvesView: View {
                          *  hStack with topBar stats
                          */
                         HStack {
-                            StatLabelHorizontal(label: "SOLVES", value: Double(controller.count ?? 0), showDecimal: false)
-                            StatLabelHorizontal(label: "AVERAGE", value: Double(controller.average ?? 0))
-                            StatLabelHorizontal(label: "STD. DEV", value: Double(controller.stdDev ?? -1))
+                                
+                            
+                            if !controller.selecting {
+                                
+                                StatLabelHorizontal(label: "SOLVES", value: Double(controller.count ?? 0), showDecimal: false)
+                                StatLabelHorizontal(label: "AVERAGE", value: Double(controller.average ?? 0))
+                                StatLabelHorizontal(label: "STD. DEV", value: Double(controller.stdDev ?? -1))
+                      
+                            } else {
+                                
+                                Button(action: {
+                                    parent.tappedEditSolves(solves: controller.selected)
+                                }, label: {
+                                    HStack {
+                                        Text("EDIT")
+                                        Text(String(controller.selected.count))
+                                        Text("SOLVES")
+                                    }
+                                })
+                                
+                            } // end if
+                         
                         }
                         .frame(height: 30, alignment: .leading)
                         .padding(.top, 10)
@@ -233,7 +257,7 @@ struct AllSolvesView: View {
 struct AllSolvesView_Previews: PreviewProvider {
     static var previews: some View {
       //  AllSolvesView(parent: ContentView(), solvesData: SolvesFromTimeframe(), solvesGridController: SolvesGridController())
-        AllSolvesView(controller: AllSolvesController())
+        AllSolvesView(parent: ContentView(), controller: AllSolvesController())
                 .previewLayout(.fixed(width: 2436 / 3.0, height: 1125 / 3.0))
     }
 }

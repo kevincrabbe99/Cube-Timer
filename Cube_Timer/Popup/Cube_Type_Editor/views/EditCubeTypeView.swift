@@ -11,7 +11,7 @@ struct EditCubeTypeView: View {
     
     //var parent: PopupView!
     var controller: CTEditController!
-    var contentView: ContentView!
+    var parent: PopupController!
     
     var setCT: CubeType?
     
@@ -32,11 +32,11 @@ struct EditCubeTypeView: View {
    }
  */
     
-    init(controller: CTEditController, contentView: ContentView, setCT: CubeType?) {
+    init(controller: CTEditController, parent: PopupController, setCT: CubeType?) {
         
         
         self.controller = controller
-        self.contentView = contentView
+        self.parent = parent
         self.setCT = setCT
     }
  
@@ -147,9 +147,9 @@ struct EditCubeTypeView: View {
                     TextField("enter a description", text: $description, onEditingChanged: { editing in
                         if editing {
                             let offset:CGFloat = -1*(h/2)
-                            controller.offsetPopup(y: offset) // moves the popup up a little so they can see what they are typing
+                            parent.offsetPopup(y: offset) // moves the popup up a little so they can see what they are typing
                         }else {
-                            controller.offsetPopup(y: 0) // moves the popup back to the center
+                            parent.offsetPopup(y: 0) // moves the popup back to the center
                         }
                     })
                     .frame(width: w-120)
@@ -167,7 +167,7 @@ struct EditCubeTypeView: View {
                     //deleteButton(controller: controller, contentView: contentView, w: w, id: setCT!.id!)
                     Button(action: {
                         controller.deleteCT(id: (setCT?.id)!)
-                        contentView.hidePopup()
+                        parent.hidePopup()
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
@@ -230,6 +230,6 @@ struct EditCubeTypeView: View {
 
 struct EditCubeTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        EditCubeTypeView(controller: CTEditController(), contentView: ContentView(), setCT: CubeType())
+        EditCubeTypeView(controller: CTEditController(), parent: PopupController(), setCT: CubeType())
     }
 }

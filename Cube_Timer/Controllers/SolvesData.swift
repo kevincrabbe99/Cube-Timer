@@ -63,19 +63,6 @@ class SolvesFromTimeframe: ObservableObject {
         //self.timeframe = .Unknown
     }
     
-    /*
-     *  Inits and sets a timeframe
-     *  No known callers
-     #1 Removed constructor, no need to set self.timeframe
-     
-    init(_ tf: Timeframe) {
-        self.solves = []
-        self.size = 0
-        self.timeframe = tf
-    }
-     */
-    
-    
     
     
     /*
@@ -209,68 +196,6 @@ class SolvesFromTimeframe: ObservableObject {
         
         return res
         
-        
-        /*
-        var res: [SolveItem] = []
-        let now = Date()
-        let cal = Calendar.current
-        
-        // the solves to be analyzed
-        let sGroup = getSolvesFrom(ct: cTypeHandler!.selected!)
-        
-        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
-        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
-        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
-        
-        switch tg {
-            case .today:
-                for s in sGroup {
-                    if cal.isDateInToday(s.timestamp) {
-                        res.append(s)
-                    }
-                }
-            break
-            
-            case .Unknown:
-                break
-            case .yesterday:
-                for s in sGroup {
-                    if cal.isDateInYesterday(s.timestamp) {
-                        res.append(s)
-                    }
-                }
-            case .lastWeek:
-                // check yesterday - lastweek
-                let rangeW = dayAgo...weekAgo
-                for s in sGroup {
-                    if rangeW.contains(s.timestamp) {
-                        res.append(s)
-                    }
-                }
-            case .thisMonth:
-                // check last week - this month
-                let rangeM = weekAgo...monthAgo
-                for s in sGroup {
-                    if rangeM.contains(s.timestamp) {
-                        res.append(s)
-                    }
-                }
-            case .lastMonth:
-                // check this month - last month
-                let monthAgo2: Date = Calendar.current.date(byAdding: .month, value: -2, to: now)!
-                let range2M = monthAgo...monthAgo2
-                for s in sGroup {
-                    if range2M.contains(s.timestamp) {
-                        res.append(s)
-                    }
-                }
-            default:
-                res.append(contentsOf: getSolvesFrom(month: tg))
-                break
-        }
-        
-        return res
-        */
     }
     
     
@@ -307,72 +232,6 @@ class SolvesFromTimeframe: ObservableObject {
         }
         
         return res
-        
-        /*
-        var res: [TimeGroup] = []
-        let now = Date()
-        let cal = Calendar.current
-        
-        // this is the group of solves we want to query
-        let sGroup = getSolvesFrom(ct: cTypeHandler!.selected!)
-        
-        // check today
-        for s in sGroup {
-            if cal.isDateInToday(s.timestamp) {
-                res.append(.today)
-                break
-            }
-        }
-        
-        // check yesterday
-        for s in sGroup {
-            if cal.isDateInYesterday(s.timestamp) {
-                res.append(.yesterday)
-                break
-            }
-        }
-        
-        
-        // check yesterday - lastweek
-        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
-        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
-        let rangeW = weekAgo...dayAgo
-        for s in sGroup {
-            if rangeW.contains(s.timestamp) {
-                res.append(.lastWeek)
-                break
-            }
-        }
-        
-        
-        // check last week - this month
-        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
-        let rangeM = monthAgo...weekAgo
-        for s in sGroup {
-            if rangeM.contains(s.timestamp) {
-                res.append(.thisMonth)
-                break
-            }
-        }
-        
-        // check this month - last month
-        let monthAgo2: Date = Calendar.current.date(byAdding: .month, value: -2, to: now)!
-        let range2M = monthAgo2...monthAgo
-        for s in sGroup {
-            if range2M.contains(s.timestamp) {
-                res.append(.lastMonth)
-                break
-            }
-        }
-        
-        // add rest of the monts
-        res.append(contentsOf: getMonthsWithSolves(excludeLast: 2))
-        
-        return res
-        
-        // check last year
-        // yeah maybe some other time
-        */
     }
     
     
@@ -414,72 +273,25 @@ class SolvesFromTimeframe: ObservableObject {
     }
     
     
-    
-    
-    
-    /*
-     *  Returns an array of the timeframs which are needed for all the solves
-     
-        * I am moving this to SolveHandler so it can take into account the cubeType
- 
-    func getApplicableTimeframes() -> [Timeframe] {
-        var res: [Timeframe] = [.LastThree, .Today, .All] // the array to be returned
-        let now = Date()
+    public func setCtTo(ct: CubeType, solves: [SolveItem]) {
         
-        // needed for test .Week calculation
-        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
-        
-        // test .Week
-        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
-        let rangeW = weekAgo...dayAgo
+        // update local arrays
         for s in solves {
-            if rangeW.contains(s.timestamp) {
-                res.append(.Week)
-                break
-            }
+            s.setValue(ct, forKey: "cubeType")
+            s.setCubeType(ct)
         }
         
-        // test .OneMonth
-        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
-        let rangeM = monthAgo...weekAgo
-        for s in solves {
-            if rangeM.contains(s.timestamp) {
-                res.append(.OneMonth)
-                break
-            }
+        print("updated ", solves.count, " solves to ", ct.name)
+        
+        do { // saving it
+            try PersistenceController.shared.container.viewContext.save()
+            //updateEverything() // updates EVERYTHING
+        } catch {
+            print("error updating solve")
         }
         
-        // test .ThreeMonths
-        let threeMonthAgo: Date = Calendar.current.date(byAdding: .month, value: -3, to: now)!
-        let range3M = threeMonthAgo...monthAgo
-        for s in solves {
-            if range3M.contains(s.timestamp) {
-                res.append(.ThreeMonths)
-                break
-            }
-        }
-        
-        // test .Year
-        let yearAgo: Date = Calendar.current.date(byAdding: .year, value: -1, to: now)!
-        let rangeY = yearAgo...threeMonthAgo
-        for s in solves {
-            if rangeY.contains(s.timestamp) {
-                res.append(.Year)
-                break
-            }
-        }
-        
-        // delete the last one added so last and all are not redundant
-        // ONLY IF: we have more than 3 and less than 7 buttons active
-        if res.count > 3 && res.count < 7 { // if we should delete one
-            res.remove(at: res.count - 1) // delete the second to last button
-        }
-        
-        return res
         
     }
-     
-  */
 
     
     /*

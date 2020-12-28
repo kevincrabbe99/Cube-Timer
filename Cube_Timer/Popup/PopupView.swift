@@ -30,7 +30,7 @@ struct PopupView: View {
      */
     
     public func hide() {
-        ctEditController.unfocusTextField()
+        popupController.unfocusTextField()
         contentView.hidePopup()
     }
     
@@ -47,7 +47,7 @@ struct PopupView: View {
                         .cornerRadius(10)
                         .shadow(radius: 15)
                         .onTapGesture {
-                            ctEditController.unfocusTextField()
+                            popupController.unfocusTextField()
                         }
                     
                     
@@ -72,7 +72,8 @@ struct PopupView: View {
                 }
                 .frame(width: geo.size.width/2, height: popupHeight, alignment: .center)
                 .animation(.spring())
-                .offset(x: ctEditController.popupOffsetX, y:ctEditController.popupOffsetY)
+                .offset(x: popupController.popupOffsetX, y:popupController.popupOffsetY)
+                //.offset(x: ctEditController.popupOffsetX, y:ctEditController.popupOffsetY)
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
         }

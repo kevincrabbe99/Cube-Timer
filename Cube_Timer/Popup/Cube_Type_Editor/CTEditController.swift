@@ -12,6 +12,7 @@ class CTEditController: ObservableObject {
     
     var cTypeHandler: CTypeHandler!
     
+    /*
     // used to set the position of the popup when the keyboard is being used
     @Published var popupOffsetY: CGFloat = 0
     @Published var popupOffsetX: CGFloat = 0 // stupid af that I have to put this here
@@ -25,6 +26,7 @@ class CTEditController: ObservableObject {
         self.popupOffsetX = 0
         self.popupOffsetY = 0
     }
+    */
     
     public func deleteCT(id: UUID) {
         cTypeHandler.delete(id)

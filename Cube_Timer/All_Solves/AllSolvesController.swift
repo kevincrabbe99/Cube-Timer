@@ -43,7 +43,11 @@ class AllSolvesController: ObservableObject {
     @Published var tgControllerOct: TimeGroupController
     @Published var tgControllerNov: TimeGroupController
     @Published var tgControllerDec: TimeGroupController
-
+    
+    
+    // selecting mode stuff
+    @Published var selecting: Bool = false
+    @Published var selected: [SolveItem] = []
   
     
     init() {
@@ -66,9 +70,53 @@ class AllSolvesController: ObservableObject {
         self.tgControllerOct = TimeGroupController(tg: .oct, solves: [])
         self.tgControllerNov = TimeGroupController(tg: .nov, solves: [])
         self.tgControllerDec = TimeGroupController(tg: .dec, solves: [])
+        
+        
+        self.tgControllerToday.setParent(self)
+        self.tgControllerYesterday.setParent(self)
+        self.tgControllerThisWeek.setParent(self)
+        self.tgControllerThisMonth.setParent(self)
+        self.tgControllerLastMonth.setParent(self)
+        
+        self.tgControllerJan.setParent(self)
+        self.tgControllerFeb.setParent(self)
+        self.tgControllerMar.setParent(self)
+        self.tgControllerApr.setParent(self)
+        self.tgControllerMay.setParent(self)
+        self.tgControllerJun.setParent(self)
+        self.tgControllerJul.setParent(self)
+        self.tgControllerAug.setParent(self)
+        self.tgControllerSep.setParent(self)
+        self.tgControllerOct.setParent(self)
+        self.tgControllerNov.setParent(self)
+        self.tgControllerDec.setParent(self)
+        
     }
     
-    //var solvesGridController: SolvesGridController!
+    
+    
+    
+    /*
+     *  called when a solve is tapped on
+     *      this gets called from SolveElementView -> TimeGroupController -> AllSolvesController
+     */
+    public func tap(_ si: SolveItem) {
+        print("tapped for selection: ", si.timeMS)
+        
+        self.selecting = true // set to true just incase
+        
+        self.selected.append(si)
+    }
+    
+    public func uptap(_ si: SolveItem) {
+        
+        self.selected = selected.filter { $0 != si }
+        
+        if selected.count == 0 {
+            self.selecting = false
+        }
+    }
+    
     
     
     /*
@@ -82,9 +130,13 @@ class AllSolvesController: ObservableObject {
         print("updating AllSolvesView to: ", cTypeHandler.selected.name)
         print("analyzing ", solves.count, " solves")
         
+        // routes the solves to the tg controllers
         for s in solves {
             addSolveToCorrespondingTGController(s: s)
         }
+        
+        // unselect everything
+      // unselectAll() // this goes to all the views and unselects 
         
         // update all attributes
         updateBest()
@@ -94,6 +146,8 @@ class AllSolvesController: ObservableObject {
         updateAverage()
         updateStdDev()
     }
+    
+    
     
     private func updateStdDev() {
         
@@ -125,7 +179,7 @@ class AllSolvesController: ObservableObject {
     
     private func updateMedian() {
         let c = solves.count
-        if c < 2 {
+        if c < 4 {
             self.median = 0
             return
         }

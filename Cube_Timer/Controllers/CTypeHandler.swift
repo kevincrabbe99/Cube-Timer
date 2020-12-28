@@ -213,6 +213,15 @@ class CTypeHandler: ObservableObject {
         
     }
     
+    public func getCubeTypes() -> [CubeType] {
+        var res: [CubeType] = []
+        
+        for ctController in typeControllers {
+            res.append(ctController.ct)
+        }
+        
+        return res
+    }
     
     /*
      *  Adds a solve element based on given attributes

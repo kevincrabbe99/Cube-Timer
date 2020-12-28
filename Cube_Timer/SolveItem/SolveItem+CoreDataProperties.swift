@@ -38,6 +38,13 @@ extension SolveItem: Identifiable {
     
     @NSManaged public var cubeType: CubeType
     
+    
+    func setCubeType(_ ct: CubeType) {
+        self.cubeType = ct
+        
+        
+    }
+ 
 
     
     func getTimeCapture() -> TimeCapture? {
