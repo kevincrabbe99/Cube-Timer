@@ -216,7 +216,16 @@ struct AllSolvesView: View {
                 } // end main hStack
             
             } // end main ZStack, no more color
-                
+            .gesture ( // gesture for transitioning to allSolvesView
+                DragGesture()
+                    .onChanged { value in
+                        cvc.dragChanged(value)
+                    }
+                    .onEnded { value in
+                        cvc.dragEnded(value)
+                    }
+            )
+            
         }
         
         

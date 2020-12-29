@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ButtonsView: View {
     
+    @EnvironmentObject var cvc: ContentViewController
+    
     @ObservedObject var timer: TimerController
     
     @State var leftBtnOpacity: Double = 1
@@ -31,14 +33,12 @@ struct ButtonsView: View {
     var body: some View {
         GeometryReader { geometry in
             HStack {
+                
+                /*
+                        LEFT BUTTON
+                 */
                 ZStack {
-                    /*
-                    Color.init("dark_black")
-                        .cornerRadius(35, corners: [.topLeft])
-                        .cornerRadius(4, corners: [.bottomRight, .topRight])
-                        .cornerRadius(10, corners: [.bottomLeft])
-                        .opacity(leftBtnOpacity)
-                    */
+                  
                     RoundedRectangle(cornerRadius: 5)
                         .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
                         .cornerRadius(35, corners: [.topLeft])
@@ -61,6 +61,17 @@ struct ButtonsView: View {
                     
                 }
                 .frame(width: geometry.size.width / 2 - 15, alignment: .leading)
+                
+                .gesture (// gesture for transitioning to allSolvesView
+                    DragGesture()
+                        .onChanged { value in
+                            cvc.dragChanged(value)
+                        }
+                        .onEnded { value in
+                            cvc.dragEnded(value)
+                        }
+                )
+                
                 .onLongPressGesture(minimumDuration: 100.0, maximumDistance: .infinity, pressing: { pressing in
                     if pressing  {
                         timer.activateLeft()
@@ -75,7 +86,14 @@ struct ButtonsView: View {
                             self.leftIconOpacity = 0.2
                         }
                     }
-                                }, perform: { })
+                }, perform: { })
+                
+                
+                
+                
+                /*
+                *       RIGHT BUTTON
+                 */
                 
                 ZStack {
                     /* Redundany by setting gradient background
@@ -100,6 +118,17 @@ struct ButtonsView: View {
                  
                 }
                 .frame(width: geometry.size.width / 2 - 15, alignment: .leading)
+                
+                .gesture ( // gesture for transitioning to allSolvesView
+                    DragGesture()
+                        .onChanged { value in
+                            cvc.dragChanged(value)
+                        }
+                        .onEnded { value in
+                            cvc.dragEnded(value)
+                        }
+                )
+                
                 .onLongPressGesture(minimumDuration: 100.0, maximumDistance: .infinity, pressing: { pressing in
                     if pressing  {
                         timer.activateRight()
@@ -115,6 +144,7 @@ struct ButtonsView: View {
                         }
                     }
                                 }, perform: { })
+                
                 
             }
             .frame(width: geometry.size.width - 10, height: geometry.size.height - 35)

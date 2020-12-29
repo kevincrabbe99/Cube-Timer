@@ -115,151 +115,33 @@ struct ContentView: View {
         
     }
     
-    /*
-    /*
-     *  this is triggered when user wants to edit solves from AllSolvesView
-            * pass SolveElementController so we can use that to unselect within th epopup
-     */
-    public func tappedEditSolves(solves: [SolveElementController]) {
-        showPopup(v: AnyView(EditSolveView(/*controller: editSolveController, parent: popupController,*/ solves: solves, selection: 1)))
-    }
-    
-    /*
-     *  This is triggered when the user taps new Cube Type Icon
-            * called by onClick listener in SidebarView.swift
-     */
-    public func tappedAddCT() {
-        print("creating new Cube Type view")
-        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController, parent: popupController)))
-    }
-    
-    /*
-     *  When editing a CT we bring up the add CT view and change it a lil
-     */
-    public func showCTPopupFor(id: UUID) {
-        let ct = cTypeHandler.getControllerFrom(id: id)!.ct
-        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, parent: popupController, setCT: ct)))
-    }
-    
-    public func showPopup(v: AnyView) {
-        print("setting popupShowing to: true")
-        lightTap.impactOccurred()
-        popupController.set(v)
-        popupShowing = true
-        print("popupShowing = ", popupShowing)
-    }
-    
-    public func hidePopup() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        lightTap.impactOccurred()
-        print("setting popupShowing to: false")
-        popupShowing = false
-       // shaderOpacity = 0
-        print("popup hidden")
-    }
-    
-    
-    /*
-    private func showPopup() {
-        popupShowing = true
-        //shaderOpacity = 0.8
-        print("popup showing")
-    }
-    */
-    
-    /*
-     *  The drag gesture for the sidebar
-            This is called by SidebarView.swift
-     */
-    var sbDrag: some Gesture {
-        DragGesture()
-            .onChanged { (trans) in
-                self.sidebarDraggin = true
-                
-                let xTrans = trans.translation.width
-                
-                self.sbXPos = xTrans
-                
-                if sbXPos >= sidebarInPos.x {
-                    sbXPos = sidebarInPos.x
-                }
-                
-                // shoadow stuff
-                let p = sbXPos / sidebarInPos.x
-                self.sbBgOpacity = Double((0.8)*p)
-                
-            }
-            .onEnded { (trans) in
-                self.sidebarDraggin = false
-                
-                var xTrans = trans.translation.width
-        
-                if sbXPos > sidebarOutPos.x/2 {
-                    self.pullInSidebar()
-                }else {
-                    self.pushOutSidebar()
-                }
-                
-            }
-    }
-    
-    var sbTab: some Gesture {
-        TapGesture().onEnded { (e) in
-            if !sidebarDraggin {
-                self.toggleSidebar()
-            }
-        }
-    }
-    
-    func toggleSidebar() {
-        if sidebar {
-            self.pushOutSidebar()
-        }else {
-            self.pullInSidebar()
-        }
-    }
-    
-    func pullInSidebar() {
-       // if !sidebar {
-            sidebar = true
-            self.sbXPos = self.sidebarInPos.x
-            self.sbBgOpacity = 0.8
-       // }
-    }
-    
-    func pushOutSidebar() {
-       // if sidebar {
-            sidebar = false
-            self.sbXPos = self.sidebarOutPos.x
-            self.sbBgOpacity = 0
-       // }
-    }
-    
-    var peripheralOpacity: Double  {
-        if timer.startApproved || timer.timerGoing || timer.oneActivated{
-            return -0.3
-        }else {
-            return 0.5
-        }
-    }
-    
-    func setPageTo(_ p: Page) {
-        if p == .showAll { // load solves before going there 
-            // update solves in
-            self.allSolvesController.updateSolves()
-        }
-        self.onPage = p
-    }
-
-    */
-    
+    let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     var body: some View {
         
         GeometryReader { geo in
             ZStack {
+                Rectangle()
+                    .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .opacity(0.6)
                 
              
+                ZStack {
+                    
+                    
+                    
+                    AllSolvesView(parent: self, controller: allSolvesController)
+                        .offset(y: cvc.allSolvesViewYOffset)
+                        .scaleEffect(cvc.allSolvesViewScale)
+                        
+                    
+                    MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
+                        .opacity(cvc.mainViewOpacity)
+                       
+                    
+                }
+                .animation(.spring())
                 
+                /*
                 switch cvc.onPage {
                 case .Main:
                     MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
@@ -271,7 +153,7 @@ struct ContentView: View {
                 default:
                     MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
                         .zIndex(0)
-                }
+                }*/
                 
                 // add stuff for sidebar
                 // the tab for the sidebar
