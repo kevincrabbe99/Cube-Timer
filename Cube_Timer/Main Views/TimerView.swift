@@ -78,7 +78,7 @@ struct TimerView: View {
      */
     var slvsBarHeight: CGFloat {
         if solveHandler.currentTimeframe == .LastThree { // height of BO view
-            return 100
+            return 60
         } else { // return regular bar height
             return 20 // regular bar heightr
         }
@@ -124,7 +124,7 @@ struct TimerView: View {
     
     var body: some View {
 
-        VStack {
+        VStack(spacing: 0) {
             
             /*
              *  Timer elements
@@ -168,19 +168,20 @@ struct TimerView: View {
                             })
                             
                     }
-                    .offset(y: 5)
+                    .offset(y: -5)
                     .frame(width: 260, height: 20)
                 
                 
-               }// end if
+                }// end if
                 
                 /*
                  *  THE ACTUAL TIMER
                  */
                 StopwatchDisplayView(timer: timer)
-                    .frame(width: 250)
-                   // .animation(.spring())`
-            }
+                    .frame(width: 250, height: 60)
+                    //.offset(y: 10)
+                
+            } // end main ZStack
             
             /*
              *  displays the last 3 bar under the timer
@@ -222,7 +223,10 @@ struct TimerView: View {
                          * BEST OF 3 Gamemode
                          */
                         //BestOfThreeView(timer: timer, solveHandler: solveHandler)
-                        BestOfThreeView(c: self.bo3Controller) // bo3Controoler is initiated in ContentView.swift
+                      
+                            BestOfThreeView(c: self.bo3Controller) // bo3Controoler is initiated in ContentView.swift
+                                .frame(width: 300, height: 60)
+                        
                     }else {
                     
                         HStack(spacing: 30.0) {
@@ -248,7 +252,6 @@ struct TimerView: View {
                 }
             }
             .frame(width: 280, height: 20, alignment: .top)
-            .offset(y: -30)
             .zIndex(90)
             .opacity(timer.peripheralOpacity)
             .animation(
@@ -259,11 +262,12 @@ struct TimerView: View {
              *  Displays the bar graph at all times
              */
             StatsBarView(timer: timer, solveHandler: solveHandler)
-                .offset(y: -15)
                 .opacity(statBarGraphOpacity)
                 .animation(Animation.easeOut(duration: 0.15))
+                .offset(y: 20)
             
- 
+                // .animation(.spring())`
+            
         }
         .foregroundColor(.white)
         .animation(.spring())
@@ -271,6 +275,8 @@ struct TimerView: View {
         .onAppear() {
             timer.setDisplayToLastSolve()
         }
+       // .offset(y: 20)
+        
     }
     
 }

@@ -104,7 +104,7 @@ struct SolveElementView: View {
         } label: {
             ZStack {
                     if isSelected {
-                        Color.init("dark_black")
+                        Color.black
                             .cornerRadius(3)
                             .opacity(0.2)
                     } else {
@@ -125,6 +125,7 @@ struct SolveElementView: View {
             
             }
             .frame(width: 45, height: 25)
+            .foregroundColor(.init("mint_cream"))
         }
 
         

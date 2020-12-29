@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class SingleCubeTypeViewController: ObservableObject, Identifiable {
     
@@ -86,10 +87,12 @@ class SingleCubeTypeViewController: ObservableObject, Identifiable {
         * this method updated this class
         * then updated CTypeHandler -> newSelection(ct: CubeType)
      */
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
     public func select() {
         if self.selected {
             return
         } else {
+            lightTap.impactOccurred()
             self.selected = true
             ctHandler.newSelection(self)
         }

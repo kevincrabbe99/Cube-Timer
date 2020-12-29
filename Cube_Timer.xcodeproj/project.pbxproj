@@ -43,6 +43,26 @@
 		7B9B7966254908380088ECD5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B7965254908380088ECD5 /* MainView.swift */; };
 		7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B799925493D280088ECD5 /* SolvesData.swift */; };
 		7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */; };
+		7BAAE0FB259B386C00330533 /* Dosis-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */; };
+		7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */; };
+		7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */; };
+		7BAAE0FE259B386C00330533 /* Dosis-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F4259B386C00330533 /* Dosis-Light.ttf */; };
+		7BAAE0FF259B386C00330533 /* Dosis-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F5259B386C00330533 /* Dosis-Bold.ttf */; };
+		7BAAE100259B386C00330533 /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F6259B386C00330533 /* Dosis-ExtraBold.ttf */; };
+		7BAAE101259B386C00330533 /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F7259B386C00330533 /* Dosis-SemiBold.ttf */; };
+		7BAAE102259B386C00330533 /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F8259B386C00330533 /* Dosis-ExtraLight.ttf */; };
+		7BAAE116259B387300330533 /* Heebo-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10A259B387300330533 /* Heebo-Thin.ttf */; };
+		7BAAE117259B387300330533 /* Heebo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10B259B387300330533 /* Heebo-Medium.ttf */; };
+		7BAAE118259B387300330533 /* Heebo-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10C259B387300330533 /* Heebo-Black.ttf */; };
+		7BAAE119259B387300330533 /* Heebo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10D259B387300330533 /* Heebo-Bold.ttf */; };
+		7BAAE11A259B387300330533 /* Heebo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10E259B387300330533 /* Heebo-SemiBold.ttf */; };
+		7BAAE11B259B387300330533 /* Heebo-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10F259B387300330533 /* Heebo-ExtraLight.ttf */; };
+		7BAAE11C259B387300330533 /* Heebo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE110259B387300330533 /* Heebo-Regular.ttf */; };
+		7BAAE11D259B387300330533 /* Heebo-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE111259B387300330533 /* Heebo-ExtraBold.ttf */; };
+		7BAAE11E259B387300330533 /* Heebo-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE112259B387300330533 /* Heebo-Light.ttf */; };
+		7BAAE120259B387300330533 /* Heebo-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE114259B387300330533 /* Heebo-VariableFont_wght.ttf */; };
+		7BAAE129259B387900330533 /* Play-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE126259B387900330533 /* Play-Regular.ttf */; };
+		7BAAE12B259B387900330533 /* Play-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE128259B387900330533 /* Play-Bold.ttf */; };
 		7BBA7186258C763300FED3A2 /* CubeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7185258C763300FED3A2 /* CubeIcon.swift */; };
 		7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */; };
 		7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7198258D356600FED3A2 /* SidebarShape.swift */; };
@@ -124,6 +144,26 @@
 		7B9B7965254908380088ECD5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7B9B799925493D280088ECD5 /* SolvesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolvesData.swift; sourceTree = "<group>"; };
 		7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesView.swift; sourceTree = "<group>"; };
+		7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
+		7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
+		7BAAE0F4259B386C00330533 /* Dosis-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Light.ttf"; sourceTree = "<group>"; };
+		7BAAE0F5259B386C00330533 /* Dosis-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.ttf"; sourceTree = "<group>"; };
+		7BAAE0F6259B386C00330533 /* Dosis-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.ttf"; sourceTree = "<group>"; };
+		7BAAE0F7259B386C00330533 /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
+		7BAAE0F8259B386C00330533 /* Dosis-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraLight.ttf"; sourceTree = "<group>"; };
+		7BAAE10A259B387300330533 /* Heebo-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Thin.ttf"; sourceTree = "<group>"; };
+		7BAAE10B259B387300330533 /* Heebo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Medium.ttf"; sourceTree = "<group>"; };
+		7BAAE10C259B387300330533 /* Heebo-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Black.ttf"; sourceTree = "<group>"; };
+		7BAAE10D259B387300330533 /* Heebo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Bold.ttf"; sourceTree = "<group>"; };
+		7BAAE10E259B387300330533 /* Heebo-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-SemiBold.ttf"; sourceTree = "<group>"; };
+		7BAAE10F259B387300330533 /* Heebo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-ExtraLight.ttf"; sourceTree = "<group>"; };
+		7BAAE110259B387300330533 /* Heebo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Regular.ttf"; sourceTree = "<group>"; };
+		7BAAE111259B387300330533 /* Heebo-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-ExtraBold.ttf"; sourceTree = "<group>"; };
+		7BAAE112259B387300330533 /* Heebo-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Light.ttf"; sourceTree = "<group>"; };
+		7BAAE114259B387300330533 /* Heebo-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		7BAAE126259B387900330533 /* Play-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Play-Regular.ttf"; sourceTree = "<group>"; };
+		7BAAE128259B387900330533 /* Play-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Play-Bold.ttf"; sourceTree = "<group>"; };
 		7BBA7185258C763300FED3A2 /* CubeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeIcon.swift; sourceTree = "<group>"; };
 		7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTab.swift; sourceTree = "<group>"; };
 		7BBA7198258D356600FED3A2 /* SidebarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarShape.swift; sourceTree = "<group>"; };
@@ -293,6 +333,7 @@
 				7B984CF2253E02DC00BC6402 /* Assets.xcassets */,
 				7B984CF9253E02DC00BC6402 /* Cube_Timer.xcdatamodeld */,
 				7B984CFC253E02DC00BC6402 /* Info.plist */,
+				7BAAE0EE259B384C00330533 /* fonts */,
 				7B984CF4253E02DC00BC6402 /* Preview Content */,
 			);
 			path = Cube_Timer;
@@ -323,6 +364,73 @@
 				7B984D12253E02DC00BC6402 /* Info.plist */,
 			);
 			path = Cube_TimerUITests;
+			sourceTree = "<group>";
+		};
+		7BAAE0EE259B384C00330533 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE125259B387900330533 /* Play */,
+				7BAAE108259B387300330533 /* Heebo */,
+				7BAAE0EF259B386C00330533 /* Dosis */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		7BAAE0EF259B386C00330533 /* Dosis */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */,
+				7BAAE0F1259B386C00330533 /* static */,
+			);
+			path = Dosis;
+			sourceTree = "<group>";
+		};
+		7BAAE0F1259B386C00330533 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */,
+				7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */,
+				7BAAE0F4259B386C00330533 /* Dosis-Light.ttf */,
+				7BAAE0F5259B386C00330533 /* Dosis-Bold.ttf */,
+				7BAAE0F6259B386C00330533 /* Dosis-ExtraBold.ttf */,
+				7BAAE0F7259B386C00330533 /* Dosis-SemiBold.ttf */,
+				7BAAE0F8259B386C00330533 /* Dosis-ExtraLight.ttf */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		7BAAE108259B387300330533 /* Heebo */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE109259B387300330533 /* static */,
+				7BAAE114259B387300330533 /* Heebo-VariableFont_wght.ttf */,
+			);
+			path = Heebo;
+			sourceTree = "<group>";
+		};
+		7BAAE109259B387300330533 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE10A259B387300330533 /* Heebo-Thin.ttf */,
+				7BAAE10B259B387300330533 /* Heebo-Medium.ttf */,
+				7BAAE10C259B387300330533 /* Heebo-Black.ttf */,
+				7BAAE10D259B387300330533 /* Heebo-Bold.ttf */,
+				7BAAE10E259B387300330533 /* Heebo-SemiBold.ttf */,
+				7BAAE10F259B387300330533 /* Heebo-ExtraLight.ttf */,
+				7BAAE110259B387300330533 /* Heebo-Regular.ttf */,
+				7BAAE111259B387300330533 /* Heebo-ExtraBold.ttf */,
+				7BAAE112259B387300330533 /* Heebo-Light.ttf */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		7BAAE125259B387900330533 /* Play */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE126259B387900330533 /* Play-Regular.ttf */,
+				7BAAE128259B387900330533 /* Play-Bold.ttf */,
+			);
+			path = Play;
 			sourceTree = "<group>";
 		};
 		7BCC6DB0256EC5E4001663B1 /* BestOfThree */ = {
@@ -540,8 +648,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BAAE11B259B387300330533 /* Heebo-ExtraLight.ttf in Resources */,
+				7BAAE120259B387300330533 /* Heebo-VariableFont_wght.ttf in Resources */,
+				7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */,
+				7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */,
+				7BAAE11E259B387300330533 /* Heebo-Light.ttf in Resources */,
+				7BAAE0FF259B386C00330533 /* Dosis-Bold.ttf in Resources */,
+				7BAAE12B259B387900330533 /* Play-Bold.ttf in Resources */,
+				7BAAE100259B386C00330533 /* Dosis-ExtraBold.ttf in Resources */,
+				7BAAE11C259B387300330533 /* Heebo-Regular.ttf in Resources */,
+				7BAAE129259B387900330533 /* Play-Regular.ttf in Resources */,
 				7B984CF6253E02DC00BC6402 /* Preview Assets.xcassets in Resources */,
+				7BAAE118259B387300330533 /* Heebo-Black.ttf in Resources */,
+				7BAAE102259B386C00330533 /* Dosis-ExtraLight.ttf in Resources */,
+				7BAAE117259B387300330533 /* Heebo-Medium.ttf in Resources */,
+				7BAAE101259B386C00330533 /* Dosis-SemiBold.ttf in Resources */,
 				7B984CF3253E02DC00BC6402 /* Assets.xcassets in Resources */,
+				7BAAE119259B387300330533 /* Heebo-Bold.ttf in Resources */,
+				7BAAE0FE259B386C00330533 /* Dosis-Light.ttf in Resources */,
+				7BAAE116259B387300330533 /* Heebo-Thin.ttf in Resources */,
+				7BAAE11D259B387300330533 /* Heebo-ExtraBold.ttf in Resources */,
+				7BAAE11A259B387300330533 /* Heebo-SemiBold.ttf in Resources */,
+				7BAAE0FB259B386C00330533 /* Dosis-VariableFont_wght.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

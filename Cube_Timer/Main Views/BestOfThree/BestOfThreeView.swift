@@ -33,11 +33,13 @@ struct BestOfThreeView: View {
     
         //if solveHandler.size > 0 { // EXIT: if no solves
         GeometryReader { geo in
+            
+            let innerW: CGFloat = geo.size.width - 50
+            
             VStack {
                 
                 /*
                  * the times display
-                 */
                 HStack(spacing: 30.0) {
                     ForEach(controller.solves) { s in
                         Text(TimeCapture.init(s.timeMS).getAsReadable() )
@@ -57,7 +59,6 @@ struct BestOfThreeView: View {
                     
                     /*
                      *  Clear / Load button
-                     */
                     if controller.solves.count < 3 { // if not full
                         Button(action: {
                             controller.load3Solves()
@@ -79,57 +80,91 @@ struct BestOfThreeView: View {
                             .frame(width: 15, height: 50)
                         }
                     }
+                     */
                     
                     
                 }
                 .frame(width: geo.size.width, height: 30)
                 .animation(.spring())
-                
+                 
+                 */
                 /*
                  * container for the stats
                  */
-                VStack {
+                if controller.solves.count >= 3 {
                     HStack {
-                        Text("Best:")
-                            .fontWeight(.bold)
-                            .font(.system(size: 13))
-                            .frame(width: (geo.size.width/4), alignment: .leading)
-                        Text("\(self.controller.best.getAsReadable())" as String)
-                            .font(.system(size: 13))
-                            .frame(width: (geo.size.width/4), alignment: .trailing)
-                            .foregroundColor(Color.init("green"))
+                        VStack(alignment: .trailing, spacing: 2.5) {
+                            Text("Best")
+                                .fontWeight(.bold)
+                                .font(.system(size: 13))
+                             //   .frame(width: (geo.size.width/4), alignment: .leading)
+                            LabelElement(label: self.controller.best.getAsReadable())
+                            /*
+                            Text("\(self.controller.best.getAsReadable())" as String)
+                                .font(.system(size: 13))
+                                .frame(width: (geo.size.width/4), alignment: .trailing)
+                                .foregroundColor(Color.init("green"))
+                            */
+                        }
+                        .frame(width:  innerW / 3, alignment: .leading)
+                        VStack(alignment: .trailing, spacing: 2.5) {
+                            Text("Wost")
+                                .fontWeight(.bold)
+                                .font(.system(size: 13))
+                                //.frame(width: (geo.size.width/4), alignment: .leading)
+                            LabelElement(label: self.controller.worst.getAsReadable())
+                            /*
+                            Text("\(self.controller.worst.getAsReadable())" as String)
+                                .font(.system(size: 13))
+                                .frame(width: (geo.size.width/4), alignment: .trailing)
+                                .foregroundColor(Color.init("red"))
+                            */
+                        }
+                        .frame(width:  innerW / 3, alignment: .leading)
+                        VStack(alignment: .trailing, spacing: 2.5) {
+                            Text("Average")
+                                .fontWeight(.bold)
+                                .font(.system(size: 13))
+                                //.frame(width: (geo.size.width/4), alignment: .leading)
+                            LabelElement(label: String(format: "%.2f", self.controller.average))
+                            /*
+                            Text("\(String(format: "%.2f", self.controller.average))s")
+                                .font(.system(size: 13))
+                                .frame(width: (geo.size.width/4), alignment: .trailing)
+                                .foregroundColor(Color.init("yellow"))
+                            */
+                        }
+                        .frame(width: innerW / 3, alignment: .leading)
                     }
-                    .frame(width: geo.size.width - 50, alignment: .center)
-                    HStack {
-                        Text("Wost:")
-                            .fontWeight(.bold)
-                            .font(.system(size: 13))
-                            .frame(width: (geo.size.width/4), alignment: .leading)
-                        Text("\(self.controller.worst.getAsReadable())" as String)
-                            .font(.system(size: 13))
-                            .frame(width: (geo.size.width/4), alignment: .trailing)
-                            .foregroundColor(Color.init("red"))
-                    }
-                    .frame(width: geo.size.width - 50, alignment: .center)
-                    HStack {
-                        Text("Average:")
-                            .fontWeight(.bold)
-                            .font(.system(size: 13))
-                            .frame(width: (geo.size.width/4), alignment: .leading)
-                        Text("\(String(format: "%.2f", self.controller.average))s")
-                            .font(.system(size: 13))
-                            .frame(width: (geo.size.width/4), alignment: .trailing)
-                            .foregroundColor(Color.init("yellow"))
-                    }
-                    .frame(width: geo.size.width - 50, alignment: .center)
+                    .opacity(0.8)
+                    .padding(10)
+                    .offset(x: 15)
+                    //.frame(width:innerW)
                 }
-                .offset(y: 7)
-                .opacity(0.8)
             }
                 
         }
             
     }
+}
+
+struct LabelElement: View {
+    
+    var label: String
+    
+    var body: some View {
+        ZStack {
+            Color.init("mint_cream")
+                .cornerRadius(3)
+                .opacity(0.2)
+            
+            Text(label)
+                .fontWeight(.bold)
+                .font(.system(size: 12))
+        }
+        .frame(width: 65, height: 15, alignment: .center)
+    }
+    
 }
 
 struct BestOfThreeView_Previews: PreviewProvider {

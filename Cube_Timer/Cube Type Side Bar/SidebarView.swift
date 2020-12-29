@@ -60,8 +60,9 @@ struct SidebarView: View {
                      */
                     HStack {
                         Text("CUBES")
-                            .fontWeight(.black)
-                            .font(.system(size: 22))
+                            .font(Font.custom("Dosis-ExtraBold", size: 22))
+                           // .fontWeight(.black)
+                           // .font(.system(size: 22))
                         Spacer()
                         HStack {
                             

@@ -57,10 +57,13 @@ struct SingleCubeTypeView: View/*, Identifiable */{
                     .opacity(0.8)
                 VStack(alignment: .leading) {
                     Text(controller.rawName)
-                        .font(.system(size: 14))
-                        .fontWeight(.bold)
+                        .font(Font.custom("Play-Bold", size: 14))
+                        .tracking(3)
+                        //.font(.system(size: 14))
+                       // .fontWeight(.bold)
                     Text(controller.desc)
-                        .font(.system(size: 9))
+                        .font(Font.custom("Play-Regular", size: 9))
+                        //.font(.system(size: 9))
                 }
                 .offset(x: 8)
                 //
