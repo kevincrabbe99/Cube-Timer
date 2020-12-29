@@ -65,15 +65,30 @@ struct SolveElementView: View {
     */
     
     
-    @EnvironmentObject var controller: SolveElementController
+    var controller: SolveElementController
+    @EnvironmentObject var allSolvesController: AllSolvesController
     var solveItem: SolveItem?
     
-    init(/*controller: SolveElementController*/) {
+    init(controller: SolveElementController) {
        // self.controller = controller
+        self.controller = controller
     }
     
+    /*
     init(solveItem: SolveItem) {
         self.solveItem = solveItem
+    }
+    */
+    
+    /*
+     * check allSolvesController.selected to see if this.controller.si is in the view
+     honestly this is just fucked
+     */
+    var isSelected: Bool {
+        if allSolvesController.selected.contains( self.controller ) {
+            return true
+        }
+        return false
     }
     
     
@@ -88,7 +103,7 @@ struct SolveElementView: View {
             }
         } label: {
             ZStack {
-                    if controller.selected {
+                    if isSelected {
                         Color.init("dark_black")
                             .cornerRadius(3)
                             .opacity(0.2)
@@ -121,7 +136,7 @@ struct SolveElementView_Previews: PreviewProvider {
         ZStack {
             Color.init("very_dark_black")
             
-            SolveElementView()
+            SolveElementView(controller: SolveElementController(si: SolveItem(), allSolvesController: AllSolvesController()))
         }
         .previewLayout(.fixed(width: 100, height: 100))
     }

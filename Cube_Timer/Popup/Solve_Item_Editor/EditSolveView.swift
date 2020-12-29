@@ -9,17 +9,28 @@ import SwiftUI
 
 struct EditSolveView: View {
     
-    var controller: EditSolveController
-    var parent: PopupController
+    @EnvironmentObject var controller: EditSolveController
+    @EnvironmentObject var parent: PopupController
+    @EnvironmentObject var allSolvesController: AllSolvesController
     
-    var solves: [SolveItem] = []
     
-    init(controller: EditSolveController, parent: PopupController, solves: [SolveItem], selection: Int? = 1) {
-        self.controller = controller
-        self.parent = parent
-        self.solves = solves
+    var solveControllers: [SolveElementController] = []
+    var solves: [SolveItem] {
+        var res: [SolveItem] = []
+        for sc in solveControllers {
+            res.append(sc.si)
+        }
+        return res
+    }
+    
+    init(/*controller: EditSolveController, parent: PopupController,*/ solves: [SolveElementController], selection: Int? = 1) {
+     //   self.controller = controller
+    //    self.parent = parent
+        self.solveControllers = solves
         print("numer of solves: ", solves.count)
     }
+    
+    
     
     /* this will be replaced by controller.cTypeHandler.types
     let configTypes: [String] = [
@@ -50,9 +61,13 @@ struct EditSolveView: View {
                  *  the view with all the selected solves
                  */
                 HStack {
-                    ForEach (solves) { s in
-                        SolveElementView(solveItem: s)
-                            .environmentObject(SolveElementController(si: s))
+                    ForEach (solveControllers) { s in
+                        if s.selected {
+                            SolveElementView(controller: s)
+                        }
+                       // SolveElementView(solveItem: s)
+                           // .environmentObject(SolveElementController(si: s, allSolvesController: allSolvesController))
+                           // .environmentObject(allSolvesController)
                         //Text(s.getTimeCapture()!.getInSolidForm())
                     }
                 }
@@ -118,7 +133,7 @@ struct EditSolveView_Previews: PreviewProvider {
         ZStack {
             Color.init("very_dark_black")
         
-            EditSolveView(controller: EditSolveController(), parent: PopupController(), solves: [])
+            EditSolveView(/*controller: EditSolveController(), parent: PopupController(),*/ solves: [])
             
         }
         .previewLayout(PreviewLayout.fixed(width: 350, height: 200))

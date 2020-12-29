@@ -16,6 +16,8 @@ class CTypeHandler: ObservableObject {
     var solveHandler: SolveHandler!
     var allSolvesController: AllSolvesController!
     
+    var cvc: ContentViewController!
+    
     @Published var typeControllers: [SingleCubeTypeViewController] // array with all saved cube types as keys and controllers as values
     @Published var size: Int = 0
     @Published var selected: CubeType! // empty placeholder
@@ -126,7 +128,7 @@ class CTypeHandler: ObservableObject {
     
     public func showEditPopupFor(id: UUID) {
         print("passed through CTypeHandler")
-        self.contentView.showCTPopupFor(id: id)
+        cvc.showCTPopupFor(id: id)
     }
     
     public func getDefaultSelection() -> CubeType? {

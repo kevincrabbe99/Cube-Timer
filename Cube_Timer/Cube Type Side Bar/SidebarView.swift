@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SidebarView: View {
     
+    @EnvironmentObject var cvc: ContentViewController
+    
     var contentView: ContentView
     var cTypeHandler: CTypeHandler
     
@@ -45,8 +47,8 @@ struct SidebarView: View {
                     .foregroundColor(Color.init("mint_cream"))
                 }
                 .contentShape(Rectangle())
-                .gesture(contentView.sbDrag)
-                .gesture(contentView.sbTab)
+                .gesture(cvc.sbDrag)
+                .gesture(cvc.sbTab)
                 .frame(width: 50, height: 200, alignment: .center)
                 .position(x: geo.size.width - 29, y: geo.size.height / 2)
                 
@@ -73,7 +75,7 @@ struct SidebarView: View {
                             
                             Button(action: { // listener for new cube type
                                 print("work")
-                                self.contentView.tappedAddCT()
+                                self.cvc.tappedAddCT()
                             }, label: {
                                 Image(systemName: "plus.square.fill")
                             })
@@ -101,7 +103,7 @@ struct SidebarView: View {
                                             // toggle edit mode
                                             self.editMode.toggle()
                                             // show popup for currently iterated t.ct.id
-                                            contentView.showCTPopupFor(id: t.ct.id!)
+                                            cvc.showCTPopupFor(id: t.ct.id!)
                                          }, label: {
                                              Image(systemName: "pencil.tip.crop.circle")
                                          })
@@ -134,15 +136,15 @@ struct SidebarView: View {
                      *  bottom bar
                      */
                     Button(action: {
-                        if contentView.onPage == .showAll {
-                            contentView.setPageTo(.Main)
+                        if cvc.onPage == .showAll {
+                            cvc.setPageTo(.Main)
                         } else {
-                            contentView.setPageTo(.showAll)
+                            cvc.setPageTo(.showAll)
                         }
                     }, label: {
                         ZStack {
                             
-                            if contentView.onPage == .showAll {
+                            if cvc.onPage == .showAll {
                                 
                                 HStack {
                                     Text("go back")

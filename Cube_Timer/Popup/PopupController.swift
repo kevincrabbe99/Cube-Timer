@@ -11,6 +11,8 @@ import SwiftUI
 
 class PopupController: ObservableObject {
     
+   var cvc: ContentViewController!
+    
     var contentView: ContentView!
     var cTypeHandler: CTypeHandler!
     
@@ -35,7 +37,7 @@ class PopupController: ObservableObject {
     }
     
     public func hidePopup() {
-        contentView.hidePopup()
+        cvc.hidePopup()
     }
     
 }

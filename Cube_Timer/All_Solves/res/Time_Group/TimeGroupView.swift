@@ -46,8 +46,8 @@ struct TimeGroupView: View {
                     LazyVGrid(columns: gridItemLayout, alignment: .trailing) {
                         ForEach(controller.solveElementControllers) { sec in
                             
-                            SolveElementView(/*controller: sec*/)
-                                .environmentObject(sec)
+                            SolveElementView(controller: sec)
+                                //.environmentObject(sec)
                            // SolveElementView(si: s, parentController: controller)
                                 //.border(Color.green)
                         }

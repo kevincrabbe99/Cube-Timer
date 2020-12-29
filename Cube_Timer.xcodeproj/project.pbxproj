@@ -61,6 +61,7 @@
 		7BFF31F4259874D10029EA19 /* StatLabelHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */; };
 		7BFF3203259986B80029EA19 /* EditSolveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF3202259986B80029EA19 /* EditSolveView.swift */; };
 		7BFF32082599870F0029EA19 /* EditSolveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF32072599870F0029EA19 /* EditSolveController.swift */; };
+		7BFF3210259AEEA40029EA19 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF320F259AEEA30029EA19 /* ContentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLabelHorizontal.swift; sourceTree = "<group>"; };
 		7BFF3202259986B80029EA19 /* EditSolveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSolveView.swift; sourceTree = "<group>"; };
 		7BFF32072599870F0029EA19 /* EditSolveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSolveController.swift; sourceTree = "<group>"; };
+		7BFF320F259AEEA30029EA19 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +282,7 @@
 			children = (
 				7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */,
 				7B984CF0253E02D900BC6402 /* ContentView.swift */,
+				7BFF320F259AEEA30029EA19 /* ContentViewController.swift */,
 				7BE885A62547665C00046D29 /* Controllers */,
 				7BE885A72547667200046D29 /* Main Views */,
 				7B55C60E25954A880076B913 /* All_Solves */,
@@ -583,6 +586,7 @@
 				7B984CFB253E02DC00BC6402 /* Cube_Timer.xcdatamodeld in Sources */,
 				7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */,
 				7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */,
+				7BFF3210259AEEA40029EA19 /* ContentViewController.swift in Sources */,
 				7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */,
 				7B984D5A253E72D700BC6402 /* SolveHandler.swift in Sources */,
 				7BBA7186258C763300FED3A2 /* CubeIcon.swift in Sources */,

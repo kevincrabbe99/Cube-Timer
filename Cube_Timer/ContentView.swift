@@ -16,7 +16,7 @@ enum Page: String {
 
 
 struct ContentView: View {
-    
+    /*
     
     @State var onPage: Page = .Main
     @State var sidebar: Bool = false
@@ -30,7 +30,7 @@ struct ContentView: View {
     @State var sidebarDraggin: Bool = false
     @State var sbBgOpacity: Double = 0
     @State var sbXPos: CGFloat = -1 * (UIScreen.main.bounds.width/6)+45 // initialize it to sidebarOutPos x value
-    
+    */
     @ObservedObject var cTypeHandler: CTypeHandler = CTypeHandler()
     @ObservedObject var timer: TimerController = TimerController()
     @ObservedObject var solveHandler: SolveHandler = SolveHandler()
@@ -43,7 +43,7 @@ struct ContentView: View {
    // @ObservedObject var solvesGridController: SolvesGridController = SolvesGridController()
     @ObservedObject var editSolveController: EditSolveController = EditSolveController()
     
-    
+    /*
     // vars for popup
     @State var popupShowing: Bool = false
     
@@ -51,7 +51,9 @@ struct ContentView: View {
     
     
    // @State var shaderOpacity: Double = 0
+    */
     
+    @StateObject var cvc: ContentViewController = ContentViewController()
     
     /*
      *  This is thie first init, we link all the controller and handlers here
@@ -103,6 +105,8 @@ struct ContentView: View {
         self.editSolveController.solvesData = solveHandler.solvesByTimeFrame
         self.editSolveController.allSolvesController = allSolvesController
         
+        
+        
         // solves grid stuff
       //  self.solvesGridController.solvesData = solveHandler.solvesByTimeFrame
         
@@ -111,12 +115,13 @@ struct ContentView: View {
         
     }
     
-    
+    /*
     /*
      *  this is triggered when user wants to edit solves from AllSolvesView
+            * pass SolveElementController so we can use that to unselect within th epopup
      */
-    public func tappedEditSolves(solves: [SolveItem]) {
-        showPopup(v: AnyView(EditSolveView(controller: editSolveController, parent: popupController, solves: solves, selection: 1)))
+    public func tappedEditSolves(solves: [SolveElementController]) {
+        showPopup(v: AnyView(EditSolveView(/*controller: editSolveController, parent: popupController,*/ solves: solves, selection: 1)))
     }
     
     /*
@@ -246,7 +251,7 @@ struct ContentView: View {
         self.onPage = p
     }
 
-    
+    */
     
     var body: some View {
         
@@ -255,7 +260,7 @@ struct ContentView: View {
                 
              
                 
-                switch onPage {
+                switch cvc.onPage {
                 case .Main:
                     MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
                         .zIndex(0)
@@ -273,19 +278,19 @@ struct ContentView: View {
             
                 
                 Color.black
-                    .opacity(sbBgOpacity)
+                    .opacity(cvc.sbBgOpacity)
                     .animation(.spring())
                     .frame(width: geo.size.width, height: geo.size.height)
                     .position(x: geo.size.width/2, y: geo.size.height/2)
                     .zIndex(1)
                     .onTapGesture { // close sidebar when tapped
-                        self.pushOutSidebar()
+                        cvc.pushOutSidebar()
                     }
                 
                 SidebarView(contentView: self, cTypeHandler: cTypeHandler)
                     .frame(width: geo.size.width / 3, height: geo.size.height)
                     //.position(x: geo.size.width / 6, y: geo.size.height/2)
-                    .position(x: sbXPos, y: geo.size.height/2)
+                    .position(x: cvc.sbXPos, y: geo.size.height/2)
                     .animation(.spring())
                     .zIndex(3)
                 
@@ -293,16 +298,16 @@ struct ContentView: View {
                 /*
                  *  popup stuff
                  */
-                if popupShowing {
+                if cvc.popupShowing {
                     Color.black
                         .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.2)))
                         .zIndex(6)
                         .opacity(0.5)
                         .onTapGesture {
-                            self.hidePopup()
+                            cvc.hidePopup()
                         }
                     
-                    PopupView(contentView: self, ctEditController: ctEditController, popupController: popupController)
+                    PopupView(contentView: self/*, ctEditController: ctEditController, popupController: popupController*/)
                         .transition(AnyTransition.move(edge: .top))
                         .animation(.spring())
                         // .transition(AnyTransition.opacity.combined(with: .slide).animation(.spring()))
@@ -314,8 +319,29 @@ struct ContentView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear() {
+            // contentViewController stuff
+            
+            // objects that need to reference the cvc
+            self.cTypeHandler.cvc = cvc
+            self.popupController.cvc = cvc
+            
+            // objects which cvc needs to reference 
+            self.cvc.ctEditController = ctEditController
+            self.cvc.popupController = popupController
+            self.cvc.cTypeHandler = cTypeHandler
+            self.cvc.timer = timer
+            self.cvc.allSolvesController = allSolvesController
+            
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
         }
+        .environmentObject(solveHandler)
+        .environmentObject(cTypeHandler)
+        .environmentObject(allSolvesController)
+        .environmentObject(popupController)
+        .environmentObject(editSolveController)
+        .environmentObject(ctEditController)
+        .environmentObject(cvc)
+        
     
     }
 

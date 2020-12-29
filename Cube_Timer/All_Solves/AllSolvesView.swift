@@ -14,6 +14,8 @@ struct AllSolvesView: View {
     var solvesData: SolvesFromTimeframe
  `` */
     
+    @EnvironmentObject var cvc: ContentViewController
+    
     var parent: ContentView
     var controller: AllSolvesController
     
@@ -24,7 +26,7 @@ struct AllSolvesView: View {
  
     
     func gotoPage(_ p: Page) {
-        controller.contentView.setPageTo(p)
+        cvc.setPageTo(p)
     }
     
     var body: some View {
@@ -106,13 +108,30 @@ struct AllSolvesView: View {
                             } else {
                                 
                                 Button(action: {
-                                    parent.tappedEditSolves(solves: controller.selected)
+                                    cvc.tappedEditSolves(solves: controller.selected)
                                 }, label: {
-                                    HStack {
-                                        Text("EDIT")
-                                        Text(String(controller.selected.count))
-                                        Text("SOLVES")
+                                    ZStack {
+                                        Color.init("mint_cream")
+                                            .opacity(0.2)
+                                            .cornerRadius(5)
+                                        
+                                        HStack(alignment: .center, spacing: 5) {
+                                            Text("EDIT")
+                                                .fontWeight(.bold)
+                                            ZStack {
+                                                Circle()
+                                                    .fill(Color.init("very_dark_black"))
+                                                    .padding(5)
+                                                Text(String(controller.selected.count))
+                                                    .font(.system(size: 10))
+                                            }
+                                            Text("SOLVES")
+                                                .fontWeight(.bold)
+                                        }
+                                        .foregroundColor(.white)
+                                        .frame(width: 200)
                                     }
+                                    .padding(.leading, 40)
                                 })
                                 
                             } // end if

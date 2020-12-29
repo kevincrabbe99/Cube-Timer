@@ -10,8 +10,9 @@ import SwiftUI
 struct PopupView: View {
     
     var contentView: ContentView
-    var ctEditController: CTEditController // used to move the fucking box
-    var popupController: PopupController
+    @EnvironmentObject var ctEditController: CTEditController // used to move the fucking box
+    @EnvironmentObject var popupController: PopupController
+    @EnvironmentObject var cvc: ContentViewController
     
     /*
      * this got moved to CTEditController.swift (fuck me)
@@ -31,7 +32,7 @@ struct PopupView: View {
     
     public func hide() {
         popupController.unfocusTextField()
-        contentView.hidePopup()
+        cvc.hidePopup()
     }
     
     var body: some View {
@@ -62,7 +63,7 @@ struct PopupView: View {
                         .position(x: popupWidth - 25, y: 20)
                         .zIndex(9)
                    
-                    
+            //     need to unselect all solveelemts on popup go away
                     /*
                      * this area will implement the choosing of what view to display for the popup
                      */
@@ -88,7 +89,7 @@ struct PopupView_Previews: PreviewProvider {
             Color.black
                 .opacity(0.8)
             
-            PopupView(contentView: ContentView(), ctEditController: CTEditController(), popupController: PopupController())
+            PopupView(contentView: ContentView())
             
             
         }.previewLayout(PreviewLayout.fixed(width: 568, height: 320))

@@ -47,7 +47,7 @@ class AllSolvesController: ObservableObject {
     
     // selecting mode stuff
     @Published var selecting: Bool = false
-    @Published var selected: [SolveItem] = []
+    @Published var selected: [SolveElementController] = []
   
     
     init() {
@@ -100,17 +100,17 @@ class AllSolvesController: ObservableObject {
      *  called when a solve is tapped on
      *      this gets called from SolveElementView -> TimeGroupController -> AllSolvesController
      */
-    public func tap(_ si: SolveItem) {
-        print("tapped for selection: ", si.timeMS)
+    public func tap(_ sec: SolveElementController) {
+        print("tapped for selection: ", sec.si.timeMS)
         
         self.selecting = true // set to true just incase
         
-        self.selected.append(si)
+        self.selected.append(sec)
     }
     
-    public func uptap(_ si: SolveItem) {
+    public func uptap(_ sec: SolveElementController) {
         
-        self.selected = selected.filter { $0 != si }
+        self.selected = selected.filter { $0 != sec }
         
         if selected.count == 0 {
             self.selecting = false

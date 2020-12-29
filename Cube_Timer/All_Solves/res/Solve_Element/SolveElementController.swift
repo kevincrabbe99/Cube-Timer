@@ -8,15 +8,23 @@
 import Foundation
 import SwiftUI
 
-class SolveElementController: ObservableObject, Identifiable {
+class SolveElementController: ObservableObject, Identifiable, Equatable {
+    static func == (lhs: SolveElementController, rhs: SolveElementController) -> Bool {
+        if lhs.id == rhs.id {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
     var id: String
     var si: SolveItem
     
-    var view: SolveElementView?
+    //var view: SolveElementView?
     
     // this is so we can check if this.si is in the selected array
-    var allSolvesController: AllSolvesController?
+    var allSolvesController: AllSolvesController
     
     @Published var time: TimeCapture = TimeCapture(0)
     @Published var date: Date = Date()
@@ -29,23 +37,16 @@ class SolveElementController: ObservableObject, Identifiable {
         self.allSolvesController = allSolvesController
     }
     
-    init(si: SolveItem) {
-        self.si = si
-        self.id = si.id
-    }
-    
     public func tapped() {
-        
-        if allSolvesController == nil  { return }
         
         print("tapped!")
         
         if !selected { // if not selected
             self.selected = true
-            allSolvesController!.tap(si)
+            allSolvesController.tap(self)
         } else { // if selected
             self.selected = false
-            allSolvesController!.uptap(si)
+            allSolvesController.uptap(self)
         }
         
     }
@@ -78,11 +79,12 @@ class SolveElementController: ObservableObject, Identifiable {
         self.view = nSCTV
     }
      */
-    
+    /*
     private func hasView() -> Bool {
         if self.view == nil {
             return false
         }
         return true
     }
+    */
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     
+    @EnvironmentObject var cvc: ContentViewController
+    
     var parent: ContentView
     @ObservedObject var timer: TimerController
     @ObservedObject var solveHandler: SolveHandler
@@ -23,7 +25,7 @@ struct MainView: View {
     }
     
     func gotoPage(_ p: Page) {
-        parent.setPageTo(p)
+        cvc.setPageTo(p)
     }
     
     var body: some View {
