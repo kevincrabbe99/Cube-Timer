@@ -39,7 +39,15 @@ struct AllSolvesView: View {
                 Rectangle()
                     .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
                     .opacity(0.6)
-                
+                    .gesture ( // gesture for transitioning to allSolvesView
+                        DragGesture()
+                            .onChanged { value in
+                                cvc.dragChanged(value)
+                            }
+                            .onEnded { value in
+                                cvc.dragEnded(value)
+                            }
+                    )
                 
                 /*
                  *  outer stack contains 2 cells left and right
@@ -216,15 +224,7 @@ struct AllSolvesView: View {
                 } // end main hStack
             
             } // end main ZStack, no more color
-            .gesture ( // gesture for transitioning to allSolvesView
-                DragGesture()
-                    .onChanged { value in
-                        cvc.dragChanged(value)
-                    }
-                    .onEnded { value in
-                        cvc.dragEnded(value)
-                    }
-            )
+            
             
         }
         

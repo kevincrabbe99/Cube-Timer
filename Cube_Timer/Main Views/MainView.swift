@@ -10,9 +10,11 @@ import SwiftUI
 struct MainView: View {
     
     @EnvironmentObject var cvc: ContentViewController
+    @EnvironmentObject var cTypeHandler: CTypeHandler
+    @EnvironmentObject var timer: TimerController
     
     var parent: ContentView
-    @ObservedObject var timer: TimerController
+    //@ObservedObject var timer: TimerController
     @ObservedObject var solveHandler: SolveHandler
     @ObservedObject var bo3Controller: BO3Controller
 
@@ -33,19 +35,42 @@ struct MainView: View {
             Color.init("very_dark_black")
             ZStack {
                 
+               
+                
                 ButtonsView(timer: timer)
                 
-                if !(timer.timerGoing || timer.oneActivated) { // only show when there is no timer active
-                TimeframeBar(sh: solveHandler)
-                    .position(x: geo.size.width/2, y: geo.size.height-50)
-                    //.opacity(0.9)
-                    .opacity(peripheralOpacity + 0.3)
-                    .animation(.easeIn)
-                    .transition(.move(edge: .bottom))
-                }
+                
+                VStack(alignment:.trailing) {
+                    Text(cTypeHandler.selected.name)
+                        .font(.system(size: 30))
+                        .fontWeight(.black)
+                        .tracking(5)
+                        .offset(x: 5)
+                    Text(cTypeHandler.selected.descrip)
+                        .font(.system(size: 12))
+                        .fontWeight(.bold)
+                        .opacity(0.75)
+                }.frame(width: 150, alignment: .trailing)
+                .position(x: geo.size.width - 120, y: 30)
+                .padding(.top, 20)
+                .padding(.bottom, 30)
+                .opacity(cvc.mainViewOpacity - 0.3)
+                
+                
+                if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) { // only show when there is no timer active
+                 
+                    
+                    TimeframeBar(sh: solveHandler)
+                        .position(x: geo.size.width/2, y: geo.size.height-50)
+                        //.opacity(0.9)
+                        .opacity(peripheralOpacity + 0.3)
+                        .animation(.easeIn)
+                        .transition(.move(edge: .bottom))
+                    }
 
-                TimerView(p: self, t: timer, s: solveHandler, bo3c: bo3Controller /*solveHandler: solveHandler*/)
-                    .offset(y:-30)
+                    TimerView(p: self, t: timer, s: solveHandler, bo3c: bo3Controller /*solveHandler: solveHandler*/)
+                        .offset(y:-30)
+                
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
         }
@@ -55,6 +80,8 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(parent: ContentView(), timer: TimerController(), solveHandler: SolveHandler(), bo3Controller: BO3Controller())
+        MainView(parent: ContentView(), solveHandler: SolveHandler(), bo3Controller: BO3Controller())
+            .environmentObject(CTypeHandler())
+            .previewLayout(.fixed(width: 2436 / 3.0, height: 1125 / 3.0))
     }
 }

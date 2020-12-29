@@ -134,7 +134,7 @@ struct ContentView: View {
                         .scaleEffect(cvc.allSolvesViewScale)
                         
                     
-                    MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
+                    MainView(parent: self, solveHandler: solveHandler, bo3Controller: bo3Controller)
                         .opacity(cvc.mainViewOpacity)
                        
                     
@@ -223,6 +223,7 @@ struct ContentView: View {
         .environmentObject(editSolveController)
         .environmentObject(ctEditController)
         .environmentObject(cvc)
+        .environmentObject(timer)
         
     
     }

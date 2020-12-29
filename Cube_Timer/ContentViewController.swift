@@ -58,7 +58,7 @@ class ContentViewController: ObservableObject {
             let transY: CGFloat = v.translation.height
             
             // leave if we are draggin up
-            if transY < 0 {
+            if transY < 0 || timer.bothActivated || timer.timerGoing {
                 return
             }
             
@@ -118,7 +118,7 @@ class ContentViewController: ObservableObject {
         if onPage == .Main {
             
             // leave if we are draggin up
-            if v.translation.height < 0 {
+            if v.translation.height < 0 ||  timer.bothActivated || timer.timerGoing  {
                 return
             }
             
@@ -141,7 +141,7 @@ class ContentViewController: ObservableObject {
             setPageTo(.showAll)
         } else {
             // leave if we are draggin down
-            if v.translation.height > 0 {
+            if v.translation.height > 0 || timer.bothActivated || timer.timerGoing  {
                 
                 /// go to all solves view just incase
                 setStateForAllSolves()

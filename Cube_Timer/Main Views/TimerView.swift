@@ -231,14 +231,14 @@ struct TimerView: View {
                                     .fontWeight(.bold)
                                     .opacity(0.6)
                                     .font(.system(size: 13))
-                                    
+                                    /*
                                     .gesture(
                                         TapGesture()
                                             .onEnded { _ in
                                                 print("tapped")
                                                 self.solveHandler.delete(s)
                                             }
-                                    )
+                                    )*/
                                     
                             }
                         } // end last 3 bar [HStack]
@@ -279,7 +279,7 @@ struct StatsPreviewView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
         Color.black
-            TimerView(p: MainView(parent: ContentView(), timer: TimerController(), solveHandler: SolveHandler(), bo3Controller: BO3Controller()), t: TimerController(), s: SolveHandler(), bo3c: BO3Controller())
+            TimerView(p: MainView(parent: ContentView(),solveHandler: SolveHandler(), bo3Controller: BO3Controller()), t: TimerController(), s: SolveHandler(), bo3c: BO3Controller())
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
         .previewLayout(.fixed(width: 250, height: 150))

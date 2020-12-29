@@ -18,6 +18,8 @@ struct CubeIcon: View {
     var widthNoPadding: CGFloat = 30
     var cr: CGFloat = 2
     
+    var goodForIcon: Bool = false
+    
     init(_ d1: Int, _ d2: Int, _ d3: Int, width: CGFloat) {
         self.d1 = d1
         self.d2 = d2
@@ -29,6 +31,10 @@ struct CubeIcon: View {
         //self.blockWPadding = blockWidth + padding
         self.w = width
     
+        if (d1 == d2) && (d2 == d3) && (d1 >= 2) && (d1 < 7) {
+            self.goodForIcon = true
+        }
+        
     }
     
     
@@ -36,13 +42,30 @@ struct CubeIcon: View {
         
         ZStack {
             
-            ForEach( 0..<d1, id: \.self ){ i in
-                ForEach( 0..<d2, id: \.self ) { k in
-                    RoundedRectangle(cornerRadius: cr)
-                        .frame(width: blockWidth, height: blockWidth)
-                        .offset(x: CGFloat(CGFloat(i)*widthNoPadding))
-                        .offset(y: CGFloat(CGFloat(k)*widthNoPadding))
+            if goodForIcon {
+                ForEach( 0..<d1, id: \.self ){ i in
+                    ForEach( 0..<d2, id: \.self ) { k in
+                        RoundedRectangle(cornerRadius: cr)
+                            .frame(width: blockWidth, height: blockWidth)
+                            .offset(x: CGFloat(CGFloat(i)*widthNoPadding))
+                            .offset(y: CGFloat(CGFloat(k)*widthNoPadding))
+                    }
                 }
+            } else {
+                
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(Color.clear)
+                    .border(Color.init("mint_cream"), width: 1)
+                    .cornerRadius(2)
+                    .clipped()
+                    .frame(width: w, height: w)
+                
+                Text(String(d1))
+                    .foregroundColor(.init("mint_cream"))
+                    .font(.system(size:8))
+                    .fontWeight(.black)
+                
+                
             }
            // .offset(x: widthNoPadding * CGFloat((-1 * (d1-3))), y: widthNoPadding * CGFloat((-1 * (d1-3)))) // idk what (-1*(d1-3) really does, but it seems to center it
             
@@ -56,8 +79,9 @@ struct CubeIcon: View {
 struct CubeIcon_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
+            Color.init("very_dark_black")
             
-            CubeIcon(6,6,6, width: 50)
+            CubeIcon(9,2,5, width: 50)
             
         }
             .previewLayout(.fixed(width: 100, height: 100))
