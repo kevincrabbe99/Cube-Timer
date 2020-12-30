@@ -162,7 +162,7 @@ struct AllSolvesView: View {
                                 .foregroundColor(.init("very_dark_black"))
                                 .innerShadow(color: Color.black.opacity(0.15), radius: 0.05)
                                 .mask(RoundedRectangle(cornerRadius: 10))
-                                .opacity(0.7)
+                                .opacity(0.3)
                             
                             
                             ScrollView {

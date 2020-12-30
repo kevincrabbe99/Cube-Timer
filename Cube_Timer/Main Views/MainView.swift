@@ -57,6 +57,7 @@ struct MainView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 30)
                 .opacity(cvc.mainViewOpacity - 0.3)
+                .foregroundColor(.white)
                 
                 
                 if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) { // only show when there is no timer active
