@@ -75,7 +75,7 @@ struct TimeframeBar: View {
                         .frame(width: 35, height: 100)
                     }
                     
-                    if solveHandler.getApplicableTimeframes().contains(.Week) { // guard to check if solves in timeframe exist
+                    if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.Week) { // guard to check if solves in timeframe exist
                         Button(action: {
                             lightTap.impactOccurred()
                             self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Week)
@@ -90,7 +90,7 @@ struct TimeframeBar: View {
                         }
                     }
                     
-                    if solveHandler.getApplicableTimeframes().contains(.OneMonth) { // guard to check if solves in timeframe exist
+                    if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.OneMonth) { // guard to check if solves in timeframe exist
                         Button(action: {
                             lightTap.impactOccurred()
                             self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.OneMonth)
@@ -105,7 +105,7 @@ struct TimeframeBar: View {
                         }
                     }
                     
-                    if solveHandler.getApplicableTimeframes().contains(.ThreeMonths) { // guard to check if solves in timeframe exist
+                    if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.ThreeMonths) { // guard to check if solves in timeframe exist
                         Button(action: {
                             lightTap.impactOccurred()
                             self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.ThreeMonths)
@@ -120,7 +120,7 @@ struct TimeframeBar: View {
                         }
                     }
                     
-                    if solveHandler.getApplicableTimeframes().contains(.Year) { // guard to check if solves in timeframe exist
+                    if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.Year) { // guard to check if solves in timeframe exist
                         Button(action: {
                             lightTap.impactOccurred()
                             self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Year)
@@ -137,7 +137,7 @@ struct TimeframeBar: View {
                     
                     Button(action: {
                         lightTap.impactOccurred()
-                        self.solveHandler.currentTimeframeButtonPos = Int(CGFloat((solveHandler.getApplicableTimeframes().count - 1))) // the count is the total of solveHandler.getApplicabletimeFrames().count + ( -1 )
+                        self.solveHandler.currentTimeframeButtonPos = Int(CGFloat((solveHandler.solvesByTimeFrame.getApplicableTimeframes().count - 1))) // the count is the total of solveHandler.getApplicabletimeFrames().count + ( -1 )
                         solveHandler.updateSolves(to: .All)
                     }) {
                         ZStack {
@@ -151,7 +151,7 @@ struct TimeframeBar: View {
                 }
                 .frame(height: 25) // needed to set the height of the dark bar
             }.position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-            .frame(width: 57 * CGFloat(solveHandler.getApplicableTimeframes().count)) // this is wht width of the dark bar: NEEDS UPDATING: to conform to needed timeframes
+            .frame(width: 57 * CGFloat(solveHandler.solvesByTimeFrame.getApplicableTimeframes().count)) // this is wht width of the dark bar: NEEDS UPDATING: to conform to needed timeframes
         }
         .frame(width: 390, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
     }
@@ -164,7 +164,7 @@ struct TimeframeBar: View {
      */
     private func getIndexOfTfButton(_ tf: Timeframe) -> Int {
         
-        let applicableTimeframes = solveHandler.getApplicableTimeframes()
+        let applicableTimeframes = solveHandler.solvesByTimeFrame.getApplicableTimeframes()
         
         if !applicableTimeframes.contains(tf) { // return 0 if the tf DNE
             return 0

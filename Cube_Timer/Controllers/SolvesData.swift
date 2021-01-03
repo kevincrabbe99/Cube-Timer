@@ -72,6 +72,69 @@ class SolvesFromTimeframe: ObservableObject {
     }
     
     /*
+     *  Returns an array of the timeframs which are needed for all the solves
+     */
+    func getApplicableTimeframes() -> [Timeframe] {
+        var res: [Timeframe] = [.LastThree, .Today, .All] // the array to be returned
+        let now = Date()
+        
+        // only check solves from the current cubeType
+        let sGroup = getSolvesFrom(ct: cTypeHandler!.selected)
+        
+        // needed for test .Week calculation
+        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
+        
+        
+        // test .Week
+        let weekAgo: Date = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        let rangeW = weekAgo...dayAgo
+        for s in sGroup {
+            if rangeW.contains(s.timestamp) {
+                res.append(.Week)
+                break
+            }
+        }
+        
+        // test .OneMonth
+        let monthAgo: Date = Calendar.current.date(byAdding: .month, value: -1, to: now)!
+        let rangeM = monthAgo...weekAgo
+        for s in sGroup {
+            if rangeM.contains(s.timestamp) {
+                res.append(.OneMonth)
+                break
+            }
+        }
+        
+        // test .ThreeMonths
+        let threeMonthAgo: Date = Calendar.current.date(byAdding: .month, value: -3, to: now)!
+        let range3M = threeMonthAgo...monthAgo
+        for s in sGroup {
+            if range3M.contains(s.timestamp) {
+                res.append(.ThreeMonths)
+                break
+            }
+        }
+        
+        // test .Year
+        let yearAgo: Date = Calendar.current.date(byAdding: .year, value: -1, to: now)!
+        let rangeY = yearAgo...threeMonthAgo
+        for s in sGroup {
+            if rangeY.contains(s.timestamp) {
+                res.append(.Year)
+                break
+            }
+        }
+        
+        // delete the last one added so last and all are not redundant
+        // ONLY IF: we have more than 3 and less than 7 buttons active
+        if res.count > 3 && res.count < 7 { // if we should delete one
+            res.remove(at: res.count - 1) // delete the second to last button
+        }
+        
+        return res
+    }
+    
+    /*
      *  Returns an array of the solves from the requested timeframe
      *  Called by self.updateTimeFrame
      
