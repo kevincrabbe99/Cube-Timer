@@ -208,22 +208,16 @@ struct TimerView: View {
                     }, label: {
                         
                         if !(solveHandler.currentTimeframe == .LastThree && solveHandler.solves.count < 3)  {
-                            ZStack {
-                                Color(.init("very_dark_black"))
-                                    .cornerRadius(5)
-                                    .animation(.easeInOut(duration: 0.15))
-                                    .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
-                                    
-                                    .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
+                            if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) {
+                                ZStack {
+                                    Color(.init("very_dark_black"))
+                                        .cornerRadius(5)
+                                        .animation(.easeInOut(duration: 0.15))
+                                        .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
+                                        
+                                        .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
 
-                                    /*
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color.white.opacity(0.6),lineWidth: 1)
-                                            .animation(.easeInOut(duration: 0.15))
-                                            .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
-                                    )
-                                    */
+                                }
                             }
                         } else {
                             ZStack {
