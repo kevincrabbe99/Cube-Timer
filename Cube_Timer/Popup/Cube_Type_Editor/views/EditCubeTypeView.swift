@@ -207,7 +207,7 @@ struct EditCubeTypeView: View {
                      updateButton(w: w)
                      */
                     Button(action: {
-                        cTypeHandler.edit(setCT!, d1: d1, d2: d2, d3: d3, desc: description)
+                        cTypeHandler.edit(setCT!, d1: d1+2, d2: d2+2, d3: d3+2, desc: description)
                         parent.hidePopup()
                     }, label: {
                         

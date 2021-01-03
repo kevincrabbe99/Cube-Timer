@@ -11,14 +11,14 @@ import SwiftUI
 
 struct SingleCubeTypeView: View/*, Identifiable */{
     
-    var ct: CubeType
+   // var ct: CubeType
     @ObservedObject private var controller: SingleCubeTypeViewController
-    private var ctHandler: CTypeHandler
+   // private var ctHandler: CTypeHandler
     
-    init(ct: CubeType, controller: SingleCubeTypeViewController, ctHandler: CTypeHandler) {
-        self.ct = ct
+    init(/*ct: CubeType,*/ controller: SingleCubeTypeViewController/*, ctHandler: CTypeHandler*/) {
+     //   self.ct = ct
         self.controller = controller
-        self.ctHandler = ctHandler
+   //     self.ctHandler = ctHandler
     }
     
     /*
@@ -117,7 +117,7 @@ struct SingleCubeTypeView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.init("black_chocolate")
-            SingleCubeTypeView(ct: CubeType(), controller: SingleCubeTypeViewController(ct: CubeType(), ctHandler: CTypeHandler()), ctHandler: CTypeHandler())
+            SingleCubeTypeView(/*ct: CubeType(),*/ controller: SingleCubeTypeViewController(ct: CubeType(), ctHandler: CTypeHandler()))
        
         }
     }

@@ -238,7 +238,7 @@ class CTypeHandler: ObservableObject {
         
         // create controller reference
         let newCTController = SingleCubeTypeViewController(ct: newCT, ctHandler: self)
-        newCTController.initView()
+        //newCTController.initView()
         self.typeControllers.append(newCTController)
         
         self.size += 1
@@ -265,6 +265,11 @@ class CTypeHandler: ObservableObject {
         ct.dim2 = d2
         ct.setValue(d3, forKey: "d3")
         ct.dim3 = d3
+        
+        let rawName: String = String(d1)+"x"+String(d2)+"x"+String(d3)
+        ct.setValue(rawName, forKey: "rawName")
+        ct.rawName = rawName
+        
         ct.setValue(desc, forKey: "desc")
         ct.desc = desc
         ct.setValue(Date(), forKey: "lastModified")
@@ -274,6 +279,10 @@ class CTypeHandler: ObservableObject {
             print("Cube Type Saved!")
         } catch {
             print("SAVE ERROR: saving a new CubeType, CTypeController.swift -> edit")
+        }
+        
+        for tc in typeControllers {
+            tc.updateFromCTObj()
         }
     }
     
@@ -291,7 +300,7 @@ class CTypeHandler: ObservableObject {
         
         // if not then create the controller
         let newCTController = SingleCubeTypeViewController(ct: ct, ctHandler: self)
-        newCTController.initView()
+        //newCTController.initView()
         
         // add the controller to the array
         self.typeControllers.append(newCTController)

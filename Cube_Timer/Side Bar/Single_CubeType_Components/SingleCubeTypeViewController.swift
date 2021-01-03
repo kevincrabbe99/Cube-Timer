@@ -32,13 +32,13 @@ class SingleCubeTypeViewController: ObservableObject, Identifiable {
         self.ct = ct
         self.ctHandler = ctHandler
         
+        self.updateFromCTObj()
         // generate the view
             // wait we fucking cant
     }
     
     /*
      *  returns the view attribute, if it doesnt exist then we create one
-     */
     public func getView() -> SingleCubeTypeView {
         if hasView() {
             return view!
@@ -47,16 +47,17 @@ class SingleCubeTypeViewController: ObservableObject, Identifiable {
             return self.view!
         }
     }
+     */
     
     /*
      * this is called upon creation to create the View object
             why? because fuck structs and we can't initiate anything with self
-     */
     public func initView() {
         let nSCTV: SingleCubeTypeView = SingleCubeTypeView(ct: ct, controller: self, ctHandler: ctHandler)
         self.updateFromCTObj()
         self.view = nSCTV
     }
+     */
     /*
      *  grabs the values from ctHandler and updates local attributes
      */

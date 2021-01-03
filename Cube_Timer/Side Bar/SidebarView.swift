@@ -98,8 +98,8 @@ struct SidebarView: View {
                             ForEach(/*cTypeHandler.views*/cTypeHandler.typeControllers) { t in
                                 
                                 HStack {
-                                    t.view
-                                    
+                                   // t.view
+                                    SingleCubeTypeView(controller: t)
                                     /*
                                      *  the edit button
                                      */
