@@ -21,7 +21,7 @@ struct EditSolvesBarView: View {
                 /*
                  *  the option buttons
                  */
-                HStack(spacing: 30) {
+                HStack(spacing: 20) {
                     
                     Button(action: {
                         cvc.tappedDeleteSolves()
@@ -44,7 +44,19 @@ struct EditSolvesBarView: View {
                     })
                     .frame(width: 30, height: 80)
                     .zIndex(9)
-                }
+                    
+                    Button(action: {
+                        allSolvesController.unselectAll()
+                    }, label: {
+                        ZStack {
+                            Color.clear
+                            Image(systemName: "clear.fill")
+                        }
+                    })
+                    .frame(width: 30, height: 80)
+                    .zIndex(9)
+                    
+                }.offset(y: -5)
                 
                 // shows whats selected
                 ZStack {
@@ -53,23 +65,26 @@ struct EditSolvesBarView: View {
                      *  hStack for SolveElemenst
                      */
                     
-                    ScrollView(.horizontal) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach (allSolvesController.selected) { s in
                                 if s.selected {
+                                    
                                     SolveElementView(controller: s)
+                                       
+    
                                 }
                             }
                         }
                     }
-                    .frame(width: 300) // idk why this works
+                    .frame(width: geo.size.width - 220, height: 30, alignment: .top) // subtract width of icons
                     
                     
                     
                    // Text("solves")
                     
                 }
-                .padding(.leading, 30)
+                .padding(.leading, 20)
                 
             } // end main HStack
             .foregroundColor(.white)

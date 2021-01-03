@@ -36,10 +36,15 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
         self.id = si.id
         self.allSolvesController = allSolvesController
     }
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
     
+    /*
+     * called by view, then alerts AllSolvesView of its selected state
+     */
     public func tapped() {
         
         print("tapped!")
+        lightTap.impactOccurred()
         
         if !selected { // if not selected
             self.selected = true
@@ -49,6 +54,13 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
             allSolvesController.uptap(self)
         }
         
+    }
+    
+    /*
+     *  called by allSolvesController when ie. unselectAll
+     */
+    public func untap() {
+        self.selected = false
     }
     
     

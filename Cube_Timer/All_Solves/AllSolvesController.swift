@@ -110,6 +110,13 @@ class AllSolvesController: ObservableObject {
     }
     
     
+    func unselectAll() {
+        for sec in selected {
+            self.uptap(sec)
+        }
+    }
+    
+    
     /*
      *  called when a solve is tapped on
      *      this gets called from SolveElementView -> TimeGroupController -> AllSolvesController
@@ -124,6 +131,7 @@ class AllSolvesController: ObservableObject {
     
     public func uptap(_ sec: SolveElementController) {
         
+        sec.untap()
         self.selected = selected.filter { $0 != sec }
         
         if selected.count == 0 {

@@ -88,9 +88,10 @@ class ContentViewController: ObservableObject {
         } else { // if on the other page
             
             // leave if we are draggin down
-            if v.translation.height > 0 {
+            if v.translation.height > 0 || allSolvesController.selecting {
                 return
             }
+            
             
             let transY: CGFloat = (v.translation.height * -1)
             

@@ -120,18 +120,18 @@ struct AllSolvesView: View {
                             } else {
                                 
                                 
-                                EditSolvesBarView()
-                                    .frame(width: geo.size.width - 400)
+                                EditSolvesBarView()                               //     .frame(width: geo.size.width - 400)
                                 
                                 
                             } // end if
                          
                         }
+                      // .allowsHitTesting(false)
                         .frame(height: 30, alignment: .trailing)
-                        .padding(.top, 10)
+                        .padding(.top, 20)
                         .padding(.bottom, 10)
                         .padding(.trailing, 60)
-                        
+
                         
                         /*
                          *  the main view with all the solves
@@ -258,10 +258,10 @@ struct AllSolvesView: View {
                             .padding(.trailing, 20)
                         }
                         //.padding(.top, 20)
-                        .padding(20)
-                        .padding(.leading, 20)
+                        //.padding(20)
+                        .padding(.leading, 40)
                         .padding(.trailing, 40)
-                        .padding(.bottom, 30)
+                        .padding(.bottom, 20)
                     }
                     
                 } // end main hStack

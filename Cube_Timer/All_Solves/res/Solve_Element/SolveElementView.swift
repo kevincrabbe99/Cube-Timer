@@ -10,61 +10,7 @@ import SwiftUI
 struct SolveElementView: View {
     
     
-    /*
-    var si: SolveItem!
-    var timeGroupController: TimeGroupController?
-    var allSolvesController: AllSolvesController?
-    //@ObservedObject var controller: SolveElementController
-    
-    @State var selected: Bool = false
-    */
-    /*
-    init(si: SolveItem?, parentController: TimeGroupController?) {
-        self.si = si
-        self.timeGroupController = parentController
-        self.allSolvesController = parentController!.allSolvesController
-        //self.controller = controller
-    }
-    
-    init(si: SolveItem) {
-        self.si = si
-    }
-     */
-    
-    /*
-    public func unselect() {
-        self.selected = false
-    }
-    
-    
-    public func tapped() {
-        
-        if timeGroupController == nil { // return if no controller, may need to change if I use this for something other than the solvesgrid
-            return
-        }
-        
-        if !isSelected() {
-            self.selected = true
-            timeGroupController!.tap(si!)
-        }else {
-            self.selected = false
-            timeGroupController!.untap(si!)
-        }
-    }
-    
-    public func isSelected() -> Bool {
-        if allSolvesController == nil {
-            return false
-        }
-        
-        if allSolvesController!.selected.contains(si) {
-            return true
-        }
-        return false
-    }
-    */
-    
-    
+
     var controller: SolveElementController
     @EnvironmentObject var allSolvesController: AllSolvesController
     var solveItem: SolveItem?
@@ -97,10 +43,9 @@ struct SolveElementView: View {
         
         Button {
             print("tapped 1")
-            if controller != nil {
-                print("tapped 2")
+            //if controller != nil {
                 controller.tapped()
-            }
+           // }
         } label: {
             ZStack {
                     if isSelected {

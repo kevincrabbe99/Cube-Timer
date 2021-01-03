@@ -71,7 +71,7 @@ class TimeGroupController: ObservableObject, Identifiable {
     
     public func update() {
         
-        height = CGFloat(((solveElementControllers.count / 8) + 1) * 35)
+        height = CGFloat((((solveElementControllers.count-1) / 8) + 1) * 35)
         //height = CGFloat(((solveElementControllers.count / 8) + 10) * 25)
     }
     
