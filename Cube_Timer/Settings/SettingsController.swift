@@ -16,6 +16,9 @@ class SettingsController: ObservableObject {
     @Published var requireDoublePressToStop: Bool = false
     @Published var pauseSavingSolves:  Bool = false
     
+    // about stuff
+    @Published var aboutState: Bool = false
+    
     let lightTap = UIImpactFeedbackGenerator(style: .light)
     init() {
         
@@ -39,6 +42,14 @@ class SettingsController: ObservableObject {
             self.pauseSavingSolves = false
         }
         
+    }
+    
+    
+    /*
+     *  sets the state to the about view
+     */
+    public func toggleAbout() {
+        self.aboutState.toggle()
     }
     
     /*

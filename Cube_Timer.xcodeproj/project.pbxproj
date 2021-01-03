@@ -26,6 +26,7 @@
 		7B7D56B125A05B2B00A427ED /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56B025A05B2B00A427ED /* SettingsController.swift */; };
 		7B7D56B725A0688A00A427ED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56B625A0688A00A427ED /* AlertView.swift */; };
 		7B7D56C525A06DA000A427ED /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56C425A06DA000A427ED /* AlertController.swift */; };
+		7B7D56E925A1AD6100A427ED /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56E825A1AD6000A427ED /* AboutView.swift */; };
 		7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */; };
 		7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */; };
 		7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */; };
@@ -127,6 +128,7 @@
 		7B7D56B025A05B2B00A427ED /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		7B7D56B625A0688A00A427ED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		7B7D56C425A06DA000A427ED /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		7B7D56E825A1AD6000A427ED /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCubeTypeView.swift; sourceTree = "<group>"; };
 		7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCubeTypeViewController.swift; sourceTree = "<group>"; };
 		7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDisplayView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 		7B7D56A4259E6CEC00A427ED /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				7B7D56E725A1AD4200A427ED /* About */,
 				7B7D56A5259E6DC900A427ED /* SettingsView.swift */,
 				7B7D56B025A05B2B00A427ED /* SettingsController.swift */,
 			);
@@ -309,6 +312,14 @@
 				7B7D56C425A06DA000A427ED /* AlertController.swift */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		7B7D56E725A1AD4200A427ED /* About */ = {
+			isa = PBXGroup;
+			children = (
+				7B7D56E825A1AD6000A427ED /* AboutView.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 		7B7DDCFF259076E800E2197F /* Shapes */ = {
@@ -752,6 +763,7 @@
 				7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */,
 				7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */,
 				7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */,
+				7B7D56E925A1AD6100A427ED /* AboutView.swift in Sources */,
 				7BAAE142259C5E7C00330533 /* EditSolvesBarView.swift in Sources */,
 				7BFF32082599870F0029EA19 /* EditSolveController.swift in Sources */,
 				7B607424258F29D000D188CF /* PopupError.swift in Sources */,

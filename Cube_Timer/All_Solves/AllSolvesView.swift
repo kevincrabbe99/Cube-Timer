@@ -78,6 +78,7 @@ struct AllSolvesView: View {
                         .padding(.top, 20)
                         .padding(.bottom, 30)
                         
+                        
                         StatLabelVertical(label: "BEST", solve: controller.best)
                         
                         Spacer()

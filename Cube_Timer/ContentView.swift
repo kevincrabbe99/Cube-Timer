@@ -145,7 +145,6 @@ struct ContentView: View {
                 
              
                 ZStack {
-                    
                 
                     
                     AllSolvesView(parent: self)
@@ -161,23 +160,11 @@ struct ContentView: View {
                             .transition(.move(edge: .bottom))
                     }
                     
+                    
                 }
                 .animation(.spring())
                 
-                /*
-                switch cvc.onPage {
-                case .Main:
-                    MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
-                        .zIndex(0)
-                case .showAll:
-                    //AllSolvesView(parent: self, solvesData: solveHandler.solvesByTimeFrame, solvesGridController: solvesGridController)
-                    AllSolvesView(parent: self, controller: allSolvesController)
-                        .zIndex(0)
-                default:
-                    MainView(parent: self, timer: timer, solveHandler: solveHandler, bo3Controller: bo3Controller)
-                        .zIndex(0)
-                }*/
-                
+              
                 // add stuff for sidebar
                 // the tab for the sidebar
             

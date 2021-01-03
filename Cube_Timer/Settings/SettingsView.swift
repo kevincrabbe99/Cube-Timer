@@ -9,12 +9,12 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @EnvironmentObject var settingsController: SettingsController
+    @EnvironmentObject var controller: SettingsController
     @EnvironmentObject var cvc: ContentViewController
     
     
     var doublePressToStopLabel: String {
-        if settingsController.requireDoublePressToStop {
+        if controller.requireDoublePressToStop {
             return "YES"
         } else {
             return "NO"
@@ -22,7 +22,7 @@ struct SettingsView: View {
     }
     
     var pauseSavingSolvesLabel: String {
-        if settingsController.pauseSavingSolves {
+        if controller.pauseSavingSolves {
             return "ON"
         } else {
             return "OFF"
@@ -54,7 +54,7 @@ struct SettingsView: View {
                     /*
                      * TITLE
                      */
-                    Text("SETTINGS")
+                    Text(controller.aboutState ? "ABOUT" : "SETTINGS")
                         .font(Font.custom("Dosis-ExtraBold", size: 25))
                         .padding(.top, 20)
                     
@@ -64,22 +64,34 @@ struct SettingsView: View {
                      */
                     VStack(spacing: 20) {
                         
+                        if !controller.aboutState { // if in regular state (not in about section
+                            Button(action: {
+                                controller.toggleRequireDoublePressToStop()
+                            }, label: {
+                                SettingsOption(label: "Double press to stop", value: doublePressToStopLabel, info: "Requires both buttons to be pressed to record the solve.")
+                            })
+                           
+                            Button(action: {
+                                controller.togglePauseSavingSolves()
+                            }, label: {
+                                SettingsOption(label: "Pause saving solves", value: pauseSavingSolvesLabel)
+                            })
+                            
+                        } else {
+                            
+                            AboutView()
+                                .frame(height: 150)
+                            
+                        }
+                        
                         Button(action: {
-                            settingsController.toggleRequireDoublePressToStop()
+                            controller.toggleAbout()
                         }, label: {
-                            SettingsOption(label: "Double press to stop", value: doublePressToStopLabel, info: "Requires both buttons to be pressed to record the solve.")
-                        })
-                       
-                        Button(action: {
-                            settingsController.togglePauseSavingSolves()
-                        }, label: {
-                            SettingsOption(label: "Pause saving solves", value: pauseSavingSolvesLabel)
+                            SettingsOption(label: (controller.aboutState ? "back" : "about"))
+                                .padding(.top, 30)
+                                .opacity(0.8)
                         })
                         
-                        
-                        SettingsOption(label: "about")
-                            .padding(.top, 30)
-                            .opacity(0.8)
                     }
                     .frame(height: h - 130)
                     .offset(y: -30)
