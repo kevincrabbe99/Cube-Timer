@@ -31,12 +31,33 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
     
     @Published var selected: Bool = false
     
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
+    
+    // sets the color green if the solve is the best solve
+    var bgColor: Color {
+        if allSolvesController.best == si {
+            return Color.init("green").opacity(0.8)
+        }
+        if allSolvesController.worst == si {
+            return Color.init("red").opacity(0.8)
+        }
+        return Color.init("mint_cream").opacity(0.2)
+    }
+    
+    var textColor: Color {
+        if allSolvesController.best == si || allSolvesController.worst == si {
+            return Color.init("very_dark_black")
+        }
+        return Color.init("mint_cream")
+    }
+    
+    
+    
     init(si: SolveItem, allSolvesController: AllSolvesController) {
         self.si = si
         self.id = si.id
         self.allSolvesController = allSolvesController
     }
-    let lightTap = UIImpactFeedbackGenerator(style: .light)
     
     /*
      * called by view, then alerts AllSolvesView of its selected state

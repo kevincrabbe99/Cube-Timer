@@ -80,8 +80,8 @@ struct TimeCapture {
         // calculate ms
         let milliseconds = Int(time * 100)
         
-        let strMin = String(format: "%02d", minutes)
-        let strSec = String(format: "%02d", seconds)
+        let strMin = String(format: "%2d", minutes)
+        let strSec = String(format: "%2d", seconds)
         let strMS = String(format: "%02d",milliseconds)
         
         if minutes == 0 {

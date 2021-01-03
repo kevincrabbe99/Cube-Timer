@@ -51,26 +51,26 @@ struct SolveElementView: View {
                     if isSelected {
                         Color.black
                             .cornerRadius(3)
-                            .opacity(0.2)
+                            //.opacity(0.2)
                     } else {
-                        Color.init("mint_cream")
+                        controller.bgColor
                             .cornerRadius(3)
-                            .opacity(0.2)
+                            //.opacity(0.2)
                     }
                 
                 if controller != nil {
                     Text(controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")
                         .fontWeight(.bold)
-                        .font(.system(size: 12))
+                        .font(.system(size: 11))
                 } else {
                     Text(solveItem!.getTimeCapture()?.getInSolidForm() ?? "0:00")
                         .fontWeight(.bold)
-                        .font(.system(size: 12))
+                        .font(.system(size: 11))
                 }
             
             }
             .frame(width: 45, height: 25)
-            .foregroundColor(.init("mint_cream"))
+            .foregroundColor(controller.textColor)
         }
 
         

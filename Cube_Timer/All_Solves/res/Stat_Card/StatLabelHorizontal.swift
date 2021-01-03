@@ -10,7 +10,7 @@ import SwiftUI
 struct StatLabelHorizontal: View {
     
     var label: String
-    var value: Double
+    var value: String
     var showDecimal: Bool = true
     
     var body: some View {
@@ -31,12 +31,12 @@ struct StatLabelHorizontal: View {
                         .opacity(0.2)
                     
                     if showDecimal {
-                        Text("\(value, specifier: "%.2f")")
+                        Text(value/*"\(value, specifier: "%.2f")"*/)
                             .bold()
                             .font(.system(size:14))
                             .opacity(0.8)
                     } else {
-                        Text("\(value, specifier: "%.0f")")
+                        Text(value/*"\(value, specifier: "%.0f")"*/)
                             .bold()
                             .font(.system(size:14))
                             .opacity(0.8)
@@ -57,7 +57,7 @@ struct StatLabelHorizontal_Previews: PreviewProvider {
         ZStack {
             Color.init("very_dark_black")
             
-            StatLabelHorizontal(label: "SOLVES", value: 420)
+            StatLabelHorizontal(label: "SOLVES", value: "420")
         }
             .previewLayout(.fixed(width: 200, height: 200))
     }
