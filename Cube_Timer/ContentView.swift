@@ -145,7 +145,6 @@ struct ContentView: View {
                 
              
                 ZStack {
-                
                     
                     AllSolvesView(parent: self)
                         .offset(y: cvc.allSolvesViewYOffset)
@@ -180,9 +179,10 @@ struct ContentView: View {
                     }
                 
                 SidebarView(contentView: self, cTypeHandler: cTypeHandler)
-                    .frame(width: geo.size.width / 3, height: geo.size.height)
+                    .frame(width: (UIDevice.current.hasNotch ? (geo.size.width / 3) : (geo.size.width / 2.4)), height: geo.size.height)
                     //.position(x: geo.size.width / 6, y: geo.size.height/2)
                     .position(x: cvc.sbXPos, y: geo.size.height/2)
+                    .offset(x: (UIDevice.current.hasNotch ? 0 : -20))
                     .animation(.spring())
                     .zIndex(3)
                 
@@ -266,5 +266,12 @@ struct RoundedCorner: Shape {
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
+    }
+}
+
+extension UIDevice {
+    var hasNotch: Bool {
+        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        return bottom > 0
     }
 }

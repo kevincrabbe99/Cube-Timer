@@ -112,12 +112,12 @@ struct AllSolvesView: View {
                         HStack {
                                 
                             
-                            if !(controller.selected.count > 0) { // if there are no selected solves
-                                
-                                StatLabelHorizontal(label: "SOLVES", value: String(controller.count ?? 0), showDecimal: false)
-                                StatLabelHorizontal(label: "AVERAGE", value: TimeCapture(controller.average ?? 0).getAsReadable())
-                                StatLabelHorizontal(label: "STD. DEV", value: TimeCapture(controller.stdDev ?? -1).getAsReadable())
-                      
+                            if !(controller.selected.count > 0)  { // if there are no selected solves
+                                if (controller.solves.count > 0) {
+                                    StatLabelHorizontal(label: "SOLVES", value: String(controller.count ?? 0), showDecimal: false)
+                                    StatLabelHorizontal(label: "AVERAGE", value: TimeCapture(controller.average ?? -1).getAsReadable())
+                                    StatLabelHorizontal(label: "STD. DEV", value: TimeCapture(controller.stdDev ?? -1).getAsReadable())
+                                }
                             } else {
                                 
                                 

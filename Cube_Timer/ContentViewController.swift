@@ -21,8 +21,8 @@ class ContentViewController: ObservableObject {
     // sidebar positioning
     @Published var sidebar: Bool = false
     let sidebarOutPos: CGPoint = CGPoint(x: -1 * (UIScreen.main.bounds.width/6)+45, y: UIScreen.main.bounds.height/2)// 45 shows 5px of the sidebar always
-    let sidebarInPos: CGPoint = CGPoint(x: UIScreen.main.bounds.width/6, y: UIScreen.main.bounds.height/2)
-    let sidebarWidth: CGFloat = UIScreen.main.bounds.width / 3
+    let sidebarInPos: CGPoint = CGPoint(x: (UIDevice.current.hasNotch ? UIScreen.main.bounds.width/6 : (UIScreen.main.bounds.width/4)-15), y: UIScreen.main.bounds.height/2)
+    let sidebarWidth: CGFloat = (UIDevice.current.hasNotch ? (UIScreen.main.bounds.width / 3) : (UIScreen.main.bounds.width / 2.4))
     @Published var sidebarDraggin: Bool = false
     @Published var sbBgOpacity: Double = 0
     @Published var sbXPos: CGFloat = -1 * (UIScreen.main.bounds.width/6)+45 // initialize it to sidebarOutPos x value

@@ -19,6 +19,7 @@ struct SidebarView: View {
     @State var editMode: Bool = false
     
     
+    
     var body: some View {
         
         GeometryReader { geo in

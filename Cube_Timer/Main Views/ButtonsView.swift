@@ -19,6 +19,13 @@ struct ButtonsView: View {
     @State var leftIconOpacity: Double = 0.1
     @State var rightIconOpacity: Double = 0.1
     
+    var topCRs: CGFloat {
+        if UIDevice.current.hasNotch {
+            return 35
+        } else {
+            return 10
+        }
+    }
     
     let gradient = Gradient(colors: [.init("dark_black"), .clear])
     
@@ -41,7 +48,7 @@ struct ButtonsView: View {
                   
                     RoundedRectangle(cornerRadius: 5)
                         .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
-                        .cornerRadius(35, corners: [.topLeft])
+                        .cornerRadius(topCRs, corners: [.topLeft])
                         .cornerRadius(4, corners: [.bottomRight, .topRight])
                         .cornerRadius(10, corners: [.bottomLeft])
                         .opacity(leftBtnOpacity)
@@ -101,7 +108,7 @@ struct ButtonsView: View {
                     */
                     RoundedRectangle(cornerRadius: 5)
                         .fill(LinearGradient(gradient: gradient, startPoint: .topTrailing, endPoint: .bottomLeading))
-                        .cornerRadius(35, corners: [.topRight])
+                        .cornerRadius(topCRs, corners: [.topRight])
                         .cornerRadius(4, corners: [.bottomLeft, .topLeft])
                         .cornerRadius(10, corners: [.bottomRight])
                         .opacity(rightBtnOpacity)
