@@ -11,6 +11,7 @@ import CoreData
 enum Page: String {
     case Main = "Main Page"
     case showAll = "Show All Solves"
+    case settings = "Settings"
 }
 
 
@@ -34,6 +35,9 @@ struct ContentView: View {
     @ObservedObject var cTypeHandler: CTypeHandler = CTypeHandler()
     @ObservedObject var timer: TimerController = TimerController()
     @ObservedObject var solveHandler: SolveHandler = SolveHandler()
+    
+    @ObservedObject var barGraphController: BarGraphController = BarGraphController()
+    
     @ObservedObject var bo3Controller: BO3Controller = BO3Controller()
     @ObservedObject var sbController: SidebarController = SidebarController()
     @ObservedObject var popupController: PopupController = PopupController()
@@ -42,6 +46,8 @@ struct ContentView: View {
     @ObservedObject var allSolvesController: AllSolvesController = AllSolvesController()
    // @ObservedObject var solvesGridController: SolvesGridController = SolvesGridController()
     @ObservedObject var editSolveController: EditSolveController = EditSolveController()
+    @ObservedObject var settingsController: SettingsController = SettingsController()
+    @ObservedObject var alertController: AlertController = AlertController()
     
     /*
     // vars for popup
@@ -70,6 +76,7 @@ struct ContentView: View {
         self.timer.solveHandler = solveHandler
         self.timer.bo3Controller = bo3Controller
         self.timer.cTypeHandler = cTypeHandler
+        self.timer.settingsController = settingsController
         
         // set solveHandler controllers
         self.solveHandler.timer = timer
@@ -77,6 +84,13 @@ struct ContentView: View {
         self.solveHandler.sbController = sbController
         self.solveHandler.cTypeHandler = cTypeHandler
         self.solveHandler.solvesByTimeFrame.cTypeHandler = cTypeHandler
+        self.solveHandler.allSolvesController = allSolvesController
+        self.solveHandler.barGraphController = barGraphController
+        
+        // bar graph controller stuff
+        self.barGraphController.solveHandler = solveHandler
+        self.barGraphController.timer = timer
+        self.barGraphController.cTypeHandler = cTypeHandler
         
         // set the timers BO3 Controller
         //self.timer.bo3Controller = bo3Controller
@@ -105,6 +119,8 @@ struct ContentView: View {
         self.editSolveController.solvesData = solveHandler.solvesByTimeFrame
         self.editSolveController.allSolvesController = allSolvesController
         
+        // settings controller refs
+        self.settingsController.alertController = alertController
         
         
         // solves grid stuff
@@ -127,9 +143,9 @@ struct ContentView: View {
              
                 ZStack {
                     
+                
                     
-                    
-                    AllSolvesView(parent: self, controller: allSolvesController)
+                    AllSolvesView(parent: self)
                         .offset(y: cvc.allSolvesViewYOffset)
                         .scaleEffect(cvc.allSolvesViewScale)
                         
@@ -137,6 +153,10 @@ struct ContentView: View {
                     MainView(parent: self, solveHandler: solveHandler, bo3Controller: bo3Controller)
                         .opacity(cvc.mainViewOpacity)
                        
+                    if cvc.inSettings {
+                        SettingsView()
+                            .transition(.move(edge: .bottom))
+                    }
                     
                 }
                 .animation(.spring())
@@ -196,6 +216,8 @@ struct ContentView: View {
                         .zIndex(9)
                 }
                 
+                AlertView()
+                
             }
         
         }
@@ -224,7 +246,9 @@ struct ContentView: View {
         .environmentObject(ctEditController)
         .environmentObject(cvc)
         .environmentObject(timer)
-        
+        .environmentObject(settingsController)
+        .environmentObject(alertController)
+        .environmentObject(barGraphController)
     
     }
 
@@ -233,7 +257,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().previewLayout(PreviewLayout.fixed(width: 568, height: 320))
+        ContentView()
+            .previewLayout(.fixed(width: 2436 / 3.0, height: 1125 / 3.0))
             //.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             
     }

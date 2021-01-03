@@ -65,6 +65,7 @@ class SolveHandler: ObservableObject {
         handles the cube types */
     var sbController: SidebarController!
     var cTypeHandler: CTypeHandler!
+    var allSolvesController: AllSolvesController!
 
     
     @Published var solves: [SolveItem] // array which changes to correspond with timeframe
@@ -78,14 +79,17 @@ class SolveHandler: ObservableObject {
     
     // sets the initial timeframe
     @Published var currentTimeframe: Timeframe = .Today   // sets .Today as initial timeFrame
+    @Published var currentTimeframeButtonPos: Int = 1
     
     /* New way below :) */
     // initiates an empty solves by timeframe object
     @ObservedObject var solvesByTimeFrame: SolvesFromTimeframe = SolvesFromTimeframe();
     // self.barGraphController is a instance of a bar graph
     //  this is for the homescreen standard deviation graph preview
-    @ObservedObject var barGraphController: BarGraphController = BarGraphController()
     
+   /* @ObservedObject */ var barGraphController: BarGraphController = BarGraphController()
+    
+    //@EnvironmentObject var barGraphController: BarGraphController
     init() {
         
         // initialize solves to be empty
@@ -94,7 +98,7 @@ class SolveHandler: ObservableObject {
         //solvesByTimeFrame.cTypeHandler = cTypeHandler
         
         // initialize self.barGraphController with a new instance of a bar graph (BarGraphController.swift)
-        barGraphController = BarGraphController(parent: self)
+     //   barGraphController = BarGraphController(parent: self)
         
         // setup for CoreData
         let solveRequest = NSFetchRequest<SolveItem>(entityName: "SolveItem")
@@ -246,9 +250,19 @@ class SolveHandler: ObservableObject {
         
     }
      */
-    
     public func deleteLast() {
         self.delete(getLastSolve()!)
+    }
+    
+    /*
+     * deletes any solve thats stored in the AllSolvesView.selected array
+     * called by DeleteSolvesView popup,
+     */
+    public func deleteSelectedSolves() {
+        for sElController in allSolvesController.selected {
+            self.delete(sElController.si)
+        }
+        allSolvesController.clearSelected()
     }
     
     /*
@@ -256,8 +270,8 @@ class SolveHandler: ObservableObject {
      */
     func delete(_ s: SolveItem) -> Bool{
         
-        let deleteIndex = getIndexOf(s)
-        if deleteIndex != -1 {
+        //let deleteIndex = getIndexOf(s)
+        if solvesByTimeFrame.exists(solveItem: s) {
             
             print("Deleting from CoreData")
             
@@ -295,12 +309,13 @@ class SolveHandler: ObservableObject {
         return i
     }
     
+    
     /*
      *  Adds a solve to the solve array (in SolvesFromTimeframe()) then calls self.updateDisplay()
      *  Called by TimerController().stopTimer()
      *          & self.init() when loading in solves from CoreData
      */
-    func add(_ s: SolveItem) {
+    func add(_ s: SolveItem, newEntry: Bool = false) {
         
         print("adding new solve: ", s.timeMS)
         
@@ -309,9 +324,11 @@ class SolveHandler: ObservableObject {
         solves.append(s)
         */
         // (new way) adds to SolveFromTimeframe().solves
-        self.solvesByTimeFrame.add(s)
+        self.solvesByTimeFrame.add(s, newEntry: newEntry)
         
-        updateSolves()
+     
+            updateSolves()
+        
     }
     
     func getSolvesOrderedByTime() -> [SolveItem] {
@@ -520,6 +537,8 @@ class SolveHandler: ObservableObject {
     func getMin() -> SolveItem {
         var min: Double = 99999999999
         var si: SolveItem = SolveItem()
+      
+        
         for s in solves {
             let solve = s as SolveItem
             if min > solve.timeMS {

@@ -94,6 +94,12 @@ class AllSolvesController: ObservableObject {
     }
     
     
+    /*
+     * clears the selected array
+     */
+    public func clearSelected() {
+        self.selected = []
+    }
     
     
     /*

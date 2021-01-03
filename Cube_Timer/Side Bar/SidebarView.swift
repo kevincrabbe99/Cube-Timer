@@ -59,8 +59,12 @@ struct SidebarView: View {
                      *  Header
                      */
                     HStack {
+                        
+                        
                         Text("CUBES")
                             .font(Font.custom("Dosis-ExtraBold", size: 22))
+                        
+                        
                            // .fontWeight(.black)
                            // .font(.system(size: 22))
                         Spacer()
@@ -136,50 +140,85 @@ struct SidebarView: View {
                     /*
                      *  bottom bar
                      */
-                    Button(action: {
-                        if cvc.onPage == .showAll {
-                            cvc.setPageTo(.Main)
-                        } else {
-                            cvc.setPageTo(.showAll)
-                        }
-                    }, label: {
-                        ZStack {
-                            
-                            if cvc.onPage == .showAll {
+                    
+                        //ZStack {
+                            HStack { // right side buttons
                                 
-                                HStack {
-                                    Text("go back")
-                                        .fontWeight(.bold)
-                                        .font(.system(size: 12))
-                                    Spacer()
-                                    Image("two_fingers")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .aspectRatio(contentMode: .fit)
-                                        .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
-                                        .foregroundColor(.white)
+                                if cvc.onPage != .settings {
+                                    Button(action: {
+                                        cvc.setPageTo(.settings)
+                                    }, label: {
+                                        Image(systemName:"gear")
+                                            .resizable()
+                                            .frame(width: 16, height: 16)
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundColor(.white)
+                                            .padding(.leading, 22)
+                                    })
+                                } else{ // if were on settings
+                                    Button(action: {
+                                        cvc.setPageTo(.settings) // passing .settings toggles it
+                                    }, label: {
+                                        Image(systemName:"house.fill")
+                                            .resizable()
+                                            .frame(width: 16, height: 16)
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundColor(.white)
+                                            .padding(.leading, 22)
+                                    })
                                 }
-                                .frame(width: geo.size.width/3.5, alignment: .trailing)
-                            
-                            } else {
                                 
-                                HStack {
-                                    Text("show solves")
-                                        .fontWeight(.bold)
-                                        .font(.system(size: 12))
-                                    Spacer()
-                                    Image.init(systemName: "square.grid.3x2")
-                                        .resizable()
-                                        .frame(width: 18, height: 13.5)
-                                        .foregroundColor(.white)
-                                }
-                                .frame(width: geo.size.width/2.4, alignment: .trailing)
                                 
+                                Spacer()
+                                
+                                Button(action: {
+                                    if cvc.onPage == .showAll {
+                                        cvc.setPageTo(.Main)
+                                    } else {
+                                        cvc.setPageTo(.showAll)
+                                    }
+                                }, label: {
+                                    if cvc.onPage == .showAll {
+                                        
+                                       // HStack {
+                                            /*
+                                            Text("go back")
+                                                .fontWeight(.bold)
+                                                .font(.system(size: 12))
+                                             Spacer()
+                                            */
+                                            Image("two_fingers")
+                                                .resizable()
+                                                .frame(width: 16, height: 16)
+                                                .aspectRatio(contentMode: .fit)
+                                                .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
+                                                .foregroundColor(.white)
+                                        //}
+                                      //  .frame(width: geo.size.width/3.5, alignment: .trailing)
+                                    
+                                    } else {
+                                        
+                                        // HStack {
+                                            /*
+                                            Text("show solves")
+                                                .fontWeight(.bold)
+                                                .font(.system(size: 12))
+                                            Spacer()
+                                            */
+                                            Image.init(systemName: "square.grid.3x2")
+                                                .resizable()
+                                                .frame(width: 18, height: 13.5)
+                                                .foregroundColor(.white)
+                                       // }
+                                        // .frame(width: geo.size.width/2.4, alignment: .trailing)
+                                        
+                                    } // end if
+                                    
+                                })// end button
                             }
-                        }
+                        //}
                         .frame(width: geo.size.width - 100, height: 60, alignment: .trailing)
                         .offset(y:-10)
-                    })
                     
                     
                     

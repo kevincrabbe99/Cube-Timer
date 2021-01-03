@@ -12,6 +12,7 @@ struct EditSolveView: View {
     @EnvironmentObject var controller: EditSolveController
     @EnvironmentObject var parent: PopupController
     @EnvironmentObject var allSolvesController: AllSolvesController
+    @EnvironmentObject var cTypeHandler: CTypeHandler
     
     
     var solveControllers: [SolveElementController] = []
@@ -59,24 +60,26 @@ struct EditSolveView: View {
                 
                 /*
                  *  the view with all the selected solves
-                 */
-                HStack {
-                    ForEach (solveControllers) { s in
-                        if s.selected {
-                            SolveElementView(controller: s)
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach (solveControllers) { s in
+                            
+                            if s.selected {
+                                SolveElementView(controller: s)
+                            }
+                            
                         }
-                       // SolveElementView(solveItem: s)
-                           // .environmentObject(SolveElementController(si: s, allSolvesController: allSolvesController))
-                           // .environmentObject(allSolvesController)
-                        //Text(s.getTimeCapture()!.getInSolidForm())
                     }
                 }
-                .padding(.top, 10)
+                .padding(20)
                 .frame(width: geo.size.width)
+                 */
+
                 
-                VStack {
-                    Text("UPDATE CUBE TYPE")
-                        .fontWeight(.black)
+                VStack(spacing: 0) {
+                    Text("UPDATE CUBES FOR \(allSolvesController.selected.count) SOLVES")
+                        .font(Font.custom("Heebo-Black", size: 20))
+                        .padding(20)
                     
                     Picker(selection: $selection, label: Text("Picker")) {
                         ForEach(0..<controller.cTypeHandler.getCubeTypes().count) {
@@ -84,9 +87,10 @@ struct EditSolveView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: geo.size.width * 0.8, height: 70)
+                    .frame(width: geo.size.width * 0.65, height: 70)
                     .labelsHidden()
-                    .clipped()
+                   // .clipped()
+                    .offset(y: -15) // damn
                     
                 }
                 .padding(.leading, 20)
@@ -100,6 +104,8 @@ struct EditSolveView: View {
                         parent.hidePopup()
                     }, label: {
                         ZStack {
+                            RoundedButton(color: Color.init("mint_cream"), text: "UPDATE", textColor: Color.init("very_dark_black"))
+                            /*
                             RoundedRectangle(cornerRadius: 5)
                                 .fill(LinearGradient(
                                     gradient: .init(colors: [Color.init("very_dark_black"), Color.init("dark_black")]),
@@ -112,6 +118,7 @@ struct EditSolveView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size:13))
                                 .fontWeight(.bold)
+ */
                         }
                         .frame(width: 90, height: 35, alignment: .center)
                     })
@@ -122,6 +129,9 @@ struct EditSolveView: View {
             .foregroundColor(Color.init("mint_cream"))
             
         }// end geo
+        .onAppear {
+            self.selection = cTypeHandler.getIndexFrom(id: cTypeHandler.selected.id!)
+        }
         
     }
     

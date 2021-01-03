@@ -37,6 +37,16 @@ extension SolveItem: Identifiable {
     @NSManaged public var timestamp: Date
     
     @NSManaged public var cubeType: CubeType
+    /*
+    convenience init(id: String, timeMS: Double, timestamp: Date, cubeType: CubeType) {
+        self.init()
+        self.id = id
+        self.timeMS = timeMS
+        self.timestamp = timestamp
+        self.cubeType = cubeType
+    }
+    */
+  
     
     
     func setCubeType(_ ct: CubeType) {
@@ -144,9 +154,15 @@ extension SolveItem: Identifiable {
         }
     }
     
-}
-
-extension SolveItem {
+    
+    static func getAllItems() -> NSFetchRequest<SolveItem> {
+        let request: NSFetchRequest<SolveItem> = NSFetchRequest<SolveItem>(entityName: "SolveItem")
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
+        
+        return request
+    }
+    
     static var defaultSortDescriptors: [NSSortDescriptor] {
         return [NSSortDescriptor(key: "timestamp", ascending: true)]
     }
@@ -160,6 +176,10 @@ extension SolveItem {
         // request.predicate = NSPredicate(format: "visited == true")
         return request
     }
+}
+
+extension SolveItem {
+ 
 }
 
 extension SolveItem {
@@ -188,13 +208,6 @@ extension SolveItem {
     }
     */
     
-    static func getAllItems() -> NSFetchRequest<SolveItem> {
-        let request: NSFetchRequest<SolveItem> = NSFetchRequest<SolveItem>(entityName: "SolveItem")
-        
-        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
-        
-        return request
-    }
     
 }
 

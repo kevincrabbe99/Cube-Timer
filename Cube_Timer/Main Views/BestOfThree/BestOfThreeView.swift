@@ -39,56 +39,6 @@ struct BestOfThreeView: View {
             VStack {
                 
                 /*
-                 * the times display
-                HStack(spacing: 30.0) {
-                    ForEach(controller.solves) { s in
-                        Text(TimeCapture.init(s.timeMS).getAsReadable() )
-                            .fontWeight(.bold)
-                            .opacity(0.6)
-                            .font(.system(size: 13))
-                            
-                            .gesture(
-                                TapGesture()
-                                    .onEnded { _ in
-                                        print("tapped")
-                                        self.controller.delete(s)
-                                    }
-                            )
-                            
-                    }
-                    
-                    /*
-                     *  Clear / Load button
-                    if controller.solves.count < 3 { // if not full
-                        Button(action: {
-                            controller.load3Solves()
-                        }) {
-                            ZStack {
-                                Image(systemName: "arrow.clockwise")
-                                    .font(Font.system(size: 13, weight: .bold))
-                        
-                            }
-                            .frame(width: 15, height: 50)
-                        }
-                    } else { // we can clear
-                        Button(action: {
-                            controller.clear()
-                        }) {
-                            ZStack {
-                                Image(systemName: "clear")
-                            }
-                            .frame(width: 15, height: 50)
-                        }
-                    }
-                     */
-                    
-                    
-                }
-                .frame(width: geo.size.width, height: 30)
-                .animation(.spring())
-                 
-                 */
-                /*
                  * container for the stats
                  */
                 if controller.solves.count >= 3 {

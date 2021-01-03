@@ -44,7 +44,11 @@ class ContentViewController: ObservableObject {
     let SCALE_DIFFERENCE: CGFloat = 0.1
     let PAGE_DRAG_MAX: CGFloat = 150
     let ASV_Y_ABS_OFFSET: CGFloat = 150 // AllSolveView Y Absolute Offset
+    var blockTransition: Bool = false
     
+    
+    // settigns page
+    @Published var inSettings: Bool = false
     
     /*
      *  THE DRAG GESTURE TO SWITCH VIEWS
@@ -59,7 +63,12 @@ class ContentViewController: ObservableObject {
             
             // leave if we are draggin up
             if transY < 0 || timer.bothActivated || timer.timerGoing {
+                self.blockTransition = true
                 return
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.blockTransition = false
+                }
             }
             
             // calculate percentage
@@ -118,7 +127,8 @@ class ContentViewController: ObservableObject {
         if onPage == .Main {
             
             // leave if we are draggin up
-            if v.translation.height < 0 ||  timer.bothActivated || timer.timerGoing  {
+            if v.translation.height < 0 || blockTransition  /*timer.bothActivated || timer.timerGoing*/  {
+                self.setPageTo(self.onPage)
                 return
             }
             
@@ -166,19 +176,41 @@ class ContentViewController: ObservableObject {
     
     
     func setPageTo(_ p: Page) {
+        lightTap.impactOccurred()
         
+        if p == .settings {
+            self.setStateForSettings()
+        }else { // a button that was not settings was pressed
+            // check if we need to exit settings
+            if self.onPage == .settings {
+                self.inSettings = false
+            }
+        }
         
         if p == .showAll { // load solves before going there
             // update solves in
             self.setStateForAllSolves()
             self.allSolvesController.updateSolves()
-        }else {
+        }
+        
+        if p == .Main {
             self.setStateForMain()
         }
         
         
+        self.pushOutSidebar()
+        
         self.onPage = p
         
+    }
+    
+    
+    private func setStateForSettings() {
+        if !inSettings  {
+            self.inSettings = true
+        } else {
+            self.inSettings = false
+        }
     }
     
     private func setStateForAllSolves() {
@@ -198,8 +230,13 @@ class ContentViewController: ObservableObject {
     
     
     
-    
-    
+    /*
+     *  shows popup to confirm they want to delete
+     * triggered by EditSolvesBarView from within AllSolvesView
+     */
+    public func tappedDeleteSolves() {
+        showPopup(v: AnyView(DeleteSolvesView()))
+    }
     
     /*
      *  this is triggered when user wants to edit solves from AllSolvesView
@@ -215,7 +252,7 @@ class ContentViewController: ObservableObject {
      */
     public func tappedAddCT() {
         print("creating new Cube Type view")
-        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController, parent: popupController)))
+        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController)))
     }
     
     /*

@@ -44,13 +44,20 @@ struct PopupView: View {
             
             ZStack {
                 ZStack {
-                    Color.init("very_dark_black")
-                        .cornerRadius(10)
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(Color.init("very_dark_black").opacity(0.9))
+                        .addBorder(Color.init("dark_black").opacity(0.5), width: 1, cornerRadius: 5)
                         .shadow(radius: 15)
                         .onTapGesture {
                             popupController.unfocusTextField()
                         }
                     
+                    /*
+                    Color.init("very_dark_black")
+                        .cornerRadius(10)
+                        .shadow(radius: 15)
+                */
+                        
                     
                         Button(action: {
                             self.hide()
@@ -79,6 +86,14 @@ struct PopupView: View {
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
         }
         
+    }
+}
+
+extension View {
+    public func addBorder<S>(_ content: S, width: CGFloat = 1, cornerRadius: CGFloat) -> some View where S : ShapeStyle {
+        let roundedRect = RoundedRectangle(cornerRadius: cornerRadius)
+        return clipShape(roundedRect)
+             .overlay(roundedRect.strokeBorder(content, lineWidth: width))
     }
 }
 

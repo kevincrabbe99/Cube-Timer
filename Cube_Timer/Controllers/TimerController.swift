@@ -54,7 +54,7 @@ class TimerController: ObservableObject {
     var solveHandler: SolveHandler! // solve handler
     var bo3Controller: BO3Controller!
     var cTypeHandler: CTypeHandler!
-    
+    var settingsController: SettingsController!
     
     
     init() {
@@ -166,8 +166,8 @@ class TimerController: ObservableObject {
         self.oneActivated = false
         self.bothActivated = false
         if timerGoing { // stop timer
-            stopTimer()
-            startApproved = false // prevent from starting timer without both buttons pressed
+            //stopTimer()
+            //startApproved = false // prevent from starting timer without both buttons pressed
         } else if !startApproved { // dont abort if start is approved
             abortResettingTimer()
         } else if startApproved {
@@ -181,29 +181,51 @@ class TimerController: ObservableObject {
         //startApproved = false
         //self.peripheralOpacity = 0
         self.oneActivated = true
+        self.bothActivated = false
         if !timerGoing { // if timer is not going
             self.resetTimerStart()  // start reseting the timer
+        } else {
+            // check with settings
+            if !settingsController.requireDoublePressToStop {
+                stopTimer()
+                startApproved = false
+            }
         }
     }
     
     private func bothButtonsPressed() {
         self.oneActivated = false
+        self.bothActivated = true
         if timerGoing {
             stopTimer()
+            startApproved = false
         }else {
             startApproved = true
         }
     }
     
+    var tempSolve: SolveItem?
+    
     func startTimer() {
         
         
         self.peripheralOpacity = 0 // show the peripherals
-        solveHandler.barGraphController.animateOut()
+       // solveHandler.barGraphController.animateOut()
         startTap.notificationOccurred(.success) // tap the phone when starting
         
         UIApplication.shared.isIdleTimerDisabled = true // disable the sleep
         print("time started")
+        
+        // create temp solve object
+        self.tempSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
+        tempSolve!.id = UUID().uuidString
+        tempSolve!.timeMS = lastRecordedTime
+        tempSolve!.timestamp = Date()
+        
+        tempSolve!.cubeType = cTypeHandler.selected!
+        
+        solveHandler.add(tempSolve!, newEntry: true)
+        
         startTime = Date().timeIntervalSinceReferenceDate
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
         timerGoing = true
@@ -219,7 +241,7 @@ class TimerController: ObservableObject {
         self.solveHandler.barGraphController.animateIn()
         self.peripheralOpacity = 1 // show the peripherals
         
-        
+        /*
         let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
         //newSolve.brand = self.cTypeHandler.selected.desc /*brand.rawValue*/
         //newSolve.cubeType = type
@@ -229,8 +251,10 @@ class TimerController: ObservableObject {
         
         newSolve.cubeType = cTypeHandler.selected!
         //newSolve.type = type.rawValue
+         
+         solveHandler.add(tempSolve!, newEntry: true)
+        */
         
-        solveHandler.add(newSolve)
         
         do {
             try PersistenceController.shared.container.viewContext.save()
@@ -241,8 +265,10 @@ class TimerController: ObservableObject {
         }
         
         startTime = 0
-        oneActivated = false
         timer?.invalidate()
+        self.tempSolve = nil
+        oneActivated = false
+        bothActivated = false
         timerGoing = false
         acceptInput = false
         //let delayInputTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(acceptInputNow), userInfo: nil, repeats: false)
@@ -272,9 +298,12 @@ class TimerController: ObservableObject {
         // update vars which control the timer
         lastRecordedTime = Date().timeIntervalSinceReferenceDate - startTime // calculates the new time (every milisecond)
         time = lastRecordedTime
+        self.tempSolve!.timeMS = time
         
         self.updateOverUnderDisplay() // update O/U display
         self.updateTimerFromTime() // update timer display
+        self.solveHandler.barGraphController.updateBars()
+        self.bo3Controller.update()
         
     }
     

@@ -77,7 +77,7 @@ struct StatsBarView: View {
                      */
                     if solveHandler.size > 0 { // guard incase there are no solves
                         HStack {
-                            Text( solveHandler.getMin().getTimeCapture()?.getAsReadable() ?? "-" )
+                            Text( solveHandler.getMin().getTimeCapture()?.getInSolidForm() ?? "-" )
                                 .font(.system(size: 9))
                                 .fontWeight(.bold)
                                 .frame(width: 100, height: 10, alignment: .leading)
@@ -97,7 +97,7 @@ struct StatsBarView: View {
                             .frame(width: 60, height: 10)
                             .offset(y: 3)
                             
-                            Text( solveHandler.getMax().getTimeCapture()?.getAsReadable() ?? "-" )
+                            Text( solveHandler.getMax().getTimeCapture()?.getInSolidForm() ?? "-" )
                                 .font(.system(size: 9))
                                 .fontWeight(.bold)
                                 .frame(width: 100, height: 10, alignment: .trailing)

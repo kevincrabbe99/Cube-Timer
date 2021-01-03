@@ -22,6 +22,10 @@
 		7B607411258F0B5700D188CF /* CTypeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607410258F0B5700D188CF /* CTypeHandler.swift */; };
 		7B607424258F29D000D188CF /* PopupError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607423258F29D000D188CF /* PopupError.swift */; };
 		7B607442258F30D200D188CF /* CTEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607441258F30D200D188CF /* CTEditController.swift */; };
+		7B7D56A6259E6DC900A427ED /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56A5259E6DC900A427ED /* SettingsView.swift */; };
+		7B7D56B125A05B2B00A427ED /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56B025A05B2B00A427ED /* SettingsController.swift */; };
+		7B7D56B725A0688A00A427ED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56B625A0688A00A427ED /* AlertView.swift */; };
+		7B7D56C525A06DA000A427ED /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56C425A06DA000A427ED /* AlertController.swift */; };
 		7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */; };
 		7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */; };
 		7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */; };
@@ -63,6 +67,8 @@
 		7BAAE120259B387300330533 /* Heebo-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE114259B387300330533 /* Heebo-VariableFont_wght.ttf */; };
 		7BAAE129259B387900330533 /* Play-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE126259B387900330533 /* Play-Regular.ttf */; };
 		7BAAE12B259B387900330533 /* Play-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE128259B387900330533 /* Play-Bold.ttf */; };
+		7BAAE142259C5E7C00330533 /* EditSolvesBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAAE141259C5E7C00330533 /* EditSolvesBarView.swift */; };
+		7BAAE14E259C678900330533 /* DeleteSolvesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAAE14D259C678900330533 /* DeleteSolvesView.swift */; };
 		7BBA7186258C763300FED3A2 /* CubeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7185258C763300FED3A2 /* CubeIcon.swift */; };
 		7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */; };
 		7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7198258D356600FED3A2 /* SidebarShape.swift */; };
@@ -117,6 +123,10 @@
 		7B607410258F0B5700D188CF /* CTypeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTypeHandler.swift; sourceTree = "<group>"; };
 		7B607423258F29D000D188CF /* PopupError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupError.swift; sourceTree = "<group>"; };
 		7B607441258F30D200D188CF /* CTEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTEditController.swift; sourceTree = "<group>"; };
+		7B7D56A5259E6DC900A427ED /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7B7D56B025A05B2B00A427ED /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		7B7D56B625A0688A00A427ED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		7B7D56C425A06DA000A427ED /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCubeTypeView.swift; sourceTree = "<group>"; };
 		7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCubeTypeViewController.swift; sourceTree = "<group>"; };
 		7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDisplayView.swift; sourceTree = "<group>"; };
@@ -164,6 +174,8 @@
 		7BAAE114259B387300330533 /* Heebo-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		7BAAE126259B387900330533 /* Play-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Play-Regular.ttf"; sourceTree = "<group>"; };
 		7BAAE128259B387900330533 /* Play-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Play-Bold.ttf"; sourceTree = "<group>"; };
+		7BAAE141259C5E7C00330533 /* EditSolvesBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSolvesBarView.swift; sourceTree = "<group>"; };
+		7BAAE14D259C678900330533 /* DeleteSolvesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSolvesView.swift; sourceTree = "<group>"; };
 		7BBA7185258C763300FED3A2 /* CubeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeIcon.swift; sourceTree = "<group>"; };
 		7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTab.swift; sourceTree = "<group>"; };
 		7BBA7198258D356600FED3A2 /* SidebarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarShape.swift; sourceTree = "<group>"; };
@@ -214,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				7B2929C825477C51009A5B90 /* BarGraphView.swift */,
+				7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */,
 				7B2929D62547909C009A5B90 /* Stat Bar */,
 			);
 			path = Stats;
@@ -222,7 +235,6 @@
 		7B2929D62547909C009A5B90 /* Stat Bar */ = {
 			isa = PBXGroup;
 			children = (
-				7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */,
 				7B2929D7254790B3009A5B90 /* Bar.swift */,
 				7B4719E1256BBBEB009FFFEA /* BarController.swift */,
 			);
@@ -254,6 +266,7 @@
 			children = (
 				7B6073F3258E4FFF00D188CF /* PopupController.swift */,
 				7B6073FB258E500700D188CF /* PopupView.swift */,
+				7BAAE14C259C674900330533 /* Delete_Solve_Confirm */,
 				7BFF31FB25997D800029EA19 /* Solve_Item_Editor */,
 				7B607440258F30A000D188CF /* Cube_Type_Editor */,
 			);
@@ -277,6 +290,24 @@
 				7B607400258ED65F00D188CF /* views */,
 			);
 			path = Cube_Type_Editor;
+			sourceTree = "<group>";
+		};
+		7B7D56A4259E6CEC00A427ED /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7B7D56A5259E6DC900A427ED /* SettingsView.swift */,
+				7B7D56B025A05B2B00A427ED /* SettingsController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		7B7D56B525A0684C00A427ED /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7B7D56B625A0688A00A427ED /* AlertView.swift */,
+				7B7D56C425A06DA000A427ED /* AlertController.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		7B7DDCFF259076E800E2197F /* Shapes */ = {
@@ -326,8 +357,10 @@
 				7BE885A62547665C00046D29 /* Controllers */,
 				7BE885A72547667200046D29 /* Main Views */,
 				7B55C60E25954A880076B913 /* All_Solves */,
+				7B7D56A4259E6CEC00A427ED /* Settings */,
+				7B7D56B525A0684C00A427ED /* Alert */,
 				7B6073F2258E4FE400D188CF /* Popup */,
-				7BCC6DCB25723833001663B1 /* Cube Type Side Bar */,
+				7BCC6DCB25723833001663B1 /* Side Bar */,
 				7BE885AE2547669E00046D29 /* SolveItem */,
 				7B6073E2258E4AC400D188CF /* CubeTypeItem */,
 				7B984CF2253E02DC00BC6402 /* Assets.xcassets */,
@@ -433,6 +466,14 @@
 			path = Play;
 			sourceTree = "<group>";
 		};
+		7BAAE14C259C674900330533 /* Delete_Solve_Confirm */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE14D259C678900330533 /* DeleteSolvesView.swift */,
+			);
+			path = Delete_Solve_Confirm;
+			sourceTree = "<group>";
+		};
 		7BCC6DB0256EC5E4001663B1 /* BestOfThree */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,7 +483,7 @@
 			path = BestOfThree;
 			sourceTree = "<group>";
 		};
-		7BCC6DCB25723833001663B1 /* Cube Type Side Bar */ = {
+		7BCC6DCB25723833001663B1 /* Side Bar */ = {
 			isa = PBXGroup;
 			children = (
 				7BCC6DD4257238B8001663B1 /* SidebarView.swift */,
@@ -450,7 +491,7 @@
 				7B7DDD0825907D3700E2197F /* Single_CubeType_Components */,
 				7B7DDCFF259076E800E2197F /* Shapes */,
 			);
-			path = "Cube Type Side Bar";
+			path = "Side Bar";
 			sourceTree = "<group>";
 		};
 		7BE885A62547665C00046D29 /* Controllers */ = {
@@ -492,6 +533,7 @@
 		7BFF31A52596FC860029EA19 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				7BAAE141259C5E7C00330533 /* EditSolvesBarView.swift */,
 				7BFF31DC25986EEB0029EA19 /* Stat_Card */,
 				7BFF31BA2596FE9D0029EA19 /* Solve_Element */,
 				7BFF31AC2596FCCA0029EA19 /* Solves_Grid */,
@@ -694,9 +736,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B7D56B125A05B2B00A427ED /* SettingsController.swift in Sources */,
 				7B6073F4258E4FFF00D188CF /* PopupController.swift in Sources */,
 				7B984CF1253E02D900BC6402 /* ContentView.swift in Sources */,
 				7B9B7966254908380088ECD5 /* MainView.swift in Sources */,
+				7B7D56C525A06DA000A427ED /* AlertController.swift in Sources */,
 				7B6073FC258E500700D188CF /* PopupView.swift in Sources */,
 				7B2929D8254790B3009A5B90 /* Bar.swift in Sources */,
 				7B55C62E2596F29C0076B913 /* AllSolvesController.swift in Sources */,
@@ -708,6 +752,7 @@
 				7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */,
 				7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */,
 				7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */,
+				7BAAE142259C5E7C00330533 /* EditSolvesBarView.swift in Sources */,
 				7BFF32082599870F0029EA19 /* EditSolveController.swift in Sources */,
 				7B607424258F29D000D188CF /* PopupError.swift in Sources */,
 				7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */,
@@ -717,6 +762,7 @@
 				7BFF3210259AEEA40029EA19 /* ContentViewController.swift in Sources */,
 				7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */,
 				7B984D5A253E72D700BC6402 /* SolveHandler.swift in Sources */,
+				7B7D56B725A0688A00A427ED /* AlertView.swift in Sources */,
 				7BBA7186258C763300FED3A2 /* CubeIcon.swift in Sources */,
 				7BFF31D82597FCA60029EA19 /* TimeGroupView.swift in Sources */,
 				7B607402258ED68300D188CF /* NewCubeTypeView.swift in Sources */,
@@ -736,10 +782,12 @@
 				7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */,
 				7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */,
 				7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */,
+				7BAAE14E259C678900330533 /* DeleteSolvesView.swift in Sources */,
 				7BFF3203259986B80029EA19 /* EditSolveView.swift in Sources */,
 				7BFF31D02597FC9A0029EA19 /* TimeGroupController.swift in Sources */,
 				7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */,
 				7BFF31AE2596FCE90029EA19 /* SolvesGridView.swift in Sources */,
+				7B7D56A6259E6DC900A427ED /* SettingsView.swift in Sources */,
 				7B607442258F30D200D188CF /* CTEditController.swift in Sources */,
 				7BCC6DCD25723860001663B1 /* SidebarController.swift in Sources */,
 				7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */,

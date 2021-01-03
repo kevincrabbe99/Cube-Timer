@@ -171,14 +171,16 @@ class CTypeHandler: ObservableObject {
         return false
     }
     
+    
     /*
-     *  Called by SidebarView.swift, used to call every CubeTypeController.editMode.toggle()
-    public func toggleEditMode() {
-        for ctController in typeControllers {
-            ctController.editMode.toggle()
-        }
-    }
+     *  Called whenever a cube is added by SolvesData.swift
      */
+    public func updateModifiedDateForSelected() {
+        self.selected.setValue(Date(), forKey: "lastModified")
+        
+        // reorder the typeControllers
+        self.typeControllers = typeControllers.sorted { $0.ct.lastModified! > $1.ct.lastModified! }
+    }
     
     /*
      *  This method calls the delte from CoreData method (right below)
@@ -253,6 +255,26 @@ class CTypeHandler: ObservableObject {
         }
         
         return false
+    }
+    
+    public func edit(_ ct: CubeType, d1: Int, d2: Int, d3: Int, desc: String) {
+        print("set to: ", d1, d2, d3, desc)
+        ct.setValue(d1, forKey: "d1")
+        ct.dim1 = d1
+        ct.setValue(d2, forKey: "d2")
+        ct.dim2 = d2
+        ct.setValue(d3, forKey: "d3")
+        ct.dim3 = d3
+        ct.setValue(desc, forKey: "desc")
+        ct.desc = desc
+        ct.setValue(Date(), forKey: "lastModified")
+        
+        do {
+            try PersistenceController.shared.container.viewContext.save()
+            print("Cube Type Saved!")
+        } catch {
+            print("SAVE ERROR: saving a new CubeType, CTypeController.swift -> edit")
+        }
     }
     
     

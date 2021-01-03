@@ -191,17 +191,39 @@ struct TimerView: View {
                 Button(action: { // background / label
                     openShowAllSolves()
                 }, label: {
-                    ZStack {
-                        Color(.init("very_dark_black"))
-                            .cornerRadius(5)
-                            .animation(.easeInOut(duration: 0.15))
-                            .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.white.opacity(0.6),lineWidth: 1)
-                                    .animation(.easeInOut(duration: 0.15))
-                                    .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
-                            )
+                    
+                    if !(solveHandler.currentTimeframe == .LastThree && solveHandler.solves.count < 3) {
+                        ZStack {
+                            Color(.init("very_dark_black"))
+                                .cornerRadius(5)
+                                .animation(.easeInOut(duration: 0.15))
+                                .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
+                                
+                                .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
+
+                                /*
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.white.opacity(0.6),lineWidth: 1)
+                                        .animation(.easeInOut(duration: 0.15))
+                                        .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
+                                )
+                                */
+                        }
+                    } else {
+                        ZStack {
+                            Color.init("very_dark_black")
+                                .cornerRadius(5)
+                                .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
+                                .transition(.opacity)
+                            
+                            Text("COMPLETE \( 3 - solveHandler.solves.count) MORE SOLVES")
+                                .foregroundColor(Color.init("mint_cream"))
+                                .fontWeight(.bold)
+                                .font(Font.custom("Heebo-Black", size: 12))
+                                .opacity(0.8)
+                        }
+                        .frame(width: slvsBarWidth, height: slvsBarHeight)
                     }
                     /*
                     RoundedRectangle(cornerRadius: 5)
@@ -223,9 +245,10 @@ struct TimerView: View {
                          * BEST OF 3 Gamemode
                          */
                         //BestOfThreeView(timer: timer, solveHandler: solveHandler)
-                      
+                        if solveHandler.solves.count >= 3 {
                             BestOfThreeView(c: self.bo3Controller) // bo3Controoler is initiated in ContentView.swift
                                 .frame(width: 300, height: 60)
+                        }
                         
                     }else {
                     
@@ -246,6 +269,7 @@ struct TimerView: View {
                                     
                             }
                         } // end last 3 bar [HStack]
+                        .opacity(timer.peripheralOpacity)
                         
                     } // end if
                     
@@ -253,7 +277,6 @@ struct TimerView: View {
             }
             .frame(width: 280, height: 20, alignment: .top)
             .zIndex(90)
-            .opacity(timer.peripheralOpacity)
             .animation(
                 Animation.easeOut(duration: 0.15)
             )
@@ -262,7 +285,7 @@ struct TimerView: View {
              *  Displays the bar graph at all times
              */
             StatsBarView(timer: timer, solveHandler: solveHandler)
-                .opacity(statBarGraphOpacity)
+                // .opacity(statBarGraphOpacity)
                 .animation(Animation.easeOut(duration: 0.15))
                 .offset(y: 20)
             

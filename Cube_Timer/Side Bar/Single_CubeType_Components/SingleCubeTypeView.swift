@@ -85,8 +85,8 @@ struct SingleCubeTypeView: View/*, Identifiable */{
             }
             .foregroundColor( Color.init("mint_cream"))
             .offset(x: 20)
-            .offset(x: (controller.selected ? CGFloat.random(in: 1..<5) : -5))
-            .animation((controller.selected ? Animation.easeInOut(duration: 1).repeatForever(autoreverses: true) : Animation.easeInOut))
+            .offset(x: (controller.selected ? /*CGFloat.random(in: 1..<5)*/ 5 : -5))
+            //.animation((controller.selected ? Animation.easeInOut(duration: 1).repeatForever(autoreverses: true) : Animation.easeInOut))
             .onTapGesture {
                 self.controller.select()
             }

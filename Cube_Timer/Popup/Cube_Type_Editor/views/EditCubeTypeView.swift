@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EditCubeTypeView: View {
     
+    @EnvironmentObject var cTypeHandler: CTypeHandler
+    
     //var parent: PopupView!
     var controller: CTEditController!
     var parent: PopupController!
@@ -22,7 +24,11 @@ struct EditCubeTypeView: View {
     @State var d2: Int = 3
     @State var d3: Int = 3
     
+    
+    
     let configDimensionOptions: [Int] = [2,3,4,5,6,7,8,9]
+
+    @State var deleteGuardCounter: Int = 0
     
     /*
     init(controller: CTEditController, contentView: ContentView) {
@@ -33,8 +39,6 @@ struct EditCubeTypeView: View {
  */
     
     init(controller: CTEditController, parent: PopupController, setCT: CubeType?) {
-        
-        
         self.controller = controller
         self.parent = parent
         self.setCT = setCT
@@ -70,11 +74,10 @@ struct EditCubeTypeView: View {
                  */
                 //if !isEditing() {
                 Text("EDIT CUBE")
-                        .fontWeight(.black)
-                        .font(.system(size: 20))
-                        .foregroundColor(.init("mint_cream"))
-                        .frame(width: w-20, alignment: .leading)
-                        .offset(x: 20, y: 10)
+                    .font(Font.custom("Heebo-Black", size: 23))
+                    .foregroundColor(.init("mint_cream"))
+                    .frame(width: w-20, alignment: .leading)
+                    .offset(x: 20, y: 10)
                 /*
                 }else {
                     Text("EDIT CUBE")
@@ -96,7 +99,7 @@ struct EditCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 40)
+                    .frame(width: 60, height: 60)
                     .labelsHidden()
                     .clipped()
                     
@@ -112,7 +115,7 @@ struct EditCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 40)
+                    .frame(width: 60, height: 60)
                     .labelsHidden()
                     .clipped()
                     
@@ -128,13 +131,14 @@ struct EditCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 30)
+                    .frame(width: 60, height: 60)
                     .labelsHidden()
                     .clipped()
                     
                     
                 }
                 .frame(width: innerW, height: 60)
+                .offset(y: -10)
         
                 /*
                  *  TextBox stuff
@@ -142,6 +146,8 @@ struct EditCubeTypeView: View {
                 ZStack {
                     Color.init("mint_cream")
                         .cornerRadius(3)
+                        .opacity(0.9)
+                        .addBorder(Color.white, width: 1, cornerRadius: 3)
                         .shadow(radius: 4)
                     
                     TextField("enter a description", text: $description, onEditingChanged: { editing in
@@ -154,7 +160,7 @@ struct EditCubeTypeView: View {
                     })
                     .frame(width: w-120)
                     .font(.system(size:14))
-                    .foregroundColor(.init("black_chocolate"))
+                    .foregroundColor(.black)
                 
                 }
                 .frame(width: innerW, height: 30, alignment: .center)
@@ -166,9 +172,17 @@ struct EditCubeTypeView: View {
                      */
                     //deleteButton(controller: controller, contentView: contentView, w: w, id: setCT!.id!)
                     Button(action: {
-                        controller.deleteCT(id: (setCT?.id)!)
-                        parent.hidePopup()
+                        if deleteGuardCounter > 0 {
+                            controller.deleteCT(id: (setCT?.id)!)
+                            parent.hidePopup()
+                        } else {
+                            deleteGuardCounter += 1
+                        }
                     }, label: {
+                        RoundedButton(      color:(deleteGuardCounter == 0 ? Color.init("mint_cream").opacity(0.8) : Color.init("red")),
+                                            text: "DELETE",
+                                            textColor: Color.init("very_dark_black"))
+                        /*
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
                                 .fill(LinearGradient(
@@ -184,6 +198,7 @@ struct EditCubeTypeView: View {
                                 .fontWeight(.bold)
                         }
                         .frame(width: 90, height: 35, alignment: .center)
+                        */
                     })
                     
                     
@@ -192,8 +207,15 @@ struct EditCubeTypeView: View {
                      updateButton(w: w)
                      */
                     Button(action: {
-                        
+                        cTypeHandler.edit(setCT!, d1: d1, d2: d2, d3: d3, desc: description)
+                        parent.hidePopup()
                     }, label: {
+                        
+                        RoundedButton(      color: (Color.init("mint_cream").opacity(0.8)),
+                                            text: "UPDATE",
+                                            textColor: Color.init("very_dark_black"))
+                        
+                        /*
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
                                 .fill(LinearGradient(
@@ -209,6 +231,7 @@ struct EditCubeTypeView: View {
                                 .fontWeight(.bold)
                         }
                         .frame(width: 90, height: 35, alignment: .center)
+                        */
                         
                     })
                 }.frame(width: innerW, alignment: .trailing)
@@ -218,6 +241,7 @@ struct EditCubeTypeView: View {
             }
             .frame(width: (w-20), height: (h-20), alignment: .topLeading)
             .position(x: w/2, y: h/2)
+            .offset(y: -14)
             .foregroundColor(.init("mint_cream"))
                 
         }

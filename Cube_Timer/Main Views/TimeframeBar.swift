@@ -7,49 +7,12 @@
 
 import SwiftUI
 
-/*
-class SelectedPos: ObservableObject {
-    
-    @Published var selectedPos: CGFloat = 0
-    init(_ pos: CGFloat) {
-        selectedPos = pos
-    }
-    func set(_ pos: CGFloat) {
-        selectedPos = pos
-    }
-    
-    /*
-     *  Used to calculate the position of the slider
-     */
-    func set(_ pos: Timeframe) {
-        switch pos {
-        case .LastThree:
-            self.selectedPos = 0
-        case .Today:
-            self.selectedPos = 1
-        case .Week:
-            self.selectedPos = 2
-        case .OneMonth:
-            self.selectedPos = 3
-        case .ThreeMonths:
-            self.selectedPos = 4
-        case .Year:
-            self.selectedPos = 5
-        case .All:
-            self.selectedPos = 6
-        default:
-            self.selectedPos = 7
-        }
-        print("selectedPos ", selectedPos)
-    }
-}
- */
 
 struct TimeframeBar: View {
     
     @ObservedObject var solveHandler: SolveHandler
     
-    @State var selectedPos: Int = 1
+    //@State var selectedPos: Int = 1
     
     //var selectedTimeFrame: Int = 0
     //var timeFrames: [STDButton] = []
@@ -60,10 +23,10 @@ struct TimeframeBar: View {
     
     func switchTimeFrameTo(_ tf: Timeframe) {
         solveHandler.currentTimeframe = tf
-        print("sp: ", selectedPos)
+        print("sp: ", solveHandler.currentTimeframeButtonPos)
     }
     
-    
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -77,7 +40,7 @@ struct TimeframeBar: View {
                     .frame(width: 35, height: 25)
                     .foregroundColor(.white)
                     .position( x: 31.5, y: 12.5 ) // THIS X VALUE: is the initial left constraint
-                    .offset(x: CGFloat(selectedPos * 55))
+                    .offset(x: CGFloat(solveHandler.currentTimeframeButtonPos * 55))
                     .animation(.default)
                 
                 
@@ -86,10 +49,9 @@ struct TimeframeBar: View {
                     /*
                     *   NEEDS TO BE UPDATED: make it so it shows only needed timeframes
                     */
-                    
-                    
                     Button(action: {
-                        self.selectedPos = getIndexOfTfButton(.LastThree)
+                        lightTap.impactOccurred()
+                        self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.LastThree)
                         solveHandler.updateSolves(to: .LastThree)
                     }) {
                         ZStack {
@@ -101,7 +63,8 @@ struct TimeframeBar: View {
                     }
                     
                     Button(action: {
-                        self.selectedPos = getIndexOfTfButton(.Today)
+                        lightTap.impactOccurred()
+                        self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Today)
                         solveHandler.updateSolves(to: .Today)
                     }) {
                         ZStack {
@@ -114,7 +77,8 @@ struct TimeframeBar: View {
                     
                     if solveHandler.getApplicableTimeframes().contains(.Week) { // guard to check if solves in timeframe exist
                         Button(action: {
-                            self.selectedPos = getIndexOfTfButton(.Week)
+                            lightTap.impactOccurred()
+                            self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Week)
                             solveHandler.updateSolves(to: .Week)
                         }) {
                             ZStack {
@@ -128,7 +92,8 @@ struct TimeframeBar: View {
                     
                     if solveHandler.getApplicableTimeframes().contains(.OneMonth) { // guard to check if solves in timeframe exist
                         Button(action: {
-                            self.selectedPos = getIndexOfTfButton(.OneMonth)
+                            lightTap.impactOccurred()
+                            self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.OneMonth)
                             solveHandler.updateSolves(to: .OneMonth)
                         }) {
                             ZStack {
@@ -142,7 +107,8 @@ struct TimeframeBar: View {
                     
                     if solveHandler.getApplicableTimeframes().contains(.ThreeMonths) { // guard to check if solves in timeframe exist
                         Button(action: {
-                            self.selectedPos = getIndexOfTfButton(.ThreeMonths)
+                            lightTap.impactOccurred()
+                            self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.ThreeMonths)
                             solveHandler.updateSolves(to: .ThreeMonths)
                         }) {
                             ZStack {
@@ -156,7 +122,8 @@ struct TimeframeBar: View {
                     
                     if solveHandler.getApplicableTimeframes().contains(.Year) { // guard to check if solves in timeframe exist
                         Button(action: {
-                            self.selectedPos = getIndexOfTfButton(.Year)
+                            lightTap.impactOccurred()
+                            self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Year)
                             solveHandler.updateSolves(to: .Year)
                         }) {
                             ZStack {
@@ -169,7 +136,8 @@ struct TimeframeBar: View {
                     }
                     
                     Button(action: {
-                        self.selectedPos = Int(CGFloat((solveHandler.getApplicableTimeframes().count - 1))) // the count is the total of solveHandler.getApplicabletimeFrames().count + ( -1 )
+                        lightTap.impactOccurred()
+                        self.solveHandler.currentTimeframeButtonPos = Int(CGFloat((solveHandler.getApplicableTimeframes().count - 1))) // the count is the total of solveHandler.getApplicabletimeFrames().count + ( -1 )
                         solveHandler.updateSolves(to: .All)
                     }) {
                         ZStack {

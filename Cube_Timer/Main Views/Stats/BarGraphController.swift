@@ -18,12 +18,14 @@ class BarGraphController: ObservableObject {
     
     var id: String = UUID().uuidString
     var solveHandler: SolveHandler!
+    var timer: TimerController!
+    var cTypeHandler: CTypeHandler!
     
     // array of Bar objects corresponding to this timeframe
-    @Published var bars: [Bar] = [Bar](repeating: Bar(), count: 30)
+    @Published var bars: [Bar] = [Bar](repeating: Bar(), count: 35)
     /* array of BarController objects corresponding to the array above
      * get initiated in self.init() */
-    var barControllers: [BarController] = [BarController](repeating: BarController(), count: 30)
+    var barControllers: [BarController] = [BarController](repeating: BarController(), count: 35)
     
     @Published var highlightedBarIndex: Int = -1
     
@@ -32,12 +34,26 @@ class BarGraphController: ObservableObject {
      *  CALLED BY: SolveHandler.swift (before initialized)
      */
     init() {
-        self.solveHandler = nil // creates a "nil" instance in place of SolveHandler (a fake self.parent)
+       
+        // fill self.bars by generating blank bars
+        for (i, _) in self.bars.enumerated() {  // loop through Bar view array (self.bars)
+            self.bars[i] = Bar(pct: 0.1)
+        }
+        
+        // fill self.barControllers based on self.bars
+        for (i, v) in self.bars.enumerated() { // loop through Bar view array (self.bars)
+            self.barControllers[i] = v.SSBController // assign v.controller to the array spot
+            print("Iteration: ", i, " ID: ", self.barControllers[i].id)
+        }
+        
     }
     
+    /*
     init(parent: SolveHandler) {
         
         self.solveHandler = parent
+        self.timer = solveHandler.timer
+        self.cTypeHandler = solveHandler.cTypeHandler
         
         // fill self.bars by generating blank bars
         for (i, _) in self.bars.enumerated() {  // loop through Bar view array (self.bars)
@@ -51,6 +67,7 @@ class BarGraphController: ObservableObject {
         }
         
     }
+    */
     
     /*
      *  Animates the bars to 0
@@ -70,9 +87,13 @@ class BarGraphController: ObservableObject {
      
      *  THIS WAS MOVED FROM SolvesFromTimeframe.swift to (this) SolveHandler.swift
      */
-    let numOfBars: Int = 30
-    var heightArray = [[SolveItem]](repeating: [], count: 30) // gets accessed in heightArray & highlightLastSolvesBar
+    let numOfBars: Int = 35
+    var heightArray = [[SolveItem]](repeating: [], count: 35) // gets accessed in heightArray & highlightLastSolvesBar
     func updateBars()  {
+        
+        if solveHandler == nil {
+            return 
+        }
         
         //print("Running: SolveHandler().updateBars()")
         print("updating bars solve count = ", solveHandler.size)
@@ -83,7 +104,18 @@ class BarGraphController: ObservableObject {
         
         unhighlightAll() // unhighlight all the bars ( basically a reset )
         
-        let orderedSolves = solveHandler.solves.sorted(by:{ $0.timeMS < $1.timeMS })
+        /*
+         * add a phantom solve which gets updated from timer.lastRecordedTime
+         */
+        var solvesGroup = solveHandler.solves
+        /* attempt 1 at  creating a fake datapoint
+        if timer != nil {
+            if timer.timerGoing {
+                solvesGroup.append(SolveItem(id: "not real", timeMS: timer.lastRecordedTime, timestamp: Date(), cubeType: cTypeHandler.selected))
+            }
+        }*/
+        
+        let orderedSolves = solvesGroup.sorted(by:{ $0.timeMS < $1.timeMS })
         
         let singleBarRepresentation: Double = solveHandler.getRange() / Double(numOfBars)
         
@@ -177,7 +209,11 @@ class BarGraphController: ObservableObject {
         let barIndex = self.getBarIndexWhichIncludes(solve: lastSolve!)  // get the index of the bar with that solve
         
         // highlight the bar
-        barControllers[barIndex].highlight(Color.init("green"));
+        if barIndex < numOfBars / 2 {
+            barControllers[barIndex].highlight(Color.init("green"));
+        } else {
+            barControllers[barIndex].highlight(Color.init("red"));
+        }
     }
     
     /*

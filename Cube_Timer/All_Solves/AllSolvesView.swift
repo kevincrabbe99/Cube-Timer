@@ -15,9 +15,10 @@ struct AllSolvesView: View {
  `` */
     
     @EnvironmentObject var cvc: ContentViewController
+    @EnvironmentObject var controller: AllSolvesController
     
     var parent: ContentView
-    var controller: AllSolvesController
+    //var controller: AllSolvesController
     
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     
@@ -110,7 +111,7 @@ struct AllSolvesView: View {
                         HStack {
                                 
                             
-                            if !controller.selecting {
+                            if !(controller.selected.count > 0) { // if there are no selected solves
                                 
                                 StatLabelHorizontal(label: "SOLVES", value: Double(controller.count ?? 0), showDecimal: false)
                                 StatLabelHorizontal(label: "AVERAGE", value: Double(controller.average ?? 0))
@@ -118,37 +119,15 @@ struct AllSolvesView: View {
                       
                             } else {
                                 
-                                Button(action: {
-                                    cvc.tappedEditSolves(solves: controller.selected)
-                                }, label: {
-                                    ZStack {
-                                        Color.init("mint_cream")
-                                            .opacity(0.2)
-                                            .cornerRadius(5)
-                                        
-                                        HStack(alignment: .center, spacing: 5) {
-                                            Text("EDIT")
-                                                .fontWeight(.bold)
-                                            ZStack {
-                                                Circle()
-                                                    .fill(Color.init("very_dark_black"))
-                                                    .padding(5)
-                                                Text(String(controller.selected.count))
-                                                    .font(.system(size: 10))
-                                            }
-                                            Text("SOLVES")
-                                                .fontWeight(.bold)
-                                        }
-                                        .foregroundColor(.white)
-                                        .frame(width: 200)
-                                    }
-                                    .padding(.leading, 40)
-                                })
+                                
+                                EditSolvesBarView()
+                                    .frame(width: geo.size.width - 400)
+                                
                                 
                             } // end if
                          
                         }
-                        .frame(height: 30, alignment: .leading)
+                        .frame(height: 30, alignment: .trailing)
                         .padding(.top, 10)
                         .padding(.bottom, 10)
                         .padding(.trailing, 60)
@@ -288,7 +267,7 @@ struct AllSolvesView: View {
 struct AllSolvesView_Previews: PreviewProvider {
     static var previews: some View {
       //  AllSolvesView(parent: ContentView(), solvesData: SolvesFromTimeframe(), solvesGridController: SolvesGridController())
-        AllSolvesView(parent: ContentView(), controller: AllSolvesController())
+        AllSolvesView(parent: ContentView())
                 .previewLayout(.fixed(width: 2436 / 3.0, height: 1125 / 3.0))
     }
 }

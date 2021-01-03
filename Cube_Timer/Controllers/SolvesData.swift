@@ -64,6 +64,12 @@ class SolvesFromTimeframe: ObservableObject {
     }
     
     
+    /*
+     *  returns whether the solve exists in the braud spectrum of all timeframes
+     */
+    public func exists(solveItem: SolveItem) -> Bool {
+        return solves.contains(solveItem)
+    }
     
     /*
      *  Returns an array of the solves from the requested timeframe
@@ -306,9 +312,15 @@ class SolvesFromTimeframe: ObservableObject {
     /*
      *  Adds a solve to self.solves
      */
-    func add(_ s: SolveItem) {
+    func add(_ s: SolveItem, newEntry: Bool = false) {
+        // add to array
         solves.append(s)
         self.size += 1
+        
+        // update the cubeType last modified
+        if newEntry {
+            cTypeHandler!.updateModifiedDateForSelected()
+        }
     }
     
     /*

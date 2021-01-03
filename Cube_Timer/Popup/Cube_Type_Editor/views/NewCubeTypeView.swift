@@ -11,13 +11,14 @@ struct NewCubeTypeView: View {
     
     //var parent: PopupView!
     var controller: CTEditController!
-    var parent: PopupController!
+   // var parent: PopupController!
+    @EnvironmentObject var parent: PopupController
     
    // var setCT: CubeType?
     
    // @State var title: String = "ENTER A NEW CUBE"
     
-    @State var description: String = "Some bullshit"
+    @State var description: String = "Description"
     @State var d1: Int = 3
     @State var d2: Int = 3
     @State var d3: Int = 3
@@ -25,9 +26,9 @@ struct NewCubeTypeView: View {
     let configDimensionOptions: [Int] = [2,3,4,5,6,7,8,9]
     
     
-    init(controller: CTEditController, parent: PopupController) {
+    init(controller: CTEditController/*, parent: PopupController*/) {
        self.controller = controller
-        self.parent = parent
+       //self.parent = parent
        //self.setCT = nil
    }
     /*
@@ -55,8 +56,7 @@ struct NewCubeTypeView: View {
                  */
                 //if !isEditing() {
                 Text("ENTER A NEW CUBE")
-                        .fontWeight(.black)
-                        .font(.system(size: 20))
+                        .font(Font.custom("Heebo-Black", size: 23))
                         .foregroundColor(.init("mint_cream"))
                         .frame(width: w-20, alignment: .leading)
                         .offset(x: 20, y: 10)
@@ -81,7 +81,7 @@ struct NewCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 40)
+                    .frame(width: 60, height: 60)
                     .labelsHidden()
                     .clipped()
                     
@@ -97,7 +97,7 @@ struct NewCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 40)
+                    .frame(width: 60, height: 60)
                     .labelsHidden()
                     .clipped()
                     
@@ -113,13 +113,14 @@ struct NewCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 30)
+                    .frame(width: 60, height: 60)
                     .labelsHidden()
                     .clipped()
                     
                     
                 }
                 .frame(width: innerW, height: 60)
+                .offset(y: -10)
         
                 /*
                  *  TextBox stuff
@@ -127,6 +128,8 @@ struct NewCubeTypeView: View {
                 ZStack {
                     Color.init("mint_cream")
                         .cornerRadius(3)
+                        .opacity(0.9)
+                        .addBorder(Color.white, width: 1, cornerRadius: 3)
                         .shadow(radius: 4)
                     
                     TextField("enter a description", text: $description, onEditingChanged: { editing in
@@ -139,7 +142,7 @@ struct NewCubeTypeView: View {
                     })
                     .frame(width: w-120)
                     .font(.system(size:14))
-                    .foregroundColor(.init("black_chocolate"))
+                    .foregroundColor(.black)
                 
                 }
                 .frame(width: innerW, height: 30, alignment: .center)
@@ -153,6 +156,8 @@ struct NewCubeTypeView: View {
                         controller.addCT(d1: (d1+2), d2: (d2+2), d3: (d3+2), desc: description) // we add 2 to offset for the Picker start point
                         parent.hidePopup()
                     }, label: {
+                        RoundedButton(color: Color.init("mint_cream"), text: "CREATE", textColor: Color.init("very_dark_black"))
+                        /*
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
                                 .fill(LinearGradient(
@@ -168,6 +173,7 @@ struct NewCubeTypeView: View {
                                 .fontWeight(.bold)
                         }
                         .frame(width: 90, height: 35, alignment: .center)
+                        */
                     })
                 }
                 .frame(width: w-100, alignment: .trailing)
@@ -177,6 +183,7 @@ struct NewCubeTypeView: View {
             }
             .frame(width: (w-20), height: (h-20), alignment: .topLeading)
             .position(x: w/2, y: h/2)
+            .offset(y: -14)
             .foregroundColor(.init("mint_cream"))
         }
         
@@ -190,7 +197,7 @@ struct NewCubeTypeView_Previews: PreviewProvider {
         ZStack {
             Color.init("very_dark_black")
             
-            NewCubeTypeView(controller: CTEditController(), parent: PopupController())
+            NewCubeTypeView(controller: CTEditController())
         }
         .previewLayout(PreviewLayout.fixed(width: 350, height: 200))
     }
