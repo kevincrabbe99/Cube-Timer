@@ -180,6 +180,7 @@ class ContentViewController: ObservableObject {
         
         if p == .settings {
             self.setStateForSettings()
+            self.onPage = p
         }else { // a button that was not settings was pressed
             // check if we need to exit settings
             if self.onPage == .settings {
@@ -191,16 +192,17 @@ class ContentViewController: ObservableObject {
             // update solves in
             self.setStateForAllSolves()
             self.allSolvesController.updateSolves()
+            self.onPage = .showAll
         }
         
         if p == .Main {
             self.setStateForMain()
+            self.onPage = .Main
         }
         
         
         self.pushOutSidebar()
         
-        self.onPage = p
         
     }
     

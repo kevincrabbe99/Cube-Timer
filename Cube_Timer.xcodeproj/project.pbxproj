@@ -510,8 +510,8 @@
 			children = (
 				7B9B7965254908380088ECD5 /* MainView.swift */,
 				7B984D27253E19A900BC6402 /* ButtonsView.swift */,
-				7B984D2F253E1CB400BC6402 /* TimeframeBar.swift */,
 				7B984D37253E226B00BC6402 /* TimerView.swift */,
+				7B984D2F253E1CB400BC6402 /* TimeframeBar.swift */,
 				7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */,
 				7BCC6DB0256EC5E4001663B1 /* BestOfThree */,
 				7B2929CD25477C5E009A5B90 /* Stats */,

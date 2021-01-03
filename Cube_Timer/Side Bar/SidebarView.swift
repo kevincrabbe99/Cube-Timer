@@ -144,7 +144,7 @@ struct SidebarView: View {
                         //ZStack {
                             HStack { // right side buttons
                                 
-                                if cvc.onPage != .settings {
+                                if !cvc.inSettings {
                                     Button(action: {
                                         cvc.setPageTo(.settings)
                                     }, label: {

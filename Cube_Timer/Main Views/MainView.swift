@@ -12,6 +12,7 @@ struct MainView: View {
     @EnvironmentObject var cvc: ContentViewController
     @EnvironmentObject var cTypeHandler: CTypeHandler
     @EnvironmentObject var timer: TimerController
+    @EnvironmentObject var settingsController: SettingsController
     
     var parent: ContentView
     //@ObservedObject var timer: TimerController
@@ -40,35 +41,38 @@ struct MainView: View {
                 ButtonsView(timer: timer)
                 
                 
-                VStack(alignment:.trailing) {
-                    Text(cTypeHandler.selected.name)
-                        //.font(.system(size: 30))
-                        .font(Font.custom("Play-Bold", size: 33))
-                        //.fontWeight(.black)
-                        .tracking(5)
-                        .offset(x: 5)
-                    Text(cTypeHandler.selected.descrip)
-                        .font(Font.custom("Play-Regular", size: 15))
-                        // .font(.system(size: 12))
-                        //.fontWeight(.bold)
-                        .opacity(0.75)
-                }.frame(width: 150, alignment: .trailing)
-                .position(x: geo.size.width - 120, y: 30)
-                .padding(.top, 20)
-                .padding(.bottom, 30)
-                .opacity(cvc.mainViewOpacity - 0.3)
-                .foregroundColor(.white)
+                if !settingsController.pauseSavingSolves {
+                    VStack(alignment:.trailing) {
+                        Text(cTypeHandler.selected.name)
+                            //.font(.system(size: 30))
+                            .font(Font.custom("Play-Bold", size: 33))
+                            //.fontWeight(.black)
+                            .tracking(5)
+                            .offset(x: 5)
+                        Text(cTypeHandler.selected.descrip)
+                            .font(Font.custom("Play-Regular", size: 15))
+                            // .font(.system(size: 12))
+                            //.fontWeight(.bold)
+                            .opacity(0.75)
+                    }.frame(width: 150, alignment: .trailing)
+                    .position(x: geo.size.width - 120, y: 30)
+                    .padding(.top, 20)
+                    .padding(.bottom, 30)
+                    .opacity(cvc.mainViewOpacity - 0.3)
+                    .foregroundColor(.white)
+                }
                 
                 
                 if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) { // only show when there is no timer active
                  
-                    
-                    TimeframeBar(sh: solveHandler)
-                        .position(x: geo.size.width/2, y: geo.size.height-50)
-                        //.opacity(0.9)
-                        .opacity(peripheralOpacity + 0.3)
-                        .animation(.easeIn)
-                        .transition(.move(edge: .bottom))
+                    if !settingsController.pauseSavingSolves {
+                        TimeframeBar(sh: solveHandler)
+                            .position(x: geo.size.width/2, y: geo.size.height-50)
+                            //.opacity(0.9)
+                            .opacity(peripheralOpacity + 0.3)
+                            .animation(.easeIn)
+                            .transition(.move(edge: .bottom))
+                        }
                     }
 
                     TimerView(p: self, t: timer, s: solveHandler, bo3c: bo3Controller /*solveHandler: solveHandler*/)

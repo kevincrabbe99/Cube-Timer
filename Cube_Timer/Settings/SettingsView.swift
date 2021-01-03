@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @EnvironmentObject var settingsController: SettingsController
+    @EnvironmentObject var cvc: ContentViewController
     
     
     var doublePressToStopLabel: String {
@@ -39,6 +40,15 @@ struct SettingsView: View {
                 Rectangle()
                     .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
                     .opacity(0.6)
+                
+                Button(action: {
+                    cvc.setPageTo(.settings)
+                }, label: {
+                    Image(systemName: "arrow.left")
+                        .foregroundColor(.init("mint_cream"))
+                })
+                .position(x: 50, y: 50)
+                
                 
                 VStack(alignment: .leading) {
                     /*

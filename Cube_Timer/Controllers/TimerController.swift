@@ -217,14 +217,15 @@ class TimerController: ObservableObject {
         print("time started")
         
         // create temp solve object
-        self.tempSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
-        tempSolve!.id = UUID().uuidString
-        tempSolve!.timeMS = lastRecordedTime
-        tempSolve!.timestamp = Date()
-        
-        tempSolve!.cubeType = cTypeHandler.selected!
-        
-        solveHandler.add(tempSolve!, newEntry: true)
+        if !settingsController.pauseSavingSolves {
+            self.tempSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
+            tempSolve!.id = UUID().uuidString
+            tempSolve!.timeMS = lastRecordedTime
+            tempSolve!.timestamp = Date()
+            tempSolve!.cubeType = cTypeHandler.selected!
+            
+            solveHandler.add(tempSolve!, newEntry: true)
+        }
         
         startTime = Date().timeIntervalSinceReferenceDate
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
@@ -255,13 +256,14 @@ class TimerController: ObservableObject {
          solveHandler.add(tempSolve!, newEntry: true)
         */
         
-        
-        do {
-            try PersistenceController.shared.container.viewContext.save()
-                print("Solve Saved!")
-            //presentationMode.wrappedValue.dismiss()  //idk
-        } catch {
-            print("SAVE ERROR: ", error.localizedDescription)
+        if !settingsController.pauseSavingSolves {
+            do {
+                try PersistenceController.shared.container.viewContext.save()
+                    print("Solve Saved!")
+                //presentationMode.wrappedValue.dismiss()  //idk
+            } catch {
+                print("SAVE ERROR: ", error.localizedDescription)
+            }
         }
         
         startTime = 0
@@ -298,7 +300,10 @@ class TimerController: ObservableObject {
         // update vars which control the timer
         lastRecordedTime = Date().timeIntervalSinceReferenceDate - startTime // calculates the new time (every milisecond)
         time = lastRecordedTime
-        self.tempSolve!.timeMS = time
+        
+        if !settingsController.pauseSavingSolves {
+            self.tempSolve!.timeMS = time // update tempSolve 
+        }
         
         self.updateOverUnderDisplay() // update O/U display
         self.updateTimerFromTime() // update timer display
