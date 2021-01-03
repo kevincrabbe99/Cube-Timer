@@ -48,7 +48,7 @@ struct BestOfThreeView: View {
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
                              //   .frame(width: (geo.size.width/4), alignment: .leading)
-                            LabelElement(label: self.controller.best.getAsReadable())
+                            LabelElement(label: self.controller.best.getAsReadable(), highlighted: self.controller.lastIsBest, bgColor: Color.init("green"))
                             /*
                             Text("\(self.controller.best.getAsReadable())" as String)
                                 .font(.system(size: 13))
@@ -62,7 +62,7 @@ struct BestOfThreeView: View {
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 //.frame(width: (geo.size.width/4), alignment: .leading)
-                            LabelElement(label: self.controller.worst.getAsReadable())
+                            LabelElement(label: self.controller.worst.getAsReadable(), highlighted: self.controller.lastIsWorst, bgColor: Color.init("red"))
                             /*
                             Text("\(self.controller.worst.getAsReadable())" as String)
                                 .font(.system(size: 13))
@@ -101,12 +101,20 @@ struct BestOfThreeView: View {
 struct LabelElement: View {
     
     var label: String
+    var highlighted: Bool = false
+    var bgColor: Color = Color.init("mint_cream")
     
     var body: some View {
         ZStack {
-            Color.init("mint_cream")
-                .cornerRadius(3)
-                .opacity(0.2)
+            if !highlighted {
+                Color.init("mint_cream")
+                    .cornerRadius(3)
+                    .opacity(0.2)
+            } else {
+                bgColor
+                    .cornerRadius(3)
+                    .opacity(0.9)
+            }
             
             Text(label)
                 .fontWeight(.bold)

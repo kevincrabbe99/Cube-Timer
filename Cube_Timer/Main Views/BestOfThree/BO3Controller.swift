@@ -25,6 +25,9 @@ class BO3Controller: ObservableObject {
     @Published var worst: TimeCapture = TimeCapture()
     @Published var average: Double = -1
     
+    @Published var lastIsBest: Bool = false
+    @Published var lastIsWorst: Bool = false
+    
     //var body: BestOfThreeView = BestOfThreeView()
     
     @Published var solves: [SolveItem] = []
@@ -103,6 +106,14 @@ class BO3Controller: ObservableObject {
             }
         }
         self.best = b.getTimeCapture() ?? TimeCapture()
+        
+        // check if best is the last solve
+        if b == solveHandler.getLastSolve() {
+            self.lastIsBest = true
+        }else {
+            self.lastIsBest = false
+        }
+        
     }
     
     private func updateWorst() {
@@ -117,6 +128,13 @@ class BO3Controller: ObservableObject {
             }
         }
         self.worst = w.getTimeCapture() ?? TimeCapture()
+        
+        // check if best is the last solve
+        if w == solveHandler.getLastSolve() {
+            self.lastIsWorst = true
+        }else {
+            self.lastIsWorst = false
+        }
     }
     
     private func updateAverage() {
