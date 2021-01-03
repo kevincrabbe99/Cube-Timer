@@ -101,6 +101,14 @@ class AllSolvesController: ObservableObject {
         self.selected = []
     }
     
+    public func timeGroupHasSolves(_ tgc: TimeGroupController) -> Bool{
+        if tgc.solveElementControllers.count > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
     /*
      *  called when a solve is tapped on

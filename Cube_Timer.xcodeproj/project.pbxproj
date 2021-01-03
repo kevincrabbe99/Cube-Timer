@@ -247,6 +247,7 @@
 				7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */,
 				7B55C62D2596F29B0076B913 /* AllSolvesController.swift */,
 				7BFF31A52596FC860029EA19 /* res */,
+				7BFF31AC2596FCCA0029EA19 /* Solves_Grid */,
 			);
 			path = All_Solves;
 			sourceTree = "<group>";
@@ -536,7 +537,6 @@
 				7BAAE141259C5E7C00330533 /* EditSolvesBarView.swift */,
 				7BFF31DC25986EEB0029EA19 /* Stat_Card */,
 				7BFF31BA2596FE9D0029EA19 /* Solve_Element */,
-				7BFF31AC2596FCCA0029EA19 /* Solves_Grid */,
 				7BFF31A62596FCA60029EA19 /* Time_Group */,
 			);
 			path = res;

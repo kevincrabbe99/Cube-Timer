@@ -147,49 +147,106 @@ struct AllSolvesView: View {
                             ScrollView {
                                 LazyVStack {
                                     Group {
-                                        TimeGroupView(controller: controller.tgControllerToday)
-                                            .frame(height: controller.tgControllerToday.height)
-                                        TimeGroupView(controller: controller.tgControllerYesterday)
-                                            .frame(height: controller.tgControllerYesterday.height)
-                                        TimeGroupView(controller: controller.tgControllerThisWeek)
-                                            .frame(height: controller.tgControllerThisWeek.height)
-                                        TimeGroupView(controller: controller.tgControllerThisMonth)
-                                            .frame(height: controller.tgControllerThisMonth.height)
-                                        TimeGroupView(controller: controller.tgControllerLastMonth)
-                                            .frame(height: controller.tgControllerLastMonth.height)
+                                        if controller.timeGroupHasSolves(controller.tgControllerToday) {
+                                            TimeGroupView(controller: controller.tgControllerToday)
+                                                .frame(height: controller.tgControllerToday.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerYesterday) {
+                                            TimeGroupView(controller: controller.tgControllerYesterday)
+                                                .frame(height: controller.tgControllerYesterday.height)
+                                        }
+                                            
+                                        if controller.timeGroupHasSolves(controller.tgControllerThisWeek) {
+                                            TimeGroupView(controller: controller.tgControllerThisWeek)
+                                                .frame(height: controller.tgControllerThisWeek.height)
+                                        }
+                                            
+                                        if controller.timeGroupHasSolves(controller.tgControllerThisMonth) {
+                                            TimeGroupView(controller: controller.tgControllerThisMonth)
+                                                .frame(height: controller.tgControllerThisMonth.height)
+                                        }
+                                            
+                                        if controller.timeGroupHasSolves(controller.tgControllerLastMonth) {
+                                            TimeGroupView(controller: controller.tgControllerLastMonth)
+                                                .frame(height: controller.tgControllerLastMonth.height)
+                                        }
                                     }
                                     
                                     Group {
-                                        TimeGroupView(controller: controller.tgControllerJan)
-                                            .frame(height: controller.tgControllerJan.height)
-                                        TimeGroupView(controller: controller.tgControllerFeb)
-                                            .frame(height: controller.tgControllerFeb.height)
-                                        TimeGroupView(controller: controller.tgControllerMar)
-                                            .frame(height: controller.tgControllerMar.height)
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerJan) {
+                                            TimeGroupView(controller: controller.tgControllerJan)
+                                                .frame(height: controller.tgControllerJan.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerFeb) {
+                                            TimeGroupView(controller: controller.tgControllerFeb)
+                                                .frame(height: controller.tgControllerFeb.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerMar) {
+                                            TimeGroupView(controller: controller.tgControllerMar)
+                                                .frame(height: controller.tgControllerMar.height)
+                                        }
+                                        
+                                        
                                     }
                                     Group {
-                                        TimeGroupView(controller: controller.tgControllerApr)
-                                            .frame(height: controller.tgControllerApr.height)
-                                        TimeGroupView(controller: controller.tgControllerMay)
-                                            .frame(height: controller.tgControllerMay.height)
-                                        TimeGroupView(controller: controller.tgControllerJun)
-                                            .frame(height: controller.tgControllerJun.height)
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerApr) {
+                                            TimeGroupView(controller: controller.tgControllerApr)
+                                                .frame(height: controller.tgControllerApr.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerMay) {
+                                            TimeGroupView(controller: controller.tgControllerMay)
+                                                .frame(height: controller.tgControllerMay.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerJun) {
+                                            TimeGroupView(controller: controller.tgControllerJun)
+                                                .frame(height: controller.tgControllerJun.height)
+                                        }
+                                        
+                                        
                                     }
                                     Group {
-                                        TimeGroupView(controller: controller.tgControllerJul)
-                                            .frame(height: controller.tgControllerJul.height)
-                                        TimeGroupView(controller: controller.tgControllerAug)
-                                            .frame(height: controller.tgControllerAug.height)
-                                        TimeGroupView(controller: controller.tgControllerSep)
-                                            .frame(height: controller.tgControllerSep.height)
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerJul) {
+                                            TimeGroupView(controller: controller.tgControllerJul)
+                                                .frame(height: controller.tgControllerJul.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerAug) {
+                                            TimeGroupView(controller: controller.tgControllerAug)
+                                                .frame(height: controller.tgControllerAug.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerSep) {
+                                            TimeGroupView(controller: controller.tgControllerSep)
+                                                .frame(height: controller.tgControllerSep.height)
+                                        }
+                                        
                                     }
                                     Group {
-                                        TimeGroupView(controller: controller.tgControllerOct)
-                                            .frame(height: controller.tgControllerOct.height)
-                                        TimeGroupView(controller: controller.tgControllerNov)
-                                            .frame(height: controller.tgControllerNov.height)
-                                        TimeGroupView(controller: controller.tgControllerDec)
-                                            .frame(height: controller.tgControllerDec.height)
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerOct) {
+                                            TimeGroupView(controller: controller.tgControllerOct)
+                                                .frame(height: controller.tgControllerOct.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerNov) {
+                                            TimeGroupView(controller: controller.tgControllerNov)
+                                                .frame(height: controller.tgControllerNov.height)
+                                        }
+                                        
+                                        if controller.timeGroupHasSolves(controller.tgControllerDec) {
+                                            TimeGroupView(controller: controller.tgControllerDec)
+                                                .frame(height: controller.tgControllerDec.height)
+                                        }
+                                        
+                                        
                                     }
                                     
                                 }
@@ -212,49 +269,6 @@ struct AllSolvesView: View {
         
         
         
-        /*
-        GeometryReader { geo in
-            ZStack {
-                Color.init("very_dark_black")
-                
-                
-                
-                
-                
-                ScrollView {
-                    VStack {
-                        ForEach (solveHandler.solves) { s in
-                            Button(action: {
-                                self.deleteFromCell(s)
-                            }, label: {
-                                HStack {
-                                    Text( s.getTimeCapture()?.getAsReadable() ?? "-" )
-                                    Spacer()
-                                    Text( s.getDateString() )
-                                    
-                                }
-                            })
-                            Spacer()
-                        }
-                    }
-                    .frame(width: 300)
-                }
-                
-                HStack {
-                    Button(action: {
-                        gotoPage(.Main)
-                    }, label: {
-                        Image(systemName: "arrow.down.right.and.arrow.up.left")
-                    })
-                }
-                .frame(width: geo.size.width, alignment: .leading)
-                .foregroundColor(.white)
-                
-                
-            }
-                
-        }
-         */
     }
     
     func deleteFromCell(_ s: SolveItem) {
