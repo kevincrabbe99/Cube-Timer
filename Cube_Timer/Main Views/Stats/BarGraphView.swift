@@ -76,26 +76,26 @@ struct StatsBarView: View {
                      *  The labels under the bars
                      */
                     if solveHandler.size > 0 { // guard incase there are no solves
-                        HStack {
+                        HStack(alignment: .center) {
                             Text( solveHandler.getMin().getTimeCapture()?.getInSolidForm() ?? "-" )
                                 .font(.system(size: 9))
                                 .fontWeight(.bold)
                                 .frame(width: 100, height: 10, alignment: .leading)
                             
                             ZStack {
-                                Color.white
-                                    .cornerRadius(5)
+                                Color.init("mint_cream")
                                     .opacity(0.7)
-                                    .foregroundColor(.init("very_dark_black"))
+                                    .cornerRadius(5)
+                                    .addBorder(Color.init("mint_cream").opacity(0.9), width: 1, cornerRadius: 5)
                                     .frame(width: 60, height: 12)
                                 
-                                Text( String(solveHandler.size) + ": " + solveHandler.getAverage().getInSolidForm())
+                                Text( String(solveHandler.size) + ":" + solveHandler.average.getInSolidForm())
                                     .font(.system(size: 9))
                                     .fontWeight(.bold)
                                     .frame(width: 50, alignment: .center)
+                                    .foregroundColor(.init("very_dark_black"))
                             }
                             .frame(width: 60, height: 10)
-                            .offset(y: 3)
                             
                             Text( solveHandler.getMax().getTimeCapture()?.getInSolidForm() ?? "-" )
                                 .font(.system(size: 9))

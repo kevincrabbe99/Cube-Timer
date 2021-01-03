@@ -36,7 +36,8 @@ struct TimeframeBar: View {
                     //.opacity(0.65)
                 
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.init("dark_white"))
+                    .fill(Color.init("mint_cream").opacity(0.5))
+                    .addBorder(Color.init("mint_cream").opacity(0.8), width: 1, cornerRadius: 4)
                     .frame(width: 35, height: 25)
                     .foregroundColor(.white)
                     .position( x: 31.5, y: 12.5 ) // THIS X VALUE: is the initial left constraint
