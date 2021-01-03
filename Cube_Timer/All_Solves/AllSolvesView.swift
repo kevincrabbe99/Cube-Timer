@@ -144,7 +144,7 @@ struct AllSolvesView: View {
                                 .opacity(0.3)
                             
                             
-                            ScrollView {
+                            ScrollView(showsIndicators: false) {
                                 LazyVStack {
                                     Group {
                                         if controller.timeGroupHasSolves(controller.tgControllerToday) {
@@ -252,9 +252,13 @@ struct AllSolvesView: View {
                                 }
                               //  .frame(width: 300, height: 200, alignment: <#T##Alignment#>)
                             }
-                            .padding(20)
+                            .padding(.top, 2)
+                            .padding(.bottom, 2)
+                            .padding(.leading, 20)
+                            .padding(.trailing, 20)
                         }
                         //.padding(.top, 20)
+                        .padding(20)
                         .padding(.leading, 20)
                         .padding(.trailing, 40)
                         .padding(.bottom, 30)

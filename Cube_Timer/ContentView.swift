@@ -83,9 +83,12 @@ struct ContentView: View {
         self.solveHandler.bo3Controller = bo3Controller
         self.solveHandler.sbController = sbController
         self.solveHandler.cTypeHandler = cTypeHandler
-        self.solveHandler.solvesByTimeFrame.cTypeHandler = cTypeHandler
         self.solveHandler.allSolvesController = allSolvesController
         self.solveHandler.barGraphController = barGraphController
+        
+        
+        self.solveHandler.solvesByTimeFrame.cTypeHandler = cTypeHandler
+        self.solveHandler.solvesByTimeFrame.allSolvesController = allSolvesController
         
         // bar graph controller stuff
         self.barGraphController.solveHandler = solveHandler

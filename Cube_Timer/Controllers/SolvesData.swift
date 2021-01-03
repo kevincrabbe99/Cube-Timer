@@ -43,7 +43,8 @@ class SolvesFromTimeframe: ObservableObject {
     // parent is this clases outlet to the app
         // the CubeType gets parced here
             // timeframe is parced in parent: SolveHandler
-   var cTypeHandler: CTypeHandler?
+    var cTypeHandler: CTypeHandler?
+    var allSolvesController: AllSolvesController!
     
     @Published var solves: [SolveItem] // array of all the solves
     @Published var size: Int   // amount of solves
@@ -393,6 +394,8 @@ class SolvesFromTimeframe: ObservableObject {
     func delete(_ s: SolveItem) {
         solves = solves.filter { $0 != s }
         size -= 1
+        
+        allSolvesController.updateSolves()
         print("Deleted from SolvesFromTimeframe.swift reference")
     }
      
