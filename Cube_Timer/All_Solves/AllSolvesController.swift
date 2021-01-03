@@ -139,7 +139,8 @@ class AllSolvesController: ObservableObject {
      */
     public func updateSolves() {
         self.clearTimeGroups()
-        self.solves = solvesData.getSolvesFrom(ct: cTypeHandler.selected!)
+        self.solves = solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
+
         
         print("updating AllSolvesView to: ", cTypeHandler.selected.name)
         print("analyzing ", solves.count, " solves")
