@@ -34,11 +34,16 @@ struct TimeGroupView: View {
                      */
                     ZStack {
                         Text(controller.tg.rawValue)
+                            .font(Font.custom("Play-Regular", size: 10))
+                            .foregroundColor(.init("mint_cream"))
+                            .opacity(0.8)
+                            /*
                             .fontWeight(.bold)
                             .font(.system(size: 13))
+                            */
                     }
-                    .frame(width: 65, height: controller.height, alignment: .topTrailing)
-                    .offset(y: 3)
+                    .frame(width: 50, height: controller.height, alignment: .topTrailing)
+                    .offset(y: 10)
                     
                     /*
                      *  the grid of solves
@@ -52,7 +57,7 @@ struct TimeGroupView: View {
                                 //.border(Color.green)
                         }
                     }
-                    .frame(width: (w-75))
+                    .frame(width: (w-60))
                 
                     
                     //.border(Color.green)
