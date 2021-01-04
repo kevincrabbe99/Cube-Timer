@@ -115,7 +115,7 @@ struct SettingsOption: View {
         VStack(alignment: .leading,spacing: 0) {
             HStack{
                 ZStack {
-                    Text(label)
+                    Text(LocalizedStringKey(label))
                         .fontWeight(.bold)
                         .font(Font.custom("Dosis-Bold", size: 19))
                 }
@@ -127,7 +127,7 @@ struct SettingsOption: View {
                             .cornerRadius(3)
                             .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 3)
                         
-                        Text(value!)
+                        Text(LocalizedStringKey(value!))
                                 .foregroundColor(.init("very_dark_black"))
                                 .font(.system(size:12))
                                 .fontWeight(.bold)
@@ -137,7 +137,7 @@ struct SettingsOption: View {
             }
             .frame(width: 280, alignment: .leading)
             if info != nil {
-                Text(info!)
+                Text(LocalizedStringKey(info!))
                     //.font(.system(size:12))
                     .font(Font.custom("Dosis", size: 13))
                     .frame(width: 220, alignment: .leading)

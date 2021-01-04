@@ -160,6 +160,7 @@ struct ContentView: View {
                     }
                     
                     
+                    
                 }
                 .animation(.spring())
                 
@@ -228,6 +229,7 @@ struct ContentView: View {
             
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
         }
+        .environment(\.locale, .init(identifier: "hi"))
         .environmentObject(solveHandler)
         .environmentObject(cTypeHandler)
         .environmentObject(allSolvesController)

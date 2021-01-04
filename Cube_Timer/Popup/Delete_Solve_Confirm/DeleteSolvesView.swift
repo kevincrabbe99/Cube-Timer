@@ -17,7 +17,7 @@ struct DeleteSolvesView: View {
         
         VStack {
             
-            Text("Are you sure you want to delete \(allSolvesController.selected.count) \(allSolvesController.selected.count > 1 ? "solves?" : "solve")")
+            Text("Are you sure you want to delete \(allSolvesController.selected.count) solves?"/* \(allSolvesController.selected.count > 1 ? "solves?" : "solve?")"*/)
                 .font(Font.custom("Heebo-Black", size: 24))
                 .padding(.leading, 20)
                 .padding(.trailing, 20)
@@ -62,7 +62,7 @@ struct DeleteSolvesView: View {
 struct RoundedButton: View {
     
     var color: Color
-    var text: String
+    var text: LocalizedStringKey
     var textColor: Color = Color.white
     
     var body: some View {

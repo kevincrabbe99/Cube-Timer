@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StatLabelHorizontal: View {
     
-    var label: String
+    var label: LocalizedStringKey
     var value: String
     var showDecimal: Bool = true
     

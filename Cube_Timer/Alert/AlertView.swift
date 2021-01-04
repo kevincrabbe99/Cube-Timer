@@ -34,11 +34,11 @@ struct AlertView: View {
                         
                         VStack(alignment: .leading) {
                             if controller.title != nil {
-                                Text(controller.title!)
+                                Text(LocalizedStringKey(controller.title!))
                                     .font(Font.custom("Play-Bold", size: 15))
                             }
                             
-                            Text(controller.text)
+                            Text(LocalizedStringKey(controller.text))
                                 .font(Font.custom("Play-Regular", size: 13))
                         }
                         

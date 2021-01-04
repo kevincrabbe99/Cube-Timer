@@ -1,0 +1,77 @@
+/*
+  Localizable.strings
+  Cube_Timer
+
+  Created by Kevin Crabbe on 1/3/21.
+  Hindi (PUZZLE)
+*/
+"CUBES" = "पहेलि"; // trans: Puzzle
+
+"EDIT CUBE" = "संपादित करें पहेलि";
+"Description" = "विवरण";
+
+"DELETE" = "हटाएँ";
+"UPDATE" = "सेट"; // trans: set
+"CREATE" = "बनाना"; // trans: make
+
+"ENTER A NEW CUBE" = "एक नया कूबड़ बनाएँ"; // trans: CREATE A NEW CUBE
+"Are you sure you want to delete %lld solves?" = "क्या आप सुनिश्चित हैं कि आप %lld विलोप हटाना चाहते हैं?";
+
+"UPDATE CUBES FOR %lld SOLVES" = "%lld SOLVES के लिए अद्यतन करें";
+
+// ALERT STUFF
+"Pause Saving Solves" = "सेविंग सॉल्व करें";
+"Solves will not be saved until you turn pause saving solves back off" = "जब तक आप सॉल्विंग सेविंग को विराम नहीं देते तब तक सॉल्व्स सेव नहीं होंगे";
+"Resumed Saving Solves" = "सेविंग सॉल्व्स को फिर से शुरू किया";
+"Solves will not be recorded and saved" = "हल को रिकॉर्ड और सहेजा नहीं जाएगा";
+"Currently not saving solves, change in settings" = "वर्तमान में सेविंग नहीं, सेटिंग्स में बदलाव";
+
+// SETTINGS STUFF
+"SETTINGS" = "समायोजन";
+"Double press to stop" = "बंद करने के लिए डबल प्रेस";
+"Requires both buttons to be pressed to record the solve." = "हल रिकॉर्ड करने के लिए दोनों बटन दबाने की आवश्यकता है।";
+"Pause saving solves" = "सेविंग विराम दें";
+"about" = "के बारे में";
+
+"ABOUT" = "के बारे में";
+"Developer:" = "डेवलपर:";
+"Contact:" = "संपर्क करें:";
+"back" = "वापस";
+
+"NO" = "नहीं";
+"YES" = "हाँ";
+"OFF" = "बंद";
+"ON" = "पर";
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1W";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1Y";
+"ALL" = "सब";
+
+"BEST" = "श्रेष्ठ";
+"WORST" = "पिछले"; // trans: last
+"MEDIAN" = "मध्यमध्य";
+"AVERAGE" = "मध्य";
+"STD. DEV" = "मानक विचलन";
+
+"today" = "आज";
+"yesterday" = "बिता कल";
+"last week" = "पिछले सप्ताह";
+"this month" = "इस महीने";
+"last month" = "पिछले महीने";
+
+"jan" = "जनवरी";
+"feb" = "फ़रवरी";
+"mar" = "जुलूस";
+"apr" = "अप्रैल";
+"may" = "मई";
+"jun" = "जून";
+"jul" = "जुलाई";
+"aug" = "अगस्त";
+"sep" = "सितंबर";
+"oct" = "अक्टूबर";
+"nov" = "नवंबर";
+"dec" = "दिसंबर";

@@ -1,0 +1,78 @@
+/*
+  Localizable.strings
+  Cube_Timer
+
+  Created by Kevin Crabbe on 1/3/21.
+  Chinese Simplified
+*/
+"CUBES" = "拼图"; // PUZZLES
+
+"EDIT CUBE" = "编辑难题"; // EDIT PUZZLE
+"Description" = "描述";
+
+"DELETE" = "编辑难题";
+"UPDATE" = "更新";
+"CREATE" = "创造";
+
+"ENTER A NEW CUBE" = "输入新立方体"; // trans: NEW CUBE
+"Are you sure you want to delete %lld solves?" = "您确定要删除 %lld 解决方案吗";
+
+"UPDATE CUBES FOR %lld SOLVES" = "更新 %lld 解决方案的清单";
+
+// ALERT STUFF
+"Pause Saving Solves" = "暂停保存解决方案";
+"Solves will not be saved until you turn pause saving solves back off" = "解决方案将不会保存，直到您将暂停保存解决方案重新启用";
+"Resumed Saving Solves" = "恢复的储蓄解决方案";
+"Solves will not be recorded and saved" = "解决方案将不会被记录和保存";
+"Currently not saving solves, change in settings" = "当前未保存求解，请更改设置";
+
+// SETTINGS STUFF
+"SETTINGS" = "设定";
+"Double press to stop" = "双击停止";
+"Requires both buttons to be pressed to record the solve." = "需要同时按下两个按钮来记录求解。";
+"Pause saving solves" = "暂停节省解决";
+"about" = "关于";
+
+"ABOUT" = "关于";
+"Developer:" = "开发者:";
+"Contact:" = "联系";
+"back" = "背部";
+
+"NO" = "没有";
+"YES" = "是";
+"OFF" = "关";
+"ON" = "上";
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1W";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1Y";
+"ALL" = "一切";
+
+"BEST" = "最好";
+"WORST" = "最坏的";
+"MEDIAN" = "中位数";
+"SOLVES" = "完成"; // trans: completions
+"AVERAGE" = "平均";
+"STD. DEV" = "标准偏差";
+
+"today" = "今天";
+"yesterday" = "昨天";
+"last week" = "上个星期";
+"this month" = "这个月";
+"last month" = "上个月";
+
+"jan" = "一月";
+"feb" = "二月";
+"mar" = "游行";
+"apr" = "四月";
+"may" = "可能";
+"jun" = "六月";
+"jul" = "七月";
+"aug" = "八月";
+"sep" = "九月";
+"oct" = "十月";
+"nov" = "十一月";
+"dec" = "十二月";

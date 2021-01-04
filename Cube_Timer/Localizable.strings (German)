@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Cube_Timer
+
+  Created by Kevin Crabbe on 1/3/21.
+  
+*/
+"Hello World!" = "Hallo Welt!";
+"Hello" = "Hallo";
+"CUBES" = "WÜRFEL"

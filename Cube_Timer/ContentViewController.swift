@@ -50,6 +50,8 @@ class ContentViewController: ObservableObject {
     // settigns page
     @Published var inSettings: Bool = false
     
+    
+    
     /*
      *  THE DRAG GESTURE TO SWITCH VIEWS
      * called by AllSolvesView & Buttons View

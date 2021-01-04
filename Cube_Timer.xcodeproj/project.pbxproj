@@ -44,6 +44,7 @@
 		7B984D38253E226B00BC6402 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D37253E226B00BC6402 /* TimerView.swift */; };
 		7B984D45253E550300BC6402 /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D44253E550300BC6402 /* TimerController.swift */; };
 		7B984D5A253E72D700BC6402 /* SolveHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D59253E72D700BC6402 /* SolveHandler.swift */; };
+		7B9B2E7D25A29F2200819159 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B9B2E7F25A29F2200819159 /* Localizable.strings */; };
 		7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B79602548F20F0088ECD5 /* BestOfThreeView.swift */; };
 		7B9B7966254908380088ECD5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B7965254908380088ECD5 /* MainView.swift */; };
 		7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B799925493D280088ECD5 /* SolvesData.swift */; };
@@ -152,6 +153,15 @@
 		7B984D37253E226B00BC6402 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		7B984D44253E550300BC6402 /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		7B984D59253E72D700BC6402 /* SolveHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveHandler.swift; sourceTree = "<group>"; };
+		7B9B2E7E25A29F2200819159 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8325A29F2800819159 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7B9B2E8425A29F2A00819159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8525A29F2B00819159 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8625A29F4F00819159 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8725A29F5500819159 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8825A29F5B00819159 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8925A29F6100819159 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8D25A2D01700819159 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B9B79602548F20F0088ECD5 /* BestOfThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfThreeView.swift; sourceTree = "<group>"; };
 		7B9B7965254908380088ECD5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7B9B799925493D280088ECD5 /* SolvesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolvesData.swift; sourceTree = "<group>"; };
@@ -343,6 +353,7 @@
 		7B984CE2253E02D900BC6402 = {
 			isa = PBXGroup;
 			children = (
+				7B9B2E7F25A29F2200819159 /* Localizable.strings */,
 				7B984CED253E02D900BC6402 /* Cube_Timer */,
 				7B984D04253E02DC00BC6402 /* Cube_TimerTests */,
 				7B984D0F253E02DC00BC6402 /* Cube_TimerUITests */,
@@ -683,6 +694,14 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				"zh-Hans",
+				es,
+				fr,
+				de,
+				ru,
+				ko,
+				hi,
 			);
 			mainGroup = 7B984CE2253E02D900BC6402;
 			productRefGroup = 7B984CEC253E02D900BC6402 /* Products */;
@@ -703,6 +722,7 @@
 			files = (
 				7BAAE11B259B387300330533 /* Heebo-ExtraLight.ttf in Resources */,
 				7BAAE120259B387300330533 /* Heebo-VariableFont_wght.ttf in Resources */,
+				7B9B2E7D25A29F2200819159 /* Localizable.strings in Resources */,
 				7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */,
 				7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */,
 				7BAAE11E259B387300330533 /* Heebo-Light.ttf in Resources */,
@@ -838,6 +858,25 @@
 			targetProxy = 7B984D0D253E02DC00BC6402 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7B9B2E7F25A29F2200819159 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B9B2E7E25A29F2200819159 /* en */,
+				7B9B2E8325A29F2800819159 /* zh-Hans */,
+				7B9B2E8425A29F2A00819159 /* ja */,
+				7B9B2E8525A29F2B00819159 /* es */,
+				7B9B2E8625A29F4F00819159 /* fr */,
+				7B9B2E8725A29F5500819159 /* de */,
+				7B9B2E8825A29F5B00819159 /* ru */,
+				7B9B2E8925A29F6100819159 /* ko */,
+				7B9B2E8D25A2D01700819159 /* hi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7B984D13253E02DC00BC6402 /* Debug */ = {

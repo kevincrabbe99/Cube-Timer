@@ -18,7 +18,7 @@ struct NewCubeTypeView: View {
     
    // @State var title: String = "ENTER A NEW CUBE"
     
-    @State var description: String = "Description"
+    @State var description: String = ""
     @State var d1: Int = 3
     @State var d2: Int = 3
     @State var d3: Int = 3
@@ -132,7 +132,14 @@ struct NewCubeTypeView: View {
                         .addBorder(Color.white, width: 1, cornerRadius: 3)
                         .shadow(radius: 4)
                     
-                    TextField("enter a description", text: $description, onEditingChanged: { editing in
+                    if description.isEmpty {
+                        Text("Description")
+                            .font(.system(size:14))
+                            .foregroundColor(.init("black_chocolate"))
+                            .frame(width: w-120)
+                    }
+                    
+                    TextField("", text: $description, onEditingChanged: { editing in
                         if editing {
                             let offset:CGFloat = -1*(h/2)
                             parent.offsetPopup(y: offset) // moves the popup up a little so they can see what they are typing
@@ -143,6 +150,8 @@ struct NewCubeTypeView: View {
                     .frame(width: w-120)
                     .font(.system(size:14))
                     .foregroundColor(.black)
+                    
+                    
                 
                 }
                 .frame(width: innerW, height: 30, alignment: .center)

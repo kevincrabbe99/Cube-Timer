@@ -1,0 +1,81 @@
+/*
+  Localizable.strings
+  Cube_Timer
+
+  Created by Kevin Crabbe on 1/3/21.
+  
+ GERMAN
+*/
+"CUBES" = "WÜRFEL";
+
+"EDIT CUBE" = "BEARBEITEN"; // trans: EDIT
+"Description" = "Beschreibung";
+
+/*
+ new
+ */
+"ENTER A NEW CUBE" = "NEUER WÜRFEL"; // trans: NEW CUBE
+"Are you sure you want to delete %lld solves?" = "Möchten Sie wirklich %lld Lösungen löschen?";
+
+"UPDATE CUBES FOR %lld SOLVES" = "UPDATE CUBES FÜR %lld LÖSUNGEN";
+
+// ALERT STUFF
+"Pause Saving Solves" = "Pause Speichern von Lösungen";
+"Solves will not be saved until you turn pause saving solves back off" = "Lösungen werden erst gespeichert, wenn Sie die Funktion zum Speichern der Pause wieder deaktivieren";
+"Resumed Saving Solves" = "Wieder aufgenommene Speicherlösungen";
+"Solves will not be recorded and saved" = "Lösungen werden nicht aufgezeichnet und gespeichert";
+"Currently not saving solves, change in settings" = "Derzeit werden keine Lösungen gespeichert";
+
+"DELETE" = "LÖSCHEN";
+"UPDATE" = "AKTUALISIEREN";
+"CREATE" = "ERSTELLEN";
+
+"SETTINGS" = "Präferenzen";
+"Double press to stop" = "Zum Stoppen zweimal drücken";
+"Requires both buttons to be pressed to record the solve." = "Erfordert, dass beide Tasten gedrückt werden, um die Lösung aufzuzeichnen.";
+"Pause saving solves" = "Pause speichern löst";
+"about" = "Über";
+
+"ABOUT" = "ÜBER";
+"Developer:" = "Entwicklerin:";
+"Contact:" = "Kontakt";
+"back" = "zurück";
+
+"NO" = "NEIN";
+"YES" = "JA";
+"OFF" = "AUS";
+"ON" = "AUF";
+
+"3X" = "3X";
+"1D" = "1T";
+"1W" = "1W";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1J";
+"ALL" = "ALL";
+
+"BEST" = "BESTE";
+"WORST" = "ZULETZT";
+"MEDIAN" = "MEDIAN";
+"SOLVES" = "LÖSUNGEN";
+"AVERAGE" = "BEDEUTEN"; // MEAN
+"STD. DEV" = "STD. DAB";
+
+"today" = "heute";
+"yesterday" = "gestern";
+"last week" = "letzte Woche";
+"this month" = "diesen Monat";
+"last month" = "Letzten Monat";
+
+"jan" = "Januar";
+"feb" = "Februar";
+"mar" = "März";
+"apr" = "April";
+"may" = "Kann";
+"jun" = "Juni";
+"jul" = "Juli";
+"aug" = "August";
+"sep" = "September";
+"oct" = "Oktober";
+"nov" = "November";
+"dec" = "Dezember";

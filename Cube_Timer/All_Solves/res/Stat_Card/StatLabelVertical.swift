@@ -9,11 +9,11 @@ import SwiftUI
 
 struct StatLabelVertical: View {
     
-    var label: String
+    var label: LocalizedStringKey
     var value: String
     var solve: SolveItem?
     
-    init(label: String, solve: SolveItem?) {
+    init(label: LocalizedStringKey, solve: SolveItem?) {
         self.label = label
         if solve != nil {
             self.solve = solve
@@ -30,7 +30,7 @@ struct StatLabelVertical: View {
     }
         */
  
-    init(label: String, value: String) {
+    init(label: LocalizedStringKey, value: String) {
         self.label = label
         self.value = value
     }

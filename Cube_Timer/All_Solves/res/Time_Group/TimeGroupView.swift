@@ -33,7 +33,7 @@ struct TimeGroupView: View {
                      *  right side, where the time labels are
                      */
                     ZStack {
-                        Text(controller.tg.rawValue)
+                        Text(LocalizedStringKey(controller.tg.rawValue))
                             .font(Font.custom("Play-Regular", size: 10))
                             .foregroundColor(.init("mint_cream"))
                             .opacity(0.8)

@@ -129,6 +129,7 @@ class SolveHandler: ObservableObject {
         self.addCostumSolve(sec: 35)
         self.addCostumSolve(sec: 36)
 //      */
+       // self.addCostumSolve(sec: 66)
     }
     
     /*
@@ -141,7 +142,7 @@ class SolveHandler: ObservableObject {
         //newSolve.cubeType = .a3x3x3
         newSolve.id = UUID().uuidString
         newSolve.timeMS = sec
-        newSolve.timestamp = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
+        newSolve.timestamp = Calendar.current.date(byAdding: .month, value: -2, to: Date())!
        // newSolve.type = "3x3x3"
         
         // add the new solve
