@@ -120,9 +120,13 @@ class CTypeHandler: ObservableObject {
         
         // update the SolveHandler
         if solveHandler != nil {
-            solveHandler.updateSolves() // update for the solves handler
+            solveHandler.updateSolves(to: .All) // update for the solves handler
             allSolvesController.updateSolves() // update for the grid view
+            //solveHandler.setTimeFrame(.Today)
         }
+        
+        
+        
         
     }
     

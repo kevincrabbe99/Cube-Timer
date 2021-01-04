@@ -314,8 +314,7 @@ class SolveHandler: ObservableObject {
     func updateSolves(to: Timeframe) {
         print("Updating solves (& tf) from ", self.size, "elements")
                 
-        self.currentTimeframe = to
-        self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: to) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
+        setTimeFrame(to)
         
         //self.solves = solves.filter { $0.cubeType == cTypeHandler.selected }
         
@@ -325,6 +324,140 @@ class SolveHandler: ObservableObject {
         
         self.updateDisplayStats()
     }
+    
+    public func setTimeFrame(_ tf: Timeframe) {
+        self.currentTimeframe = tf
+        self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: tf) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
+        self.currentTimeframeButtonPos = getIndexOfTfButton(tf)
+    }
+    
+    
+    
+    /*
+     *  Returns an INT representing the position of that timeframe button within the bottom bar
+        CALLED BY: TimeframeBar 
+     
+     *  NEEDS UPDATING: wtf is going on here
+     */
+    public func getIndexOfTfButton(_ tf: Timeframe) -> Int {
+        
+        let applicableTimeframes = solvesByTimeFrame.getApplicableTimeframes()
+        
+        if !applicableTimeframes.contains(tf) { // return 0 if the tf DNE
+            return 0
+        }
+        
+        /*
+         *  All variables used to calculate position
+         */
+        let hasL3: Bool = applicableTimeframes.contains(.LastThree)
+        let hasDay: Bool = applicableTimeframes.contains(.Today)
+        let hasWeek: Bool = applicableTimeframes.contains(.Week)
+        let hasMonth: Bool = applicableTimeframes.contains(.OneMonth)
+        let has3Month: Bool = applicableTimeframes.contains(.ThreeMonths)
+        let hasYear: Bool = applicableTimeframes.contains(.Year)
+        let hasAll: Bool = applicableTimeframes.contains(.All)
+        
+        // -1 means DNE
+        var L3Pos: Int = 0
+        var oneDayPos: Int = 0
+        var weekPos: Int = 0
+        var monthPos: Int = 0
+        var threeMonthsPos: Int = 0
+        var yearPos: Int = 0
+        var allPos: Int = 0
+        /*
+         *  Calculates the position of each button depending on the buttons before it
+         */
+    // L3
+        if hasL3 {
+            //L3Pos = 0 // set
+            oneDayPos += 1
+            weekPos += 1
+            monthPos += 1
+            threeMonthsPos += 1
+            yearPos += 1
+            allPos += 1
+        }
+    // 1D
+        if hasDay {
+            //oneDayPos += 1
+            weekPos += 1
+            monthPos += 1
+            threeMonthsPos += 1
+            yearPos += 1
+            allPos += 1
+        }
+    // W
+        if hasWeek {
+            //oneDayPos += 1
+            //weekPos += 1
+            monthPos += 1
+            threeMonthsPos += 1
+            yearPos += 1
+            allPos += 1
+        }
+    // 1M
+        if hasMonth {
+            //oneDayPos += 1
+            //weekPos += 1
+            //monthPos += 1
+            threeMonthsPos += 1
+            yearPos += 1
+            allPos += 1
+        }
+    // 3M
+        if has3Month {
+            //oneDayPos += 1
+            //weekPos += 1
+            //monthPos += 1
+            //threeMonthsPos += 1
+            yearPos += 1
+            allPos += 1
+        }
+    // T
+        if hasYear {
+            //oneDayPos += 1
+            //weekPos += 1
+            //monthPos += 1
+            //threeMonthsPos += 1
+            //yearPos += 1
+            allPos += 1
+        }
+        
+    // do not need to implement for ALL
+        
+        /*
+         *  Return calculated position
+         */
+        switch tf {
+            case .LastThree:
+                return L3Pos
+            case .Today:
+                return oneDayPos
+            case .Week:
+                return weekPos
+            case .OneMonth:
+                return monthPos
+            case .ThreeMonths:
+                return threeMonthsPos
+            case .Year:
+                return yearPos
+            case .All:
+                return allPos
+            default:
+                return 1
+        }
+       
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     /*          OVERLOAD METHOD FOR ^
      *  Sets the solves array BASED ON self.currentTimeframe
      *  CALLED BY: updateEverything()

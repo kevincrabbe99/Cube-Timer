@@ -229,7 +229,7 @@ struct ContentView: View {
             
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
         }
-        .environment(\.locale, .init(identifier: "hi"))
+     //   .environment(\.locale, .init(identifier: "en")) // DEV USE ONLY
         .environmentObject(solveHandler)
         .environmentObject(cTypeHandler)
         .environmentObject(allSolvesController)

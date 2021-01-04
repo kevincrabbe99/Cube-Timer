@@ -52,7 +52,7 @@ struct TimeframeBar: View {
                     */
                     Button(action: {
                         lightTap.impactOccurred()
-                        self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.LastThree)
+                        //self.solveHandler.currentTimeframeButtonPos = self.solveHandler.getIndexOfTfButton(.LastThree)
                         solveHandler.updateSolves(to: .LastThree)
                     }) {
                         ZStack {
@@ -65,7 +65,7 @@ struct TimeframeBar: View {
                     
                     Button(action: {
                         lightTap.impactOccurred()
-                        self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Today)
+                        //self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Today)
                         solveHandler.updateSolves(to: .Today)
                     }) {
                         ZStack {
@@ -79,7 +79,7 @@ struct TimeframeBar: View {
                     if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.Week) { // guard to check if solves in timeframe exist
                         Button(action: {
                             lightTap.impactOccurred()
-                            self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Week)
+                           // self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Week)
                             solveHandler.updateSolves(to: .Week)
                         }) {
                             ZStack {
@@ -94,7 +94,7 @@ struct TimeframeBar: View {
                     if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.OneMonth) { // guard to check if solves in timeframe exist
                         Button(action: {
                             lightTap.impactOccurred()
-                            self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.OneMonth)
+                            //self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.OneMonth)
                             solveHandler.updateSolves(to: .OneMonth)
                         }) {
                             ZStack {
@@ -109,7 +109,7 @@ struct TimeframeBar: View {
                     if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.ThreeMonths) { // guard to check if solves in timeframe exist
                         Button(action: {
                             lightTap.impactOccurred()
-                            self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.ThreeMonths)
+                            //self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.ThreeMonths)
                             solveHandler.updateSolves(to: .ThreeMonths)
                         }) {
                             ZStack {
@@ -124,7 +124,7 @@ struct TimeframeBar: View {
                     if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.Year) { // guard to check if solves in timeframe exist
                         Button(action: {
                             lightTap.impactOccurred()
-                            self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Year)
+                            //self.solveHandler.currentTimeframeButtonPos = getIndexOfTfButton(.Year)
                             solveHandler.updateSolves(to: .Year)
                         }) {
                             ZStack {
@@ -138,7 +138,7 @@ struct TimeframeBar: View {
                     
                     Button(action: {
                         lightTap.impactOccurred()
-                        self.solveHandler.currentTimeframeButtonPos = Int(CGFloat((solveHandler.solvesByTimeFrame.getApplicableTimeframes().count - 1))) // the count is the total of solveHandler.getApplicabletimeFrames().count + ( -1 )
+                        //self.solveHandler.currentTimeframeButtonPos = Int(CGFloat((solveHandler.solvesByTimeFrame.getApplicableTimeframes().count - 1))) // the count is the total of solveHandler.getApplicabletimeFrames().count + ( -1 )
                         solveHandler.updateSolves(to: .All)
                     }) {
                         ZStack {
@@ -157,163 +157,9 @@ struct TimeframeBar: View {
         .frame(width: 390, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
     }
     
-    /*
-     *  Returns an INT representing the position of that timeframe button within the bottom bar
-        CALLED BY: self.body
-     
-     *  NEEDS UPDATING: wtf is going on here
-     */
-    private func getIndexOfTfButton(_ tf: Timeframe) -> Int {
-        
-        let applicableTimeframes = solveHandler.solvesByTimeFrame.getApplicableTimeframes()
-        
-        if !applicableTimeframes.contains(tf) { // return 0 if the tf DNE
-            return 0
-        }
-        
-        /*
-         *  All variables used to calculate position
-         */
-        let hasL3: Bool = applicableTimeframes.contains(.LastThree)
-        let hasDay: Bool = applicableTimeframes.contains(.Today)
-        let hasWeek: Bool = applicableTimeframes.contains(.Week)
-        let hasMonth: Bool = applicableTimeframes.contains(.OneMonth)
-        let has3Month: Bool = applicableTimeframes.contains(.ThreeMonths)
-        let hasYear: Bool = applicableTimeframes.contains(.Year)
-        let hasAll: Bool = applicableTimeframes.contains(.All)
-        
-        // -1 means DNE
-        var L3Pos: Int = 0
-        var oneDayPos: Int = 0
-        var weekPos: Int = 0
-        var monthPos: Int = 0
-        var threeMonthsPos: Int = 0
-        var yearPos: Int = 0
-        var allPos: Int = 0
-        /*
-         *  Calculates the position of each button depending on the buttons before it
-         */
-    // L3
-        if hasL3 {
-            //L3Pos = 0 // set
-            oneDayPos += 1
-            weekPos += 1
-            monthPos += 1
-            threeMonthsPos += 1
-            yearPos += 1
-            allPos += 1
-        }
-    // 1D
-        if hasDay {
-            //oneDayPos += 1
-            weekPos += 1
-            monthPos += 1
-            threeMonthsPos += 1
-            yearPos += 1
-            allPos += 1
-        }
-    // W
-        if hasWeek {
-            //oneDayPos += 1
-            //weekPos += 1
-            monthPos += 1
-            threeMonthsPos += 1
-            yearPos += 1
-            allPos += 1
-        }
-    // 1M
-        if hasMonth {
-            //oneDayPos += 1
-            //weekPos += 1
-            //monthPos += 1
-            threeMonthsPos += 1
-            yearPos += 1
-            allPos += 1
-        }
-    // 3M
-        if has3Month {
-            //oneDayPos += 1
-            //weekPos += 1
-            //monthPos += 1
-            //threeMonthsPos += 1
-            yearPos += 1
-            allPos += 1
-        }
-    // T
-        if hasYear {
-            //oneDayPos += 1
-            //weekPos += 1
-            //monthPos += 1
-            //threeMonthsPos += 1
-            //yearPos += 1
-            allPos += 1
-        }
-        
-    // do not need to implement for ALL
-        
-        /*
-         *  Return calculated position
-         */
-        switch tf {
-            case .LastThree:
-                return L3Pos
-            case .Today:
-                return oneDayPos
-            case .Week:
-                return weekPos
-            case .OneMonth:
-                return monthPos
-            case .ThreeMonths:
-                return threeMonthsPos
-            case .Year:
-                return yearPos
-            case .All:
-                return allPos
-            default:
-                return 1
-        }
-       
-    }
+    
     
 }
-
-/*
-struct STDButton: View {
-    
-    var label: Timeframe
-    var id: Int
-    var selection: SelectedPos
-    var parent: TopBar
-    
-    
-    var body: some View {
-        Button(action: {
-            print("tapped: ", label.rawValue)
-            parent.switchTimeFrameTo(label)
-            selection.set(label)
-        }) {
-            /*if selected {
-                ZStack {
-                    Color.white
-                        .cornerRadius(5)
-                    Text(self.label.rawValue)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                }
-                .frame(width: 35, height: 25)
-                
-            }else {*/
-                ZStack {
-                    Text(self.label.rawValue)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
-                .frame(width: 35, height: 25)
-            //}
-        }
-    }
-}
- */
 
 struct selectedButton: ViewModifier {
     func body(content: Content) -> some View {
