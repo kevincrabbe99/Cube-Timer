@@ -15,9 +15,9 @@
 "CREATE" = "CREATE";
 
 "ENTER A NEW CUBE" = "ENTER A NEW CUBE"; // trans: NEW CUBE
-"Are you sure you want to delete %lld solves?" = "Are you sure you want to delete %@ solves?";
+"Are you sure you want to delete %lld solves?" = "Are you sure you want to delete %lld solves?";
 
-"UPDATE CUBES FOR %lld SOLVES" = "UPDATE CUBES FOR %@ SOLVES";
+"UPDATE CUBES FOR %lld SOLVES" = "UPDATE CUBES FOR %lld SOLVES";
 
 // ALERT STUFF
 "Pause Saving Solves" = "Pause Saving Solves";
