@@ -36,7 +36,7 @@ class CTypeHandler: ObservableObject {
             
             // loop through all solves
             for (r) in result {
-                let nCT = r as CubeType
+              //  let nCT = r as CubeType
                 print("CT, ", r)
                 self.add(r)
             }

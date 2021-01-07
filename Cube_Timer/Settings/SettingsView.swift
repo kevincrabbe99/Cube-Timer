@@ -32,7 +32,7 @@ struct SettingsView: View {
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     var body: some View {
         GeometryReader { geo in
-            let w = geo.size.width
+         //   let w = geo.size.width
             let h = geo.size.height
             
             ZStack {

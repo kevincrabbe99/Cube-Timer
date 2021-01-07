@@ -16,12 +16,12 @@ struct SidebarTab: Shape {
         
         //let bottomRight = CGPoint(x:  rect.size.height, y: rect.size.height)
         
-                let midPoightHeight = rect.size.height / 2
+        //let midPoightHeight = rect.size.height / 2
         
 
         let w = rect.size.width
         let h = rect.size.height
-        let topRight = CGPoint(x: w, y: 0)
+        //let topRight = CGPoint(x: w, y: 0)
         let topLeft = CGPoint(x: 0, y: 0)
         let bottomLeft = CGPoint(x: 0, y:  h)
         

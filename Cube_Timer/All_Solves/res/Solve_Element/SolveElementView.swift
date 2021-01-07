@@ -58,15 +58,15 @@ struct SolveElementView: View {
                             //.opacity(0.2)
                     }
                 
-                if controller != nil {
+                //if controller != nil {
                     Text(controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")
                         .fontWeight(.bold)
                         .font(.system(size: 11))
-                } else {
+                /*} else {
                     Text(solveItem!.getTimeCapture()?.getInSolidForm() ?? "0:00")
                         .fontWeight(.bold)
                         .font(.system(size: 11))
-                }
+                }*/
             
             }
             .frame(width: 45, height: 25)

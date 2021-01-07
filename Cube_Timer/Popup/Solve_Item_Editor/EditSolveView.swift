@@ -83,7 +83,8 @@ struct EditSolveView: View {
                     
                     Picker(selection: $selection, label: Text("Picker")) {
                         ForEach(0..<controller.cTypeHandler.getCubeTypes().count) {
-                            Text( controller.cTypeHandler.getCubeTypes()[$0].name )
+                            SingleCubeTypeView(controller: controller.cTypeHandler.typeControllers[$0], asSidebar: false)
+                            //Text( controller.cTypeHandler.getCubeTypes()[$0].name )
                         }
                     }
                     .pickerStyle(WheelPickerStyle())

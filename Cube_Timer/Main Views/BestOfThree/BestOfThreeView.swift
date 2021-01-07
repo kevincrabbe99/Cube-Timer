@@ -58,7 +58,7 @@ struct BestOfThreeView: View {
                         }
                         .frame(width:  innerW / 3, alignment: .leading)
                         VStack(alignment: .trailing, spacing: 2.5) {
-                            Text("Wost")
+                            Text("Worst")
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 //.frame(width: (geo.size.width/4), alignment: .leading)

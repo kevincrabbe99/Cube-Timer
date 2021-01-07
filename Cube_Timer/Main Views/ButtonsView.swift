@@ -20,7 +20,7 @@ struct ButtonsView: View {
     @State var rightIconOpacity: Double = 0.1
     
     var topCRs: CGFloat {
-        if UIDevice.current.hasNotch {
+        if UIDevice.hasNotch {
             return 35
         } else {
             return 10

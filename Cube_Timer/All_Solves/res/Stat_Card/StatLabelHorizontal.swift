@@ -42,7 +42,7 @@ struct StatLabelHorizontal: View {
                             .opacity(0.8)
                     }
                 }
-                .frame(width: geo.size.width/2.6)
+                .frame(width: (!UIDevice.IsIpad ? geo.size.width/2.6 : 100))
             }
             .foregroundColor(.init("mint_cream"))
             .frame(width: 200, alignment: .trailing)

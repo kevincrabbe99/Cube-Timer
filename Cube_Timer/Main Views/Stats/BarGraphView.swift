@@ -109,7 +109,7 @@ struct StatsBarView: View {
                
                 }
                 .opacity(visibility)
-                .animation(.easeOut)
+                .animation(.easeOut(duration:0.15))
                 //.frame(height:30, alignment: .bottom)
             } // end if (last3Mode)
         } // parent ZStack

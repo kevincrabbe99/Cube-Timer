@@ -212,10 +212,10 @@ struct TimerView: View {
                                 ZStack {
                                     Color(.init("very_dark_black"))
                                         .cornerRadius(5)
-                                        .animation(.easeInOut(duration: 0.15))
                                         .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
                                         
                                         .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
+                                        .animation(.easeOut(duration: 0.15))
 
                                 }
                             }
@@ -234,12 +234,7 @@ struct TimerView: View {
                             }
                             .frame(width: slvsBarWidth, height: slvsBarHeight)
                         }
-                        /*
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color.white.opacity(0.6),lineWidth: 1)
-                            .animation(.easeInOut(duration: 0.15))
-                            .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
-                        */
+                
                     })
                     
                     /*
@@ -295,19 +290,17 @@ struct TimerView: View {
                  */
                 StatsBarView(timer: timer, solveHandler: solveHandler)
                     // .opacity(statBarGraphOpacity)
-                    .animation(Animation.easeOut(duration: 0.15))
                     .offset(y: 20)
+                    .animation(Animation.easeOut(duration: 0.15))
                 
-                    // .animation(.spring())`
             } // end guard for pauseSavingSolves
         }
         .foregroundColor(.white)
-        .animation(.spring())
         .offset(y: solveHandler.size == 0 ? 50 : 0)
         .onAppear() {
             timer.setDisplayToLastSolve()
         }
-       // .offset(y: 20)
+        .animation(.easeOut(duration: 0.15))
         
     }
     

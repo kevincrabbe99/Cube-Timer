@@ -107,13 +107,7 @@ class BarGraphController: ObservableObject {
         /*
          * add a phantom solve which gets updated from timer.lastRecordedTime
          */
-        var solvesGroup = solveHandler.solves
-        /* attempt 1 at  creating a fake datapoint
-        if timer != nil {
-            if timer.timerGoing {
-                solvesGroup.append(SolveItem(id: "not real", timeMS: timer.lastRecordedTime, timestamp: Date(), cubeType: cTypeHandler.selected))
-            }
-        }*/
+        let solvesGroup = solveHandler.solves
         
         let orderedSolves = solvesGroup.sorted(by:{ $0.timeMS < $1.timeMS })
         
@@ -141,7 +135,7 @@ class BarGraphController: ObservableObject {
         }
         
         // fill the heightArray with the corresponding solveTimes
-        var res: [Bar] = []
+        //var res: [Bar] = []
         //var min: Double = getMin().timeMS
         //var range: Double = getRange()
         //et maxheight: CGFloat = CGFloat(getRange())
@@ -235,8 +229,8 @@ class BarGraphController: ObservableObject {
      *  CALLED BY: self.updateBars()
      */
     private func unhighlightAll() {
-        for (index, barSolves) in barControllers.enumerated() {
-            barControllers[index].unhighlight()
+        for barSolves in barControllers {
+            barSolves.unhighlight()
         }
     }
   

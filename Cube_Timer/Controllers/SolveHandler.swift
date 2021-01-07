@@ -21,38 +21,6 @@ enum Timeframe: String {
 }
 
 
-
-
-
-
-
-
-/*
- 
- IDEAS FOR INTEGRATING ALL THE NECESSARY VIEW COMPONENTS
- SolveHandler will need
- 
- get all solves count [done].size
- get average [done].average
- get standard deviation
- get best [done].best
- get worst
- get median
- 
- WIll also need to figure out how tf to integrate the solveType
- 
- 
- 
- */
-
-
-
-
-
-
-
-
-
 /*
  *  Class which holds the solves array which represents the solves which can be found within the current timeframe
  *  MAIN PURPOSE: Facilitate self.solves
@@ -95,10 +63,6 @@ class SolveHandler: ObservableObject {
         // initialize solves to be empty
         solves = []
         
-        //solvesByTimeFrame.cTypeHandler = cTypeHandler
-        
-        // initialize self.barGraphController with a new instance of a bar graph (BarGraphController.swift)
-     //   barGraphController = BarGraphController(parent: self)
         
         // setup for CoreData
         let solveRequest = NSFetchRequest<SolveItem>(entityName: "SolveItem")
@@ -108,41 +72,47 @@ class SolveHandler: ObservableObject {
             let results = try PersistenceController.shared.container.viewContext.fetch(solveRequest)
             
             //print("worked fetched: ", results)
-            for (index, re) in results.enumerated() {
+            for (re) in results {
                 //print("Item \(index) = ", re.timeMS);
                 print("Solve Item IMPORTED: ", re as SolveItem)
                 
                 self.add(re as SolveItem)
             }
            
-            //updateSolves(to: currentTimeframe) // sets timeframe and updates everything
             
         }catch  {
             print("error fetching solves: ")
         }
         
-        /*
-         for testing add a solve from yesterday
-         
-        self.addCostumSolve(sec: 33)
-        self.addCostumSolve(sec: 34)
-        self.addCostumSolve(sec: 35)
-        self.addCostumSolve(sec: 36)
-//      */
-       // self.addCostumSolve(sec: 66)
     }
+    
     
     /*
      *  Adds a costum defined solve to the dataset
      *  FOR DEV PURPOSES ONLY
      */
-    private func addCostumSolve(sec: Double) {
+    public func addGenericSampleSolves(count: Int = 100) {
+        
+        for _ in 0..<count {
+            self.addCostumSolve(sec: Double.random(in: 31.23..<68.3), daysAgo: Int.random(in: 0..<90))
+        }
+
+    }
+    
+    
+    
+    /*
+     *  Adds a costum defined solve to the dataset
+     *  FOR DEV PURPOSES ONLY
+     */
+    private func addCostumSolve(sec: Double, daysAgo: Int) {
         let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
         //newSolve.brand = cTypeHandler.ct.rawName /*"Rubiks Brand"*/
         //newSolve.cubeType = .a3x3x3
         newSolve.id = UUID().uuidString
         newSolve.timeMS = sec
-        newSolve.timestamp = Calendar.current.date(byAdding: .month, value: -2, to: Date())!
+        newSolve.timestamp = Calendar.current.date(byAdding: .day, value: (daysAgo * -1), to: Date())!
+        newSolve.cubeType = cTypeHandler.selected
        // newSolve.type = "3x3x3"
         
         // add the new solve
@@ -151,16 +121,21 @@ class SolveHandler: ObservableObject {
         // save the new solve
         do {
             try PersistenceController.shared.container.viewContext.save()
-                print("Solve Saved!")
+                print("[SolveHandler] Solve Saved!")
             //presentationMode.wrappedValue.dismiss()  //idk
         } catch {
-            print("SAVE ERROR: ", error.localizedDescription)
+            print("[SolveHandler] SAVE ERROR: ", error.localizedDescription)
         }
         
     }
     
     
    
+    
+    
+    
+    
+    
     
     /*
      *  returns whether the provided .TimeFrame has any values in it
@@ -179,21 +154,7 @@ class SolveHandler: ObservableObject {
         return false;
         
     }
-    
-    /*
-     *  Updated every solvesByTimeFrame by replacing contents with self.getSolvesFrom(timeframe: .TimeFrame)
-     *  Called when a solve is added or deleted via self.delete() & self.updateDisplay()
-     
-     *  NEEDS TO BE REPLACED, change it so that it updates the SolveFromTimeframe().solves
-     #1 DELETED: idk why this is needed
-     
-    func updateTimeframes() {
-        
-        // this is assuming that the solves in solvesByTimeFrame were already updated
-        self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: currentTimeframe)
-        
-    }
-     */
+ 
     public func deleteLast() {
         self.delete(getLastSolve()!)
     }
@@ -217,7 +178,7 @@ class SolveHandler: ObservableObject {
         //let deleteIndex = getIndexOf(s)
         if solvesByTimeFrame.exists(solveItem: s) {
             
-            print("Deleting from CoreData")
+            print("[SolveHandler] Deleting from CoreData")
             
             // this deletes
             PersistenceController.shared.container.viewContext.delete(s)
@@ -227,7 +188,7 @@ class SolveHandler: ObservableObject {
                 self.solvesByTimeFrame.delete(s) // delete SolvesFromTimeframe() reference
                 //updateEverything() // updates EVERYTHING
             } catch {
-                print("error deleting solve")
+                print("[SolveHandler.delete(_ s:SolveItem)] error deleting solve")
             }
             
             // update solves gets called upon success ^
@@ -261,7 +222,7 @@ class SolveHandler: ObservableObject {
      */
     func add(_ s: SolveItem, newEntry: Bool = false) {
         
-        print("adding new solve: ", s.timeMS)
+        print("[SolveHandler] adding new solve: ", s.timeMS)
         
         /*
         size += 1
@@ -283,28 +244,7 @@ class SolveHandler: ObservableObject {
         return solves.sorted(by:{ $0.timestamp > $1.timestamp })
     }
     
-/*
- *  THIS IS ALL UPDATING DISPLAY METHODS
-*/
-    
-    /*
-     *  Updates the solves and the display
-     *  CALLED BY: self.add() & self.delete()
-     *  CALLS: self.updateSolves(), then self.updateDisplay()
-    func updateEverything() {
-        self.updateSolves()
-        //self.updateDisplayStats()
-    }
-    /*              OVERLOAD METHOD FOR ^
-     *  Sets the currentTimeframe, then Updates the solves and the display stats
-     *  CALLED BY:
-     *  CALLS: self.updateSolves(), then self.updateDisplay()
-     */
-    func updateEverything(to: Timeframe) {
-        self.updateSolves(to: currentTimeframe)
-        //self.updateDisplayStats()
-    }
-     */
+
     
     /*
      *  Sets the solves array based on the PROVIDED TIMEFRAME
@@ -312,7 +252,7 @@ class SolveHandler: ObservableObject {
      *  CALLS: updateDisplayStats()
      */
     func updateSolves(to: Timeframe) {
-        print("Updating solves (& tf) from ", self.size, "elements")
+        print("[SolveHandler] Updating solves (& tf) from ", self.size, "elements")
                 
         setTimeFrame(to)
         
@@ -320,7 +260,7 @@ class SolveHandler: ObservableObject {
         
         self.size = solves.count // update count
         
-        print("Updating (& tf) solves to ", self.size, "elements")
+        print("[SolveHandler] Updating (& tf) solves to ", self.size, "elements")
         
         self.updateDisplayStats()
     }
@@ -356,7 +296,7 @@ class SolveHandler: ObservableObject {
         let hasMonth: Bool = applicableTimeframes.contains(.OneMonth)
         let has3Month: Bool = applicableTimeframes.contains(.ThreeMonths)
         let hasYear: Bool = applicableTimeframes.contains(.Year)
-        let hasAll: Bool = applicableTimeframes.contains(.All)
+        //let hasAll: Bool = applicableTimeframes.contains(.All)
         
         // -1 means DNE
         var L3Pos: Int = 0
@@ -464,7 +404,7 @@ class SolveHandler: ObservableObject {
      *  CALLS: NOTHING
      */
     func updateSolves() {
-        print("Updating just solves from ", self.size, "elements")
+        print("[SolveHandler] Updating just solves from ", self.size, "elements")
         
         self.solves = self.solvesByTimeFrame.getSolvesFrom(timeframe: currentTimeframe) // sets the self.solves to solves iterated by SolvesFromTimeFrame.swift
         
@@ -476,7 +416,7 @@ class SolveHandler: ObservableObject {
             
         self.size = solves.count
         
-        print("Updating just solves to ", self.size, "elements")
+        print("[SolveHandler] Updating just solves to ", self.size, "elements")
         
         self.updateDisplayStats()
     }
@@ -515,7 +455,7 @@ class SolveHandler: ObservableObject {
         }
         // update BO3 view
         if self.bo3Controller != nil {
-            print("updating bo4Controller")
+            print("[SolveHandler] updating bo4Controller")
             self.bo3Controller.update()
         }
     }

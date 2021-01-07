@@ -20,9 +20,21 @@ class ContentViewController: ObservableObject {
     
     // sidebar positioning
     @Published var sidebar: Bool = false
-    let sidebarOutPos: CGPoint = CGPoint(x: -1 * (UIScreen.main.bounds.width/6)+45, y: UIScreen.main.bounds.height/2)// 45 shows 5px of the sidebar always
-    let sidebarInPos: CGPoint = CGPoint(x: (UIDevice.current.hasNotch ? UIScreen.main.bounds.width/6 : (UIScreen.main.bounds.width/4)-15), y: UIScreen.main.bounds.height/2)
-    let sidebarWidth: CGFloat = (UIDevice.current.hasNotch ? (UIScreen.main.bounds.width / 3) : (UIScreen.main.bounds.width / 2.4))
+    var sidebarOutPos: CGPoint {
+        if UIDevice.IsIpad {
+            return CGPoint(x: -1 * (UIScreen.main.bounds.width/6)+45, y: UIScreen.main.bounds.height/2)
+        }else {
+            return CGPoint(x: -1 * (UIScreen.main.bounds.width/6)+45, y: UIScreen.main.bounds.height/2)// 45 shows 5px of the sidebar always
+        }
+    }
+    var sidebarInPos: CGPoint {
+        if UIDevice.IsIpad {
+            return CGPoint(x: UIScreen.main.bounds.width/6, y: UIScreen.main.bounds.height/2)
+        }else {
+            return CGPoint(x: (UIDevice.hasNotch ? UIScreen.main.bounds.width/6 : (UIScreen.main.bounds.width/4)-15), y: UIScreen.main.bounds.height/2)
+        }
+    }
+    let sidebarWidth: CGFloat = (UIDevice.hasNotch ? (UIScreen.main.bounds.width / 3) : (UIScreen.main.bounds.width / 2.4))
     @Published var sidebarDraggin: Bool = false
     @Published var sbBgOpacity: Double = 0
     @Published var sbXPos: CGFloat = -1 * (UIScreen.main.bounds.width/6)+45 // initialize it to sidebarOutPos x value
@@ -45,23 +57,43 @@ class ContentViewController: ObservableObject {
     let PAGE_DRAG_MAX: CGFloat = 150
     let ASV_Y_ABS_OFFSET: CGFloat = 150 // AllSolveView Y Absolute Offset
     var blockTransition: Bool = false
+    @Published var blockGesture: Bool = false // this is set by the timer and has a 0.5 second buffer from when timerstops
     
     
     // settigns page
     @Published var inSettings: Bool = false
     
     
+    init() {
+        let notificationCenter = NotificationCenter.default
+            notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    /*
+     * this me
+     */
+    @objc func appMovedToBackground() {
+        print("App moved to background, setting page to, ", self.onPage.rawValue)
+        if self.onPage == .Main {
+            self.setStateForMain()
+        } else {
+            self.setStateForAllSolves()
+        }
+    }
     
     /*
      *  THE DRAG GESTURE TO SWITCH VIEWS
      * called by AllSolvesView & Buttons View
      */
     public func dragChanged(_ v: DragGesture.Value) {
-       
+        
+        // this blocks ransition pages during and 0.4 seconds after the timer stops, set by timerController
+        if blockGesture { return }
+        
         if onPage == .Main { // if on main page
             
-        
             let transY: CGFloat = v.translation.height
+            
             
             // leave if we are draggin up
             if transY < 0 || timer.bothActivated || timer.timerGoing {
@@ -120,12 +152,13 @@ class ContentViewController: ObservableObject {
      * called by AllSolvesView & Buttons View
      */
     public func dragEnded(_ v: DragGesture.Value) {
-        print("draggin ended: ", v.translation.height)
-        
         let transY: CGFloat = abs( v.translation.height )
         
         // calculate percentage
         self.pageTransitionPercentage = Double(transY / PAGE_DRAG_MAX)
+        
+        // this blocks ransition pages during and 0.4 seconds after the timer stops, set by timerController
+        if blockGesture { return }
         
         if onPage == .Main {
             
@@ -256,7 +289,7 @@ class ContentViewController: ObservableObject {
             * called by onClick listener in SidebarView.swift
      */
     public func tappedAddCT() {
-        print("creating new Cube Type view")
+        print("[cvc] creating popup for new CubeType")
         showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController)))
     }
     
@@ -269,20 +302,19 @@ class ContentViewController: ObservableObject {
     }
     
     public func showPopup(v: AnyView) {
-        print("setting popupShowing to: true")
         lightTap.impactOccurred()
         popupController.set(v)
         popupShowing = true
-        print("popupShowing = ", popupShowing)
+        
+        print("[cvc] popupShowing = ", popupShowing)
     }
     
     public func hidePopup() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         lightTap.impactOccurred()
-        print("setting popupShowing to: false")
+        
+        
         popupShowing = false
-       // shaderOpacity = 0
-        print("popup hidden")
     }
     
     
@@ -312,7 +344,7 @@ class ContentViewController: ObservableObject {
             .onEnded { [self] (trans) in
                 self.sidebarDraggin = false
                 
-                var xTrans = trans.translation.width
+                //var xTrans = trans.translation.width
         
                 if self.sbXPos > sidebarOutPos.x/2 {
                     self.pullInSidebar()

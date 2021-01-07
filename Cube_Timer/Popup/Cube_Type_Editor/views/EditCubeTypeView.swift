@@ -49,7 +49,7 @@ struct EditCubeTypeView: View {
      */
     private func updateValuesFromSetCT() {
         if setCT != nil {
-            print("setting to ", setCT)
+            print("setting to ", setCT?.descrip as Any)
             self.description = setCT!.descrip
             self.d1 = Int(setCT!.d1 - 2)
             self.d2 = Int(setCT!.d1 - 2)

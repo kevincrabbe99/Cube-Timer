@@ -55,11 +55,11 @@ class TimerController: ObservableObject {
     var bo3Controller: BO3Controller!
     var cTypeHandler: CTypeHandler!
     var settingsController: SettingsController!
+    var cvc: ContentViewController!
     
     
     init() {
-        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
-        //solveHandler.timer = self
+       
         
     }
     
@@ -118,20 +118,20 @@ class TimerController: ObservableObject {
     }
     
     func deActivateRight() {
-        print("Right DeActivated")
+        print("[timer] Right DeActivated")
         rightActivated = false
         testStart()
     }
     
     func activateLeft() {
         lightTap.impactOccurred()
-        print("Left Activated")
+        print("[timer] Left Activated")
         leftActivated = true
         testStart()
     }
     
     func deActivateLeft() {
-        print("Left DeActivated")
+        print("[timer] Left DeActivated")
         leftActivated = false
         testStart()
     }
@@ -139,7 +139,7 @@ class TimerController: ObservableObject {
     private func testStart() {
         
         if acceptInput {
-        print("TS: called")
+        print("[timer] testStart: called")
             oneActivated = (leftActivated || rightActivated) && !(leftActivated && rightActivated) // bool expression for if one is active
             bothActivated = (leftActivated && rightActivated)
             neitherActivated = !(leftActivated && rightActivated)
@@ -208,13 +208,15 @@ class TimerController: ObservableObject {
     
     func startTimer() {
         
+        // block view from switching
+        cvc.blockGesture = true // blocks page transition
         
         self.peripheralOpacity = 0 // show the peripherals
        // solveHandler.barGraphController.animateOut()
         startTap.notificationOccurred(.success) // tap the phone when starting
         
         UIApplication.shared.isIdleTimerDisabled = true // disable the sleep
-        print("time started")
+        print("[timer.startTimer] timerStarted")
         
         // create temp solve object
         if !settingsController.pauseSavingSolves {
@@ -242,27 +244,14 @@ class TimerController: ObservableObject {
         self.solveHandler.barGraphController.animateIn()
         self.peripheralOpacity = 1 // show the peripherals
         
-        /*
-        let newSolve = SolveItem.init(entity: SolveItem.entity(), insertInto: PersistenceController.shared.container.viewContext)
-        //newSolve.brand = self.cTypeHandler.selected.desc /*brand.rawValue*/
-        //newSolve.cubeType = type
-        newSolve.id = UUID().uuidString
-        newSolve.timeMS = lastRecordedTime
-        newSolve.timestamp = Date()
-        
-        newSolve.cubeType = cTypeHandler.selected!
-        //newSolve.type = type.rawValue
-         
-         solveHandler.add(tempSolve!, newEntry: true)
-        */
         
         if !settingsController.pauseSavingSolves {
             do {
                 try PersistenceController.shared.container.viewContext.save()
-                    print("Solve Saved!")
+                    print("[timer.stopTimer] Solve Saved!")
                 //presentationMode.wrappedValue.dismiss()  //idk
             } catch {
-                print("SAVE ERROR: ", error.localizedDescription)
+                print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
             }
         }
         
@@ -276,6 +265,9 @@ class TimerController: ObservableObject {
         //let delayInputTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(acceptInputNow), userInfo: nil, repeats: false)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.acceptInput = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.cvc.blockGesture = false // allows the page to transition again
         }
     }
     
@@ -380,7 +372,6 @@ class TimerController: ObservableObject {
         
         if self.time != 0 {
             timeQuotient = Double(( (time * 100) / Double(iterations))) // divide minutes by iterations
-            print("set tQ: ", timeQuotient)
         }
         if self.minutes != 0 {
             minQuotient = Double((minutes / iterations)) // divide minutes by iterations

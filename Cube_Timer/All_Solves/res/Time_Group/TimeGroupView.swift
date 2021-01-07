@@ -11,7 +11,7 @@ struct TimeGroupView: View {
     
     @ObservedObject var controller: TimeGroupController // this is set via AllSolvesView upon printing
     
-    var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 5), count: 8)
+    var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 5), count: (!UIDevice.IsIpad ? 8 : 15))
     
     
     
@@ -63,6 +63,7 @@ struct TimeGroupView: View {
                     //.border(Color.green)
                 }
                 .frame(width: geo.size.width, alignment: .topTrailing)
+                .animation(.linear)
                 //.border(Color.red)
                 /*
                 HStack {

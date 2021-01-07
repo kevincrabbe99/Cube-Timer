@@ -14,7 +14,7 @@ enum TimeGroup: String {
     case yesterday = "yesterday"
     case thisWeek = "last week"
     case thisMonth = "this month"
-    case lastMonth = "lastMonth"
+    case lastMonth = "last month"
     
     case jan = "Jan"
     case feb = "Feb"
@@ -147,7 +147,7 @@ class SolvesFromTimeframe: ObservableObject {
         
         let now = Date()
         // needed for test .Week calculation
-        let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
+        //let dayAgo: Date = Calendar.current.date(byAdding: .day, value: -1, to: now)!
         
         switch timeframe {
         case .LastThree:
@@ -228,8 +228,6 @@ class SolvesFromTimeframe: ObservableObject {
             return res
         }
         
-        print("getSolvesFrom(tf: Timeframe) tf = ", timeframe.rawValue);
-        print("getSolvesFrom(tf: Timeframe) was called, ", res.count, " items returned!")
     }
     
     /*

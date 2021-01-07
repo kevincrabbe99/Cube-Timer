@@ -51,6 +51,13 @@
 "1Y" = "1Y";
 "ALL" = "ALL";
 
+"Best" = "ベスト";
+"Worst" = "最悪";
+"Average" = "平均";
+
+"COMPLETE %lld MORE SOLVES" = "完了 %lld より多くの解決策";
+"no solves found." = "解決策が見つかりません。 ☹️";
+
 "BEST" = "ベスト";
 "WORST" = "最悪";
 "MEDIAN" = "最悪";
@@ -64,15 +71,15 @@
 "this month" = "今月";
 "last month" = "先月";
 
-"jan" = "1月";
-"feb" = "2月";
-"mar" = "十二月";
-"apr" = "4月";
-"may" = "五月";
-"jun" = "六月";
-"jul" = "7月";
-"aug" = "8月";
-"sep" = "9月";
-"oct" = "10月";
-"nov" = "11月";
-"dev" = "12月";
+"Jan" = "1月";
+"Feb" = "2月";
+"Mar" = "十二月";
+"Apr" = "4月";
+"May" = "五月";
+"Jun" = "六月";
+"Jul" = "7月";
+"Aug" = "8月";
+"Sep" = "9月";
+"Oct" = "10月";
+"Nov" = "11月";
+"Dev" = "12月";

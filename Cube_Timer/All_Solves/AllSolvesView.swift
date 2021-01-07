@@ -55,7 +55,7 @@ struct AllSolvesView: View {
                     /*
                      *  outer stack contains 2 cells left and right
                      */
-                    HStack {
+                    HStack(alignment: .top) {
                         
                         /*
                          *  verticle list with all sidebar elements
@@ -87,18 +87,17 @@ struct AllSolvesView: View {
                             
                             StatLabelVertical(label: "WORST", solve: controller.worst)
                             
+                            
                             Spacer()
                             
                             StatLabelVertical(label: "MEDIAN", value: TimeCapture(controller.median).getAsReadable())
                                 
-                            
-                            
      
                             
                             
                             
                         }// end sidebar vstack
-                        .frame(width: 150, height: geo.size.height, alignment: .top)
+                        .frame(width: 150, height: (!UIDevice.IsIpad ? geo.size.height : 450), alignment: .top)
                         .foregroundColor(.white)
                         .padding(.leading, 20)
                         
@@ -112,7 +111,7 @@ struct AllSolvesView: View {
                              *  hStack with topBar stats
                              */
                             HStack {
-                                    
+                                     
                                 
                                 if !(controller.selected.count > 0)  { // if there are no selected solves
                                     if (controller.solves.count > 0) {
@@ -134,6 +133,7 @@ struct AllSolvesView: View {
                             .padding(.top, 20)
                             .padding(.bottom, 10)
                             .padding(.trailing, 60)
+                            .padding(.leading, 5)
 
                             
                             /*
@@ -148,7 +148,7 @@ struct AllSolvesView: View {
                                 
                                 
                                 ScrollView(showsIndicators: false) {
-                                    LazyVStack {
+                                    VStack {
                                         Group {
                                             if controller.timeGroupHasSolves(controller.tgControllerToday) {
                                                 TimeGroupView(controller: controller.tgControllerToday)
@@ -268,11 +268,13 @@ struct AllSolvesView: View {
                         }
                         
                     } // end main hStack
+                    
             
                 } else { // end no solves if guard
-                    Text("no solves found :(")
+                    Text("no solves found.")
                         .font(Font.custom("Play-Bold", size: 17))
                         .opacity(0.75)
+                        .foregroundColor(.white)
                 }
                 
             } // end main ZStack, no more color

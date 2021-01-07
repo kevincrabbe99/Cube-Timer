@@ -51,6 +51,13 @@
 "1Y" = "1A";
 "ALL" = "ALL";
 
+"Best" = "Meilleur";
+"Worst" = "Pire";
+"Average" = "Moyenne";
+
+"COMPLETE %lld MORE SOLVES" = "COMPLETEZ %lld PLUS DE SOLVES";
+"no solves found." = "aucune solution trouvée. ☹️";
+
 "BEST" = "MEILLEUR";
 "WORST" = "PIRE";
 "MEDIAN" = "MÉDIAN";
@@ -64,15 +71,15 @@
 "this month" = "ce mois-ci";
 "last month" = "mois dernier";
 
-"jan" = "janvier";
-"feb" = "février";
-"mar" = "mars";
-"apr" = "avril";
-"may" = "mai";
-"jun" = "juin";
-"jul" = "juillet";
-"aug" = "août";
-"sep" = "septembre";
-"oct" = "octobre";
-"nov" = "novembre";
-"dec" = "décembre";
+"Jan" = "janvier";
+"Feb" = "février";
+"Mar" = "mars";
+"Apr" = "avril";
+"May" = "mai";
+"Jun" = "juin";
+"Jul" = "juillet";
+"Aug" = "août";
+"Sep" = "septembre";
+"Oct" = "octobre";
+"Nov" = "novembre";
+"Dec" = "décembre";

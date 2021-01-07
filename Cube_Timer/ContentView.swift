@@ -134,6 +134,18 @@ struct ContentView: View {
         
     }
     
+    var sidebarWidth: CGFloat {
+        if UIDevice.IsIpad {
+            return UIScreen.main.bounds.width / 3
+        }
+        if UIDevice.hasNotch {
+            return UIScreen.main.bounds.width / 3
+        }
+        
+        // old iphone
+        return UIScreen.main.bounds.width / 2.4
+    }
+    
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     var body: some View {
         
@@ -180,10 +192,11 @@ struct ContentView: View {
                     }
                 
                 SidebarView(contentView: self, cTypeHandler: cTypeHandler)
-                    .frame(width: (UIDevice.current.hasNotch ? (geo.size.width / 3) : (geo.size.width / 2.4)), height: geo.size.height)
+                    //.frame(width: (UIDevice.current.hasNotch || UIDevice.IsIpad ? (geo.size.width / 3) : (geo.size.width / 2.4)), height: geo.size.height)
+                    .frame(width: sidebarWidth)
                     //.position(x: geo.size.width / 6, y: geo.size.height/2)
                     .position(x: cvc.sbXPos, y: geo.size.height/2)
-                    .offset(x: (UIDevice.current.hasNotch ? 0 : -20))
+                    .offset(x: (UIDevice.hasNotch || UIDevice.IsIpad ? 0 : -20))
                     .animation(.spring())
                     .zIndex(3)
                 
@@ -212,6 +225,7 @@ struct ContentView: View {
             }
         
         }
+        .statusBar(hidden: true)
         .edgesIgnoringSafeArea(.all)
         .onAppear() {
             // contentViewController stuff
@@ -219,6 +233,7 @@ struct ContentView: View {
             // objects that need to reference the cvc
             self.cTypeHandler.cvc = cvc
             self.popupController.cvc = cvc
+            self.timer.cvc = cvc
             
             // objects which cvc needs to reference 
             self.cvc.ctEditController = ctEditController
@@ -226,10 +241,14 @@ struct ContentView: View {
             self.cvc.cTypeHandler = cTypeHandler
             self.cvc.timer = timer
             self.cvc.allSolvesController = allSolvesController
+        
             
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
+            
+            // FOR DEV PURPOSE: Uncommenting this will create 50 random solves to the default cubetype
+            // solveHandler.addGenericSampleSolves() [are u sure??]
         }
-     //   .environment(\.locale, .init(identifier: "en")) // DEV USE ONLY
+      // .environment(\.locale, .init(identifier: "ja")) // DEV USE ONLY
         .environmentObject(solveHandler)
         .environmentObject(cTypeHandler)
         .environmentObject(allSolvesController)
@@ -272,8 +291,15 @@ struct RoundedCorner: Shape {
 }
 
 extension UIDevice {
-    var hasNotch: Bool {
+    static var hasNotch: Bool {
         let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
         return bottom > 0
+    }
+    
+    static var IsIpad: Bool {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return true
+        }
+        return false
     }
 }
