@@ -67,7 +67,7 @@ struct StatsBarView: View {
                             }
                             
                         }
-                        .foregroundColor(.white)
+                        .foregroundColor(.init("blackORwhite"))
                         .frame(width: 250, height: 30, alignment: .bottom)
                     }
                     .frame(width: 250, height: 50, alignment: .bottom)
@@ -78,33 +78,33 @@ struct StatsBarView: View {
                     if solveHandler.size > 0 { // guard incase there are no solves
                         HStack(alignment: .center) {
                             Text( solveHandler.getMin().getTimeCapture()?.getInSolidForm() ?? "-" )
-                                .font(.system(size: 9))
+                                .font(Font.custom("Play-Regular", size: 8))
                                 .fontWeight(.bold)
                                 .frame(width: 100, height: 10, alignment: .leading)
                             
                             ZStack {
-                                Color.init("mint_cream")
+                                Color.init("blackORwhite")
                                     .opacity(0.7)
                                     .cornerRadius(5)
-                                    .addBorder(Color.init("mint_cream").opacity(0.9), width: 1, cornerRadius: 5)
+                                    .addBorder(Color.init("whiteORblack").opacity(0.9), width: 1, cornerRadius: 5)
                                     .frame(width: 60, height: 12)
                                 
                                 Text( String(solveHandler.size) + ":" + solveHandler.average.getInSolidForm())
-                                    .font(.system(size: 9))
+                                    .font(Font.custom("Play-Regular", size: 8))
                                     .fontWeight(.bold)
                                     .frame(width: 50, alignment: .center)
-                                    .foregroundColor(.init("very_dark_black"))
                             }
                             .frame(width: 60, height: 10)
                             
                             Text( solveHandler.getMax().getTimeCapture()?.getInSolidForm() ?? "-" )
-                                .font(.system(size: 9))
+                                .font(Font.custom("Play-Regular", size: 8))
                                 .fontWeight(.bold)
                                 .frame(width: 100, height: 10, alignment: .trailing)
                         }
                         .frame(width: 270, height: 20, alignment: .center)
-                        .offset(y: -22)
-                        .opacity(0.9)
+                        .foregroundColor(.init("blackORwhite"))
+                        .offset(y: -26)
+                        //.opacity(0.9)
                     }
                
                 }

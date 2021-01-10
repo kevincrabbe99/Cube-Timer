@@ -46,11 +46,11 @@ struct ButtonsView: View {
                  */
                 ZStack {
                   
-                    RoundedRectangle(cornerRadius: 5)
+                    RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
-                        .cornerRadius(topCRs, corners: [.topLeft])
+                        .cornerRadius(topCRs, corners: [.topLeft,.bottomLeft])
                         .cornerRadius(4, corners: [.bottomRight, .topRight])
-                        .cornerRadius(10, corners: [.bottomLeft])
+                        //.cornerRadius(10, corners: [.bottomLeft])
                         .opacity(leftBtnOpacity)
                     
                     
@@ -61,7 +61,7 @@ struct ButtonsView: View {
                         .offset(x: -50, y: 20)
                         .aspectRatio(contentMode: .fit)
                         .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
-                        .foregroundColor(.white)
+                        .foregroundColor(.init("whiteORblack"))
                         .opacity(leftIconOpacity)
                         .animation(.easeIn)
                   
@@ -106,11 +106,11 @@ struct ButtonsView: View {
                     /* Redundany by setting gradient background
                     Color.init("dark_black")
                     */
-                    RoundedRectangle(cornerRadius: 5)
+                    RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .fill(LinearGradient(gradient: gradient, startPoint: .topTrailing, endPoint: .bottomLeading))
-                        .cornerRadius(topCRs, corners: [.topRight])
+                        .cornerRadius(topCRs, corners: [.topRight, .bottomRight])
                         .cornerRadius(4, corners: [.bottomLeft, .topLeft])
-                        .cornerRadius(10, corners: [.bottomRight])
+                        //.cornerRadius(10, corners: [.bottomRight])
                         .opacity(rightBtnOpacity)
                  
                         Image("two_fingers")
@@ -119,7 +119,7 @@ struct ButtonsView: View {
                             .offset(x: 50, y: 20)
                             .aspectRatio(contentMode: .fit)
                             .rotation3DEffect(.degrees(330), axis: (x: 0, y: 0, z: 1))
-                            .foregroundColor(.white)
+                            .foregroundColor(.init("whiteORblack"))
                             .opacity(rightIconOpacity)
                             .animation(.easeIn)
                  
@@ -154,8 +154,8 @@ struct ButtonsView: View {
                 
                 
             }
-            .frame(width: geometry.size.width - 10, height: geometry.size.height - 35)
-            .offset(x:5)
+            .frame(width: geometry.size.width - 20, height: (UIDevice.hasNotch ? geometry.size.height - 20 : geometry.size.height - 35))
+            .offset(x:12) // 3 to account for sidebar offset
             .offset(y:10)
         }
     }

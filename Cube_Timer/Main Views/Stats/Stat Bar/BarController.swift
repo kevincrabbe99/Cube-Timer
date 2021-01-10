@@ -17,7 +17,7 @@ class BarController: ObservableObject, Identifiable {
     
     @Published var maxHeight: CGFloat = 30 // this sets the height of the standard deviation bar graph
     @Published var percentage: Double = 0
-    @Published var color: Color = .white
+    @Published var color: Color = Color.init("blackORwhite")
     
     /*
      *  updated the bar on the display
@@ -32,7 +32,7 @@ class BarController: ObservableObject, Identifiable {
     }
     
     func unhighlight() {
-        self.color = .white
+        self.color = Color.init("blackORwhite")
     }
     
 }

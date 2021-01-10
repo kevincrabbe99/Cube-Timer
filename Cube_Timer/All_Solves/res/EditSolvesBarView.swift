@@ -57,6 +57,7 @@ struct EditSolvesBarView: View {
                     .zIndex(9)
                     
                 }.offset(y: -5)
+                .foregroundColor(.init("blackORwhite"))
                 
                 // shows whats selected
                 ZStack {

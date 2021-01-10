@@ -36,19 +36,21 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
     // sets the color green if the solve is the best solve
     var bgColor: Color {
         if allSolvesController.best == si {
-            return Color.init("green").opacity(0.8)
+            return Color.init("green")
         }
         if allSolvesController.worst == si {
-            return Color.init("red").opacity(0.8)
+            return Color.init("red")
         }
-        return Color.init("mint_cream").opacity(0.2)
+        return Color.init("mint_cream").opacity(0.1)
     }
     
     var textColor: Color {
         if allSolvesController.best == si || allSolvesController.worst == si {
-            return Color.init("very_dark_black")
+            return Color.init("whiteORblack")
+        } else if selected {
+            return Color.white
         }
-        return Color.init("mint_cream")
+        return Color.init("blackORwhite")
     }
     
     

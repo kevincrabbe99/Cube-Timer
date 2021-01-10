@@ -268,7 +268,7 @@ struct TimerView: View {
                 
             } // end guard for pauseSavingSolves
         }
-        .foregroundColor(.white)
+        .foregroundColor(.init("blackORwhite"))
         .offset(y: solveHandler.size == 0 ? 50 : 0)
         .onAppear() {
             timer.setDisplayToLastSolve()

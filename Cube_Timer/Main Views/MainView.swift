@@ -59,7 +59,7 @@ struct MainView: View {
                     .padding(.top, 20)
                     .padding(.bottom, 30)
                     .opacity(cvc.mainViewOpacity - 0.3)
-                    .foregroundColor(.white)
+                    .foregroundColor(.init("whiteORblack"))
                 }
                 
                 

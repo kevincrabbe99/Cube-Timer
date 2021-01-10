@@ -26,7 +26,7 @@ struct SidebarView: View {
             ZStack {
                 SidebarShape()
                     .fill(LinearGradient(
-                        gradient: .init(colors: [Color.init("black_chocolate"), Color.init("very_dark_black")]),
+                        gradient: .init(colors: [Color.init("black_chocolate"), Color.init("blackORwhite")]),
                           startPoint: .init(x: 0, y: 1),
                         endPoint: .init(x: 1.5, y: -0.5)
                         ))
@@ -118,19 +118,7 @@ struct SidebarView: View {
                                 }
                                 .frame(width: geo.size.width - 150, alignment: .leading)
                                 
-                               // plan is to show the edit button here and see if that works
-                                
-                                // the plan:
-                                /*
-                                 *  [] use the foreach to being all of the CT's in as CubeTypeController objects (initied and stored in CTypeHandler
-                                 
-                                 *  [done] The CTController objects will store the corresponind view to be displayed
-                                 
-                                 *  [done] CTypeHandler also has to store each SingleCubeTypeController rather than the views
-                                    
-                                 *  [half done] When the SingleCubeTypeView receives a tap gesture it calls the Controller and the controller will have a reference to CTypeHandler (as thats where it was created)
-                                 */
-                            
+                        
                             }
                         }
                         .frame(width: geo.size.width - 75, alignment: .leading)

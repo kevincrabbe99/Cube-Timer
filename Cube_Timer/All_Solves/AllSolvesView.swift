@@ -36,10 +36,10 @@ struct AllSolvesView: View {
             
             ZStack {
                 
-                Color.black
+                Color.init("whiteORblack")
                 Rectangle()
                     .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .opacity(0.6)
+                    .opacity(0.3)
                     .gesture ( // gesture for transitioning to allSolvesView
                         DragGesture()
                             .onChanged { value in
@@ -79,6 +79,7 @@ struct AllSolvesView: View {
                             }.frame(width: 150, alignment: .trailing)
                             .padding(.top, 20)
                             .padding(.bottom, 30)
+                            .foregroundColor(.init("blackORwhite"))
                             
                             
                             StatLabelVertical(label: "BEST", solve: controller.best)
@@ -98,7 +99,7 @@ struct AllSolvesView: View {
                             
                         }// end sidebar vstack
                         .frame(width: 150, height: (!UIDevice.IsIpad ? geo.size.height : 450), alignment: .top)
-                        .foregroundColor(.white)
+                        .foregroundColor(.init("blackORwhite"))
                         .padding(.leading, 20)
                         
                         
@@ -274,7 +275,7 @@ struct AllSolvesView: View {
                     Text("no solves found.")
                         .font(Font.custom("Play-Bold", size: 17))
                         .opacity(0.75)
-                        .foregroundColor(.white)
+                        .foregroundColor(.init("blackORwhite"))
                 }
                 
             } // end main ZStack, no more color

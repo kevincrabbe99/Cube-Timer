@@ -32,14 +32,14 @@ struct TimeframeBar: View {
             ZStack {
                 Color.init("very_dark_black")
                     .cornerRadius(5)
-                    .shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
+                    //.shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
                     //.opacity(0.65)
                 
                 RoundedRectangle(cornerRadius: 4)
                     .fill(Color.init("mint_cream").opacity(0.5))
                     .addBorder(Color.init("mint_cream").opacity(0.8), width: 1, cornerRadius: 4)
                     .frame(width: 35, height: 25)
-                    .foregroundColor(.white)
+                   // .foregroundColor(.init("blackORwhite"))
                     .position( x: 31.5, y: 12.5 ) // THIS X VALUE: is the initial left constraint
                     .offset(x: CGFloat(solveHandler.currentTimeframeButtonPos * 55))
                     .animation(.default)
@@ -58,7 +58,7 @@ struct TimeframeBar: View {
                         ZStack {
                             Text("3X")
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)
+                                .foregroundColor(.init("blackORwhite"))
                         }
                         .frame(width: 35, height: 100)
                     }
@@ -71,7 +71,7 @@ struct TimeframeBar: View {
                         ZStack {
                             Text("1D")
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)
+                                .foregroundColor(.init("blackORwhite"))
                         }
                         .frame(width: 35, height: 100)
                     }
@@ -85,7 +85,7 @@ struct TimeframeBar: View {
                             ZStack {
                                 Text("1W")
                                     .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.init("blackORwhite"))
                             }
                             .frame(width: 35, height: 100)
                         }
@@ -100,7 +100,7 @@ struct TimeframeBar: View {
                             ZStack {
                                 Text("1M")
                                     .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.init("blackORwhite"))
                             }
                             .frame(width: 35, height: 100)
                         }
@@ -115,7 +115,7 @@ struct TimeframeBar: View {
                             ZStack {
                                 Text("3M")
                                     .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.init("blackORwhite"))
                             }
                             .frame(width: 35, height: 100)
                         }
@@ -130,7 +130,7 @@ struct TimeframeBar: View {
                             ZStack {
                                 Text("1Y")
                                     .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.init("blackORwhite"))
                             }
                             .frame(width: 35, height: 100)
                         }
@@ -144,7 +144,7 @@ struct TimeframeBar: View {
                         ZStack {
                             Text("ALL")
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)
+                                .foregroundColor(.init("blackORwhite"))
                         }
                         .frame(width: 35, height: 100)
                     }
@@ -165,7 +165,7 @@ struct selectedButton: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.largeTitle)
-            .foregroundColor(.white)
+            .foregroundColor(.init("blackORwhite"))
             .padding()
             .background(Color.blue)
             .clipShape(RoundedRectangle(cornerRadius: 10))

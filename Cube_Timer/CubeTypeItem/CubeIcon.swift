@@ -17,10 +17,11 @@ struct CubeIcon: View {
     var padding: CGFloat = 4
     var widthNoPadding: CGFloat = 30
     var cr: CGFloat = 2
+    var color: Color = Color.init("whiteORblack")
     
     var goodForIcon: Bool = false
     
-    init(_ d1: Int, _ d2: Int, _ d3: Int, width: CGFloat) {
+    init(_ d1: Int, _ d2: Int, _ d3: Int, width: CGFloat, color: Color = Color.init("whiteORblack")) {
         self.d1 = d1
         self.d2 = d2
         self.d3 = d3
@@ -28,6 +29,7 @@ struct CubeIcon: View {
         self.padding = blockWidth / 20 // padding is a tenth of widthNoPadding
         self.blockWidth = widthNoPadding - padding
         self.cr = padding / 2
+        self.color = color
         //self.blockWPadding = blockWidth + padding
         self.w = width
     
@@ -46,6 +48,7 @@ struct CubeIcon: View {
                 ForEach( 0..<d1, id: \.self ){ i in
                     ForEach( 0..<d2, id: \.self ) { k in
                         RoundedRectangle(cornerRadius: cr)
+                            .fill(color)
                             .frame(width: blockWidth, height: blockWidth)
                             .offset(x: CGFloat(CGFloat(i)*widthNoPadding))
                             .offset(y: CGFloat(CGFloat(k)*widthNoPadding))
@@ -55,13 +58,13 @@ struct CubeIcon: View {
                 
                 RoundedRectangle(cornerRadius: 5)
                     .fill(Color.clear)
-                    .border(Color.init("mint_cream"), width: 1)
+                    .border(Color.init("whiteORblack"), width: 1)
                     .cornerRadius(2)
                     .clipped()
                     .frame(width: w, height: w)
                 
                 Text(String(d1))
-                    .foregroundColor(.init("mint_cream"))
+                    .foregroundColor(.init("whiteORblack"))
                     .font(.system(size:8))
                     .fontWeight(.black)
                 

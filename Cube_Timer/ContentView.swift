@@ -224,6 +224,7 @@ struct ContentView: View {
             // solveHandler.addGenericSampleSolves(count: 30) are u sure?
         }
       // .environment(\.locale, .init(identifier: "ja")) // DEV USE ONLY
+        .environment(\.colorScheme, .light)
         .environmentObject(solveHandler)
         .environmentObject(cTypeHandler)
         .environmentObject(allSolvesController)

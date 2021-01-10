@@ -31,6 +31,7 @@ struct SingleCubeTypeView: View/*, Identifiable */{
              
             HStack {
                 CubeIcon(controller.d1,controller.d2,controller.d3, width: 15)
+                    .foregroundColor(asSidebar ? Color.init("whiteORblack") : Color.init("blackORwhite"))
                     //.frame(width: 30, height:30)
                     .opacity(0.8)
                 VStack(alignment: .leading) {
@@ -48,7 +49,7 @@ struct SingleCubeTypeView: View/*, Identifiable */{
  
                 
             }
-            .foregroundColor( Color.white)
+            .foregroundColor(asSidebar ? Color.init("whiteORblack") : Color.init("blackORwhite"))
             .offset(x: 20)
             .offset(x: (controller.selected && asSidebar ? /*CGFloat.random(in: 1..<5)*/ 5 : -5))
             //.animation((controller.selected ? Animation.easeInOut(duration: 1).repeatForever(autoreverses: true) : Animation.easeInOut))
