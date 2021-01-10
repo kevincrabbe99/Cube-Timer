@@ -15,11 +15,7 @@ class BO3Controller: ObservableObject {
     var solveHandler: SolveHandler!
     var timerController: TimerController!
     
-    /*
-    @Published var bestDiff: String = ""
-    @Published var worstDiff: String = ""
-    @Published var averageDiff: String = ""
-    */
+
     
     @Published var best: TimeCapture  = TimeCapture()
     @Published var worst: TimeCapture = TimeCapture()
@@ -34,17 +30,7 @@ class BO3Controller: ObservableObject {
     
     var clearedTime: Date = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
     
-    /*
-     *  fake constructor
-     */
-    
-    
-    /*
-    init(s: SolveHandler, t: TimerController) {
-        self.body = BestOfThreeView(c: self)
-    }
- */
-    
+
     /*
      *  used to creat a "new game"
      */
@@ -148,57 +134,6 @@ class BO3Controller: ObservableObject {
         }
         self.average = res / Double(solves.count)
     }
-    
-    
-    
-    /*
-    let lrc = timerController.lastRecordedTime
-    self.solves = solveHandler.last3
-    
-    let best = solveHandler.getMin().timeMS
-    
-    if lrc == 0 {
-        bestDiff = ""
-    } else if lrc < best { // if under best
-        var diffMS = solveHandler.getMin().timeMS - timerController.lastRecordedTime
-        diffMS *= 1
-        bestDiff =  "(-\(TimeCapture(diffMS).getInSolidForm()))"
-    } else { // if over best
-        var diffMS = timerController.lastRecordedTime - solveHandler.getMin().timeMS
-        diffMS *= 1
-        bestDiff =  "(+\(TimeCapture(diffMS).getInSolidForm()))"
-    }
-
-
-    let worst = solveHandler.getMax().timeMS
-    
-    if lrc == 0 {
-        worstDiff =  ""
-    } else if lrc < worst { // if under best
-        var diffMS = solveHandler.getMax().timeMS - timerController.lastRecordedTime
-        diffMS *= 1
-        worstDiff = "(-\(TimeCapture(diffMS).getInSolidForm()))"
-    } else { // if over best
-        var diffMS = timerController.lastRecordedTime - solveHandler.getMax().timeMS
-        //diffMS *= 1
-        worstDiff = "(+\(TimeCapture(diffMS).getInSolidForm()))"
-    }
-
-
-    let average = solveHandler.getAverage().timeInMS
-    
-    if lrc == 0 {
-        averageDiff = ""
-    } else if lrc < average { // if under best
-        var diffMS = solveHandler.getAverage().timeInMS - timerController.lastRecordedTime
-        diffMS *= 1
-        averageDiff = "(-\(TimeCapture(diffMS).getInSolidForm()))"
-    } else { // if over best
-        var diffMS = timerController.lastRecordedTime - solveHandler.getAverage().timeInMS
-        diffMS *= 1
-        averageDiff = "(+\(TimeCapture(diffMS).getInSolidForm()))"
-    }
-     */
     
     
 }

@@ -37,27 +37,9 @@ class SingleCubeTypeViewController: ObservableObject, Identifiable {
             // wait we fucking cant
     }
     
-    /*
-     *  returns the view attribute, if it doesnt exist then we create one
-    public func getView() -> SingleCubeTypeView {
-        if hasView() {
-            return view!
-        } else {
-            self.initView()
-            return self.view!
-        }
-    }
-     */
+   
     
-    /*
-     * this is called upon creation to create the View object
-            why? because fuck structs and we can't initiate anything with self
-    public func initView() {
-        let nSCTV: SingleCubeTypeView = SingleCubeTypeView(ct: ct, controller: self, ctHandler: ctHandler)
-        self.updateFromCTObj()
-        self.view = nSCTV
-    }
-     */
+ 
     /*
      *  grabs the values from ctHandler and updates local attributes
      */
@@ -74,14 +56,7 @@ class SingleCubeTypeViewController: ObservableObject, Identifiable {
     
     
     
-    
-    /*
-     *  gets called by the view when the edit button is tapped
-    public func tappedEdit() {
-        // here we will reference CTypeHandler, which will, then call the contentView to show the popup
-        ctHandler.showEditPopupFor(id: ct.id!)
-    }
-     */
+ 
     
     /*
      *  this is called by SingleCubeTypeView when it is tapped

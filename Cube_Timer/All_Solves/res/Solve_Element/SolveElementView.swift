@@ -21,12 +21,6 @@ struct SolveElementView: View {
     }
     
     /*
-    init(solveItem: SolveItem) {
-        self.solveItem = solveItem
-    }
-    */
-    
-    /*
      * check allSolvesController.selected to see if this.controller.si is in the view
      honestly this is just fucked
      */

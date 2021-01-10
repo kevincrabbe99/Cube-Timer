@@ -91,33 +91,5 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
     }
     
     
-    /*
-     *  returns the view attribute, if it doesnt exist then we create one
-    public func getView() -> SolveElementView {
-        if hasView() {
-            return view!
-        } else {
-            self.initView()
-            return self.view!
-        }
-    }
-    
-    /*
-     * this is called upon creation to create the View object
-            why? because fuck structs and we can't initiate anything with self
-     */
-    public func initView() {
-        let nSCTV: SolveElementView = SolveElementView(si: si)
-        self.updateSelfFromObj()
-        self.view = nSCTV
-    }
-     */
-    /*
-    private func hasView() -> Bool {
-        if self.view == nil {
-            return false
-        }
-        return true
-    }
-    */
+  
 }

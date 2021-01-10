@@ -17,21 +17,7 @@ enum Page: String {
 
 
 struct ContentView: View {
-    /*
-    
-    @State var onPage: Page = .Main
-    @State var sidebar: Bool = false
-    
-    let w: CGFloat = UIScreen.main.bounds.width
-    let h: CGFloat = UIScreen.main.bounds.height
-    
-    let sidebarOutPos: CGPoint = CGPoint(x: -1 * (UIScreen.main.bounds.width/6)+45, y: UIScreen.main.bounds.height/2)// 45 shows 5px of the sidebar always
-    let sidebarInPos: CGPoint = CGPoint(x: UIScreen.main.bounds.width/6, y: UIScreen.main.bounds.height/2)
-    let sidebarWidth: CGFloat = UIScreen.main.bounds.width / 3
-    @State var sidebarDraggin: Bool = false
-    @State var sbBgOpacity: Double = 0
-    @State var sbXPos: CGFloat = -1 * (UIScreen.main.bounds.width/6)+45 // initialize it to sidebarOutPos x value
-    */
+
     @ObservedObject var cTypeHandler: CTypeHandler = CTypeHandler()
     @ObservedObject var timer: TimerController = TimerController()
     @ObservedObject var solveHandler: SolveHandler = SolveHandler()
@@ -49,16 +35,7 @@ struct ContentView: View {
     @ObservedObject var settingsController: SettingsController = SettingsController()
     @ObservedObject var alertController: AlertController = AlertController()
     
-    /*
-    // vars for popup
-    @State var popupShowing: Bool = false
-    
-    let lightTap = UIImpactFeedbackGenerator(style: .light)
-    
-    
-   // @State var shaderOpacity: Double = 0
-    */
-    
+  
     @StateObject var cvc: ContentViewController = ContentViewController()
     
     /*
@@ -126,8 +103,6 @@ struct ContentView: View {
         self.settingsController.alertController = alertController
         
         
-        // solves grid stuff
-      //  self.solvesGridController.solvesData = solveHandler.solvesByTimeFrame
         
         // update the stopwatch display to show the last solve time
         self.timer.setDisplayToLastSolve()
@@ -246,7 +221,7 @@ struct ContentView: View {
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
             
             // FOR DEV PURPOSE: Uncommenting this will create 50 random solves to the default cubetype
-            // solveHandler.addGenericSampleSolves() [are u sure??]
+            // solveHandler.addGenericSampleSolves(count: 30) are u sure?
         }
       // .environment(\.locale, .init(identifier: "ja")) // DEV USE ONLY
         .environmentObject(solveHandler)
@@ -279,6 +254,7 @@ extension View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
 }
+
 struct RoundedCorner: Shape {
 
     var radius: CGFloat = .infinity

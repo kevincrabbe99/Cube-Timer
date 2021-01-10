@@ -15,18 +15,11 @@ import CoreData
  */
 struct TimerView: View {
      
-   // @Environment(\.managedObjectContext) private var viewContext
-    /*
-    @FetchRequest(entity: SolveItem.entity(), sortDescriptors: [])
-    var fetchedSolves: FetchedResults<SolveItem>
-    */
+
     
     var parent: MainView!
     
-    
-    //var type: PuzzleType = .a3x3x3
-    //var brand: PuzzleBrand = .rubiks
-    
+ 
     @ObservedObject var timer: TimerController
     @ObservedObject var solveHandler: SolveHandler
     @ObservedObject var bo3Controller: BO3Controller
@@ -93,33 +86,13 @@ struct TimerView: View {
         }
     }
     
-/*
-    @State var slvsBarWidth: CGFloat = 250
-    @State var slvsBarHeight: CGFloat = 20
-    @State var slvsOffsetY: CGFloat = 0
-    @State var slvsOpacity: Double = 1
-    @State var slvsTextOpacity: Double = 1
-*/
+
     func openShowAllSolves() {
-        /*
-        slvsBarWidth = UIScreen.main.bounds.width
-        slvsBarHeight = UIScreen.main.bounds.height
-        slvsOffsetY = 30
-        slvsOpacity = 1
-        slvsTextOpacity = 0
-        */
+
         parent.gotoPage(.showAll)
     }
     
-    func closeShowAllSolves() {
-        /*
-        slvsBarWidth = 280
-        slvsBarHeight = 20
-        slvsOffsetY = 0
-        slvsOpacity = 1
-        slvsTextOpacity = 1
-        */
-    }
+    
     
     
     

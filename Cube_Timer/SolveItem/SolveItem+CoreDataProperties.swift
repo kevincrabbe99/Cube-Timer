@@ -178,36 +178,6 @@ extension SolveItem: Identifiable {
     }
 }
 
-extension SolveItem {
- 
-}
-
-extension SolveItem {
-    
-    /*
-    @NSManaged public var type: String
-    
-    var cubeType: PuzzleType {
-        set {
-            type = newValue.rawValue
-        }
-        get {
-            PuzzleType(rawValue: type) ?? .pending
-        }
-    }
-    
-    @NSManaged public var brand: String
-    
-    var cubeBrand: PuzzleBrand {
-        set {
-            brand = newValue.rawValue
-        }
-        get {
-            PuzzleBrand(rawValue: brand) ?? .pending
-        }
-    }
-    */
     
     
-}
 

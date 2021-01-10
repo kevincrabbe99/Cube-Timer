@@ -11,22 +11,7 @@ import SwiftUI
 class CTEditController: ObservableObject {
     
     var cTypeHandler: CTypeHandler!
-    
-    /*
-    // used to set the position of the popup when the keyboard is being used
-    @Published var popupOffsetY: CGFloat = 0
-    @Published var popupOffsetX: CGFloat = 0 // stupid af that I have to put this here
-    
-    public func offsetPopup(x: CGFloat = 0, y: CGFloat = 0) {
-        self.popupOffsetY = y
-        self.popupOffsetX = x
-    }
-    
-    public func unfocusTextField() {
-        self.popupOffsetX = 0
-        self.popupOffsetY = 0
-    }
-    */
+
     
     public func deleteCT(id: UUID) {
         cTypeHandler.delete(id)

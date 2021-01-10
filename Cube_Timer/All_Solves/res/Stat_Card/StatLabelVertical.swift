@@ -23,12 +23,6 @@ struct StatLabelVertical: View {
         }
     }
     
-    /*
-    init(label: String, value: String) {
-        self.label = label
-        self.value = value
-    }
-        */
  
     init(label: LocalizedStringKey, value: String) {
         self.label = label

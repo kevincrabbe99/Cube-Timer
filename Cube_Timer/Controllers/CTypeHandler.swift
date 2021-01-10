@@ -58,15 +58,6 @@ class CTypeHandler: ObservableObject {
         
     }
     
-    public func update() {
-     // leaving for the night
-        
-        /*
-            this method will be called whenever something happens so that I can update the views so that SidebarView forEach gets updated
-            I need to remove the parent and maybe even contentView from SidebarView and manage their functionality via CTypeHandler.views
-         */
-    }
-    
     public func setDefaultSelection() {
         
         // set selections

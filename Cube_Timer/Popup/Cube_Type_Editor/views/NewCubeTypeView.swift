@@ -166,23 +166,7 @@ struct NewCubeTypeView: View {
                         parent.hidePopup()
                     }, label: {
                         RoundedButton(color: Color.init("mint_cream"), text: "CREATE", textColor: Color.init("very_dark_black"))
-                        /*
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(LinearGradient(
-                                    gradient: .init(colors: [Color.init("very_dark_black"), Color.init("dark_black")]),
-                                      startPoint: .init(x: 0, y: 1),
-                                    endPoint: .init(x: 1.5, y: -0.5)
-                                    ))
-                                //.shadow(radius: 5)
-                            
-                            Text("CREATE!")
-                                .foregroundColor(.white)
-                                .font(.system(size:13))
-                                .fontWeight(.bold)
-                        }
-                        .frame(width: 90, height: 35, alignment: .center)
-                        */
+                     
                     })
                 }
                 .frame(width: w-100, alignment: .trailing)

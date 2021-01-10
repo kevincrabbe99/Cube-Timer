@@ -47,27 +47,7 @@ class BarGraphController: ObservableObject {
         }
         
     }
-    
-    /*
-    init(parent: SolveHandler) {
-        
-        self.solveHandler = parent
-        self.timer = solveHandler.timer
-        self.cTypeHandler = solveHandler.cTypeHandler
-        
-        // fill self.bars by generating blank bars
-        for (i, _) in self.bars.enumerated() {  // loop through Bar view array (self.bars)
-            self.bars[i] = Bar(pct: 0.1)
-        }
-        
-        // fill self.barControllers based on self.bars
-        for (i, v) in self.bars.enumerated() { // loop through Bar view array (self.bars)
-            self.barControllers[i] = v.SSBController // assign v.controller to the array spot
-            print("Iteration: ", i, " ID: ", self.barControllers[i].id)
-        }
-        
-    }
-    */
+
     
     /*
      *  Animates the bars to 0
@@ -160,12 +140,7 @@ class BarGraphController: ObservableObject {
             
         }
         
-        /* set the attributes of self.bars to the new attributes
-        
-        for (index, oldBar) in self.bars.enumerated() {
-            oldBar.setAttributes(pct: res[index].percentage )
-        }
-         */
+     
         
         /* prints the height array
         print("==================== HEIGHT ARRAY ==================")
@@ -176,9 +151,7 @@ class BarGraphController: ObservableObject {
         
         
         highlightLastSolvesBar() // highlight the last bar added
-        
-        // set the result to the self.bars
-        //self.bars = res
+
     }
     
     /*

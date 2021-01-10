@@ -80,7 +80,8 @@ struct SettingsView: View {
                         } else {
                             
                             AboutView()
-                                .frame(height: 150)
+                                .frame(height: h/2)
+                                .offset(y: 30)
                             
                         }
                         

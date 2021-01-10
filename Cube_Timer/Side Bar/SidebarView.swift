@@ -151,7 +151,7 @@ struct SidebarView: View {
                                     }, label: {
                                         Image(systemName:"gear")
                                             .resizable()
-                                            .frame(width: 16, height: 16)
+                                            .frame(width: 17, height: 17)
                                             .aspectRatio(contentMode: .fit)
                                             .foregroundColor(.white)
                                             .padding(.leading, 22)
@@ -181,37 +181,22 @@ struct SidebarView: View {
                                 }, label: {
                                     if cvc.onPage == .showAll {
                                         
-                                       // HStack {
-                                            /*
-                                            Text("go back")
-                                                .fontWeight(.bold)
-                                                .font(.system(size: 12))
-                                             Spacer()
-                                            */
+                                 
                                             Image("two_fingers")
                                                 .resizable()
-                                                .frame(width: 16, height: 16)
+                                                .frame(width: 22, height: 22)
                                                 .aspectRatio(contentMode: .fit)
                                                 .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
                                                 .foregroundColor(.white)
-                                        //}
-                                      //  .frame(width: geo.size.width/3.5, alignment: .trailing)
+                                 
                                     
                                     } else {
                                         
-                                        // HStack {
-                                            /*
-                                            Text("show solves")
-                                                .fontWeight(.bold)
-                                                .font(.system(size: 12))
-                                            Spacer()
-                                            */
+                                  
                                             Image.init(systemName: "square.grid.3x2")
                                                 .resizable()
                                                 .frame(width: 18, height: 13.5)
                                                 .foregroundColor(.white)
-                                       // }
-                                        // .frame(width: geo.size.width/2.4, alignment: .trailing)
                                         
                                     } // end if
                                     
@@ -232,11 +217,6 @@ struct SidebarView: View {
             .frame(width: geo.size.width - 50)
             
 
-            
-        }.onAppear() {
-            
-            // set selections
-            //cTypeHandler.setDefaultSelection()
             
         }
         

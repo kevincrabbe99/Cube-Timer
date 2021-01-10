@@ -158,22 +158,8 @@ class SolvesFromTimeframe: ObservableObject {
                     res.append(s)
                 }
             }
-            /* New Way!
-            var i = 0; while (i < 3) {   // loop 3 times
-                if solves.count > (i+1) {   // check if solves has a value
-                    res.append(solves[i]);  // add solve to return value
-                }else { // if there are no more solves
-                    i = 3 // cancel while loop
-                }
-                
-                i+=1 // increment i for the while loop
-            }
- */
-            /* The old way of doing things
-            if solves.count >= 3 {
-                res = last3
-            }
-            */
+ 
+  
         case .Today:
             for s in solves {
                 if Calendar.current.isDateInToday(s.timestamp) {

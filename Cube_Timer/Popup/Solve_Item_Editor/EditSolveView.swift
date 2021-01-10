@@ -33,24 +33,10 @@ struct EditSolveView: View {
     
     
     
-    /* this will be replaced by controller.cTypeHandler.types
-    let configTypes: [String] = [
-        "3x3x3, Origional",
-        "4x4x4, Origional Brand",
-        "5x5x5, Origional Brand",
-        "6x6x6, Origional Brand"
-    ]
-    */
+ 
     
     @State var selection: Int = 0
-    
-    /*
-     * called from view when button is pressed
-    private func update() {
-        // should call controller and the controller deals with solveHandler to get it updated
-        self.controller.setCtTo(ct: controller.cTypeHandler.typeControllers[selection].ct, solves: solves)
-    }
-     */
+
     
     var body: some View {
         
@@ -58,23 +44,7 @@ struct EditSolveView: View {
             
             VStack {
                 
-                /*
-                 *  the view with all the selected solves
-                ScrollView(.horizontal) {
-                    HStack {
-                        ForEach (solveControllers) { s in
-                            
-                            if s.selected {
-                                SolveElementView(controller: s)
-                            }
-                            
-                        }
-                    }
-                }
-                .padding(20)
-                .frame(width: geo.size.width)
-                 */
-
+       
                 
                 VStack(spacing: 0) {
                     Text("UPDATE CUBES FOR \(allSolvesController.selected.count) SOLVES")
@@ -106,20 +76,7 @@ struct EditSolveView: View {
                     }, label: {
                         ZStack {
                             RoundedButton(color: Color.init("mint_cream"), text: "UPDATE", textColor: Color.init("very_dark_black"))
-                            /*
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(LinearGradient(
-                                    gradient: .init(colors: [Color.init("very_dark_black"), Color.init("dark_black")]),
-                                      startPoint: .init(x: 0, y: 1),
-                                    endPoint: .init(x: 1.5, y: -0.5)
-                                    ))
-                                //.shadow(radius: 5)
-                            
-                            Text("UPDATE")
-                                .foregroundColor(.white)
-                                .font(.system(size:13))
-                                .fontWeight(.bold)
- */
+          
                         }
                         .frame(width: 90, height: 35, alignment: .center)
                     })

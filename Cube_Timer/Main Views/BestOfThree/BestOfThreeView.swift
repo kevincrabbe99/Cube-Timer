@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct BestOfThreeView: View {
-    /*
-    @ObservedObject var timer: TimerController
-    var solveHandler: SolveHandler
-    */
+
     
     // controller
     @ObservedObject var controller: BO3Controller
@@ -20,13 +17,7 @@ struct BestOfThreeView: View {
     init(c: BO3Controller) {
         self.controller = c
     }
-    
-    /*
-    init(t: TimerController, s: SolveHandler) {
-        self.controller.solveHandler = String
-        self.controller.timer = t
-    }
-    */
+
     
     
     var body: some View {
@@ -49,12 +40,7 @@ struct BestOfThreeView: View {
                                 .font(.system(size: 13))
                              //   .frame(width: (geo.size.width/4), alignment: .leading)
                             LabelElement(label: self.controller.best.getAsReadable(), highlighted: self.controller.lastIsBest, bgColor: Color.init("green"))
-                            /*
-                            Text("\(self.controller.best.getAsReadable())" as String)
-                                .font(.system(size: 13))
-                                .frame(width: (geo.size.width/4), alignment: .trailing)
-                                .foregroundColor(Color.init("green"))
-                            */
+               
                         }
                         .frame(width:  innerW / 3, alignment: .leading)
                         VStack(alignment: .trailing, spacing: 2.5) {
@@ -63,12 +49,7 @@ struct BestOfThreeView: View {
                                 .font(.system(size: 13))
                                 //.frame(width: (geo.size.width/4), alignment: .leading)
                             LabelElement(label: self.controller.worst.getAsReadable(), highlighted: self.controller.lastIsWorst, bgColor: Color.init("red"))
-                            /*
-                            Text("\(self.controller.worst.getAsReadable())" as String)
-                                .font(.system(size: 13))
-                                .frame(width: (geo.size.width/4), alignment: .trailing)
-                                .foregroundColor(Color.init("red"))
-                            */
+                    
                         }
                         .frame(width:  innerW / 3, alignment: .leading)
                         VStack(alignment: .trailing, spacing: 2.5) {
@@ -77,12 +58,7 @@ struct BestOfThreeView: View {
                                 .font(.system(size: 13))
                                 //.frame(width: (geo.size.width/4), alignment: .leading)
                             LabelElement(label: String(format: "%.2f", self.controller.average))
-                            /*
-                            Text("\(String(format: "%.2f", self.controller.average))s")
-                                .font(.system(size: 13))
-                                .frame(width: (geo.size.width/4), alignment: .trailing)
-                                .foregroundColor(Color.init("yellow"))
-                            */
+                  
                         }
                         .frame(width: innerW / 3, alignment: .leading)
                     }

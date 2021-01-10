@@ -13,22 +13,7 @@ struct PopupView: View {
     @EnvironmentObject var ctEditController: CTEditController // used to move the fucking box
     @EnvironmentObject var popupController: PopupController
     @EnvironmentObject var cvc: ContentViewController
-    
-    /*
-     * this got moved to CTEditController.swift (fuck me)
-    @State var popupOffsetY: CGFloat = 0
-    @State var popupOffsetX: CGFloat = 0
-
-    public func offsetPopup(x: CGFloat = 0, y: CGFloat = 0) {
-        self.popupOffsetY = y
-        self.popupOffsetX = x
-    }
-    
-    public func unfocusTextField() {
-        self.popupOffsetX = 0
-        self.popupOffsetY = 0
-    }
-     */
+ 
     
     public func hide() {
         popupController.unfocusTextField()
@@ -53,33 +38,24 @@ struct PopupView: View {
                         }
                     
                     /*
-                    Color.init("very_dark_black")
-                        .cornerRadius(10)
-                        .shadow(radius: 15)
-                */
-                        
-                    
-                        Button(action: {
-                            self.hide()
-                        }, label: {
-                            Image.init(systemName: "xmark")
-                                .foregroundColor(.init("mint_cream"))
-                                .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
-                                .frame(width: 50, height: 50, alignment: .center)
-                        })
-                        .position(x: popupWidth - 25, y: 20)
-                        .zIndex(9)
-                   
-            //     need to unselect all solveelemts on popup go away
-                    /*
-                     * this area will implement the choosing of what view to display for the popup
+                    x button
                      */
-                    //NewCubeTypeView(parent: self)
+                    Button(action: {
+                        self.hide()
+                    }, label: {
+                        Image.init(systemName: "xmark")
+                            .foregroundColor(.init("mint_cream"))
+                            .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                            .frame(width: 50, height: 50, alignment: .center)
+                    })
+                    .position(x: popupWidth - 25, y: 20)
+                    .zIndex(9)
+                   
+                    
                     popupController.currentView
                     
                 }
                 .frame(width: geo.size.width/2, height: popupHeight, alignment: .center)
-                .animation(.spring())
                 .offset(x: popupController.popupOffsetX, y:popupController.popupOffsetY)
                 //.offset(x: ctEditController.popupOffsetX, y:ctEditController.popupOffsetY)
             }

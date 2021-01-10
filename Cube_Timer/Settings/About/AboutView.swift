@@ -27,7 +27,17 @@ struct AboutView: View {
                 VStack(alignment: .leading) {
                     Text("Contact:")
                         .font(Font.custom("Play-Bold", size: 20))
-                    Text("cubetimerapp@gmail.com")
+                    Text("cubetimerapphelp@gmail.com")
+                        .font(Font.custom("Play-Regular", size: 16))
+                }
+                .frame(width: geo.size.width, alignment: .leading)
+                
+                Spacer()
+                
+                VStack(alignment: .leading) {
+                    Text("Website")
+                        .font(Font.custom("Play-Bold", size: 20))
+                    Link("kevincrab.be/cubetimer", destination: URL(string: "http://kevincrab.be/cubetimer")!)
                         .font(Font.custom("Play-Regular", size: 16))
                 }
                 .frame(width: geo.size.width, alignment: .leading)

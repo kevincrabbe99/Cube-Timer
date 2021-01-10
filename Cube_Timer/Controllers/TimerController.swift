@@ -80,17 +80,7 @@ class TimerController: ObservableObject {
         updateTimerFromTime() // update from just set time
         //bo3Controller.update() // update bo3 view
     }
-    /* this was made redundant by the method above
-    private func setTimeToLastSolve() {
-        if solveHandler.size <= 0 {
-            return
-        }
-        time = solveHandler.getLastSolve()!.timeMS
-        updateOverUnderDisplay()
-        updateTimerFromTime()
-       // bo3Controller.update() // update bo3 view
-    }
- */
+
     
     /*
      *  Updates the stopwatch display based on self.minutes, self.seconds, sellf.miliseconds.

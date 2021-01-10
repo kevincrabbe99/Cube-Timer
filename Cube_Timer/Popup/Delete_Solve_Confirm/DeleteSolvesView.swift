@@ -28,18 +28,7 @@ struct DeleteSolvesView: View {
                     cvc.hidePopup()
                 }, label: {
                     RoundedButton(color: Color.init("mint_cream"), text: "CANCEL", textColor: Color.init("very_dark_black"))
-                    /*
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 3)
-                            .fill(Color.init("mint_cream").opacity(0.5))
-                            .border(Color.init("mint_cream").opacity(0.8), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                            .cornerRadius(3)
-                        
-                        Text("CANCEL")
-                            .fontWeight(.bold)
-                    }
-                    .frame(width: 120, height: 35)
-                    */
+              
                 })
                 
                 Button(action: {

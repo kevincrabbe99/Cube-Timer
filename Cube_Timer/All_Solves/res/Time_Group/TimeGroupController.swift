@@ -49,25 +49,7 @@ class TimeGroupController: ObservableObject, Identifiable {
         )
         update()
     }
-    
-    /*
-     *  part of the route from SolveElementView -> AllSolvesController
-    public func tap(_ si: SolveItem) {
-        allSolvesController.tap(si)
-    }
-    
-    public func untap(_ si: SolveItem) {
-        allSolvesController.uptap(si)
-    }
-     */
-    
-    /*
-    public func untapAll() {
-        for s in solves {
-            allSolvesController.uptap(s)
-        }
-    }
-    */
+
     
     public func update() {
         

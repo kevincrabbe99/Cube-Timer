@@ -30,14 +30,7 @@ struct EditCubeTypeView: View {
 
     @State var deleteGuardCounter: Int = 0
     
-    /*
-    init(controller: CTEditController, contentView: ContentView) {
-       self.controller = controller
-        self.contentView = contentView
-       //self.setCT = nil
-   }
- */
-    
+
     init(controller: CTEditController, parent: PopupController, setCT: CubeType?) {
         self.controller = controller
         self.parent = parent
@@ -182,23 +175,7 @@ struct EditCubeTypeView: View {
                         RoundedButton(      color:(deleteGuardCounter == 0 ? Color.init("mint_cream").opacity(0.8) : Color.init("red")),
                                             text: "DELETE",
                                             textColor: Color.init("very_dark_black"))
-                        /*
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(LinearGradient(
-                                    gradient: .init(colors: [Color.init("very_dark_black"), Color.init("dark_black")]),
-                                      startPoint: .init(x: 0, y: 1),
-                                    endPoint: .init(x: 1.5, y: -0.5)
-                                    ))
-                                //.shadow(radius: 5)
-                            
-                            Text("DELETE")
-                                .foregroundColor(.white)
-                                .font(.system(size:13))
-                                .fontWeight(.bold)
-                        }
-                        .frame(width: 90, height: 35, alignment: .center)
-                        */
+                   
                     })
                     
                     
@@ -215,23 +192,6 @@ struct EditCubeTypeView: View {
                                             text: "UPDATE",
                                             textColor: Color.init("very_dark_black"))
                         
-                        /*
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(LinearGradient(
-                                    gradient: .init(colors: [Color.init("very_dark_black"), Color.init("dark_black")]),
-                                      startPoint: .init(x: 0, y: 1),
-                                    endPoint: .init(x: 1.5, y: -0.5)
-                                    ))
-                                //.shadow(radius: 5)
-                            
-                            Text("UPDATE")
-                                .foregroundColor(.white)
-                                .font(.system(size:13))
-                                .fontWeight(.bold)
-                        }
-                        .frame(width: 90, height: 35, alignment: .center)
-                        */
                         
                     })
                 }.frame(width: innerW, alignment: .trailing)
