@@ -1,0 +1,86 @@
+/*
+  Localizable.strings
+  Cube_Timer
+
+  Created by Kevin Crabbe on 1/3/21.
+  JAPANESE
+*/
+"CUBES" = "キューブ";
+
+"EDIT CUBE" = "キューブを編集";
+"Description" = "説明";
+
+"DELETE" = "説明";
+"UPDATE" = "更新";
+"CREATE" = "作る";
+
+"ENTER A NEW CUBE" = "新しいパズル"; // trans: NEW PUZZLE
+"Are you sure you want to delete %lld solves?" = "%lld の解決を削除してもよろしいですか？";
+
+"UPDATE CUBES FOR %lld SOLVES" = "%lld 回のキューブの更新";
+
+// ALERT STUFF
+"Pause Saving Solves" = "保存ソルブの一時停止";
+"Solves will not be saved until you turn pause saving solves back off" = "ソルブの一時停止をオフにすると、ソルブは保存されません。";
+"Resumed Saving Solves" = "貯蓄ソルブの再開";
+"Solves will not be recorded and saved" = "解決策は記録および保存されません";
+"Currently not saving solves, change in settings" = "現在、解決策を保存していない、設定を変更する";
+
+// SETTINGS STUFF
+"SETTINGS" = "設定";
+"Double press to stop" = "ダブルプレスで停止";
+"Requires both buttons to be pressed to record the solve." = "解決を記録するには、両方のボタンを押す必要があります。";
+"Pause saving solves" = "一時停止の保存は解決します";
+"about" = "約";
+
+"ABOUT" = "約";
+"Developer:" = "開発者:";
+"Contact:" = "連絡先";
+"Website" = "ウェブサイト";
+"back" = "バック";
+
+"NO" = "番号";
+"YES" = "はい";
+"OFF" = "オフ";
+"ON" = "オン";
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1W";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1Y";
+"ALL" = "ALL";
+
+"Best" = "ベスト";
+"Worst" = "最悪";
+"Average" = "平均";
+
+"COMPLETE %lld MORE SOLVES" = "完了 %lld より多くの解決策";
+"no solves found." = "解決策が見つかりません。 ☹️";
+
+"BEST" = "ベスト";
+"WORST" = "最悪";
+"MEDIAN" = "最悪";
+"SOLVES" = "解決策";
+"AVERAGE" = "平均";
+"STD. DEV" = "標準偏差";
+
+"today" = "標準偏差";
+"yesterday" = "昨日";
+"last week" = "先週";
+"this month" = "今月";
+"last month" = "先月";
+
+"Jan" = "1月";
+"Feb" = "2月";
+"Mar" = "十二月";
+"Apr" = "4月";
+"May" = "五月";
+"Jun" = "六月";
+"Jul" = "7月";
+"Aug" = "8月";
+"Sep" = "9月";
+"Oct" = "10月";
+"Nov" = "11月";
+"Dev" = "12月";

@@ -1,0 +1,86 @@
+/*
+  Localizable.strings
+  Cube_Timer
+
+  Created by Kevin Crabbe on 1/3/21.
+  RUSSIAN
+*/
+"CUBES" = "КУБИКИ";
+
+"EDIT CUBE" = "ИЗМЕНИТЬ КУБ";
+"Description" = "Описание";
+
+"DELETE" = "УДАЛЯТЬ";
+"UPDATE" = "ОБНОВИТЬ";
+"CREATE" = "СОЗДАЙТЕ";
+
+"ENTER A NEW CUBE" = "ВОЙТИ В НОВЫЙ КУБ"; // trans: NEW CUBE
+"Are you sure you want to delete %lld solves?" = "Вы уверены, что хотите удалить %lld решает?";
+
+"UPDATE CUBES FOR %lld SOLVES" = "ИЗМЕНИТЬ %lld РЕШАЕТ";
+
+// ALERT STUFF
+"Pause Saving Solves" = "Приостановить сохранение";
+"Solves will not be saved until you turn pause saving solves back off" = "Решения не будут сохраняться, пока вы не отключите паузу при сохранении решений.";
+"Resumed Saving Solves" = "Возобновлено сохранение";
+"Solves will not be recorded and saved" = "Решения не будут записываться и сохраняться";
+"Currently not saving solves, change in settings" = "В настоящее время решения не сохраняются";
+
+// SETTINGS STUFF
+"SETTINGS" = "НАСТРОЙКИ";
+"Double press to stop" = "Дважды нажмите, чтобы остановить";
+"Requires both buttons to be pressed to record the solve." = "Для записи решения требуется нажать обе кнопки.";
+"Pause saving solves" = "Приостановить сохранение решает";
+"about" = "около";
+
+"ABOUT" = "ОКОЛО";
+"Developer:" = "Разработчик:";
+"Contact:" = "Связаться с нами";
+"Website" = "Веб-сайт";
+"back" = "назад";
+
+"NO" = "Нет";
+"YES" = "ДА";
+"OFF" = "ВЫКЛ.";
+"ON" = "НА";
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1W";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1Y";
+"ALL" = "ALL";
+
+"Best" = "Лучший";
+"Worst" = "НАИХУДШИЙ";
+"Average" = "В СРЕДНЕМ";
+
+"COMPLETE %lld MORE SOLVES" = "ВЫПОЛНИТЬ %lld БОЛЬШЕ РЕШЕНИЙ";
+"no solves found." = "решений не найдено. ☹️";
+
+"BEST" = "ЛУЧШИЙ";
+"WORST" = "НАИХУДШИЙ";
+"MEDIAN" = "MEDIAN";
+"SOLVES" = "МЕДИАНА";
+"AVERAGE" = "В СРЕДНЕМ";
+"STD. DEV" = "STD. DEV";
+
+"today" = "Cегодня";
+"yesterday" = "вчерашний день";
+"last week" = "неделю";
+"this month" = "этот месяц";
+"last month" = "прошлый месяц";
+
+"Jan" = "Январь";
+"Feb" = "Февраль";
+"Mar" = "марш";
+"Apr" = "апреля";
+"May" = "май";
+"Jun" = "Июнь";
+"Jul" = "Июль";
+"Aug" = "Август";
+"Sep" = "сентябрь";
+"Oct" = "Октябрь";
+"Nov" = "Ноябрь";
+"Dec" = "Декабрь";

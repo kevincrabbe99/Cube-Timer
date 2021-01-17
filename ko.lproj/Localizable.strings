@@ -1,0 +1,86 @@
+/*
+  Localizable.strings
+  Cube_Timer
+
+  Created by Kevin Crabbe on 1/3/21.
+  KOREAN
+*/
+"CUBES" = "큐브";
+
+"EDIT CUBE" = "큐브 수정";
+"Description" = "기술";
+
+"DELETE" = "지우다";
+"UPDATE" = "최신 정보";
+"CREATE" = "창조하다";
+
+"ENTER A NEW CUBE" = "새로운 큐브"; // trans: NEW CUBE
+"Are you sure you want to delete %lld solves?" = "%lld 해결을 삭제 하시겠습니까?";
+
+"UPDATE CUBES FOR %lld SOLVES" = "%lld SOLVES의 큐브 업데이트";
+
+// ALERT STUFF
+"Pause Saving Solves" = "해결 저장 일시 중지";
+"Solves will not be saved until you turn pause saving solves back off" = "일시 중지 저장 해결을 다시 끌 때까지 해결이 저장되지 않습니다.";
+"Resumed Saving Solves" = "재개 된 저장 해결";
+"Solves will not be recorded and saved" = "해결은 기록 및 저장되지 않습니다.";
+"Currently not saving solves, change in settings" = "현재 해결을 저장하지 않고 설정 변경";
+
+// SETTINGS STUFF
+"SETTINGS" = "설정";
+"Double press to stop" = "중지하려면 두 번 누르세요.";
+"Requires both buttons to be pressed to record the solve." = "해결을 기록하려면 두 버튼을 모두 눌러야합니다.";
+"Pause saving solves" = "저장 일시 중지 해결";
+"about" = "약";
+
+"ABOUT" = "약";
+"Developer:" = "개발자:";
+"Contact:" = "접촉";
+"Website" = "웹 사이트";
+"back" = "뒤";
+
+"NO" = "아니";
+"YES" = "예";
+"OFF" = "아니"; // trans: NO
+"ON" = "예";
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1W";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1Y";
+"ALL" = "모두";
+
+"Best" = "베스트";
+"Worst" = "가장 긴";
+"Average" = "평균";
+
+"COMPLETE %lld MORE SOLVES" = "ВЫПОЛНИТЬ %lld БОЛЬШЕ РЕШЕНИЙ";
+"no solves found." = "решений не найдено. ☹️";
+
+"BEST" = "베스트";
+"WORST" = "가장 긴"; // trans: longest
+"MEDIAN" = "중앙값";
+"SOLVES" = "해결책";
+"AVERAGE" = "평균";
+"STD. DEV" = "표준 편차";
+
+"today" = "오늘";
+"yesterday" = "어제";
+"last week" = "지난주";
+"this month" = "이번 달";
+"last month" = "지난 달";
+
+"Jan" = "일월";
+"Feb" = "2 월";
+"Mar" = "행진";
+"Apr" = "4 월";
+"May" = "할 수있다";
+"Jun" = "유월";
+"Jul" = "칠월";
+"Aug" = "팔월";
+"Sep" = "구월";
+"Oct" = "십월";
+"Nov" = "십일월";
+"Dec" = "12 월";

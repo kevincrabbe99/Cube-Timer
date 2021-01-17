@@ -1,0 +1,1167 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7B2929C925477C51009A5B90 /* BarGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2929C825477C51009A5B90 /* BarGraphView.swift */; };
+		7B2929D8254790B3009A5B90 /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2929D7254790B3009A5B90 /* Bar.swift */; };
+		7B2929E0254795B2009A5B90 /* SolvesFromTimeframeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2929DF254795B1009A5B90 /* SolvesFromTimeframeTests.swift */; };
+		7B4719E2256BBBEB009FFFEA /* BarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E1256BBBEB009FFFEA /* BarController.swift */; };
+		7B4719E7256C2E8A009FFFEA /* BarGraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */; };
+		7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A1730253E8D0A0036A30D /* Persistance.swift */; };
+		7B55C62E2596F29C0076B913 /* AllSolvesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55C62D2596F29B0076B913 /* AllSolvesController.swift */; };
+		7B6073F4258E4FFF00D188CF /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073F3258E4FFF00D188CF /* PopupController.swift */; };
+		7B6073FC258E500700D188CF /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073FB258E500700D188CF /* PopupView.swift */; };
+		7B607402258ED68300D188CF /* NewCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607401258ED68300D188CF /* NewCubeTypeView.swift */; };
+		7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607409258EF7ED00D188CF /* CubeType+CoreDataClass.swift */; };
+		7B60740C258EF7ED00D188CF /* CubeType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B60740A258EF7ED00D188CF /* CubeType+CoreDataProperties.swift */; };
+		7B607411258F0B5700D188CF /* CTypeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607410258F0B5700D188CF /* CTypeHandler.swift */; };
+		7B607424258F29D000D188CF /* PopupError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607423258F29D000D188CF /* PopupError.swift */; };
+		7B607442258F30D200D188CF /* CTEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B607441258F30D200D188CF /* CTEditController.swift */; };
+		7B7D56A6259E6DC900A427ED /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56A5259E6DC900A427ED /* SettingsView.swift */; };
+		7B7D56B125A05B2B00A427ED /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56B025A05B2B00A427ED /* SettingsController.swift */; };
+		7B7D56B725A0688A00A427ED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56B625A0688A00A427ED /* AlertView.swift */; };
+		7B7D56C525A06DA000A427ED /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56C425A06DA000A427ED /* AlertController.swift */; };
+		7B7D56E925A1AD6100A427ED /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D56E825A1AD6000A427ED /* AboutView.swift */; };
+		7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */; };
+		7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */; };
+		7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */; };
+		7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */; };
+		7B8B62F5254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */; };
+		7B984CEF253E02D900BC6402 /* Cube_TimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */; };
+		7B984CF1253E02D900BC6402 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984CF0253E02D900BC6402 /* ContentView.swift */; };
+		7B984CF3253E02DC00BC6402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B984CF2253E02DC00BC6402 /* Assets.xcassets */; };
+		7B984CF6253E02DC00BC6402 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B984CF5253E02DC00BC6402 /* Preview Assets.xcassets */; };
+		7B984CFB253E02DC00BC6402 /* Cube_Timer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B984CF9253E02DC00BC6402 /* Cube_Timer.xcdatamodeld */; };
+		7B984D06253E02DC00BC6402 /* Cube_TimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D05253E02DC00BC6402 /* Cube_TimerTests.swift */; };
+		7B984D11253E02DC00BC6402 /* Cube_TimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D10253E02DC00BC6402 /* Cube_TimerUITests.swift */; };
+		7B984D28253E19A900BC6402 /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D27253E19A900BC6402 /* ButtonsView.swift */; };
+		7B984D30253E1CB400BC6402 /* TimeframeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D2F253E1CB400BC6402 /* TimeframeBar.swift */; };
+		7B984D38253E226B00BC6402 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D37253E226B00BC6402 /* TimerView.swift */; };
+		7B984D45253E550300BC6402 /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D44253E550300BC6402 /* TimerController.swift */; };
+		7B984D5A253E72D700BC6402 /* SolveHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984D59253E72D700BC6402 /* SolveHandler.swift */; };
+		7B9B2E7D25A29F2200819159 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B9B2E7F25A29F2200819159 /* Localizable.strings */; };
+		7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B79602548F20F0088ECD5 /* BestOfThreeView.swift */; };
+		7B9B7966254908380088ECD5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B7965254908380088ECD5 /* MainView.swift */; };
+		7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B799925493D280088ECD5 /* SolvesData.swift */; };
+		7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */; };
+		7BAAE0FB259B386C00330533 /* Dosis-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */; };
+		7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */; };
+		7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */; };
+		7BAAE0FE259B386C00330533 /* Dosis-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F4259B386C00330533 /* Dosis-Light.ttf */; };
+		7BAAE0FF259B386C00330533 /* Dosis-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F5259B386C00330533 /* Dosis-Bold.ttf */; };
+		7BAAE100259B386C00330533 /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F6259B386C00330533 /* Dosis-ExtraBold.ttf */; };
+		7BAAE101259B386C00330533 /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F7259B386C00330533 /* Dosis-SemiBold.ttf */; };
+		7BAAE102259B386C00330533 /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F8259B386C00330533 /* Dosis-ExtraLight.ttf */; };
+		7BAAE116259B387300330533 /* Heebo-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10A259B387300330533 /* Heebo-Thin.ttf */; };
+		7BAAE117259B387300330533 /* Heebo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10B259B387300330533 /* Heebo-Medium.ttf */; };
+		7BAAE118259B387300330533 /* Heebo-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10C259B387300330533 /* Heebo-Black.ttf */; };
+		7BAAE119259B387300330533 /* Heebo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10D259B387300330533 /* Heebo-Bold.ttf */; };
+		7BAAE11A259B387300330533 /* Heebo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10E259B387300330533 /* Heebo-SemiBold.ttf */; };
+		7BAAE11B259B387300330533 /* Heebo-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE10F259B387300330533 /* Heebo-ExtraLight.ttf */; };
+		7BAAE11C259B387300330533 /* Heebo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE110259B387300330533 /* Heebo-Regular.ttf */; };
+		7BAAE11D259B387300330533 /* Heebo-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE111259B387300330533 /* Heebo-ExtraBold.ttf */; };
+		7BAAE11E259B387300330533 /* Heebo-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE112259B387300330533 /* Heebo-Light.ttf */; };
+		7BAAE120259B387300330533 /* Heebo-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE114259B387300330533 /* Heebo-VariableFont_wght.ttf */; };
+		7BAAE129259B387900330533 /* Play-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE126259B387900330533 /* Play-Regular.ttf */; };
+		7BAAE12B259B387900330533 /* Play-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE128259B387900330533 /* Play-Bold.ttf */; };
+		7BAAE142259C5E7C00330533 /* EditSolvesBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAAE141259C5E7C00330533 /* EditSolvesBarView.swift */; };
+		7BAAE14E259C678900330533 /* DeleteSolvesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAAE14D259C678900330533 /* DeleteSolvesView.swift */; };
+		7BBA7186258C763300FED3A2 /* CubeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7185258C763300FED3A2 /* CubeIcon.swift */; };
+		7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */; };
+		7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7198258D356600FED3A2 /* SidebarShape.swift */; };
+		7BCC6DB2256EC61B001663B1 /* BO3Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DB1256EC61B001663B1 /* BO3Controller.swift */; };
+		7BCC6DCD25723860001663B1 /* SidebarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DCC2572385F001663B1 /* SidebarController.swift */; };
+		7BCC6DD5257238B8001663B1 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DD4257238B8001663B1 /* SidebarView.swift */; };
+		7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DD9257242A6001663B1 /* SingleCubeTypeView.swift */; };
+		7BE8859F25475F0000046D29 /* TimeCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE8859E25475F0000046D29 /* TimeCapture.swift */; };
+		7BFF31A82596FCB70029EA19 /* SolveElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31A72596FCB70029EA19 /* SolveElementView.swift */; };
+		7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31BB2596FEBF0029EA19 /* SolveElementController.swift */; };
+		7BFF31D02597FC9A0029EA19 /* TimeGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31CF2597FC9A0029EA19 /* TimeGroupController.swift */; };
+		7BFF31D82597FCA60029EA19 /* TimeGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31D72597FCA60029EA19 /* TimeGroupView.swift */; };
+		7BFF31EF2598708E0029EA19 /* StatLabelVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31EE2598708E0029EA19 /* StatLabelVertical.swift */; };
+		7BFF31F4259874D10029EA19 /* StatLabelHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */; };
+		7BFF3203259986B80029EA19 /* EditSolveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF3202259986B80029EA19 /* EditSolveView.swift */; };
+		7BFF32082599870F0029EA19 /* EditSolveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF32072599870F0029EA19 /* EditSolveController.swift */; };
+		7BFF3210259AEEA40029EA19 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFF320F259AEEA30029EA19 /* ContentViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7B984D02253E02DC00BC6402 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B984CE3253E02D900BC6402 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B984CEA253E02D900BC6402;
+			remoteInfo = "Cube Timer";
+		};
+		7B984D0D253E02DC00BC6402 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B984CE3253E02D900BC6402 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B984CEA253E02D900BC6402;
+			remoteInfo = "Cube Timer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7B2929C825477C51009A5B90 /* BarGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarGraphView.swift; sourceTree = "<group>"; };
+		7B2929D7254790B3009A5B90 /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
+		7B2929DF254795B1009A5B90 /* SolvesFromTimeframeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvesFromTimeframeTests.swift; sourceTree = "<group>"; };
+		7B4719E1256BBBEB009FFFEA /* BarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarController.swift; sourceTree = "<group>"; };
+		7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarGraphController.swift; sourceTree = "<group>"; };
+		7B4A1730253E8D0A0036A30D /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		7B55C62D2596F29B0076B913 /* AllSolvesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesController.swift; sourceTree = "<group>"; };
+		7B6073F3258E4FFF00D188CF /* PopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupController.swift; sourceTree = "<group>"; };
+		7B6073FB258E500700D188CF /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		7B607401258ED68300D188CF /* NewCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCubeTypeView.swift; sourceTree = "<group>"; };
+		7B607409258EF7ED00D188CF /* CubeType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CubeType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7B60740A258EF7ED00D188CF /* CubeType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CubeType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7B607410258F0B5700D188CF /* CTypeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTypeHandler.swift; sourceTree = "<group>"; };
+		7B607423258F29D000D188CF /* PopupError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupError.swift; sourceTree = "<group>"; };
+		7B607441258F30D200D188CF /* CTEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTEditController.swift; sourceTree = "<group>"; };
+		7B7D56A5259E6DC900A427ED /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7B7D56B025A05B2B00A427ED /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		7B7D56B625A0688A00A427ED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		7B7D56C425A06DA000A427ED /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		7B7D56E825A1AD6000A427ED /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCubeTypeView.swift; sourceTree = "<group>"; };
+		7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCubeTypeViewController.swift; sourceTree = "<group>"; };
+		7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDisplayView.swift; sourceTree = "<group>"; };
+		7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SolveItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SolveItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7B984CEB253E02D900BC6402 /* Cube Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cube Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube_TimerApp.swift; sourceTree = "<group>"; };
+		7B984CF0253E02D900BC6402 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7B984CF2253E02DC00BC6402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7B984CF5253E02DC00BC6402 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7B984CFA253E02DC00BC6402 /* Cube_Timer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cube_Timer.xcdatamodel; sourceTree = "<group>"; };
+		7B984CFC253E02DC00BC6402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B984D01253E02DC00BC6402 /* Cube TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cube TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B984D05253E02DC00BC6402 /* Cube_TimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube_TimerTests.swift; sourceTree = "<group>"; };
+		7B984D07253E02DC00BC6402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B984D0C253E02DC00BC6402 /* Cube TimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cube TimerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B984D10253E02DC00BC6402 /* Cube_TimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube_TimerUITests.swift; sourceTree = "<group>"; };
+		7B984D12253E02DC00BC6402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B984D27253E19A900BC6402 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
+		7B984D2F253E1CB400BC6402 /* TimeframeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeframeBar.swift; sourceTree = "<group>"; };
+		7B984D37253E226B00BC6402 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		7B984D44253E550300BC6402 /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
+		7B984D59253E72D700BC6402 /* SolveHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveHandler.swift; sourceTree = "<group>"; };
+		7B9B2E7E25A29F2200819159 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8325A29F2800819159 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7B9B2E8425A29F2A00819159 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8525A29F2B00819159 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8625A29F4F00819159 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8725A29F5500819159 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8825A29F5B00819159 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8925A29F6100819159 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B2E8D25A2D01700819159 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B9B79602548F20F0088ECD5 /* BestOfThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfThreeView.swift; sourceTree = "<group>"; };
+		7B9B7965254908380088ECD5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		7B9B799925493D280088ECD5 /* SolvesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolvesData.swift; sourceTree = "<group>"; };
+		7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesView.swift; sourceTree = "<group>"; };
+		7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
+		7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
+		7BAAE0F4259B386C00330533 /* Dosis-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Light.ttf"; sourceTree = "<group>"; };
+		7BAAE0F5259B386C00330533 /* Dosis-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.ttf"; sourceTree = "<group>"; };
+		7BAAE0F6259B386C00330533 /* Dosis-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.ttf"; sourceTree = "<group>"; };
+		7BAAE0F7259B386C00330533 /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
+		7BAAE0F8259B386C00330533 /* Dosis-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraLight.ttf"; sourceTree = "<group>"; };
+		7BAAE10A259B387300330533 /* Heebo-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Thin.ttf"; sourceTree = "<group>"; };
+		7BAAE10B259B387300330533 /* Heebo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Medium.ttf"; sourceTree = "<group>"; };
+		7BAAE10C259B387300330533 /* Heebo-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Black.ttf"; sourceTree = "<group>"; };
+		7BAAE10D259B387300330533 /* Heebo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Bold.ttf"; sourceTree = "<group>"; };
+		7BAAE10E259B387300330533 /* Heebo-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-SemiBold.ttf"; sourceTree = "<group>"; };
+		7BAAE10F259B387300330533 /* Heebo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-ExtraLight.ttf"; sourceTree = "<group>"; };
+		7BAAE110259B387300330533 /* Heebo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Regular.ttf"; sourceTree = "<group>"; };
+		7BAAE111259B387300330533 /* Heebo-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-ExtraBold.ttf"; sourceTree = "<group>"; };
+		7BAAE112259B387300330533 /* Heebo-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-Light.ttf"; sourceTree = "<group>"; };
+		7BAAE114259B387300330533 /* Heebo-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heebo-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		7BAAE126259B387900330533 /* Play-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Play-Regular.ttf"; sourceTree = "<group>"; };
+		7BAAE128259B387900330533 /* Play-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Play-Bold.ttf"; sourceTree = "<group>"; };
+		7BAAE141259C5E7C00330533 /* EditSolvesBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSolvesBarView.swift; sourceTree = "<group>"; };
+		7BAAE14D259C678900330533 /* DeleteSolvesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSolvesView.swift; sourceTree = "<group>"; };
+		7BBA7185258C763300FED3A2 /* CubeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeIcon.swift; sourceTree = "<group>"; };
+		7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTab.swift; sourceTree = "<group>"; };
+		7BBA7198258D356600FED3A2 /* SidebarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarShape.swift; sourceTree = "<group>"; };
+		7BCC6DB1256EC61B001663B1 /* BO3Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BO3Controller.swift; sourceTree = "<group>"; };
+		7BCC6DCC2572385F001663B1 /* SidebarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarController.swift; sourceTree = "<group>"; };
+		7BCC6DD4257238B8001663B1 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		7BCC6DD9257242A6001663B1 /* SingleCubeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCubeTypeView.swift; sourceTree = "<group>"; };
+		7BE8859E25475F0000046D29 /* TimeCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapture.swift; sourceTree = "<group>"; };
+		7BFF31A72596FCB70029EA19 /* SolveElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveElementView.swift; sourceTree = "<group>"; };
+		7BFF31BB2596FEBF0029EA19 /* SolveElementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveElementController.swift; sourceTree = "<group>"; };
+		7BFF31CF2597FC9A0029EA19 /* TimeGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGroupController.swift; sourceTree = "<group>"; };
+		7BFF31D72597FCA60029EA19 /* TimeGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGroupView.swift; sourceTree = "<group>"; };
+		7BFF31EE2598708E0029EA19 /* StatLabelVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLabelVertical.swift; sourceTree = "<group>"; };
+		7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLabelHorizontal.swift; sourceTree = "<group>"; };
+		7BFF3202259986B80029EA19 /* EditSolveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSolveView.swift; sourceTree = "<group>"; };
+		7BFF32072599870F0029EA19 /* EditSolveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSolveController.swift; sourceTree = "<group>"; };
+		7BFF320F259AEEA30029EA19 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7B984CE8253E02D900BC6402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B984CFE253E02DC00BC6402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B984D09253E02DC00BC6402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7B2929CD25477C5E009A5B90 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				7B2929C825477C51009A5B90 /* BarGraphView.swift */,
+				7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */,
+				7B2929D62547909C009A5B90 /* Stat Bar */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		7B2929D62547909C009A5B90 /* Stat Bar */ = {
+			isa = PBXGroup;
+			children = (
+				7B2929D7254790B3009A5B90 /* Bar.swift */,
+				7B4719E1256BBBEB009FFFEA /* BarController.swift */,
+			);
+			path = "Stat Bar";
+			sourceTree = "<group>";
+		};
+		7B55C60E25954A880076B913 /* All_Solves */ = {
+			isa = PBXGroup;
+			children = (
+				7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */,
+				7B55C62D2596F29B0076B913 /* AllSolvesController.swift */,
+				7BFF31A52596FC860029EA19 /* res */,
+			);
+			path = All_Solves;
+			sourceTree = "<group>";
+		};
+		7B6073E2258E4AC400D188CF /* CubeTypeItem */ = {
+			isa = PBXGroup;
+			children = (
+				7B60740A258EF7ED00D188CF /* CubeType+CoreDataProperties.swift */,
+				7B607409258EF7ED00D188CF /* CubeType+CoreDataClass.swift */,
+				7BBA7185258C763300FED3A2 /* CubeIcon.swift */,
+			);
+			path = CubeTypeItem;
+			sourceTree = "<group>";
+		};
+		7B6073F2258E4FE400D188CF /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				7B6073F3258E4FFF00D188CF /* PopupController.swift */,
+				7B6073FB258E500700D188CF /* PopupView.swift */,
+				7BAAE14C259C674900330533 /* Delete_Solve_Confirm */,
+				7BFF31FB25997D800029EA19 /* Solve_Item_Editor */,
+				7B607440258F30A000D188CF /* Cube_Type_Editor */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		7B607400258ED65F00D188CF /* views */ = {
+			isa = PBXGroup;
+			children = (
+				7B607401258ED68300D188CF /* NewCubeTypeView.swift */,
+				7B7DDCF7259068BB00E2197F /* EditCubeTypeView.swift */,
+				7B607423258F29D000D188CF /* PopupError.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		7B607440258F30A000D188CF /* Cube_Type_Editor */ = {
+			isa = PBXGroup;
+			children = (
+				7B607441258F30D200D188CF /* CTEditController.swift */,
+				7B607400258ED65F00D188CF /* views */,
+			);
+			path = Cube_Type_Editor;
+			sourceTree = "<group>";
+		};
+		7B7D56A4259E6CEC00A427ED /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7B7D56E725A1AD4200A427ED /* About */,
+				7B7D56A5259E6DC900A427ED /* SettingsView.swift */,
+				7B7D56B025A05B2B00A427ED /* SettingsController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		7B7D56B525A0684C00A427ED /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7B7D56B625A0688A00A427ED /* AlertView.swift */,
+				7B7D56C425A06DA000A427ED /* AlertController.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		7B7D56E725A1AD4200A427ED /* About */ = {
+			isa = PBXGroup;
+			children = (
+				7B7D56E825A1AD6000A427ED /* AboutView.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		7B7DDCFF259076E800E2197F /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */,
+				7BBA7198258D356600FED3A2 /* SidebarShape.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		7B7DDD0825907D3700E2197F /* Single_CubeType_Components */ = {
+			isa = PBXGroup;
+			children = (
+				7BCC6DD9257242A6001663B1 /* SingleCubeTypeView.swift */,
+				7B7DDD0925907D7100E2197F /* SingleCubeTypeViewController.swift */,
+			);
+			path = Single_CubeType_Components;
+			sourceTree = "<group>";
+		};
+		7B984CE2253E02D900BC6402 = {
+			isa = PBXGroup;
+			children = (
+				7B9B2E7F25A29F2200819159 /* Localizable.strings */,
+				7B984CED253E02D900BC6402 /* Cube_Timer */,
+				7B984D04253E02DC00BC6402 /* Cube_TimerTests */,
+				7B984D0F253E02DC00BC6402 /* Cube_TimerUITests */,
+				7B984CEC253E02D900BC6402 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7B984CEC253E02D900BC6402 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7B984CEB253E02D900BC6402 /* Cube Timer.app */,
+				7B984D01253E02DC00BC6402 /* Cube TimerTests.xctest */,
+				7B984D0C253E02DC00BC6402 /* Cube TimerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7B984CED253E02D900BC6402 /* Cube_Timer */ = {
+			isa = PBXGroup;
+			children = (
+				7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */,
+				7B984CF0253E02D900BC6402 /* ContentView.swift */,
+				7BFF320F259AEEA30029EA19 /* ContentViewController.swift */,
+				7BE885A62547665C00046D29 /* Controllers */,
+				7BE885A72547667200046D29 /* Main Views */,
+				7B55C60E25954A880076B913 /* All_Solves */,
+				7B7D56A4259E6CEC00A427ED /* Settings */,
+				7B7D56B525A0684C00A427ED /* Alert */,
+				7B6073F2258E4FE400D188CF /* Popup */,
+				7BCC6DCB25723833001663B1 /* Side Bar */,
+				7BE885AE2547669E00046D29 /* SolveItem */,
+				7B6073E2258E4AC400D188CF /* CubeTypeItem */,
+				7B984CF2253E02DC00BC6402 /* Assets.xcassets */,
+				7B984CF9253E02DC00BC6402 /* Cube_Timer.xcdatamodeld */,
+				7B984CFC253E02DC00BC6402 /* Info.plist */,
+				7BAAE0EE259B384C00330533 /* fonts */,
+				7B984CF4253E02DC00BC6402 /* Preview Content */,
+			);
+			path = Cube_Timer;
+			sourceTree = "<group>";
+		};
+		7B984CF4253E02DC00BC6402 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7B984CF5253E02DC00BC6402 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7B984D04253E02DC00BC6402 /* Cube_TimerTests */ = {
+			isa = PBXGroup;
+			children = (
+				7B984D05253E02DC00BC6402 /* Cube_TimerTests.swift */,
+				7B984D07253E02DC00BC6402 /* Info.plist */,
+				7B2929DF254795B1009A5B90 /* SolvesFromTimeframeTests.swift */,
+			);
+			path = Cube_TimerTests;
+			sourceTree = "<group>";
+		};
+		7B984D0F253E02DC00BC6402 /* Cube_TimerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7B984D10253E02DC00BC6402 /* Cube_TimerUITests.swift */,
+				7B984D12253E02DC00BC6402 /* Info.plist */,
+			);
+			path = Cube_TimerUITests;
+			sourceTree = "<group>";
+		};
+		7BAAE0EE259B384C00330533 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE125259B387900330533 /* Play */,
+				7BAAE108259B387300330533 /* Heebo */,
+				7BAAE0EF259B386C00330533 /* Dosis */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		7BAAE0EF259B386C00330533 /* Dosis */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */,
+				7BAAE0F1259B386C00330533 /* static */,
+			);
+			path = Dosis;
+			sourceTree = "<group>";
+		};
+		7BAAE0F1259B386C00330533 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */,
+				7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */,
+				7BAAE0F4259B386C00330533 /* Dosis-Light.ttf */,
+				7BAAE0F5259B386C00330533 /* Dosis-Bold.ttf */,
+				7BAAE0F6259B386C00330533 /* Dosis-ExtraBold.ttf */,
+				7BAAE0F7259B386C00330533 /* Dosis-SemiBold.ttf */,
+				7BAAE0F8259B386C00330533 /* Dosis-ExtraLight.ttf */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		7BAAE108259B387300330533 /* Heebo */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE109259B387300330533 /* static */,
+				7BAAE114259B387300330533 /* Heebo-VariableFont_wght.ttf */,
+			);
+			path = Heebo;
+			sourceTree = "<group>";
+		};
+		7BAAE109259B387300330533 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE10A259B387300330533 /* Heebo-Thin.ttf */,
+				7BAAE10B259B387300330533 /* Heebo-Medium.ttf */,
+				7BAAE10C259B387300330533 /* Heebo-Black.ttf */,
+				7BAAE10D259B387300330533 /* Heebo-Bold.ttf */,
+				7BAAE10E259B387300330533 /* Heebo-SemiBold.ttf */,
+				7BAAE10F259B387300330533 /* Heebo-ExtraLight.ttf */,
+				7BAAE110259B387300330533 /* Heebo-Regular.ttf */,
+				7BAAE111259B387300330533 /* Heebo-ExtraBold.ttf */,
+				7BAAE112259B387300330533 /* Heebo-Light.ttf */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		7BAAE125259B387900330533 /* Play */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE126259B387900330533 /* Play-Regular.ttf */,
+				7BAAE128259B387900330533 /* Play-Bold.ttf */,
+			);
+			path = Play;
+			sourceTree = "<group>";
+		};
+		7BAAE14C259C674900330533 /* Delete_Solve_Confirm */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE14D259C678900330533 /* DeleteSolvesView.swift */,
+			);
+			path = Delete_Solve_Confirm;
+			sourceTree = "<group>";
+		};
+		7BCC6DB0256EC5E4001663B1 /* BestOfThree */ = {
+			isa = PBXGroup;
+			children = (
+				7B9B79602548F20F0088ECD5 /* BestOfThreeView.swift */,
+				7BCC6DB1256EC61B001663B1 /* BO3Controller.swift */,
+			);
+			path = BestOfThree;
+			sourceTree = "<group>";
+		};
+		7BCC6DCB25723833001663B1 /* Side Bar */ = {
+			isa = PBXGroup;
+			children = (
+				7BCC6DD4257238B8001663B1 /* SidebarView.swift */,
+				7BCC6DCC2572385F001663B1 /* SidebarController.swift */,
+				7B7DDD0825907D3700E2197F /* Single_CubeType_Components */,
+				7B7DDCFF259076E800E2197F /* Shapes */,
+			);
+			path = "Side Bar";
+			sourceTree = "<group>";
+		};
+		7BE885A62547665C00046D29 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7B984D44253E550300BC6402 /* TimerController.swift */,
+				7B984D59253E72D700BC6402 /* SolveHandler.swift */,
+				7B9B799925493D280088ECD5 /* SolvesData.swift */,
+				7B607410258F0B5700D188CF /* CTypeHandler.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7BE885A72547667200046D29 /* Main Views */ = {
+			isa = PBXGroup;
+			children = (
+				7B9B7965254908380088ECD5 /* MainView.swift */,
+				7B984D27253E19A900BC6402 /* ButtonsView.swift */,
+				7B984D37253E226B00BC6402 /* TimerView.swift */,
+				7B984D2F253E1CB400BC6402 /* TimeframeBar.swift */,
+				7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */,
+				7BCC6DB0256EC5E4001663B1 /* BestOfThree */,
+				7B2929CD25477C5E009A5B90 /* Stats */,
+			);
+			path = "Main Views";
+			sourceTree = "<group>";
+		};
+		7BE885AE2547669E00046D29 /* SolveItem */ = {
+			isa = PBXGroup;
+			children = (
+				7BE8859E25475F0000046D29 /* TimeCapture.swift */,
+				7B4A1730253E8D0A0036A30D /* Persistance.swift */,
+				7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */,
+				7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */,
+			);
+			path = SolveItem;
+			sourceTree = "<group>";
+		};
+		7BFF31A52596FC860029EA19 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				7BAAE141259C5E7C00330533 /* EditSolvesBarView.swift */,
+				7BFF31DC25986EEB0029EA19 /* Stat_Card */,
+				7BFF31BA2596FE9D0029EA19 /* Solve_Element */,
+				7BFF31A62596FCA60029EA19 /* Time_Group */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		7BFF31A62596FCA60029EA19 /* Time_Group */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF31CF2597FC9A0029EA19 /* TimeGroupController.swift */,
+				7BFF31D72597FCA60029EA19 /* TimeGroupView.swift */,
+			);
+			path = Time_Group;
+			sourceTree = "<group>";
+		};
+		7BFF31BA2596FE9D0029EA19 /* Solve_Element */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF31A72596FCB70029EA19 /* SolveElementView.swift */,
+				7BFF31BB2596FEBF0029EA19 /* SolveElementController.swift */,
+			);
+			path = Solve_Element;
+			sourceTree = "<group>";
+		};
+		7BFF31DC25986EEB0029EA19 /* Stat_Card */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF31EE2598708E0029EA19 /* StatLabelVertical.swift */,
+				7BFF31F3259874D10029EA19 /* StatLabelHorizontal.swift */,
+			);
+			path = Stat_Card;
+			sourceTree = "<group>";
+		};
+		7BFF31FB25997D800029EA19 /* Solve_Item_Editor */ = {
+			isa = PBXGroup;
+			children = (
+				7BFF3202259986B80029EA19 /* EditSolveView.swift */,
+				7BFF32072599870F0029EA19 /* EditSolveController.swift */,
+			);
+			path = Solve_Item_Editor;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7B984CEA253E02D900BC6402 /* Cube Timer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B984D15253E02DC00BC6402 /* Build configuration list for PBXNativeTarget "Cube Timer" */;
+			buildPhases = (
+				7B984CE7253E02D900BC6402 /* Sources */,
+				7B984CE8253E02D900BC6402 /* Frameworks */,
+				7B984CE9253E02D900BC6402 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cube Timer";
+			productName = "Cube Timer";
+			productReference = 7B984CEB253E02D900BC6402 /* Cube Timer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7B984D00253E02DC00BC6402 /* Cube TimerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B984D18253E02DC00BC6402 /* Build configuration list for PBXNativeTarget "Cube TimerTests" */;
+			buildPhases = (
+				7B984CFD253E02DC00BC6402 /* Sources */,
+				7B984CFE253E02DC00BC6402 /* Frameworks */,
+				7B984CFF253E02DC00BC6402 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7B984D03253E02DC00BC6402 /* PBXTargetDependency */,
+			);
+			name = "Cube TimerTests";
+			productName = "Cube TimerTests";
+			productReference = 7B984D01253E02DC00BC6402 /* Cube TimerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7B984D0B253E02DC00BC6402 /* Cube TimerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B984D1B253E02DC00BC6402 /* Build configuration list for PBXNativeTarget "Cube TimerUITests" */;
+			buildPhases = (
+				7B984D08253E02DC00BC6402 /* Sources */,
+				7B984D09253E02DC00BC6402 /* Frameworks */,
+				7B984D0A253E02DC00BC6402 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7B984D0E253E02DC00BC6402 /* PBXTargetDependency */,
+			);
+			name = "Cube TimerUITests";
+			productName = "Cube TimerUITests";
+			productReference = 7B984D0C253E02DC00BC6402 /* Cube TimerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7B984CE3253E02D900BC6402 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					7B984CEA253E02D900BC6402 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					7B984D00253E02DC00BC6402 = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 7B984CEA253E02D900BC6402;
+					};
+					7B984D0B253E02DC00BC6402 = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 7B984CEA253E02D900BC6402;
+					};
+				};
+			};
+			buildConfigurationList = 7B984CE6253E02D900BC6402 /* Build configuration list for PBXProject "Cube_Timer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ja,
+				"zh-Hans",
+				es,
+				fr,
+				de,
+				ru,
+				ko,
+				hi,
+			);
+			mainGroup = 7B984CE2253E02D900BC6402;
+			productRefGroup = 7B984CEC253E02D900BC6402 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7B984CEA253E02D900BC6402 /* Cube Timer */,
+				7B984D00253E02DC00BC6402 /* Cube TimerTests */,
+				7B984D0B253E02DC00BC6402 /* Cube TimerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7B984CE9253E02D900BC6402 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BAAE11B259B387300330533 /* Heebo-ExtraLight.ttf in Resources */,
+				7BAAE120259B387300330533 /* Heebo-VariableFont_wght.ttf in Resources */,
+				7B9B2E7D25A29F2200819159 /* Localizable.strings in Resources */,
+				7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */,
+				7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */,
+				7BAAE11E259B387300330533 /* Heebo-Light.ttf in Resources */,
+				7BAAE0FF259B386C00330533 /* Dosis-Bold.ttf in Resources */,
+				7BAAE12B259B387900330533 /* Play-Bold.ttf in Resources */,
+				7BAAE100259B386C00330533 /* Dosis-ExtraBold.ttf in Resources */,
+				7BAAE11C259B387300330533 /* Heebo-Regular.ttf in Resources */,
+				7BAAE129259B387900330533 /* Play-Regular.ttf in Resources */,
+				7B984CF6253E02DC00BC6402 /* Preview Assets.xcassets in Resources */,
+				7BAAE118259B387300330533 /* Heebo-Black.ttf in Resources */,
+				7BAAE102259B386C00330533 /* Dosis-ExtraLight.ttf in Resources */,
+				7BAAE117259B387300330533 /* Heebo-Medium.ttf in Resources */,
+				7BAAE101259B386C00330533 /* Dosis-SemiBold.ttf in Resources */,
+				7B984CF3253E02DC00BC6402 /* Assets.xcassets in Resources */,
+				7BAAE119259B387300330533 /* Heebo-Bold.ttf in Resources */,
+				7BAAE0FE259B386C00330533 /* Dosis-Light.ttf in Resources */,
+				7BAAE116259B387300330533 /* Heebo-Thin.ttf in Resources */,
+				7BAAE11D259B387300330533 /* Heebo-ExtraBold.ttf in Resources */,
+				7BAAE11A259B387300330533 /* Heebo-SemiBold.ttf in Resources */,
+				7BAAE0FB259B386C00330533 /* Dosis-VariableFont_wght.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B984CFF253E02DC00BC6402 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B984D0A253E02DC00BC6402 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7B984CE7253E02D900BC6402 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B7D56B125A05B2B00A427ED /* SettingsController.swift in Sources */,
+				7B6073F4258E4FFF00D188CF /* PopupController.swift in Sources */,
+				7B984CF1253E02D900BC6402 /* ContentView.swift in Sources */,
+				7B9B7966254908380088ECD5 /* MainView.swift in Sources */,
+				7B7D56C525A06DA000A427ED /* AlertController.swift in Sources */,
+				7B6073FC258E500700D188CF /* PopupView.swift in Sources */,
+				7B2929D8254790B3009A5B90 /* Bar.swift in Sources */,
+				7B55C62E2596F29C0076B913 /* AllSolvesController.swift in Sources */,
+				7BFF31A82596FCB70029EA19 /* SolveElementView.swift in Sources */,
+				7B984D38253E226B00BC6402 /* TimerView.swift in Sources */,
+				7B2929C925477C51009A5B90 /* BarGraphView.swift in Sources */,
+				7BFF31F4259874D10029EA19 /* StatLabelHorizontal.swift in Sources */,
+				7B7DDCF8259068BB00E2197F /* EditCubeTypeView.swift in Sources */,
+				7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */,
+				7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */,
+				7B7D56E925A1AD6100A427ED /* AboutView.swift in Sources */,
+				7BAAE142259C5E7C00330533 /* EditSolvesBarView.swift in Sources */,
+				7BFF32082599870F0029EA19 /* EditSolveController.swift in Sources */,
+				7B607424258F29D000D188CF /* PopupError.swift in Sources */,
+				7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */,
+				7B984CFB253E02DC00BC6402 /* Cube_Timer.xcdatamodeld in Sources */,
+				7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */,
+				7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */,
+				7BFF3210259AEEA40029EA19 /* ContentViewController.swift in Sources */,
+				7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */,
+				7B984D5A253E72D700BC6402 /* SolveHandler.swift in Sources */,
+				7B7D56B725A0688A00A427ED /* AlertView.swift in Sources */,
+				7BBA7186258C763300FED3A2 /* CubeIcon.swift in Sources */,
+				7BFF31D82597FCA60029EA19 /* TimeGroupView.swift in Sources */,
+				7B607402258ED68300D188CF /* NewCubeTypeView.swift in Sources */,
+				7BE8859F25475F0000046D29 /* TimeCapture.swift in Sources */,
+				7BFF31EF2598708E0029EA19 /* StatLabelVertical.swift in Sources */,
+				7B984D30253E1CB400BC6402 /* TimeframeBar.swift in Sources */,
+				7B984D45253E550300BC6402 /* TimerController.swift in Sources */,
+				7B984D28253E19A900BC6402 /* ButtonsView.swift in Sources */,
+				7B8B62F5254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift in Sources */,
+				7B4719E7256C2E8A009FFFEA /* BarGraphController.swift in Sources */,
+				7B4719E2256BBBEB009FFFEA /* BarController.swift in Sources */,
+				7BCC6DD5257238B8001663B1 /* SidebarView.swift in Sources */,
+				7B984CEF253E02D900BC6402 /* Cube_TimerApp.swift in Sources */,
+				7B607411258F0B5700D188CF /* CTypeHandler.swift in Sources */,
+				7B60740C258EF7ED00D188CF /* CubeType+CoreDataProperties.swift in Sources */,
+				7BCC6DB2256EC61B001663B1 /* BO3Controller.swift in Sources */,
+				7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */,
+				7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */,
+				7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */,
+				7BAAE14E259C678900330533 /* DeleteSolvesView.swift in Sources */,
+				7BFF3203259986B80029EA19 /* EditSolveView.swift in Sources */,
+				7BFF31D02597FC9A0029EA19 /* TimeGroupController.swift in Sources */,
+				7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */,
+				7B7D56A6259E6DC900A427ED /* SettingsView.swift in Sources */,
+				7B607442258F30D200D188CF /* CTEditController.swift in Sources */,
+				7BCC6DCD25723860001663B1 /* SidebarController.swift in Sources */,
+				7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */,
+				7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B984CFD253E02DC00BC6402 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B2929E0254795B2009A5B90 /* SolvesFromTimeframeTests.swift in Sources */,
+				7B984D06253E02DC00BC6402 /* Cube_TimerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B984D08253E02DC00BC6402 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B984D11253E02DC00BC6402 /* Cube_TimerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7B984D03253E02DC00BC6402 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B984CEA253E02D900BC6402 /* Cube Timer */;
+			targetProxy = 7B984D02253E02DC00BC6402 /* PBXContainerItemProxy */;
+		};
+		7B984D0E253E02DC00BC6402 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B984CEA253E02D900BC6402 /* Cube Timer */;
+			targetProxy = 7B984D0D253E02DC00BC6402 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7B9B2E7F25A29F2200819159 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B9B2E7E25A29F2200819159 /* en */,
+				7B9B2E8325A29F2800819159 /* zh-Hans */,
+				7B9B2E8425A29F2A00819159 /* ja */,
+				7B9B2E8525A29F2B00819159 /* es */,
+				7B9B2E8625A29F4F00819159 /* fr */,
+				7B9B2E8725A29F5500819159 /* de */,
+				7B9B2E8825A29F5B00819159 /* ru */,
+				7B9B2E8925A29F6100819159 /* ko */,
+				7B9B2E8D25A2D01700819159 /* hi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7B984D13253E02DC00BC6402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7B984D14253E02DC00BC6402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7B984D16253E02DC00BC6402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Cube_Timer/Preview Content\"";
+				DEVELOPMENT_TEAM = X4H69T3Q68;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Cube_Timer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "be.kevincrab.Cube-Timer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7B984D17253E02DC00BC6402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Cube_Timer/Preview Content\"";
+				DEVELOPMENT_TEAM = X4H69T3Q68;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Cube_Timer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "be.kevincrab.Cube-Timer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7B984D19253E02DC00BC6402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X4H69T3Q68;
+				INFOPLIST_FILE = "Cube TimerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "be.kevincrab.Cube-TimerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cube Timer.app/Cube Timer";
+			};
+			name = Debug;
+		};
+		7B984D1A253E02DC00BC6402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X4H69T3Q68;
+				INFOPLIST_FILE = "Cube TimerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "be.kevincrab.Cube-TimerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cube Timer.app/Cube Timer";
+			};
+			name = Release;
+		};
+		7B984D1C253E02DC00BC6402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X4H69T3Q68;
+				INFOPLIST_FILE = "Cube TimerUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "be.kevincrab.Cube-TimerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Cube Timer";
+			};
+			name = Debug;
+		};
+		7B984D1D253E02DC00BC6402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X4H69T3Q68;
+				INFOPLIST_FILE = "Cube TimerUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "be.kevincrab.Cube-TimerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Cube Timer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7B984CE6253E02D900BC6402 /* Build configuration list for PBXProject "Cube_Timer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B984D13253E02DC00BC6402 /* Debug */,
+				7B984D14253E02DC00BC6402 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B984D15253E02DC00BC6402 /* Build configuration list for PBXNativeTarget "Cube Timer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B984D16253E02DC00BC6402 /* Debug */,
+				7B984D17253E02DC00BC6402 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B984D18253E02DC00BC6402 /* Build configuration list for PBXNativeTarget "Cube TimerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B984D19253E02DC00BC6402 /* Debug */,
+				7B984D1A253E02DC00BC6402 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B984D1B253E02DC00BC6402 /* Build configuration list for PBXNativeTarget "Cube TimerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B984D1C253E02DC00BC6402 /* Debug */,
+				7B984D1D253E02DC00BC6402 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7B984CF9253E02DC00BC6402 /* Cube_Timer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7B984CFA253E02DC00BC6402 /* Cube_Timer.xcdatamodel */,
+			);
+			currentVersion = 7B984CFA253E02DC00BC6402 /* Cube_Timer.xcdatamodel */;
+			path = Cube_Timer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 7B984CE3253E02D900BC6402 /* Project object */;
+}

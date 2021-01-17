@@ -1,0 +1,86 @@
+/* 
+  Localizable.strings
+  Cube_Timer
+
+  Created by Kevin Crabbe on 1/3/21.
+  ENGLISH
+*/
+"CUBES" = "CUBES";
+
+"EDIT CUBE" = "EDIT CUBE";
+"Description" = "Description";
+
+"DELETE" = "DELETE";
+"UPDATE" = "UPDATE";
+"CREATE" = "CREATE";
+
+"ENTER A NEW CUBE" = "ENTER A NEW CUBE"; // trans: NEW CUBE
+"Are you sure you want to delete %lld solves?" = "Are you sure you want to delete %lld solves?";
+
+"UPDATE CUBES FOR %lld SOLVES" = "UPDATE CUBES FOR %lld SOLVES";
+
+// ALERT STUFF
+"Pause Saving Solves" = "Pause Saving Solves";
+"Solves will not be saved until you turn pause saving solves back off" = "Solves will not be saved until you turn pause saving solves back off";
+"Resumed Saving Solves" = "Resumed Saving Solves";
+"Solves will not be recorded and saved" = "Solves will not be recorded and saved";
+"Currently not saving solves, change in settings" = "Currently not saving solves, change in settings";
+
+// SETTINGS STUFF
+"SETTINGS" = "SETTINGS";
+"Double press to stop" = "Double press to stop";
+"Requires both buttons to be pressed to record the solve." = "Requires both buttons to be pressed to record the solve.";
+"Pause saving solves" = "Pause saving solves";
+"about" = "about";
+
+"ABOUT" = "ABOUT";
+"Developer:" = "Developer:";
+"Contact:" = "Contact";
+"Website" = "Website";
+"back" = "back";
+
+"NO" = "NO";
+"YES" = "YES";
+"OFF" = "OFF";
+"ON" = "ON";
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1W";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1Y";
+"ALL" = "ALL";
+
+"Best" = "Best";
+"Worst" = "Worst";
+"Average" = "Average";
+
+"COMPLETE %lld MORE SOLVES" = "COMPLETE %lld MORE SOLVES";
+"no solves found." = "no solves found. ☹️";
+
+"BEST" = "BEST";
+"WORST" = "WORST";
+"MEDIAN" = "MEDIAN";
+"SOLVES" = "SOLVES";
+"AVERAGE" = "AVERAGE";
+"STD. DEV" = "STD. DEV";
+
+"today" = "today";
+"yesterday" = "yesterday";
+"last week" = "last week";
+"this month" = "this month";
+"last month" = "last month";
+
+"Jan" = "January";
+"Feb" = "February";
+"Mar" = "March";
+"Apr" = "April";
+"May" = "May";
+"Jun" = "June";
+"Jul" = "July";
+"Aug" = "August";
+"Sep" = "September";
+"Oct" = "October";
+"Nov" = "November";
+"Dec" = "December";
