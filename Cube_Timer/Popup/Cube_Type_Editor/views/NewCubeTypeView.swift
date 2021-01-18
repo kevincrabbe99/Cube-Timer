@@ -26,6 +26,7 @@ struct NewCubeTypeView: View {
     
     let configDimensionOptions: [Int] = [2,3,4,5,6,7,8,9]
     
+    let generator = UINotificationFeedbackGenerator()
     
     init(controller: CTEditController/*, parent: PopupController*/) {
        self.controller = controller
@@ -110,7 +111,7 @@ struct NewCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 60)
+                    .frame(width: 60, height: 90)
                     .labelsHidden()
                     .clipped()
                     
@@ -126,7 +127,7 @@ struct NewCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 60)
+                    .frame(width: 60, height: 90)
                     .labelsHidden()
                     .clipped()
                     
@@ -142,7 +143,7 @@ struct NewCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 60)
+                    .frame(width: 60, height: 90)
                     .labelsHidden()
                     .clipped()
                     
@@ -228,7 +229,9 @@ struct NewCubeTypeView: View {
         // check if description is not empty
         if description.isEmpty || description == "" {
         
-            alertController.makeAlert(icon: Image.init(systemName: "capsule"), title: "Missing Description", text: "Please enter a description for the puzzle.", duration: 3)
+            generator.notificationOccurred(.error)
+            
+            alertController.makeAlert(icon: Image.init(systemName: "capsule"), title: "Missing Description", text: "Please enter a description for the puzzle.", duration: 3, iconColor: Color.init("yellow"))
             
         return }
         
