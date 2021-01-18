@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CoreData
 import Firebase
+import StoreKit
 
 class TimerController: ObservableObject {
     
@@ -264,6 +265,24 @@ class TimerController: ObservableObject {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             self.cvc.blockGesture = false // allows the page to transition again
+        }
+        
+        
+        // request rating after 1.5 seconds
+        if (solveHandler.solves.count % 20) == 0 { // only prompt is solve handler countis divisible by 20
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                
+                // find scene and primpt
+                if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                    
+                    // prompt
+                    SKStoreReviewController.requestReview(in: scene)
+                    
+                }
+                
+                // google analytics
+                Analytics.logEvent("requested_review", parameters: nil)
+            }
         }
         
         /*

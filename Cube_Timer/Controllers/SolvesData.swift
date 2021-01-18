@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseAnalytics
+import StoreKit
 
 enum TimeGroup: String {
     case Unknown = "unknown"
@@ -371,6 +372,7 @@ class SolvesFromTimeframe: ObservableObject {
             cTypeHandler!.updateModifiedDateForSelected()
         }
         
+        // update google analytics
         updateGATotalSaves()
     }
     
