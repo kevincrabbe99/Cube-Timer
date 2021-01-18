@@ -11,7 +11,10 @@ import CoreData
 @main
 struct Cube_TimerApp: App {
 
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     let persistanceContainer = PersistenceController.shared
+    
     
     var body: some Scene {
         WindowGroup {
