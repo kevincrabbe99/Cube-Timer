@@ -13,6 +13,7 @@ struct NewCubeTypeView: View {
     var controller: CTEditController!
    // var parent: PopupController!
     @EnvironmentObject var parent: PopupController
+    @EnvironmentObject var alertController: AlertController
     
    // var setCT: CubeType?
     
@@ -161,10 +162,15 @@ struct NewCubeTypeView: View {
                         .shadow(radius: 4)
                     
                     if description.isEmpty {
-                        Text("Description")
-                            .font(.system(size:14))
-                            .foregroundColor(.init("black_chocolate"))
-                            .frame(width: w-120)
+                        ZStack {
+                        Text("Enter a description")
+                            .font(Font.custom("Play-Bold", size: 12.5))
+                            .foregroundColor(.init("very_dark_black"))
+                            .opacity(0.6)
+                            
+                        }
+                        .frame(width: innerW-20, alignment: .leading)
+                        
                     }
                     
                     TextField("", text: $description, onEditingChanged: { editing in
@@ -175,13 +181,16 @@ struct NewCubeTypeView: View {
                             parent.offsetPopup(y: 0) // moves the popup back to the center
                         }
                     })
-                    .frame(width: w-120)
+                    .font(Font.custom("Play-Bold", size: 12.5))
+                    .foregroundColor(.init("very_dark_black"))
+                    .frame(width: innerW-20)
                     .font(.system(size:14))
                     .foregroundColor(.black)
                     
                     
                 
                 }
+                .font(Font.custom("Play-Bold", size: 12.5))
                 .frame(width: innerW, height: 30, alignment: .center)
                
                 
@@ -190,8 +199,10 @@ struct NewCubeTypeView: View {
                  */
                 ZStack {
                     Button(action: {
-                        controller.addCT(d1: (d1+2), d2: (d2+2), d3: (d3+2), desc: description) // we add 2 to offset for the Picker start point
-                        parent.hidePopup()
+                        
+                        // try add create cube
+                        self.attemptCreateNewPuzzle()
+                        
                     }, label: {
                         RoundedButton(color: Color.init("mint_cream"), text: "CREATE", textColor: Color.init("very_dark_black"))
                      
@@ -209,6 +220,20 @@ struct NewCubeTypeView: View {
             //.offset(y: -14)
             .foregroundColor(.init("mint_cream"))
         }
+        
+    }
+    
+    private func attemptCreateNewPuzzle() {
+        
+        // check if description is not empty
+        if description.isEmpty || description == "" {
+        
+            alertController.makeAlert(icon: Image.init(systemName: "capsule"), title: "Missing Description", text: "Please enter a description for the puzzle.", duration: 3)
+            
+        return }
+        
+        controller.addCT(d1: (d1+2), d2: (d2+2), d3: (d3+2), desc: description) // we add 2 to offset for the Picker start point
+        parent.hidePopup()
         
     }
 

@@ -184,7 +184,9 @@ struct EditCubeTypeView: View {
                             parent.offsetPopup(y: 0) // moves the popup back to the center
                         }
                     })
-                    .frame(width: w-120)
+                    .font(Font.custom("Play-Bold", size: 12.5))
+                    .foregroundColor(.init("very_dark_black"))
+                    .frame(width: innerW-20)
                     .font(.system(size:14))
                     .foregroundColor(.black)
                 
