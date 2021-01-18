@@ -285,8 +285,8 @@ class CTypeHandler: ObservableObject {
          * ANALYTICS, Log Edited Puzzle
          */
         Analytics.logEvent("edited_puzzle", parameters: [
-            "puzzle_name": ct.rawName as! NSObject,
-            "puzzle_description": ct.desc as! NSObject
+            "puzzle_name": ct.name as! asbject,
+            "puzzle_description": ct.descrip as NSObject
         ])
     }
     
@@ -334,8 +334,8 @@ class CTypeHandler: ObservableObject {
          *  GOOGLE ANALYTICS, log created_puzzle
          */
         Analytics.logEvent("created_puzzle", parameters: [
-            "puzzle_name": newCT.rawName as! NSObject,
-            "puzzle_description": newCT.description as NSObject
+            "puzzle_name": newCT.name as NSObject,
+            "puzzle_description": newCT.descrip as NSObject
         ])
         
         // update the total puzzles for the user

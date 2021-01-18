@@ -280,9 +280,9 @@ class TimerController: ObservableObject {
         
         let lastSolve = solveHandler.getLastSolve()
         Analytics.logEvent(AnalyticsEventPostScore, parameters: [
-            AnalyticsParameterItemName: lastSolve!.cubeType.rawName as! NSObject,
-            AnalyticsParameterItemBrand: lastSolve!.cubeType.desc as! NSObject,
-            AnalyticsParameterScore: lastSolve!.timeMS as! NSObject
+            AnalyticsParameterItemName: lastSolve!.cubeType.name as NSObject,
+            AnalyticsParameterItemBrand: lastSolve!.cubeType.descrip as NSObject,
+            AnalyticsParameterScore: lastSolve!.timeMS as NSObject
         ])
     }
     
