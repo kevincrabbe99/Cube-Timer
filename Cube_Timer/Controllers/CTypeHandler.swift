@@ -285,7 +285,7 @@ class CTypeHandler: ObservableObject {
          * ANALYTICS, Log Edited Puzzle
          */
         Analytics.logEvent("edited_puzzle", parameters: [
-            "puzzle_name": ct.name as! asbject,
+            "puzzle_name": ct.name as! NSObject,
             "puzzle_description": ct.descrip as NSObject
         ])
     }
