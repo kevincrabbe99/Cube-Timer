@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAnalytics
 
 enum TimeGroup: String {
     case Unknown = "unknown"
@@ -369,6 +370,8 @@ class SolvesFromTimeframe: ObservableObject {
         if newEntry {
             cTypeHandler!.updateModifiedDateForSelected()
         }
+        
+        updateGATotalSaves()
     }
     
     /*
@@ -381,7 +384,34 @@ class SolvesFromTimeframe: ObservableObject {
         
         allSolvesController.updateSolves()
         print("Deleted from SolvesFromTimeframe.swift reference")
+        
+        
+        /*
+         *  GOOGLE ANALYTICS STUFF
+         */
+        // lod deleted solve
+        Analytics.logEvent("deleted_solve", parameters: [
+            "puzzle_name": s.cubeType.name as NSObject,
+            "puzzle_description": s.cubeType.descrip as NSObject,
+            "time": s.timeMS as NSObject
+        ])
+        
+        updateGATotalSaves()
+        
+        /*
+        Analytics.logEvent(AnalyticsEvent, parameters: [
+            AnalyticsParameterItemName: lastSolve!.cubeType.rawName as! NSObject,
+            AnalyticsParameterItemBrand: lastSolve!.cubeType.desc as! NSObject,
+            AnalyticsParameterScore: lastSolve!.timeMS as! NSObject
+        ])
+        */
     }
      
+    /*
+     *  Google Analytics stuff
+     */ // update total solves saved
+    private func updateGATotalSaves() {
+        Analytics.setUserProperty("\(self.solves.count)", forName: "total_times")
+    }
     
 }

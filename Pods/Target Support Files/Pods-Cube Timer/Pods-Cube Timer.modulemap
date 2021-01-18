@@ -1,0 +1,6 @@
+framework module Pods_Cube_Timer {
+  umbrella header "Pods-Cube Timer-umbrella.h"
+
+  export *
+  module * { export * }
+}

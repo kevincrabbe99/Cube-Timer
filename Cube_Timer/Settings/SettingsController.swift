@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 class SettingsController: ObservableObject {
     
@@ -26,11 +27,13 @@ class SettingsController: ObservableObject {
         
         // check if the requireDoublePressToStop keys exist in userDefaults
         if let rsptsVal = defaults.object(forKey: "requireDoublePressToStop") as? Bool {
+            // set value from userDefaults
             self.requireDoublePressToStop = rsptsVal
         } else {
            print("No value in requireDoublePressToStop, initializing to false")
             defaults.set(false, forKey: "requireDoublePressToStop")
             self.requireDoublePressToStop = false
+            Analytics.setUserProperty("false", forName: "DoublePressStop")
         }
         
         // check for pauseSavingSolves key in userDefaults
@@ -40,9 +43,11 @@ class SettingsController: ObservableObject {
             print("No value in pauseSavingSolves, initializing to false")
             defaults.set(false, forKey: "pauseSavingSolves")
             self.pauseSavingSolves = false
+            Analytics.setUserProperty("false", forName: "pause_saving_solves")
         }
         
     }
+    
     
     
     /*
@@ -50,6 +55,12 @@ class SettingsController: ObservableObject {
      */
     public func toggleAbout() {
         self.aboutState.toggle()
+        
+        if aboutState {
+            Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+                AnalyticsParameterDestination: "aboutView"
+            ])
+        }
     }
     
     /*
@@ -61,8 +72,10 @@ class SettingsController: ObservableObject {
         
         if requireDoublePressToStop == false { // set to true
             self.requireDoublePressToStop = true
+            Analytics.setUserProperty("false", forName: "DoublePressStop")
         } else {
             self.requireDoublePressToStop = false // turn off
+            Analytics.setUserProperty("false", forName: "DoublePressStop")
         }
         
         defaults.set(requireDoublePressToStop, forKey: "requireDoublePressToStop")
@@ -81,11 +94,15 @@ class SettingsController: ObservableObject {
             // show alert
             alertController.makeAlert(icon: Image(systemName: "pause.rectangle.fill"), title: "Pause Saving Solves", text: "Solves will not be saved until you turn pause saving solves back off")
             
+            
+            Analytics.setUserProperty("true", forName: "pause_saving_solves")
         } else {
             self.pauseSavingSolves = false // turn off
             
             // show alert
             alertController.makeAlert(icon: Image(systemName: "play.rectangle.fill"), title: "Resumed Saving Solves", text: "Solves will not be recorded and saved")
+            
+            Analytics.setUserProperty("false", forName: "pause_saving_solves")
         }
         
         defaults.set(pauseSavingSolves, forKey: "pauseSavingSolves")

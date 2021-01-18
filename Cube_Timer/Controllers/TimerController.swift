@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreData
+import Firebase
 
 class TimerController: ObservableObject {
     
@@ -227,6 +228,11 @@ class TimerController: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.acceptInput = true
         }
+        
+        /*
+         *  GA: set user property, timer_going
+         */
+        Analytics.setUserProperty("true", forName: "timer_going")
     }
     
     func stopTimer() {
@@ -259,6 +265,25 @@ class TimerController: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             self.cvc.blockGesture = false // allows the page to transition again
         }
+        
+        /*
+         *  Google Analytics log new solve
+        Analytics.logEvent("time_saved", parameters: [
+            "puzzle_name": lastSolve!.cubeType.rawName! as NSObject,
+            "puzzle_description": lastSolve!.cubeType.description as NSObject,
+            "seconds": lastSolve!.timeMS as NSObject
+        ])
+         */
+        
+        
+       Analytics.setUserProperty("false", forName: "timer_going")
+        
+        let lastSolve = solveHandler.getLastSolve()
+        Analytics.logEvent(AnalyticsEventPostScore, parameters: [
+            AnalyticsParameterItemName: lastSolve!.cubeType.name as NSObject,
+            AnalyticsParameterItemBrand: lastSolve!.cubeType.descrip as NSObject,
+            AnalyticsParameterScore: lastSolve!.timeMS as NSObject
+        ])
     }
     
     @objc func acceptInputNow() {
