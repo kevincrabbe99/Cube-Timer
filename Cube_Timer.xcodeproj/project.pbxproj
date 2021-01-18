@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -52,7 +52,7 @@
 		7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B799925493D280088ECD5 /* SolvesData.swift */; };
 		7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */; };
 		7BA90EDC25B512CE00A03DE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA90EDB25B512CE00A03DE1 /* AppDelegate.swift */; };
-		7BA90EE125B5148700A03DE1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90EE025B5148700A03DE1 /* GoogleService-Info.plist */; };
+		7BA90EFA25B5231500A03DE1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90EF925B5231500A03DE1 /* GoogleService-Info.plist */; };
 		7BAAE0FB259B386C00330533 /* Dosis-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */; };
 		7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */; };
 		7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */; };
@@ -175,7 +175,7 @@
 		7B9B799925493D280088ECD5 /* SolvesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolvesData.swift; sourceTree = "<group>"; };
 		7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesView.swift; sourceTree = "<group>"; };
 		7BA90EDB25B512CE00A03DE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7BA90EE025B5148700A03DE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7BA90EF925B5231500A03DE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
 		7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 				7B984CF2253E02DC00BC6402 /* Assets.xcassets */,
 				7B984CF9253E02DC00BC6402 /* Cube_Timer.xcdatamodeld */,
 				7B984CFC253E02DC00BC6402 /* Info.plist */,
-				7BA90EE025B5148700A03DE1 /* GoogleService-Info.plist */,
+				7BA90EF925B5231500A03DE1 /* GoogleService-Info.plist */,
 				7BAAE0EE259B384C00330533 /* fonts */,
 				7B984CF4253E02DC00BC6402 /* Preview Content */,
 				7BA90EDB25B512CE00A03DE1 /* AppDelegate.swift */,
@@ -774,7 +774,7 @@
 				7BAAE117259B387300330533 /* Heebo-Medium.ttf in Resources */,
 				7BAAE101259B386C00330533 /* Dosis-SemiBold.ttf in Resources */,
 				7B984CF3253E02DC00BC6402 /* Assets.xcassets in Resources */,
-				7BA90EE125B5148700A03DE1 /* GoogleService-Info.plist in Resources */,
+				7BA90EFA25B5231500A03DE1 /* GoogleService-Info.plist in Resources */,
 				7BAAE119259B387300330533 /* Heebo-Bold.ttf in Resources */,
 				7BAAE0FE259B386C00330533 /* Dosis-Light.ttf in Resources */,
 				7BAAE116259B387300330533 /* Heebo-Thin.ttf in Resources */,

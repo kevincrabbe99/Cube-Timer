@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 
 class ContentViewController: ObservableObject {
@@ -170,17 +171,23 @@ class ContentViewController: ObservableObject {
             
             if self.pageTransitionPercentage > 0.5 { // goto all solves view
                 
+                /*
                 self.allSolvesViewYOffset = 0
                 self.mainViewOpacity = 0
                 self.pageTransitionPercentage = 1
                 self.allSolvesViewScale = 1
-                
+                */
+                setStateForAllSolves()
+ 
             } else {
-                
+                /*
                 self.allSolvesViewYOffset = -150
                 self.mainViewOpacity = 1
                 self.pageTransitionPercentage = 0
                 self.allSolvesViewScale = 0.9
+                */
+                
+                setStateForMain()
                 
             }
             
@@ -246,9 +253,14 @@ class ContentViewController: ObservableObject {
     private func setStateForSettings() {
         if !inSettings  {
             self.inSettings = true
+            
+            Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+                AnalyticsParameterDestination: "settingsView"
+            ])
         } else {
             self.inSettings = false
         }
+        
     }
     
     private func setStateForAllSolves() {
@@ -256,6 +268,11 @@ class ContentViewController: ObservableObject {
         self.mainViewOpacity = 0
         self.pageTransitionPercentage = 1
         self.allSolvesViewScale = 1
+        
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+            AnalyticsParameterDestination: "allSolvesView"
+        ])
     }
     
     private func setStateForMain() {
@@ -263,6 +280,10 @@ class ContentViewController: ObservableObject {
         self.mainViewOpacity = 1
         self.pageTransitionPercentage = 0
         self.allSolvesViewScale = 0.9
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+            AnalyticsParameterDestination: "mainView"
+        ])
     }
     
     

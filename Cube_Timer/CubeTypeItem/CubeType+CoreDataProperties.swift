@@ -33,6 +33,11 @@ extension CubeType: Identifiable {
             return false
         }
     }
+    
+    public func toString() -> String {
+        return self.name + ", " + self.descrip
+    }
+    
 
 }
 

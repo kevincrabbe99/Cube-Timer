@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 import SwiftUI
-
+import Firebase
 
 class CTypeHandler: ObservableObject {
     
@@ -94,6 +94,7 @@ class CTypeHandler: ObservableObject {
      */
     public func newSelection(_ ctController: SingleCubeTypeViewController) {
         
+        
         // go through and deselect all of them
         for t in typeControllers {
             if t.ct.id != ctController.ct.id { // if it does not match the passed controller then deselect it
@@ -117,6 +118,8 @@ class CTypeHandler: ObservableObject {
         }
         
         
+        // google analytics update selected puzzle
+        updateGASelectedPuzzle()
         
         
     }
@@ -194,6 +197,19 @@ class CTypeHandler: ObservableObject {
         self.size  -= 1
         
         CTypeHandler.DeleteCtFromCoreData(ct: refToDelete!.ct) // passes a reference to the static function
+    
+        /*
+         * GOOGLE ANALYTICS STUFF
+         
+         *  send delete puzzle event
+         */
+        Analytics.logEvent("deleted_puzzle", parameters: [
+            "puzzle_name": refToDelete!.rawName as NSObject,
+            "puzzle_description": refToDelete!.ct.description as NSObject
+        ])
+        
+        // update total puzzles for user
+        updateGATotalPuzzles()
     }
     
     /*
@@ -222,22 +238,7 @@ class CTypeHandler: ObservableObject {
         return res
     }
     
-    /*
-     *  Adds a solve element based on given attributes
-            * This is how we add new solves from user input
-            * any other implementations should be reconcidered
-     */
-    public func add(d1: Int, d2: Int, d3: Int, desc: String) {
-        // add to core data
-        let newCT = CTypeHandler.AddCtToCoreData(d1: d1, d2: d2, d3: d3, desc: desc)
-        
-        // create controller reference
-        let newCTController = SingleCubeTypeViewController(ct: newCT, ctHandler: self)
-        //newCTController.initView()
-        self.typeControllers.append(newCTController)
-        
-        self.size += 1
-    }
+    
     
     /*
      *  Checks if there is a controller present for the given cube type
@@ -279,6 +280,14 @@ class CTypeHandler: ObservableObject {
         for tc in typeControllers {
             tc.updateFromCTObj()
         }
+        
+        /*
+         * ANALYTICS, Log Edited Puzzle
+         */
+        Analytics.logEvent("edited_puzzle", parameters: [
+            "puzzle_name": ct.rawName as! NSObject,
+            "puzzle_description": ct.desc as! NSObject
+        ])
     }
     
     
@@ -305,6 +314,34 @@ class CTypeHandler: ObservableObject {
     }
     
     
+    /*
+     *  Adds a solve element based on given attributes
+            * This is how we add new solves from user input
+            * any other implementations should be reconcidered
+     */
+    public func add(d1: Int, d2: Int, d3: Int, desc: String) {
+        // add to core data
+        let newCT = CTypeHandler.AddCtToCoreData(d1: d1, d2: d2, d3: d3, desc: desc)
+        
+        // create controller reference
+        let newCTController = SingleCubeTypeViewController(ct: newCT, ctHandler: self)
+        //newCTController.initView()
+        self.typeControllers.append(newCTController)
+        
+        self.size += 1
+        
+        /*
+         *  GOOGLE ANALYTICS, log created_puzzle
+         */
+        Analytics.logEvent("created_puzzle", parameters: [
+            "puzzle_name": newCT.rawName as! NSObject,
+            "puzzle_description": newCT.description as NSObject
+        ])
+        
+        // update the total puzzles for the user
+        updateGATotalPuzzles()
+    }
+    
     public static func AddCtToCoreData(d1: Int, d2: Int, d3: Int, desc: String) -> CubeType {
         
         // create a raw CubeType with no data
@@ -326,9 +363,22 @@ class CTypeHandler: ObservableObject {
         } catch {
             print("SAVE ERROR: saving a new CubeType, CTypeController.swift -> addCtToCoreData")
         }
-        
         return newCT
         
     }
     
+    
+    /*
+     *  Google Analytics stuff
+     */
+    private func updateGATotalPuzzles() {
+        Analytics.setUserProperty("\(self.typeControllers.count)", forName: "total_puzzles")
+    }
+    
+    private func updateGASelectedPuzzle() {
+        Analytics.setUserProperty("\(self.selected.toString())", forName: "last_puzzle_selected")
+    }
+    
 }
+
+

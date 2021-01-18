@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import Firebase
 
 enum Page: String {
     case Main = "Main Page"
@@ -235,6 +236,10 @@ struct ContentView: View {
         .environmentObject(settingsController)
         .environmentObject(alertController)
         .environmentObject(barGraphController)
+        .onAppear(
+        
+        
+        )
     
     }
 
