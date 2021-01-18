@@ -53,6 +53,8 @@
 		7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */; };
 		7BA90EDC25B512CE00A03DE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA90EDB25B512CE00A03DE1 /* AppDelegate.swift */; };
 		7BA90EFA25B5231500A03DE1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90EF925B5231500A03DE1 /* GoogleService-Info.plist */; };
+		7BA90F8325B5924C00A03DE1 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA90F8225B5924B00A03DE1 /* RoundedButton.swift */; };
+		7BA90F8B25B59B8F00A03DE1 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA90F8A25B59B8F00A03DE1 /* IconButton.swift */; };
 		7BAAE0FB259B386C00330533 /* Dosis-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */; };
 		7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */; };
 		7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */; };
@@ -176,6 +178,8 @@
 		7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesView.swift; sourceTree = "<group>"; };
 		7BA90EDB25B512CE00A03DE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BA90EF925B5231500A03DE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7BA90F8225B5924B00A03DE1 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		7BA90F8A25B59B8F00A03DE1 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
 		7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
@@ -390,6 +394,7 @@
 		7B984CED253E02D900BC6402 /* Cube_Timer */ = {
 			isa = PBXGroup;
 			children = (
+				7BA90F8125B5922D00A03DE1 /* Buttons */,
 				7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */,
 				7B984CF0253E02D900BC6402 /* ContentView.swift */,
 				7BFF320F259AEEA30029EA19 /* ContentViewController.swift */,
@@ -438,6 +443,15 @@
 				7B984D12253E02DC00BC6402 /* Info.plist */,
 			);
 			path = Cube_TimerUITests;
+			sourceTree = "<group>";
+		};
+		7BA90F8125B5922D00A03DE1 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				7BA90F8225B5924B00A03DE1 /* RoundedButton.swift */,
+				7BA90F8A25B59B8F00A03DE1 /* IconButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		7BAAE0EE259B384C00330533 /* fonts */ = {
@@ -930,6 +944,7 @@
 				7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */,
 				7B984CFB253E02DC00BC6402 /* Cube_Timer.xcdatamodeld in Sources */,
 				7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */,
+				7BA90F8325B5924C00A03DE1 /* RoundedButton.swift in Sources */,
 				7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */,
 				7BFF3210259AEEA40029EA19 /* ContentViewController.swift in Sources */,
 				7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */,
@@ -949,6 +964,7 @@
 				7B4719E2256BBBEB009FFFEA /* BarController.swift in Sources */,
 				7BCC6DD5257238B8001663B1 /* SidebarView.swift in Sources */,
 				7B984CEF253E02D900BC6402 /* Cube_TimerApp.swift in Sources */,
+				7BA90F8B25B59B8F00A03DE1 /* IconButton.swift in Sources */,
 				7B607411258F0B5700D188CF /* CTypeHandler.swift in Sources */,
 				7B60740C258EF7ED00D188CF /* CubeType+CoreDataProperties.swift in Sources */,
 				7BCC6DB2256EC61B001663B1 /* BO3Controller.swift in Sources */,

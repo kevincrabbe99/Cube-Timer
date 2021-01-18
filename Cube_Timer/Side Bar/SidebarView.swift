@@ -101,6 +101,9 @@ struct SidebarView: View {
                                 HStack {
                                    // t.view
                                     SingleCubeTypeView(controller: t)
+                                        .onTapGesture {
+                                            t.select()
+                                        }
                                     /*
                                      *  the edit button
                                      */
@@ -109,7 +112,7 @@ struct SidebarView: View {
                                             // toggle edit mode
                                             self.editMode.toggle()
                                             // show popup for currently iterated t.ct.id
-                                            cvc.showCTPopupFor(id: t.ct.id!)
+                                            cvc.tappedEditCT(id: t.ct.id!)
                                          }, label: {
                                              Image(systemName: "pencil.tip.crop.circle")
                                          })

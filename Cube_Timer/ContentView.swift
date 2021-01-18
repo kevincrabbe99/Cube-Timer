@@ -184,7 +184,7 @@ struct ContentView: View {
                     Color.black
                         .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.2)))
                         .zIndex(6)
-                        .opacity(0.5)
+                        .opacity(0.75)
                         .onTapGesture {
                             cvc.hidePopup()
                         }
@@ -197,6 +197,7 @@ struct ContentView: View {
                 }
                 
                 AlertView()
+                    .zIndex(100)
                 
             }
         

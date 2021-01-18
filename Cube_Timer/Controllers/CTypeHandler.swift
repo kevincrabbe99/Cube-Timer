@@ -126,7 +126,7 @@ class CTypeHandler: ObservableObject {
     
     public func showEditPopupFor(id: UUID) {
         print("passed through CTypeHandler")
-        cvc.showCTPopupFor(id: id)
+        cvc.tappedEditCT(id: id)
     }
     
     public func getDefaultSelection() -> CubeType? {

@@ -47,13 +47,12 @@ struct NewCubeTypeView: View {
             let w: CGFloat = geo.size.width
             let h: CGFloat = geo.size.height
             
-            let innerW:CGFloat = w-100
+            let innerW:CGFloat = w-80
             
-            VStack {
+            VStack(spacing: 0) {
                 
-                /*
+                /* GOT REPLACED BY POPUPVIEW
                  *  title
-                 */
                 //if !isEditing() {
                 Text("ENTER A NEW CUBE")
                         .font(Font.custom("Heebo-Black", size: 23))
@@ -70,6 +69,35 @@ struct NewCubeTypeView: View {
                         .offset(x: 20, y: 10)
                 }
  */
+                 */
+                
+                /*
+                 *  Top bar menu
+                 */
+                ZStack {
+                    
+                    HStack(spacing: 0.0) {
+                        ZStack {
+                            Color.init("dark_black")
+                                .cornerRadius(5, corners: .topLeft)
+                                .opacity(0.4)
+                            
+                            Text("CUBE")
+                        }
+                            
+                        
+                        ZStack {
+                            Color.init("very_dark_black")
+                                .cornerRadius(5, corners: .topRight)
+                                .opacity(0.75)
+                            
+                            Text("CUSTOM")
+                        }
+                    }
+                    .font(Font.custom("Play-Bold", size: 15))
+                }
+                .padding([.top, .leading, .trailing],1)
+                .frame(height: 35)
    
                 HStack {
                     
@@ -119,8 +147,8 @@ struct NewCubeTypeView: View {
                     
                     
                 }
-                .frame(width: innerW, height: 60)
-                .offset(y: -10)
+                .frame(width: innerW, height: 90)
+                .font(Font.system(size: 13, weight: .bold))
         
                 /*
                  *  TextBox stuff
@@ -169,14 +197,16 @@ struct NewCubeTypeView: View {
                      
                     })
                 }
-                .frame(width: w-100, alignment: .trailing)
+                .frame(width: innerW, alignment: .trailing)
+                .padding(.top, 25)
+                .offset(x: 20)
  
                 
                 
             }
-            .frame(width: (w-20), height: (h-20), alignment: .topLeading)
+            .frame(width: (w), height: (h), alignment: .top)
             .position(x: w/2, y: h/2)
-            .offset(y: -14)
+            //.offset(y: -14)
             .foregroundColor(.init("mint_cream"))
         }
         

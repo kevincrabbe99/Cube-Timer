@@ -59,18 +59,17 @@ struct EditCubeTypeView: View {
             let w: CGFloat = geo.size.width
             let h: CGFloat = geo.size.height
             
-            let innerW:CGFloat = w-100
+            let innerW:CGFloat = w-80
             
-            VStack {
+            VStack(spacing: 0.0) {
                 
-                /*
+                /*  GOT REPLACED BY POPUPVIEW
                  *  title
-                 */
                 //if !isEditing() {
                 Text("EDIT CUBE")
                     .font(Font.custom("Heebo-Black", size: 23))
                     .foregroundColor(.init("mint_cream"))
-                    .frame(width: w-20, alignment: .leading)
+                 .frame(width: w-20, alignment: .leading)
                     .offset(x: 20, y: 10)
                 /*
                 }else {
@@ -81,7 +80,39 @@ struct EditCubeTypeView: View {
                         .frame(width: w-20, alignment: .leading)
                         .offset(x: 20, y: 10)
                 }
- */
+                    */
+                 */
+                
+                /*
+                 *  Top bar menu
+                 */
+                ZStack {
+                    
+                    HStack(spacing: 0.0) {
+                        ZStack {
+                            Color.init("dark_black")
+                                .cornerRadius(5, corners: .topLeft)
+                                .opacity(0.4)
+                            
+                            Text("CUBE")
+                        }
+                            
+                        
+                        ZStack {
+                            Color.init("very_dark_black")
+                                .cornerRadius(5, corners: .topRight)
+                                .opacity(0.75)
+                            
+                            Text("CUSTOM")
+                        }
+                    }
+                    .font(Font.custom("Play-Bold", size: 15))
+                }
+                .padding([.top, .leading, .trailing],1)
+                .frame(height: 35)
+                
+                
+                
    
                 HStack {
                     
@@ -93,13 +124,13 @@ struct EditCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 60)
+                    .frame(width: 60, height: 90)
                     .labelsHidden()
                     .clipped()
                     
                     Spacer()
                     Image.init(systemName: "xmark")
-                        .font(Font.system(size: 15, weight: .bold))
+                        .font(Font.system(size: 13, weight: .bold))
                     Spacer()
                     
                     Picker(selection: $d2, label: Text("")) {
@@ -109,13 +140,13 @@ struct EditCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 60)
+                    .frame(width: 60, height: 90)
                     .labelsHidden()
                     .clipped()
                     
                     Spacer()
                     Image.init(systemName: "xmark")
-                        .font(Font.system(size: 15, weight: .bold))
+                        .font(Font.system(size: 13, weight: .bold))
                     Spacer()
                     
                     Picker(selection: $d3, label: Text("")) {
@@ -125,14 +156,15 @@ struct EditCubeTypeView: View {
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 60)
+                    .frame(width: 60, height: 90)
                     .labelsHidden()
                     .clipped()
                     
                     
                 }
-                .frame(width: innerW, height: 60)
-                .offset(y: -10)
+                .frame(width: innerW, height: 90)
+                .font(Font.system(size: 13, weight: .bold))
+                //.offset(y: 10)
         
                 /*
                  *  TextBox stuff
@@ -175,7 +207,7 @@ struct EditCubeTypeView: View {
                             
                         }
                     }, label: {
-                        RoundedButton(      color:(deleteGuardCounter == 0 ? Color.init("mint_cream").opacity(0.8) : Color.init("red")),
+                        RoundedButton(      color:(deleteGuardCounter == 0 ? Color.init("mint_cream") : Color.init("red")),
                                             text: "DELETE",
                                             textColor: Color.init("very_dark_black"))
                    
@@ -191,20 +223,23 @@ struct EditCubeTypeView: View {
                         parent.hidePopup()
                     }, label: {
                         
-                        RoundedButton(      color: (Color.init("mint_cream").opacity(0.8)),
+                        RoundedButton(      color: (Color.init("mint_cream")),
                                             text: "UPDATE",
                                             textColor: Color.init("very_dark_black"))
                         
                         
                     })
-                }.frame(width: innerW, alignment: .trailing)
+                }
+                .frame(width: innerW, alignment: .trailing)
+                .padding(.top, 25)
+                .offset(x: 20)
                
                 
                 
             }
-            .frame(width: (w-20), height: (h-20), alignment: .topLeading)
+            .frame(width: (w), height: (h), alignment: .top)
             .position(x: w/2, y: h/2)
-            .offset(y: -14)
+            //.offset(y: -14)
             .foregroundColor(.init("mint_cream"))
                 
         }

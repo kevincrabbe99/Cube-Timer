@@ -302,7 +302,8 @@ class ContentViewController: ObservableObject {
             * pass SolveElementController so we can use that to unselect within th epopup
      */
     public func tappedEditSolves(solves: [SolveElementController]) {
-        showPopup(v: AnyView(EditSolveView(/*controller: editSolveController, parent: popupController,*/ solves: solves, selection: 1)))
+        showPopup(  v: AnyView(EditSolveView(/*controller: editSolveController, parent: popupController,*/ solves: solves, selection: 1)),
+                    title: "MOVE \(allSolvesController.selected.count) SAVED TIMES TO...")
     }
     
     /*
@@ -311,20 +312,21 @@ class ContentViewController: ObservableObject {
      */
     public func tappedAddCT() {
         print("[cvc] creating popup for new CubeType")
-        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController)))
+        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController)), title: "ENTER A NEW PUZZLE")
     }
     
     /*
      *  When editing a CT we bring up the add CT view and change it a lil
      */
-    public func showCTPopupFor(id: UUID) {
+    public func tappedEditCT(id: UUID) {
         let ct = cTypeHandler.getControllerFrom(id: id)!.ct
-        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, parent: popupController, setCT: ct)))
+        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, parent: popupController, setCT: ct)),
+                  title: "EDIT, \(ct.name)")
     }
     
-    public func showPopup(v: AnyView) {
+    public func showPopup(v: AnyView, title: LocalizedStringKey? = nil) {
         lightTap.impactOccurred()
-        popupController.set(v)
+        popupController.set(v, title: title)
         popupShowing = true
         
         print("[cvc] popupShowing = ", popupShowing)
