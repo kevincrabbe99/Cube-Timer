@@ -10,6 +10,7 @@ import SwiftUI
 struct EditCubeTypeView: View {
     
     @EnvironmentObject var cTypeHandler: CTypeHandler
+    @EnvironmentObject var alertController: AlertController
     
     //var parent: PopupView!
     var controller: CTEditController!
@@ -45,8 +46,8 @@ struct EditCubeTypeView: View {
             print("setting to ", setCT?.descrip as Any)
             self.description = setCT!.descrip
             self.d1 = Int(setCT!.d1 - 2)
-            self.d2 = Int(setCT!.d1 - 2)
-            self.d3 = Int(setCT!.d1 - 2)
+            self.d2 = Int(setCT!.d2 - 2)
+            self.d3 = Int(setCT!.d3 - 2)
         }
     }
  
@@ -169,7 +170,9 @@ struct EditCubeTypeView: View {
                             controller.deleteCT(id: (setCT?.id)!)
                             parent.hidePopup()
                         } else {
+                            alertController.makeAlert(icon: Image(systemName: "trash.fill"), title: "Are you sure you want to delete this puzzle?", text: "This will permently delete your puzzle and the reference to its saved times!")
                             deleteGuardCounter += 1
+                            
                         }
                     }, label: {
                         RoundedButton(      color:(deleteGuardCounter == 0 ? Color.init("mint_cream").opacity(0.8) : Color.init("red")),

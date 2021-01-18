@@ -72,7 +72,7 @@ struct TimerView: View {
      */
     var slvsBarHeight: CGFloat {
         if solveHandler.currentTimeframe == .LastThree { // height of BO view
-            return 60
+            return 90
         } else { // return regular bar height
             return 20 // regular bar heightr
         }
@@ -224,7 +224,7 @@ struct TimerView: View {
                             //BestOfThreeView(timer: timer, solveHandler: solveHandler)
                             if solveHandler.solves.count >= 3 {
                                 BestOfThreeView(c: self.bo3Controller) // bo3Controoler is initiated in ContentView.swift
-                                    .frame(width: 300, height: 60)
+                                    .frame(width: 300, height: slvsBarHeight)
                             }
                             
                         }else {

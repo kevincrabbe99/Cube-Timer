@@ -29,42 +29,50 @@ struct BestOfThreeView: View {
             
             VStack {
                 
+                
+                HStack {
+                    Text("BEST OF THREE")
+                        .font(Font.custom("Play-Bold", size: 13))
+                }
+                .frame(width: innerW - 15, alignment: .leading)
+                .offset(y: 10)
+                
                 /*
                  * container for the stats
                  */
                 if controller.solves.count >= 3 {
                     HStack {
-                        VStack(alignment: .trailing, spacing: 2.5) {
+                        VStack(alignment: .leading, spacing: 2.5) {
+                            
+                            LabelElement(label: self.controller.best.getAsReadable(), highlighted: self.controller.lastIsBest, bgColor: Color.init("green"))
                             Text("Best")
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
-                             //   .frame(width: (geo.size.width/4), alignment: .leading)
-                            LabelElement(label: self.controller.best.getAsReadable(), highlighted: self.controller.lastIsBest, bgColor: Color.init("green"))
                
                         }
                         .frame(width:  innerW / 3, alignment: .leading)
-                        VStack(alignment: .trailing, spacing: 2.5) {
+                        VStack(alignment: .leading, spacing: 2.5) {
+                            
+                            LabelElement(label: self.controller.worst.getAsReadable(), highlighted: self.controller.lastIsWorst, bgColor: Color.init("red"))
                             Text("Worst")
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
-                                //.frame(width: (geo.size.width/4), alignment: .leading)
-                            LabelElement(label: self.controller.worst.getAsReadable(), highlighted: self.controller.lastIsWorst, bgColor: Color.init("red"))
                     
                         }
                         .frame(width:  innerW / 3, alignment: .leading)
-                        VStack(alignment: .trailing, spacing: 2.5) {
+                        VStack(alignment: .leading, spacing: 2.5) {
+                            
+                            LabelElement(label: String(format: "%.2f", self.controller.average))
                             Text("Average")
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
-                                //.frame(width: (geo.size.width/4), alignment: .leading)
-                            LabelElement(label: String(format: "%.2f", self.controller.average))
                   
                         }
                         .frame(width: innerW / 3, alignment: .leading)
                     }
                     .opacity(0.8)
                     .padding(10)
-                    .offset(x: 15)
+                    .offset(x: 15, y: 5)
                     //.frame(width:innerW)
                 }
             }
