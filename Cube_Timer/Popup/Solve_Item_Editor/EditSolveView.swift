@@ -66,6 +66,11 @@ struct EditSolveView: View {
                                     Button(action: {
                                         print("tapped")
                                         self.controller.setCtTo(ct: ctController.ct, solves: solves)
+                                        
+                                        // goto tapped puzzle
+                                        cTypeHandler.newSelection(ctController)
+                                        
+                                        // hide popup
                                         parent.hidePopup()
                                     }, label: {
                                         SingleCubeTypeView(controller: ctController, asSidebar: false, bgColor: Color.init("very_dark_black"))

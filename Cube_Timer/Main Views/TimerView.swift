@@ -120,10 +120,9 @@ struct TimerView: View {
                              */
                             HStack {
                                 Text("\(timer.overUnderTime)")
-                                    .font(.system(size: 12))
-                                    .fontWeight(.bold)
+                                    .font(Font.custom("Chivo-Bold", size: 12))
                                 Text("(\(timer.overUnderPercentage, specifier: "%.0f")%)")
-                                    .font(.system(size: 12))
+                                    .font(Font.custom("Chivo-Regular", size: 12))
                             
                             }
                             .frame(width: 210, alignment: .leading)
@@ -147,7 +146,7 @@ struct TimerView: View {
                             }
                                 
                         }
-                        .offset(y: -5)
+                        .offset(y: 0)
                         .frame(width: 260, height: 20, alignment: .leading)
                     
                     } else {
@@ -180,8 +179,9 @@ struct TimerView: View {
                         openShowAllSolves()
                     }, label: {
                         
-                        if !(solveHandler.currentTimeframe == .LastThree && solveHandler.solves.count < 3)  {
+                        if (solveHandler.currentTimeframe == .LastThree && solveHandler.solves.count >= 3)  {
                             if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) {
+                                
                                 ZStack {
                                     Color(.init("very_dark_black"))
                                         .cornerRadius(5)
@@ -191,8 +191,10 @@ struct TimerView: View {
                                         .animation(.easeOut(duration: 0.15))
 
                                 }
+                                .offset(y: 5)
                             }
-                        } else {
+                        } else if (solveHandler.currentTimeframe == .LastThree) {
+                            // background for last 3 solves
                             ZStack {
                                 Color.init("very_dark_black")
                                     .cornerRadius(5)
@@ -205,7 +207,9 @@ struct TimerView: View {
                                     .font(Font.custom("Heebo-Black", size: 12))
                                     .opacity(0.8)
                             }
-                            .frame(width: slvsBarWidth, height: slvsBarHeight)
+                            .frame(width: slvsBarWidth, height: 50)
+                            .offset(y: 5)
+                            
                         }
                 
                     })
@@ -228,7 +232,7 @@ struct TimerView: View {
                             }
                             
                         }else {
-                        
+                        /* THE LAST 3 DISPLAY
                             HStack(spacing: 30.0) {
                                 ForEach(solveHandler.last3) { s in
                                     Text(TimeCapture.init(s.timeMS).getAsReadable() )
@@ -247,7 +251,7 @@ struct TimerView: View {
                                 }
                             } // end last 3 bar [HStack]
                             .opacity(timer.peripheralOpacity)
-                            
+                        */
                         } // end if
                         
                     }
@@ -263,13 +267,13 @@ struct TimerView: View {
                  */
                 StatsBarView(timer: timer, solveHandler: solveHandler)
                     // .opacity(statBarGraphOpacity)
-                    .offset(y: 20)
+                    //.offset(y: 20)
                     .animation(Animation.easeOut(duration: 0.15))
                 
             } // end guard for pauseSavingSolves
         }
         .foregroundColor(.white)
-        .offset(y: solveHandler.size == 0 ? 50 : 0)
+        .offset(y: solveHandler.size == 0 ? 60 : 10)
         .onAppear() {
             timer.setDisplayToLastSolve()
         }

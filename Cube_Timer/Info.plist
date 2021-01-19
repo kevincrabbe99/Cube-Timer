@@ -24,6 +24,11 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Chivo-Italic.ttf</string>
+		<string>Chivo-Light.ttf</string>
+		<string>Chivo-Regular.ttf</string>
+		<string>Chivo-Black.ttf</string>
+		<string>Chivo-Bold.ttf</string>
 		<string>Dosis-Regular.ttf</string>
 		<string>Dosis-SemiBold.ttf</string>
 		<string>Dosis-ExtraBold.ttf</string>

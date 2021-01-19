@@ -50,7 +50,7 @@ struct MainView: View {
                             .tracking(cTypeHandler.selected.isCustom() ? 0 : 5)
                             .lineLimit(1)
                             .offset(x: 5)
-                            .frame(width: 150)
+                            .frame(width: 300, alignment: .trailing)
                         Text(cTypeHandler.selected.descrip)
                             .font(Font.custom("Play-Regular", size: 15))
                             .lineLimit(1)

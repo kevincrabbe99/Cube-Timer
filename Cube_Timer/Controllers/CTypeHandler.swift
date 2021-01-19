@@ -121,6 +121,10 @@ class CTypeHandler: ObservableObject {
         // google analytics update selected puzzle
         updateGASelectedPuzzle()
         
+        // unselect selected times
+        if allSolvesController != nil {
+            allSolvesController.unselectAll()
+        }
         
     }
     

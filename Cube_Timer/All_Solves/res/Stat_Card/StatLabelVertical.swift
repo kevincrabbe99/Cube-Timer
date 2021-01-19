@@ -35,8 +35,7 @@ struct StatLabelVertical: View {
             
             VStack(alignment: .trailing, spacing: 2.0) {
                 Text(label)
-                    .fontWeight(.black)
-                    .font(.system(size:13))
+                    .font(Font.custom("Play-Bold", size: 12))
                     .opacity(0.8)
                 
                 
@@ -49,8 +48,7 @@ struct StatLabelVertical: View {
                     
                     //Text(solve?.getTimeCapture()?.getInSolidForm() ?? "none")
                     Text(value/*"\(value, specifier: "%.2f")"*/)
-                        .bold()
-                        .font(.system(size:14))
+                        .font(Font.custom("Chivo-Bold", size: 14))
                         .opacity(0.8)
                 }
             }

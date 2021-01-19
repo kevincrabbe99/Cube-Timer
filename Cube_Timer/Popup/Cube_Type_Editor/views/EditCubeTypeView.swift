@@ -194,6 +194,7 @@ struct EditCubeTypeView: View {
                             Text("TAP TO ENTER A NAME")
                                 .font(Font.custom("Play-Bold", size: 25))
                                 .multilineTextAlignment(.leading)
+                                .opacity(0.7)
                         }
                         
                         TextField("", text: $customName, onEditingChanged: { editing in
@@ -321,8 +322,18 @@ struct EditCubeTypeView: View {
             
         } else if (currentPTConfig == .custom){ // if it is custom
             
+            // check if name is blank
+            if customName.isEmpty || customName == "" {
+            
+                generator.notificationOccurred(.error)
+                
+                alertController.makeAlert(icon: Image.init(systemName: "capsule"), title: "Missing Puzzle Name", text: "Please enter a name for the puzzle.", duration: 3, iconColor: Color.init("yellow"))
+                
+            return }
+                
             cTypeHandler.edit(setCT!, customName: customName, desc: description)
             parent.hidePopup()
+                
             
         }
         

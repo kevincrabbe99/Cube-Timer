@@ -57,7 +57,7 @@ struct TimeframeBar: View {
                     }) {
                         ZStack {
                             Text("3X")
-                                .fontWeight(.bold)
+                                .font(Font.custom("Chivo-Bold", size: 16))
                                 .foregroundColor(.white)
                         }
                         .frame(width: 35, height: 100)
@@ -70,7 +70,8 @@ struct TimeframeBar: View {
                     }) {
                         ZStack {
                             Text("1D")
-                                .fontWeight(.bold)
+                                .font(Font.custom("Chivo-Bold", size: 16))
+                                .offset(x: 2)
                                 .foregroundColor(.white)
                         }
                         .frame(width: 35, height: 100)
@@ -84,7 +85,7 @@ struct TimeframeBar: View {
                         }) {
                             ZStack {
                                 Text("1W")
-                                    .fontWeight(.bold)
+                                    .font(Font.custom("Chivo-Bold", size: 16))
                                     .foregroundColor(.white)
                             }
                             .frame(width: 35, height: 100)
@@ -99,7 +100,7 @@ struct TimeframeBar: View {
                         }) {
                             ZStack {
                                 Text("1M")
-                                    .fontWeight(.bold)
+                                    .font(Font.custom("Chivo-Bold", size: 16))
                                     .foregroundColor(.white)
                             }
                             .frame(width: 35, height: 100)
@@ -114,7 +115,7 @@ struct TimeframeBar: View {
                         }) {
                             ZStack {
                                 Text("3M")
-                                    .fontWeight(.bold)
+                                    .font(Font.custom("Chivo-Bold", size: 16))
                                     .foregroundColor(.white)
                             }
                             .frame(width: 35, height: 100)
@@ -129,7 +130,7 @@ struct TimeframeBar: View {
                         }) {
                             ZStack {
                                 Text("1Y")
-                                    .fontWeight(.bold)
+                                    .font(Font.custom("Chivo-Bold", size: 16))
                                     .foregroundColor(.white)
                             }
                             .frame(width: 35, height: 100)
@@ -143,8 +144,9 @@ struct TimeframeBar: View {
                     }) {
                         ZStack {
                             Text("ALL")
-                                .fontWeight(.bold)
+                                .font(Font.custom("Chivo-Bold", size: 16))
                                 .foregroundColor(.white)
+                                .offset(x: 1)
                         }
                         .frame(width: 35, height: 100)
                     }
