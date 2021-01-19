@@ -158,7 +158,7 @@ struct ContentView: View {
             
                 
                 Color.black
-                    .opacity(cvc.sbBgOpacity)
+                    .opacity(cvc.sbEditMode ? 1 : cvc.sbBgOpacity)
                     .animation(.spring())
                     .frame(width: geo.size.width, height: geo.size.height)
                     .position(x: geo.size.width/2, y: geo.size.height/2)

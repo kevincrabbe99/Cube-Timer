@@ -40,6 +40,11 @@ class ContentViewController: ObservableObject {
     @Published var sbBgOpacity: Double = 0
     @Published var sbXPos: CGFloat = -1 * (UIScreen.main.bounds.width/6)+45 // initialize it to sidebarOutPos x value
     
+    
+    // sidebar edit mode
+    @Published var sbEditMode: Bool = false
+    
+    
     // popup stuff
     @Published var popupShowing: Bool = false
     let lightTap = UIImpactFeedbackGenerator(style: .light)
@@ -244,6 +249,8 @@ class ContentViewController: ObservableObject {
         }
         
         
+        self.sbEditMode = false
+        
         self.pushOutSidebar()
         
         
@@ -408,6 +415,9 @@ class ContentViewController: ObservableObject {
             self.sbXPos = self.sidebarOutPos.x
             self.sbBgOpacity = 0
        // }
+        
+        // cancel edit mode
+        self.sbEditMode = false
     }
     
     var peripheralOpacity: Double  {

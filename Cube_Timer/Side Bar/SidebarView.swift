@@ -16,7 +16,7 @@ struct SidebarView: View {
     
     //@State var tabIcon: CubeIcon = CubeIcon(3, 3, 3, width: 15)
     
-    @State var editMode: Bool = false
+    
     
     
     
@@ -71,6 +71,7 @@ struct SidebarView: View {
                         Spacer()
                         HStack {
                             
+                            
                             Button(action: {
                                 print("edit mode toggle" )
                                 self.editModeToggle()
@@ -102,15 +103,21 @@ struct SidebarView: View {
                                    // t.view
                                     SingleCubeTypeView(controller: t)
                                         .onTapGesture {
-                                            t.select()
+                                            t.select() // select the cube
+                                            if cvc.sbEditMode { // if in edit mode
+                                                // toggle edit mode off
+                                                self.cvc.sbEditMode.toggle()
+                                                // show popup for currently iterated t.ct.id
+                                                cvc.tappedEditCT(id: t.ct.id!)
+                                            }
                                         }
                                     /*
                                      *  the edit button
-                                     */
-                                    if self.editMode {
+                                     *      GOT REPLCAED BY SingleCubeTypeView
+                                    if self.cvc.sbEditMode {
                                          Button(action: {
                                             // toggle edit mode
-                                            self.editMode.toggle()
+                                            self.cvc.sbEditMode.toggle()
                                             // show popup for currently iterated t.ct.id
                                             cvc.tappedEditCT(id: t.ct.id!)
                                          }, label: {
@@ -118,21 +125,11 @@ struct SidebarView: View {
                                          })
                                          .frame(width:50, height: 40, alignment: .center)
                                     }
+                                     */
                                 }
                                 .frame(width: geo.size.width - 150, alignment: .leading)
                                 
-                               // plan is to show the edit button here and see if that works
-                                
-                                // the plan:
-                                /*
-                                 *  [] use the foreach to being all of the CT's in as CubeTypeController objects (initied and stored in CTypeHandler
-                                 
-                                 *  [done] The CTController objects will store the corresponind view to be displayed
-                                 
-                                 *  [done] CTypeHandler also has to store each SingleCubeTypeController rather than the views
-                                    
-                                 *  [half done] When the SingleCubeTypeView receives a tap gesture it calls the Controller and the controller will have a reference to CTypeHandler (as thats where it was created)
-                                 */
+                            
                             
                             }
                         }
@@ -229,7 +226,7 @@ struct SidebarView: View {
         let lightTap = UIImpactFeedbackGenerator(style: .light)
         lightTap.impactOccurred()
         //self.cTypeHandler.toggleEditMode()
-        self.editMode.toggle()
+        self.cvc.sbEditMode.toggle()
     }
     
     
