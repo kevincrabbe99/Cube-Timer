@@ -37,7 +37,7 @@ struct SingleCubeTypeView: View/*, Identifiable */ {
                 VStack(alignment: .leading) {
                     Text(controller.rawName)
                         .font(Font.custom("Play-Bold", size: 14))
-                        .tracking(3)
+                        .tracking(controller.ct.isCustom() ? 0 : 3)
                         //.font(.system(size: 14))
                        // .fontWeight(.bold)
                     Text(controller.desc)

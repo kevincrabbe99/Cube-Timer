@@ -26,6 +26,15 @@ extension CubeType: Identifiable {
         }
     }
     
+    public func isCustom() -> Bool {
+        if customName != nil {
+            if !customName!.isEmpty {
+                return true
+            }
+        }
+        return false
+    }
+    
     public func equals(_ ct: CubeType) -> Bool {
         if self.id == ct.id {
             return true
@@ -53,6 +62,16 @@ extension CubeType {
         let set = solves as? Set<SolveItem> ?? []
         return set.sorted {
             $0.timestamp < $1.timestamp
+        }
+    }
+    
+    @NSManaged public var customName: String?
+    var cstmName: String {
+        set {
+            customName = newValue
+        }
+        get {
+            return customName ?? "No Name Set"
         }
     }
     

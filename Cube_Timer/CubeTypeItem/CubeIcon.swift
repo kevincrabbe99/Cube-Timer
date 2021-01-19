@@ -53,17 +53,29 @@ struct CubeIcon: View {
                 }
             } else {
                 
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(Color.clear)
-                    .border(Color.init("mint_cream"), width: 1)
-                    .cornerRadius(2)
-                    .clipped()
-                    .frame(width: w, height: w)
+                if d1 > 0 { // numbered icon
+                    
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(Color.clear)
+                        .border(Color.init("mint_cream"), width: 1)
+                        .cornerRadius(2)
+                        .clipped()
+                        .frame(width: w, height: w)
                 
-                Text(String(d1))
-                    .foregroundColor(.init("mint_cream"))
-                    .font(.system(size:8))
-                    .fontWeight(.black)
+                    Text(String(d1))
+                        .foregroundColor(.init("mint_cream"))
+                        .font(.system(size:8))
+                        .fontWeight(.black)
+                    
+                } else { // if its a custom puzzle type
+                    
+                    Image(systemName: "p.circle.fill")
+                        .foregroundColor(.init("mint_cream"))
+                        .font(.system(size:14))
+                    
+                }
+                
+                
                 
                 
             }

@@ -20,22 +20,27 @@ struct EditCubeTypeView: View {
     
     //@State var title: String = "ENTER A NEW CUBE"
     
-    @State var description: String = "Some bullshit"
+    @State var description: String = "Fake Description"
+    @State var customName: String = ""
     @State var d1: Int = 3
     @State var d2: Int = 3
     @State var d3: Int = 3
     
-    
+    @State var currentPTConfig: ptConfig = .cube
     
     let configDimensionOptions: [Int] = [2,3,4,5,6,7,8,9]
 
     @State var deleteGuardCounter: Int = 0
+        
     
+    let generator = UINotificationFeedbackGenerator()
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
 
     init(controller: CTEditController, parent: PopupController, setCT: CubeType?) {
         self.controller = controller
         self.parent = parent
         self.setCT = setCT
+        self.customName = setCT!.cstmName
     }
  
     /*
@@ -48,7 +53,29 @@ struct EditCubeTypeView: View {
             self.d1 = Int(setCT!.d1 - 2)
             self.d2 = Int(setCT!.d2 - 2)
             self.d3 = Int(setCT!.d3 - 2)
+            
+            // goto custom view is puzzle is custom
+            if setCT!.isCustom() {
+                self.currentPTConfig = .custom
+                self.customName = setCT!.cstmName
+            }
         }
+    }
+    
+    private func selectCube() {
+        print("settings currentPTConfig = .cube")
+        
+        lightTap.impactOccurred()
+        
+        self.currentPTConfig = .cube
+    }
+    
+    private func selectCustom() {
+        print("settings currentPTConfig = .custom")
+        
+        lightTap.impactOccurred()
+            
+        self.currentPTConfig = .custom
     }
  
     
@@ -63,25 +90,7 @@ struct EditCubeTypeView: View {
             
             VStack(spacing: 0.0) {
                 
-                /*  GOT REPLACED BY POPUPVIEW
-                 *  title
-                //if !isEditing() {
-                Text("EDIT CUBE")
-                    .font(Font.custom("Heebo-Black", size: 23))
-                    .foregroundColor(.init("mint_cream"))
-                 .frame(width: w-20, alignment: .leading)
-                    .offset(x: 20, y: 10)
-                /*
-                }else {
-                    Text("EDIT CUBE")
-                        .fontWeight(.black)
-                        .font(.system(size: 20))
-                        .foregroundColor(.init("mint_cream"))
-                        .frame(width: w-20, alignment: .leading)
-                        .offset(x: 20, y: 10)
-                }
-                    */
-                 */
+            
                 
                 /*
                  *  Top bar menu
@@ -90,80 +99,120 @@ struct EditCubeTypeView: View {
                     
                     HStack(spacing: 0.0) {
                         ZStack {
-                            Color.init("dark_black")
+                            Color.init(currentPTConfig == .cube ? "dark_black" : "very_dark_black")
                                 .cornerRadius(5, corners: .topLeft)
                                 .opacity(0.4)
                             
                             Text("CUBE")
                         }
+                        .onTapGesture {
+                            selectCube()
+                        }
                             
                         
                         ZStack {
-                            Color.init("very_dark_black")
+                            Color.init(currentPTConfig == .custom ? "dark_black" : "very_dark_black")
                                 .cornerRadius(5, corners: .topRight)
                                 .opacity(0.75)
                             
                             Text("CUSTOM")
                         }
+                        .onTapGesture {
+                            selectCustom()
+                        }
+                        
                     }
                     .font(Font.custom("Play-Bold", size: 15))
                 }
                 .padding([.top, .leading, .trailing],1)
                 .frame(height: 35)
+                .zIndex(30)
                 
                 
                 
-   
-                HStack {
-                    
-                    
-                    Picker(selection: $d1, label: Text("")) {
-                        ForEach(0..<configDimensionOptions.count) {
-                            Text(String(self.configDimensionOptions[$0]))
-                                .foregroundColor(.white)
+                /*
+                 * picker / custom entry
+                 */
+                if currentPTConfig == .cube {
+                    HStack {
+                        
+                        
+                        Picker(selection: $d1, label: Text("")) {
+                            ForEach(0..<configDimensionOptions.count) {
+                                Text(String(self.configDimensionOptions[$0]))
+                                    .foregroundColor(.white)
+                            }
                         }
-                    }
-                    .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 90)
-                    .labelsHidden()
-                    .clipped()
-                    
-                    Spacer()
-                    Image.init(systemName: "xmark")
-                        .font(Font.system(size: 13, weight: .bold))
-                    Spacer()
-                    
-                    Picker(selection: $d2, label: Text("")) {
-                        ForEach(0..<configDimensionOptions.count) {
-                            Text(String(self.configDimensionOptions[$0]))
-                                .foregroundColor(.white)
+                        .pickerStyle(WheelPickerStyle())
+                        .frame(width: 60, height: 90)
+                        .labelsHidden()
+                        .clipped()
+                        
+                        Spacer()
+                        Image.init(systemName: "xmark")
+                            .font(Font.system(size: 13, weight: .bold))
+                        Spacer()
+                        
+                        Picker(selection: $d2, label: Text("")) {
+                            ForEach(0..<configDimensionOptions.count) {
+                                Text(String(self.configDimensionOptions[$0]))
+                                    .foregroundColor(.white)
+                            }
                         }
-                    }
-                    .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 90)
-                    .labelsHidden()
-                    .clipped()
-                    
-                    Spacer()
-                    Image.init(systemName: "xmark")
-                        .font(Font.system(size: 13, weight: .bold))
-                    Spacer()
-                    
-                    Picker(selection: $d3, label: Text("")) {
-                        ForEach(0..<configDimensionOptions.count) {
-                            Text(String(self.configDimensionOptions[$0]))
-                                .foregroundColor(.white)
+                        .pickerStyle(WheelPickerStyle())
+                        .frame(width: 60, height: 90)
+                        .labelsHidden()
+                        .clipped()
+                        
+                        Spacer()
+                        Image.init(systemName: "xmark")
+                            .font(Font.system(size: 13, weight: .bold))
+                        Spacer()
+                        
+                        Picker(selection: $d3, label: Text("")) {
+                            ForEach(0..<configDimensionOptions.count) {
+                                Text(String(self.configDimensionOptions[$0]))
+                                    .foregroundColor(.white)
+                            }
                         }
+                        .pickerStyle(WheelPickerStyle())
+                        .frame(width: 60, height: 90)
+                        .labelsHidden()
+                        .clipped()
+                        
+                        
                     }
-                    .pickerStyle(WheelPickerStyle())
-                    .frame(width: 60, height: 90)
-                    .labelsHidden()
-                    .clipped()
+                    .frame(width: innerW, height: 90)
+                    .font(Font.system(size: 13, weight: .bold))
                     
+                } else {
+                    /*
+                     * if  in custom mode
+                     */
+                    ZStack {
+                        if customName.isEmpty {
+                            Text("TAP TO ENTER A NAME")
+                                .font(Font.custom("Play-Bold", size: 25))
+                                .multilineTextAlignment(.leading)
+                        }
+                        
+                        TextField("", text: $customName, onEditingChanged: { editing in
+                            if editing {
+                                let offset:CGFloat = -1*(h/2)
+                                parent.offsetPopup(y: offset) // moves the popup up a little so they can see what they are typing
+                            }else {
+                                parent.offsetPopup(y: 0) // moves the popup back to the center
+                            }
+                        })
+                        .font(Font.custom("Play-Bold", size: 25))
+                        .frame(width: innerW)
+                        .multilineTextAlignment(.leading)
+                        
+                    }
+                    .frame(width: innerW, height: 90)
                     
                 }
-                .frame(width: innerW, height: 90)
-                .font(Font.system(size: 13, weight: .bold))
+                    
                 //.offset(y: 10)
         
                 /*
@@ -221,8 +270,10 @@ struct EditCubeTypeView: View {
                      updateButton(w: w)
                      */
                     Button(action: {
-                        cTypeHandler.edit(setCT!, d1: d1+2, d2: d2+2, d3: d3+2, desc: description)
-                        parent.hidePopup()
+                        
+                        
+                        attemptEditPuzzle()
+                        
                     }, label: {
                         
                         RoundedButton(      color: (Color.init("mint_cream")),
@@ -250,6 +301,33 @@ struct EditCubeTypeView: View {
         }
         
     }
+    
+    private func attemptEditPuzzle() {
+        
+        // check if description is not empty
+        if description.isEmpty || description == "" {
+        
+            generator.notificationOccurred(.error)
+            
+            alertController.makeAlert(icon: Image.init(systemName: "capsule"), title: "Missing Description", text: "Please enter a description for the puzzle.", duration: 3, iconColor: Color.init("yellow"))
+            
+        return }
+        
+        // if is cube
+        if currentPTConfig == .cube {
+            
+            cTypeHandler.edit(setCT!, d1: d1+2, d2: d2+2, d3: d3+2, desc: description)
+            parent.hidePopup()
+            
+        } else if (currentPTConfig == .custom){ // if it is custom
+            
+            cTypeHandler.edit(setCT!, customName: customName, desc: description)
+            parent.hidePopup()
+            
+        }
+        
+    }
+    
 }
 
 struct EditCubeTypeView_Previews: PreviewProvider {
