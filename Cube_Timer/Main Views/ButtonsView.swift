@@ -16,8 +16,8 @@ struct ButtonsView: View {
     @State var leftBtnOpacity: Double = 1
     @State var rightBtnOpacity: Double = 1
     
-    @State var leftIconOpacity: Double = 0.1
-    @State var rightIconOpacity: Double = 0.1
+    @State var leftIconOpacity: Double = 0.5
+    @State var rightIconOpacity: Double = 0.5
     
     var topCRs: CGFloat {
         if UIDevice.hasNotch {
@@ -57,12 +57,12 @@ struct ButtonsView: View {
           
                     Image("two_fingers")
                         .resizable()
-                        .frame(width: 75, height: 75)
+                        .frame(width: 60, height: 60)
                         .offset(x: -50, y: 20)
                         .aspectRatio(contentMode: .fit)
                         .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
-                        .foregroundColor(.white)
-                        .opacity(leftIconOpacity)
+                        .foregroundColor(.init("very_dark_black"))
+                        .opacity(0.5)
                         .animation(.easeIn)
                   
                     
@@ -115,12 +115,12 @@ struct ButtonsView: View {
                  
                         Image("two_fingers")
                             .resizable()
-                            .frame(width: 75, height: 75)
+                            .frame(width: 60, height: 60)
                             .offset(x: 50, y: 20)
                             .aspectRatio(contentMode: .fit)
                             .rotation3DEffect(.degrees(330), axis: (x: 0, y: 0, z: 1))
-                            .foregroundColor(.white)
-                            .opacity(rightIconOpacity)
+                            .foregroundColor(.init("very_dark_black"))
+                            .opacity(0.5)
                             .animation(.easeIn)
                  
                 }

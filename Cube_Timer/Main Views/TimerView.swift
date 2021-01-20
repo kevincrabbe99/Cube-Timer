@@ -187,7 +187,7 @@ struct TimerView: View {
                                         .cornerRadius(5)
                                         .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
                                         
-                                        .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
+                                        .addBorder(Color.init("mint_cream").opacity(0.7), width: 1, cornerRadius: 5)
                                         .animation(.easeOut(duration: 0.15))
 
                                 }
@@ -198,9 +198,12 @@ struct TimerView: View {
                             ZStack {
                                 Color.init("very_dark_black")
                                     .cornerRadius(5)
-                                    .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
+                                    .addBorder(Color.init("mint_cream").opacity(0.7), width: 1, cornerRadius: 5)
                                     .transition(.opacity)
                                 
+                                /*
+                                 * Complete more solves PROMPT
+                                 */
                                 Text("COMPLETE \( 3 - solveHandler.solves.count) MORE SOLVES")
                                     .foregroundColor(Color.init("mint_cream"))
                                     .fontWeight(.bold)

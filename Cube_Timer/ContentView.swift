@@ -223,7 +223,7 @@ struct ContentView: View {
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
             
             // FOR DEV PURPOSE: Uncommenting this will create 50 random solves to the default cubetype
-            // solveHandler.addGenericSampleSolves(count: 30) are u sure?
+            //solveHandler.addGenericSampleSolves(count: 150) //are u sure?
         }
       // .environment(\.locale, .init(identifier: "ja")) // DEV USE ONLY
         .environmentObject(solveHandler)

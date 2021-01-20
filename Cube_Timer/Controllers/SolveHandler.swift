@@ -94,7 +94,7 @@ class SolveHandler: ObservableObject {
     public func addGenericSampleSolves(count: Int = 10) {
         
         for _ in 0..<count {
-            self.addCostumSolve(sec: Double.random(in: 31.23..<68.3), daysAgo: Int.random(in: 0..<90))
+            self.addCostumSolve(sec: Double.random(in: 31.23..<68.3), daysAgo: Int.random(in: 0..<400))
         }
 
     }
