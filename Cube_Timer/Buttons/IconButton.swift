@@ -20,9 +20,12 @@ struct IconButton: View {
         ZStack {
             bgColor
                 .cornerRadius(3)
+                .shadow(radius: 2)
             
             icon
-                .font(Font.system(size: 13, weight: .bold))
+                .resizable()
+                .frame(width: width / 2.2, height: height / 2.2)
+                .font(Font.title.weight(.bold))
                 .foregroundColor(iconColor)
             
         }

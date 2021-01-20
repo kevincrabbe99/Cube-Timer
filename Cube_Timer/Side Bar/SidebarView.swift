@@ -62,7 +62,7 @@ struct SidebarView: View {
                     HStack {
                         
                         
-                        Text("CUBES")
+                        Text("GROUPS")
                             .font(Font.custom("Dosis-ExtraBold", size: 22))
                         
                         
@@ -73,20 +73,21 @@ struct SidebarView: View {
                             
                             
                             Button(action: {
-                                print("edit mode toggle" )
                                 self.editModeToggle()
                             }, label: {
-                                Image(systemName: "square.and.pencil")
+                                IconButton(icon: Image(systemName: (!cvc.sbEditMode ? "pencil.tip" : "xmark")), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 21, height: 21)
+                                
                             })
                             .frame(width: 40, height: 50, alignment: .center)
                             
-                            Button(action: { // listener for new cube type
-                                print("work")
-                                self.cvc.tappedAddCT()
-                            }, label: {
-                                Image(systemName: "plus.square.fill")
-                            })
-                            .frame(width: 40, height: 50, alignment: .center)
+                            if !cvc.sbEditMode { // dont show if in edit mode
+                                Button(action: { // listener for new cube type
+                                    self.cvc.tappedAddCT()
+                                }, label: {
+                                    IconButton(icon: Image(systemName: "plus"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 21, height: 21)
+                                })
+                                .frame(width: 40, height: 50, alignment: .center)
+                            }
                                 
                         }
                         .zIndex(3)

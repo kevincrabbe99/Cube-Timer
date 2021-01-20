@@ -102,6 +102,20 @@ class TimerController: ObservableObject {
     let heavyTap = UIImpactFeedbackGenerator(style: .heavy)
     let startTap = UINotificationFeedbackGenerator()
     
+    func activateOne() {
+        lightTap.impactOccurred()
+        print("[timer] one Activated")
+        activateLeft()
+        activateRight()
+    }
+    
+    func deActivateOne() {
+        lightTap.impactOccurred()
+        print("[timer] one DeActivated")
+        deActivateLeft()
+        deActivateRight()
+    }
+    
     func activateRight() {
         lightTap.impactOccurred()
         print("Right Activated")

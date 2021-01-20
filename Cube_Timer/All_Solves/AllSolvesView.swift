@@ -50,6 +50,25 @@ struct AllSolvesView: View {
                             }
                     )
                 
+                /*
+                 * title when there are no solves
+                 */
+                if controller.solves.count == 0 {
+                    VStack(alignment:.center) {
+                        Text(controller.cTypeHandler.selected.name)
+                            .font(Font.custom("Play-Bold", size: 33))
+                            .tracking(controller.cTypeHandler.selected.isCustom() ? 0 : 5)
+                            .lineLimit(1)
+                        Text(controller.cTypeHandler.selected.descrip)
+                            .font(Font.custom("Play-Regular", size: 15))
+                            .lineLimit(1)
+                            .opacity(0.75)
+                    }
+                    .frame(alignment: .center)
+                    .offset(y: -100)
+                    .opacity(0.25)
+                }
+                
                 if controller.solves.count  > 0 { // dont show anything if there are no solves
                 
                     /*
@@ -67,7 +86,7 @@ struct AllSolvesView: View {
                             VStack(alignment:.trailing) {
                                 Text(controller.cTypeHandler.selected.name)
                                     //.font(.system(size: 30))
-                                    .font(Font.custom("Play-Bold", size: 33))
+                                    .font(Font.custom("Play-Bold", size: 25))
                                     //.fontWeight(.black)
                                     .tracking(controller.cTypeHandler.selected.isCustom() ? 0 : 5)
                                     .lineLimit(1)
@@ -142,10 +161,11 @@ struct AllSolvesView: View {
                              *  the main view with all the solves
                              */
                             ZStack {
-                                RoundedRectangle(cornerRadius: 10)
+                                RoundedRectangle(cornerRadius: 7)
+                                    .addBorder(Color.black.opacity(0.95), width: 1, cornerRadius: 7)
                                     .foregroundColor(.init("very_dark_black"))
-                                    .innerShadow(color: Color.black.opacity(0.15), radius: 0.05)
-                                    .mask(RoundedRectangle(cornerRadius: 10))
+                                    //.innerShadow(color: Color.black.opacity(0.15), radius: 0.05)
+                                    //.mask(RoundedRectangle(cornerRadius: 10))
                                     .opacity(0.3)
                                 
                                 
@@ -155,6 +175,7 @@ struct AllSolvesView: View {
                                             if controller.timeGroupHasSolves(controller.tgControllerToday) {
                                                 TimeGroupView(controller: controller.tgControllerToday)
                                                     .frame(height: controller.tgControllerToday.height)
+                                                    .zIndex(30)
                                             }
                                             
                                             if controller.timeGroupHasSolves(controller.tgControllerYesterday) {

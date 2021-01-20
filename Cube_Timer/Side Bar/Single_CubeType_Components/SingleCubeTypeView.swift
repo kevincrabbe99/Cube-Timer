@@ -38,8 +38,9 @@ struct SingleCubeTypeView: View/*, Identifiable */ {
                     CubeIcon(controller.d1,controller.d2,controller.d3, width: (asSidebar ? 15 : 15))
                         .opacity(0.8)
                 } else {
-                    Image(systemName: "square.and.pencil")
-                        .frame(width: 15, height: 15)
+                    IconButton(icon: Image(systemName: "app.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 20, height: 20)
+                    //Image(systemName: "app")
+                    //    .frame(width: 15, height: 15)
                 }
                 
                

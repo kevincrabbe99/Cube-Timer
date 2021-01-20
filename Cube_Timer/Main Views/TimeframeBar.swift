@@ -12,6 +12,8 @@ struct TimeframeBar: View {
     
     @ObservedObject var solveHandler: SolveHandler
     
+    let labelSize: CGFloat = 15
+    
     //@State var selectedPos: Int = 1
     
     //var selectedTimeFrame: Int = 0
@@ -30,8 +32,9 @@ struct TimeframeBar: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color.init("very_dark_black")
-                    .cornerRadius(5)
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(Color.init("very_dark_black"))
+                    .addBorder(Color.black.opacity(0.5), width: 1, cornerRadius: 5)
                     .shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
                     //.opacity(0.65)
                 
@@ -40,9 +43,9 @@ struct TimeframeBar: View {
                     .addBorder(Color.init("mint_cream").opacity(0.8), width: 1, cornerRadius: 4)
                     .frame(width: 35, height: 25)
                     .foregroundColor(.white)
-                    .position( x: 31.5, y: 12.5 ) // THIS X VALUE: is the initial left constraint
+                    .position( x: ( solveHandler.solvesByTimeFrame.getApplicableTimeframes().count < 5 ? 31 : 35 ), y: 12.5 ) // THIS X VALUE: is the initial left constraint
                     .offset(x: CGFloat(solveHandler.currentTimeframeButtonPos * 55))
-                    .animation(.default)
+                    .animation(.spring())
                 
                 
                 HStack(spacing: 20.0) {
@@ -57,10 +60,10 @@ struct TimeframeBar: View {
                     }) {
                         ZStack {
                             Text("3X")
-                                .font(Font.custom("Chivo-Bold", size: 16))
+                                .font(Font.custom("Chivo-Bold", size: labelSize))
                                 .foregroundColor(.white)
                         }
-                        .frame(width: 35, height: 100)
+                        .frame(width: 35, height: 100, alignment: .center)
                     }
                     
                     Button(action: {
@@ -70,11 +73,11 @@ struct TimeframeBar: View {
                     }) {
                         ZStack {
                             Text("1D")
-                                .font(Font.custom("Chivo-Bold", size: 16))
+                                .font(Font.custom("Chivo-Bold", size: labelSize))
                                 .offset(x: 2)
                                 .foregroundColor(.white)
                         }
-                        .frame(width: 35, height: 100)
+                        .frame(width: 35, height: 100, alignment: .center)
                     }
                     
                     if solveHandler.solvesByTimeFrame.getApplicableTimeframes().contains(.Week) { // guard to check if solves in timeframe exist
@@ -85,10 +88,10 @@ struct TimeframeBar: View {
                         }) {
                             ZStack {
                                 Text("1W")
-                                    .font(Font.custom("Chivo-Bold", size: 16))
+                                    .font(Font.custom("Chivo-Bold", size: labelSize))
                                     .foregroundColor(.white)
                             }
-                            .frame(width: 35, height: 100)
+                            .frame(width: 35, height: 100, alignment: .center)
                         }
                     }
                     
@@ -100,10 +103,10 @@ struct TimeframeBar: View {
                         }) {
                             ZStack {
                                 Text("1M")
-                                    .font(Font.custom("Chivo-Bold", size: 16))
+                                    .font(Font.custom("Chivo-Bold", size: labelSize))
                                     .foregroundColor(.white)
                             }
-                            .frame(width: 35, height: 100)
+                            .frame(width: 35, height: 100, alignment: .center)
                         }
                     }
                     
@@ -115,10 +118,10 @@ struct TimeframeBar: View {
                         }) {
                             ZStack {
                                 Text("3M")
-                                    .font(Font.custom("Chivo-Bold", size: 16))
+                                    .font(Font.custom("Chivo-Bold", size: labelSize))
                                     .foregroundColor(.white)
                             }
-                            .frame(width: 35, height: 100)
+                            .frame(width: 35, height: 100, alignment: .center)
                         }
                     }
                     
@@ -130,10 +133,10 @@ struct TimeframeBar: View {
                         }) {
                             ZStack {
                                 Text("1Y")
-                                    .font(Font.custom("Chivo-Bold", size: 16))
+                                    .font(Font.custom("Chivo-Bold", size: labelSize))
                                     .foregroundColor(.white)
                             }
-                            .frame(width: 35, height: 100)
+                            .frame(width: 35, height: 100, alignment: .center)
                         }
                     }
                     
@@ -144,11 +147,11 @@ struct TimeframeBar: View {
                     }) {
                         ZStack {
                             Text("ALL")
-                                .font(Font.custom("Chivo-Bold", size: 16))
+                                .font(Font.custom("Chivo-Bold", size: labelSize))
                                 .foregroundColor(.white)
-                                .offset(x: 1)
+                                //.offset(x: 1)
                         }
-                        .frame(width: 35, height: 100)
+                        .frame(width: 35, height: 100, alignment: .center)
                     }
                     
                 }

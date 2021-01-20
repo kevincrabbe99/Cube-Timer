@@ -187,7 +187,7 @@ struct TimerView: View {
                                         .cornerRadius(5)
                                         .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
                                         
-                                        .addBorder(Color.init("mint_cream").opacity(0.7), width: 1, cornerRadius: 5)
+                                        .addBorder(Color.black.opacity(0.95), width: 1, cornerRadius: 5)
                                         .animation(.easeOut(duration: 0.15))
 
                                 }
@@ -198,7 +198,7 @@ struct TimerView: View {
                             ZStack {
                                 Color.init("very_dark_black")
                                     .cornerRadius(5)
-                                    .addBorder(Color.init("mint_cream").opacity(0.7), width: 1, cornerRadius: 5)
+                                    .addBorder(Color.black.opacity(0.95), width: 1, cornerRadius: 5)
                                     .transition(.opacity)
                                 
                                 /*

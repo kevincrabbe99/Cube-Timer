@@ -319,7 +319,7 @@ class ContentViewController: ObservableObject {
      */
     public func tappedAddCT() {
         print("[cvc] creating popup for new CubeType")
-        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController)), title: "ENTER A NEW PUZZLE")
+        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController)), title: "CREATE A NEW GROUPING")
     }
     
     /*

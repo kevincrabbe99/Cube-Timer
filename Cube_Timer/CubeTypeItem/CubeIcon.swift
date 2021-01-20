@@ -69,7 +69,7 @@ struct CubeIcon: View {
                     
                 } else { // if its a custom puzzle type
                     
-                    Image(systemName: "p.circle.fill")
+                    Image(systemName: "hexagon")
                         .foregroundColor(.init("mint_cream"))
                         .font(.system(size:14))
                     

@@ -10,14 +10,20 @@ import SwiftUI
 struct ButtonsView: View {
     
     @EnvironmentObject var cvc: ContentViewController
+    @EnvironmentObject var settings: SettingsController
+    
     
     @ObservedObject var timer: TimerController
+    
+    @State var oneBtnOpacity: Double = 1
     
     @State var leftBtnOpacity: Double = 1
     @State var rightBtnOpacity: Double = 1
     
     @State var leftIconOpacity: Double = 0.5
     @State var rightIconOpacity: Double = 0.5
+    
+    
     
     var topCRs: CGFloat {
         if UIDevice.hasNotch {
@@ -39,124 +45,177 @@ struct ButtonsView: View {
         
     var body: some View {
         GeometryReader { geometry in
-            HStack {
+            
+          //  ZStack {
                 
-                /*
-                        LEFT BUTTON
-                 */
-                ZStack {
-                  
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
-                        .cornerRadius(topCRs, corners: [.topLeft])
-                        .cornerRadius(4, corners: [.bottomRight, .topRight])
-                        .cornerRadius(10, corners: [.bottomLeft])
-                        .opacity(leftBtnOpacity)
-                    
-                    
-          
-                    Image("two_fingers")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .offset(x: -50, y: 20)
-                        .aspectRatio(contentMode: .fit)
-                        .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
-                        .foregroundColor(.init("very_dark_black"))
-                        .opacity(0.5)
-                        .animation(.easeIn)
-                  
-                    
-                }
-                .frame(width: geometry.size.width / 2 - 15, alignment: .leading)
-                
-                .gesture (// gesture for transitioning to allSolvesView
-                    DragGesture()
-                        .onChanged { value in
-                            cvc.dragChanged(value)
-                        }
-                        .onEnded { value in
-                            cvc.dragEnded(value)
-                        }
-                )
-                
-                .onLongPressGesture(minimumDuration: 100.0, maximumDistance: .infinity, pressing: { pressing in
-                    if pressing  {
-                        timer.activateLeft()
-                        withAnimation {
-                            self.leftBtnOpacity = 0
-                            self.leftIconOpacity = 0
-                        }
-                    }else {
-                        timer.deActivateLeft()
-                        withAnimation {
-                            self.leftBtnOpacity = 1
-                            self.leftIconOpacity = 0.2
-                        }
+                // [if] to decide what button to display
+                if settings.oneButtonMode {
+                    /*
+                     *       ONE BUTTON
+                     */
+                    ZStack {
+                      
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .cornerRadius(topCRs, corners: [.topLeft, .topRight])
+                            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                            .opacity(leftBtnOpacity)
+                        
                     }
-                }, perform: { })
-                
-                
-                
-                
-                /*
-                *       RIGHT BUTTON
-                 */
-                
-                ZStack {
-                    /* Redundany by setting gradient background
-                    Color.init("dark_black")
+                    //.frame(width: geometry.size.width / 2 - 15, alignment: .leading)
+                    .frame(width: geometry.size.width - 30, height: geometry.size.height - 35)
+                    .offset(x:15)
+                    .offset(y:10)
+            
+                    
+                    .gesture (// gesture for transitioning to allSolvesView
+                        DragGesture()
+                            .onChanged { value in
+                                cvc.dragChanged(value)
+                            }
+                            .onEnded { value in
+                                cvc.dragEnded(value)
+                            }
+                    )
+                    
+                    .onLongPressGesture(minimumDuration: 100.0, maximumDistance: .infinity, pressing: { pressing in
+                        if pressing  {
+                            timer.activateOne()
+                            withAnimation {
+                                self.oneBtnOpacity = 0
+                            }
+                        }else {
+                            timer.deActivateOne()
+                            withAnimation {
+                                self.oneBtnOpacity = 1
+                            }
+                        }
+                    }, perform: { })
+                    
+                } else { // if in two button mode
+                    /*
+                    *   TWO BUTTONS
                     */
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(LinearGradient(gradient: gradient, startPoint: .topTrailing, endPoint: .bottomLeading))
-                        .cornerRadius(topCRs, corners: [.topRight])
-                        .cornerRadius(4, corners: [.bottomLeft, .topLeft])
-                        .cornerRadius(10, corners: [.bottomRight])
-                        .opacity(rightBtnOpacity)
-                 
-                        Image("two_fingers")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .offset(x: 50, y: 20)
-                            .aspectRatio(contentMode: .fit)
-                            .rotation3DEffect(.degrees(330), axis: (x: 0, y: 0, z: 1))
-                            .foregroundColor(.init("very_dark_black"))
-                            .opacity(0.5)
-                            .animation(.easeIn)
-                 
-                }
-                .frame(width: geometry.size.width / 2 - 15, alignment: .leading)
-                
-                .gesture ( // gesture for transitioning to allSolvesView
-                    DragGesture()
-                        .onChanged { value in
-                            cvc.dragChanged(value)
+                    HStack {
+                        
+                        /*
+                                LEFT BUTTON
+                         */
+                        ZStack {
+                          
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
+                                .cornerRadius(topCRs, corners: [.topLeft])
+                                .cornerRadius(4, corners: [.bottomRight, .topRight])
+                                .cornerRadius(10, corners: [.bottomLeft])
+                                .opacity(leftBtnOpacity)
+                            
+                            
+                  
+                            Image("two_fingers")
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                                .offset(x: -50, y: 20)
+                                .aspectRatio(contentMode: .fit)
+                                .rotation3DEffect(.degrees(30), axis: (x: 0, y: 0, z: 1))
+                                .foregroundColor(.init("very_dark_black"))
+                                .opacity(0.5)
+                                .animation(.easeIn)
+                          
+                            
                         }
-                        .onEnded { value in
-                            cvc.dragEnded(value)
+                        .frame(width: geometry.size.width / 2 - 15, alignment: .leading)
+                        
+                        .gesture (// gesture for transitioning to allSolvesView
+                            DragGesture()
+                                .onChanged { value in
+                                    cvc.dragChanged(value)
+                                }
+                                .onEnded { value in
+                                    cvc.dragEnded(value)
+                                }
+                        )
+                        
+                        .onLongPressGesture(minimumDuration: 100.0, maximumDistance: .infinity, pressing: { pressing in
+                            if pressing  {
+                                timer.activateLeft()
+                                withAnimation {
+                                    self.leftBtnOpacity = 0
+                                    self.leftIconOpacity = 0
+                                }
+                            }else {
+                                timer.deActivateLeft()
+                                withAnimation {
+                                    self.leftBtnOpacity = 1
+                                    self.leftIconOpacity = 0.2
+                                }
+                            }
+                        }, perform: { })
+                        
+                        
+                        
+                        
+                        /*
+                        *       RIGHT BUTTON
+                         */
+                        
+                        ZStack {
+                            /* Redundany by setting gradient background
+                            Color.init("dark_black")
+                            */
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(LinearGradient(gradient: gradient, startPoint: .topTrailing, endPoint: .bottomLeading))
+                                .cornerRadius(topCRs, corners: [.topRight])
+                                .cornerRadius(4, corners: [.bottomLeft, .topLeft])
+                                .cornerRadius(10, corners: [.bottomRight])
+                                .opacity(rightBtnOpacity)
+                         
+                                Image("two_fingers")
+                                    .resizable()
+                                    .frame(width: 60, height: 60)
+                                    .offset(x: 50, y: 20)
+                                    .aspectRatio(contentMode: .fit)
+                                    .rotation3DEffect(.degrees(330), axis: (x: 0, y: 0, z: 1))
+                                    .foregroundColor(.init("very_dark_black"))
+                                    .opacity(0.5)
+                                    .animation(.easeIn)
+                         
                         }
-                )
-                
-                .onLongPressGesture(minimumDuration: 100.0, maximumDistance: .infinity, pressing: { pressing in
-                    if pressing  {
-                        timer.activateRight()
-                        withAnimation {
-                            self.rightBtnOpacity = 0
-                            self.rightIconOpacity = 0
-                        }
-                    }else {
-                        timer.deActivateRight()
-                        withAnimation {
-                            self.rightBtnOpacity = 1
-                            self.rightIconOpacity = 0.2
-                        }
+                        .frame(width: geometry.size.width / 2 - 15, alignment: .leading)
+                        
+                        .gesture ( // gesture for transitioning to allSolvesView
+                            DragGesture()
+                                .onChanged { value in
+                                    cvc.dragChanged(value)
+                                }
+                                .onEnded { value in
+                                    cvc.dragEnded(value)
+                                }
+                        )
+                        
+                        .onLongPressGesture(minimumDuration: 100.0, maximumDistance: .infinity, pressing: { pressing in
+                            if pressing  {
+                                timer.activateRight()
+                                withAnimation {
+                                    self.rightBtnOpacity = 0
+                                    self.rightIconOpacity = 0
+                                }
+                            }else {
+                                timer.deActivateRight()
+                                withAnimation {
+                                    self.rightBtnOpacity = 1
+                                    self.rightIconOpacity = 0.2
+                                }
+                            }
+                                        }, perform: { })
+                        
+                        
                     }
-                                }, perform: { })
-                
-                
-            }
-            .frame(width: geometry.size.width - 10, height: geometry.size.height - 35)
-            .offset(x:5)
-            .offset(y:10)
+                    .frame(width: geometry.size.width - 10, height: geometry.size.height - 35)
+                    .offset(x:5)
+                    .offset(y:10)
+                } // end if
+         //   } // end zstack
         }
     }
 }

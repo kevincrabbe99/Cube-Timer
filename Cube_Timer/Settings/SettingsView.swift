@@ -29,6 +29,14 @@ struct SettingsView: View {
         }
     }
     
+    var oneButtonModeLabel: String {
+        if controller.oneButtonMode {
+            return "ONE"
+        } else {
+            return "TWO"
+        }
+    }
+    
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     var body: some View {
         GeometryReader { geo in
@@ -62,44 +70,58 @@ struct SettingsView: View {
                     /*&
                      *  OPTIONS VSTACK
                      */
-                    VStack(spacing: 20) {
+                    VStack(spacing: 0) {
                         
                         if !controller.aboutState { // if in regular state (not in about section
-                            Button(action: {
-                                controller.toggleRequireDoublePressToStop()
-                            }, label: {
-                                SettingsOption(label: "Double press to stop", value: doublePressToStopLabel, info: "Requires both buttons to be pressed to record the solve.")
-                            })
-                           
-                            Button(action: {
-                                controller.togglePauseSavingSolves()
-                            }, label: {
-                                SettingsOption(label: "Pause saving solves", value: pauseSavingSolvesLabel)
-                            })
-                            
+                            ScrollView(.vertical, showsIndicators: true) {
+                                VStack {
+                                    Button(action: {
+                                        controller.toggleRequireDoublePressToStop()
+                                    }, label: {
+                                        SettingsOption(label: "Double press to stop", value: (!controller.oneButtonMode ? doublePressToStopLabel : ""), info: (!controller.oneButtonMode ? "Requires both buttons to be pressed to record the solve." : "This option is not available when 1 button start is enabled. You can change this below."))
+                                    })
+                                    .opacity(controller.oneButtonMode ? 0.4 : 1)
+                                                              
+                                    Button(action: {
+                                        controller.toggleOneButtonMode()
+                                    }, label: {
+                                        SettingsOption(label: "1 or 2 button start", value: oneButtonModeLabel, info: "Select how many buttons are needed to be pressed in order to activate the timer.")
+                                    })
+                                    
+                                    Button(action: {
+                                        controller.togglePauseSavingSolves()
+                                    }, label: {
+                                        SettingsOption(label: "Pause saving solves", value: pauseSavingSolvesLabel)
+                                    })
+                                }
+                                .padding([.top], 15)
+                            }
+                            .frame(height: h-150)
+                            .padding(.trailing, 5)
                         } else {
                             
                             AboutView()
-                                .frame(height: h/2)
-                                .offset(y: 30)
+                                .frame(height: h-150)
                             
                         }
                         
-                        Button(action: {
-                            controller.toggleAbout()
-                        }, label: {
-                            SettingsOption(label: (controller.aboutState ? "back" : "about"))
-                                .padding(.top, 30)
-                                .opacity(0.8)
-                        })
+                        
                         
                     }
-                    .frame(height: h - 130)
-                    .offset(y: -30)
+                    //.frame(height: h - 60)
+                    //.offset(y: -30)
+                    
+                    Button(action: {
+                        controller.toggleAbout()
+                    }, label: {
+                        SettingsOption(label: (controller.aboutState ? "back" : "about"))
+                           .padding(.bottom, 15)
+                            .opacity(0.8)
+                    })
                     
                 }
                 .foregroundColor(.init("mint_cream"))
-                .frame(width: 280, alignment: .leading)
+                .frame(width: 280, alignment: .topLeading)
                 
             } // end zstack bg
         } // end geo
@@ -129,9 +151,9 @@ struct SettingsOption: View {
                             .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 3)
                         
                         Text(LocalizedStringKey(value!))
-                                .foregroundColor(.init("very_dark_black"))
-                                .font(.system(size:12))
-                                .fontWeight(.bold)
+                            .foregroundColor(.init("very_dark_black"))
+                            .font(Font.custom("Chivo-Bold", size: 12))
+                            .animation(.none)
                     }
                     .frame(width: 40, height: 25)
                 }

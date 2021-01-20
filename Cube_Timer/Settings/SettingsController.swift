@@ -16,9 +16,10 @@ class SettingsController: ObservableObject {
     // each individual setting
     @Published var requireDoublePressToStop: Bool = false
     @Published var pauseSavingSolves:  Bool = false
+    @Published var oneButtonMode: Bool = true
     
     // about stuff
-    @Published var aboutState: Bool = false
+    @Published var aboutState: Bool = false // changethis
     
     let lightTap = UIImpactFeedbackGenerator(style: .light)
     init() {
@@ -46,6 +47,20 @@ class SettingsController: ObservableObject {
             Analytics.setUserProperty("false", forName: "pause_saving_solves")
         }
         
+        // check if the oneButtonMode is in userDefaults
+        if let obmVal = defaults.object(forKey: "oneButtonMode") as? Bool {
+            // set from user defaults
+            self.oneButtonMode = obmVal
+        } else {
+            print("No value in oneButtonMode, initializing to false")
+            defaults.set(false, forKey: "oneButtonMode")
+            self.oneButtonMode = false // changethis
+            
+            // set analytics
+            Analytics.setUserProperty("false", forName: "pause_saving_solves")
+        }
+        
+        
     }
     
     
@@ -61,6 +76,21 @@ class SettingsController: ObservableObject {
                 AnalyticsParameterDestination: "aboutView"
             ])
         }
+    }
+    
+    public func toggleOneButtonMode() {
+        let defaults = UserDefaults.standard
+        lightTap.impactOccurred()
+        
+        if oneButtonMode == false { // set to true
+            self.oneButtonMode = true
+            Analytics.setUserProperty("false", forName: "oneButtonMode")
+        } else {
+            self.oneButtonMode = false // turn off
+            Analytics.setUserProperty("false", forName: "oneButtonMode")
+        }
+        
+        defaults.set(oneButtonMode, forKey: "oneButtonMode")
     }
     
     /*
