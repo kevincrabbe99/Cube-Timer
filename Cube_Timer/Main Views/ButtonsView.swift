@@ -33,7 +33,9 @@ struct ButtonsView: View {
         }
     }
     
-    let gradient = Gradient(colors: [.init("dark_black"), .clear])
+    
+    
+    let gradient = Gradient(colors: [Color.init("dark_black").opacity(0.6), .clear])
     
     var iconOpacity: Double  {
         if timer.startApproved || timer.timerGoing {
@@ -43,7 +45,71 @@ struct ButtonsView: View {
         }
     }
         
+    //@State var longPressStart: Date?
+    @State var isDraggin: Bool = false
+    @GestureState var isDetectingLongPress = false
+    @State var completedLongPress = false
+    let oneBtnDragGuardHeigt: CGFloat = 50
+    
+        
+   
+    func setOneBtnOpacity(to: Double) {
+        print("setting opacity to: ", to)
+        if self.oneBtnOpacity != to {
+            self.oneBtnOpacity = to
+        }
+    }
+    
+    
+    
+    @State var cancelSingleButton: Bool = false
     var body: some View {
+        
+        
+        let singleButtonZoom = MagnificationGesture(minimumScaleDelta: 0)
+            .onChanged { (val) in
+                self.cancelSingleButton = true
+            }
+            .onEnded { (val) in
+                self.cancelSingleButton = false
+            }
+        
+        let singleButtonDrag =  DragGesture(minimumDistance: 0, coordinateSpace: .local)
+            .onChanged { value in
+                
+                print("[bv] Push down")
+                self.oneBtnOpacity = 0.1
+                
+                let transY = abs(value.translation.height)
+                if transY > oneBtnDragGuardHeigt {
+                    print("[bv] init drag")
+                    cvc.dragChanged(value)
+                    self.isDraggin = true
+                } else {
+                    
+                    print("[bv] cancle drag")
+                    timer.singleButtonPressed()
+                    self.isDraggin = false
+                }
+                
+            }
+            .onEnded { value in
+                print("[bv] Push up")
+                if isDraggin {
+                    timer.singleButtonAbort()
+                    cvc.dragEnded(value)
+                } else {
+                    timer.startTimerFromSingleBtn()
+                }
+                cvc.setPageTo(cvc.onPage)
+                //singleBtnTouching = false
+                self.cancelSingleButton = false // reset just incasew
+                self.oneBtnOpacity = 1
+            }
+        
+        let singleButtonGesture =  singleButtonZoom.simultaneously(with: singleButtonDrag) //.sequenced(before: singleButtonDrag)
+        
+        
         GeometryReader { geometry in
             
           //  ZStack {
@@ -59,26 +125,20 @@ struct ButtonsView: View {
                             .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
                             .cornerRadius(topCRs, corners: [.topLeft, .topRight])
                             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                            .opacity(leftBtnOpacity)
+                            .opacity(oneBtnOpacity)
+                        
                         
                     }
                     //.frame(width: geometry.size.width / 2 - 15, alignment: .leading)
                     .frame(width: geometry.size.width - 30, height: geometry.size.height - 35)
                     .offset(x:15)
                     .offset(y:10)
-            
-                    
-                    .gesture (// gesture for transitioning to allSolvesView
-                        DragGesture()
-                            .onChanged { value in
-                                cvc.dragChanged(value)
-                            }
-                            .onEnded { value in
-                                cvc.dragEnded(value)
-                            }
+                    .gesture(
+                        singleButtonGesture//.simultaneously(with: singleBtnLongPress).simultaneously(with: singleBtnTapGesture)
                     )
-                    
-                    .onLongPressGesture(minimumDuration: 100.0, maximumDistance: .infinity, pressing: { pressing in
+            
+                    /*
+                    .onLongPressGesture(minimumDuration: 2, pressing: { pressing in
                         if pressing  {
                             timer.activateOne()
                             withAnimation {
@@ -90,7 +150,22 @@ struct ButtonsView: View {
                                 self.oneBtnOpacity = 1
                             }
                         }
-                    }, perform: { })
+                    }, perform: {
+                        
+                    })
+                    
+    
+                    .highPriorityGesture(
+                        DragGesture()
+                            .onChanged { value in
+                                cvc.dragChanged(value)
+                            }
+                            .onEnded { value in
+                                cvc.dragEnded(value)
+                            }
+                    )
+                    */
+                    
                     
                 } else { // if in two button mode
                     /*

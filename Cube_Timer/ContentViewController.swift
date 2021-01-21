@@ -228,7 +228,6 @@ class ContentViewController: ObservableObject {
         
         if p == .settings {
             self.setStateForSettings()
-            self.onPage = p
         }else { // a button that was not settings was pressed
             // check if we need to exit settings
             if self.onPage == .settings {
@@ -260,12 +259,14 @@ class ContentViewController: ObservableObject {
     private func setStateForSettings() {
         if !inSettings  {
             self.inSettings = true
+            self.onPage = .settings
             
             Analytics.logEvent(AnalyticsEventScreenView, parameters: [
                 AnalyticsParameterDestination: "settingsView"
             ])
         } else {
             self.inSettings = false
+            self.setPageTo(.Main)
         }
         
     }
@@ -277,9 +278,7 @@ class ContentViewController: ObservableObject {
         self.allSolvesViewScale = 1
         
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
-            AnalyticsParameterDestination: "allSolvesView"
-        ])
+      
     }
     
     private func setStateForMain() {
@@ -288,9 +287,7 @@ class ContentViewController: ObservableObject {
         self.pageTransitionPercentage = 0
         self.allSolvesViewScale = 0.9
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
-            AnalyticsParameterDestination: "mainView"
-        ])
+       
     }
     
     
