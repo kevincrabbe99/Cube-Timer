@@ -196,12 +196,23 @@ class CTypeHandler: ObservableObject {
             return
         }
         
+        
         let i = getIndexFrom(id: id)
         self.typeControllers.remove(at: i)
         self.size  -= 1
         
+        setDefaultSelection()
+        
         CTypeHandler.DeleteCtFromCoreData(ct: refToDelete!.ct) // passes a reference to the static function
     
+        // delete all solves
+        let solves = refToDelete!.ct.solves
+        for s in solves {
+            solveHandler.delete(s as! SolveItem)
+        }
+        
+        
+        
         /*
          * GOOGLE ANALYTICS STUFF
          
@@ -209,11 +220,12 @@ class CTypeHandler: ObservableObject {
          */
         Analytics.logEvent("deleted_puzzle", parameters: [
             "puzzle_name": refToDelete!.rawName as NSObject,
-            "puzzle_description": refToDelete!.ct.description as NSObject
+            "puzzle_description": refToDelete!.ct.description as NSObject,
+            "number_of_solves": solves.count as NSObject
         ])
         
         // update total puzzles for user
-        updateGATotalPuzzles()
+        //updateGATotalPuzzles()
     }
     
     /*
@@ -258,6 +270,9 @@ class CTypeHandler: ObservableObject {
     }
     
     public func edit(_ ct: CubeType, customName: String, desc: String) {
+        
+        let oldNameForGoogleAnalytics: String = "\(ct.name) : \(ct.descrip)"
+        
         ct.setValue(nil, forKey: "d1")
         //ct.dim1 = nil
         ct.setValue(nil, forKey: "d2")
@@ -290,12 +305,15 @@ class CTypeHandler: ObservableObject {
          * ANALYTICS, Log Edited Puzzle
          */
         Analytics.logEvent("edited_puzzle", parameters: [
-            "puzzle_name": ct.name as! NSObject,
-            "puzzle_description": ct.descrip as NSObject
+            "new_name": "\(ct.name) : \(ct.descrip)" as! NSObject,
+            "old_name": oldNameForGoogleAnalytics as NSObject,
+            "is_custom": ct.isCustom() as NSObject
         ])
     }
     
     public func edit(_ ct: CubeType, d1: Int, d2: Int, d3: Int, desc: String) {
+        
+        let oldNameForGoogleAnalytics: String = "\(ct.name) : \(ct.descrip)"
         
         ct.setValue(nil, forKey: "customName")
         
@@ -330,8 +348,9 @@ class CTypeHandler: ObservableObject {
          * ANALYTICS, Log Edited Puzzle
          */
         Analytics.logEvent("edited_puzzle", parameters: [
-            "puzzle_name": ct.name as! NSObject,
-            "puzzle_description": ct.descrip as NSObject
+            "new_name": "\(ct.name) : \(ct.descrip)" as! NSObject,
+            "old_name": oldNameForGoogleAnalytics as NSObject,
+            "is_custom": ct.isCustom() as NSObject
         ])
     }
     
@@ -378,9 +397,10 @@ class CTypeHandler: ObservableObject {
         /*
          *  GOOGLE ANALYTICS, log created_puzzle
          */
-        Analytics.logEvent("created_cube_puzzle", parameters: [
-            "puzzle_name": newCT.name as NSObject,
-            "puzzle_description": newCT.descrip as NSObject
+        Analytics.logEvent("created_puzzle", parameters: [
+            "puzzle_name": newCT.name as! NSObject,
+            "total_puzzles": self.typeControllers.count as NSObject,
+            "is_custom": newCT.isCustom() as NSObject
         ])
         
         // update the total puzzles for the user
@@ -406,9 +426,10 @@ class CTypeHandler: ObservableObject {
         /*
          *  GOOGLE ANALYTICS, log created_puzzle
          */
-        Analytics.logEvent("created_cube_puzzle", parameters: [
-            "puzzle_name": newCT.name as NSObject,
-            "puzzle_description": newCT.descrip as NSObject
+        Analytics.logEvent("created_puzzle", parameters: [
+            "puzzle_name": newCT.name as! NSObject,
+            "total_puzzles": self.typeControllers.count as NSObject,
+            "is_custom": newCT.isCustom() as NSObject
         ])
         
         // update the total puzzles for the user

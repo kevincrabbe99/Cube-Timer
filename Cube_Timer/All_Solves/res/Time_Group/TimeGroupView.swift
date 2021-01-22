@@ -11,7 +11,7 @@ struct TimeGroupView: View {
     
     @ObservedObject var controller: TimeGroupController // this is set via AllSolvesView upon printing
     
-    var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 5), count: (!UIDevice.IsIpad ? 8 : 15))
+    var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 5), count: (!UIDevice.IsIpad ? 6 : 15) + 1)
     
     
     

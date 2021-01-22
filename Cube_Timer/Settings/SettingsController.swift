@@ -84,7 +84,7 @@ class SettingsController: ObservableObject {
         
         if oneButtonMode == false { // set to true
             self.oneButtonMode = true
-            Analytics.setUserProperty("false", forName: "oneButtonMode")
+            Analytics.setUserProperty("true", forName: "oneButtonMode")
         } else {
             self.oneButtonMode = false // turn off
             Analytics.setUserProperty("false", forName: "oneButtonMode")
@@ -102,7 +102,7 @@ class SettingsController: ObservableObject {
         
         if requireDoublePressToStop == false { // set to true
             self.requireDoublePressToStop = true
-            Analytics.setUserProperty("false", forName: "DoublePressStop")
+            Analytics.setUserProperty("true", forName: "DoublePressStop")
         } else {
             self.requireDoublePressToStop = false // turn off
             Analytics.setUserProperty("false", forName: "DoublePressStop")

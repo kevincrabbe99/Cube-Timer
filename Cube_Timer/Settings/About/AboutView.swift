@@ -37,7 +37,7 @@ struct AboutView: View {
                 
                 Button {
                     Analytics.logEvent("goto_website", parameters: [
-                        AnalyticsParameterDestination: "StatTimer Website" as NSObject
+                        "website": "StatTimer Website" as NSObject
                     ])
                 } label: {
                     VStack(alignment: .leading) {

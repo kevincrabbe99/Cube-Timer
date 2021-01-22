@@ -155,6 +155,7 @@ struct AllSolvesView: View {
                             .padding(.bottom, 10)
                             .padding(.trailing, 60)
                             .padding(.leading, 5)
+                            .offset(x: (UIDevice.hasNotch ? 0 : -20))
 
                             
                             /*

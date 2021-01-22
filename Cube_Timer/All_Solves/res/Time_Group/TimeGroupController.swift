@@ -53,7 +53,7 @@ class TimeGroupController: ObservableObject, Identifiable {
     
     public func update() {
         
-        height = CGFloat((((solveElementControllers.count-1) / (!UIDevice.IsIpad ? 8 : 15)) + 1) * 35)
+        height = CGFloat((((solveElementControllers.count-1) / (!UIDevice.IsIpad ? 6 : 15)) + 1) * 35)
         //height = CGFloat(((solveElementControllers.count / 8) + 10) * 25)
     }
     

@@ -372,8 +372,6 @@ class SolvesFromTimeframe: ObservableObject {
             cTypeHandler!.updateModifiedDateForSelected()
         }
         
-        // update google analytics
-        updateGATotalSaves()
     }
     
     /*
@@ -400,9 +398,8 @@ class SolvesFromTimeframe: ObservableObject {
      
     /*
      *  Google Analytics stuff
-     */ // update total solves saved
+     * // update total solves saved
     private func updateGATotalSaves() {
-        Analytics.setUserProperty("\(self.solves.count)", forName: "total_times")
     }
-    
+    */
 }

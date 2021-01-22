@@ -81,9 +81,12 @@ class SolveHandler: ObservableObject {
             }
            
             
+           Analytics.setUserProperty("\(results.count)", forName: "total_times")
         }catch  {
             print("error fetching solves: ")
         }
+        
+        
         
     }
     
@@ -174,7 +177,7 @@ class SolveHandler: ObservableObject {
          *  GOOGLE ANALYTICS STUFF
          */
         // lod deleted solve
-        Analytics.logEvent("deleted_solve", parameters: [
+        Analytics.logEvent("deleted_selected_solves", parameters: [
             "count": allSolvesController.selected.count as NSObject
         ])
         

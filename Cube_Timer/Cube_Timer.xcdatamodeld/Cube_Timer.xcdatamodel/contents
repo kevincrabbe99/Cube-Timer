@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="CubeType" representedClassName="CubeType" syncable="YES">
+    <entity name="CubeType" representedClassName=".CubeType" syncable="YES">
         <attribute name="customName" optional="YES" attributeType="String"/>
         <attribute name="d1" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="d2" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

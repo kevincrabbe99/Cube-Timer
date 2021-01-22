@@ -142,13 +142,13 @@
             filePath = "Cube_Timer/Controllers/SolveHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "addGenericSampleSolves(count:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - c2a1e206e5f654ea"
+                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - c2a1e206e5f65447"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -158,12 +158,12 @@
                   urlString = "file:///Users/kevincrabbe/apps/Cube_Timer/Cube_Timer/Cube_Timer/Controllers/SolveHandler.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
                   offsetFromSymbolStart = "8">
                </Location>
                <Location
-                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - ea596f2053bfeacf"
+                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - ea596f2053bfeb62"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -173,8 +173,8 @@
                   urlString = "file:///Users/kevincrabbe/apps/Cube_Timer/Cube_Timer/Cube_Timer/Controllers/SolveHandler.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
                   offsetFromSymbolStart = "56">
                </Location>
             </Locations>

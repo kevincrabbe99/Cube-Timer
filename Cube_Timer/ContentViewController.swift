@@ -85,6 +85,8 @@ class ContentViewController: ObservableObject {
         } else {
             self.setStateForAllSolves()
         }
+        
+         
     }
     
     /*
