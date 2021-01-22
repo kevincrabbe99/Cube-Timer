@@ -3,61 +3,18 @@
   Cube_Timer
 
   Created by Kevin Crabbe on 1/3/21.
-  ENGLISH
+  SPANISH
 */
-"CUBES" = "CUBOS";
+"Currently not saving solves, change in settings" = "Actualmente no resuelve el ahorro, el cambio en los ajustes";
+"GROUPS" = "GRUPOS";
 
-"EDIT CUBE" = "EDITAR CUBO";
-"Description" = "Descripción";
 
-"DELETE" = "ELIMINAR";
-"UPDATE" = "ACTUALIZAR";
-"CREATE" = "CREAR";
-
-"ENTER A NEW CUBE" = "NUEVO CUBO"; // trans: NEW CUBE
-"Are you sure you want to delete %lld solves?" = "¿Estás segura de que quieres eliminar %lld solves?";
-
-"UPDATE CUBES FOR %lld SOLVES" = "ACTUALIZAR %lld SOLVES";
-
-// ALERT STUFF
-"Pause Saving Solves" = "Pausar Guardar Resoluciones";
-"Solves will not be saved until you turn pause saving solves back off" = "Las soluciones no se guardarán hasta que desactive la pausa para guardar las soluciones.";
-"Resumed Saving Solves" = "Resúmenes de ahorro reanudados";
-"Solves will not be recorded and saved" = "Las soluciones no se grabarán ni guardarán";
-"Currently not saving solves, change in settings" = "Actualmente no se guardan las soluciones";
-
-// SETTINGS STUFF
-"SETTINGS" = "AJUSTES";
-"Double press to stop" = "Presione dos veces para detener";
-"Requires both buttons to be pressed to record the solve." = "Requiere que se presionen ambos botones para grabar la resolución.";
-"Pause saving solves" = "Pausa guardando resuelve";
-"about" = "acerca de";
-
-"ABOUT" = "ACERCA DE";
-"Developer:" = "Desarrollador:";
-"Contact:" = "Contacto";
-"Website" = "Sitio Web";
-"back" = "espalda";
-
-"NO" = "NO";
-"YES" = "SI";
-"OFF" = "APAGADO";
-"ON" = "EN";
-
-"3X" = "3X";
-"1D" = "1D";
-"1W" = "1S";
-"1M" = "1M";
-"3M" = "3M";
-"1Y" = "1A";
-"ALL" = "ALL";
-
+"BEST OF THREE" = "MEJOR DE TRES";
 "Best" = "Mejor";
-"Worst" = "Weor";
+"Worst" = "Peor";
 "Average" = "Promedio";
+"COMPLETE %lld MORE SOLVES" = "COMPLETA %lld SOLUCIONES MÁS";
 
-"COMPLETE %lld MORE SOLVES" = "COMPLETE %lld MÁS SOLUCIONES";
-"no solves found." = "no se encontraron soluciones. ☹️";
 
 "BEST" = "MEJOR";
 "WORST" = "PEOR";
@@ -68,19 +25,81 @@
 
 "today" = "hoy";
 "yesterday" = "ayer";
-"last week" = "semana pasada";
+"last week" = "la semana pasada";
 "this month" = "este mes";
-"last month" = "mes pasado";
+"last month" = "el mes pasado";
+"Jan" = "ene";
+"Feb" = "feb";
+"Mar" = "mar";
+"Apr" = "abr";
+"May" = "Mayo";
+"Jun" = "jun";
+"Jul" = "jul";
+"Aug" = "ago";
+"Sep" = "sep";
+"Oct" = "oct";
+"Nov" = "nov";
+"Dec" = "dic";
+"no solves found." = "no resuelve encontrados.";
 
-"Jan" = "enero";
-"Feb" = "Febrero";
-"Mar" = "marzo";
-"Apr" = "abril";
-"May" = "mayo";
-"Jun" = "junio";
-"Jul" = "julio";
-"Aug" = "agosto";
-"Sep" = "septiembre";
-"Oct" = "octubre";
-"Nov" = "noviembre";
-"Dec" = "diciembre";
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1S";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1A";
+"ALL" = "ALL";
+
+
+"SETTINGS" = "AJUSTES";
+"Double press to stop" = "Presione dos veces a la parada";
+"Requires both buttons to be pressed to record the solve." = "Requiere los dos botones que se deben pulsar para grabar la resolución.";
+"This option is not available when 1 button start is enabled. You can change this below." = "Esta opción no está disponible cuando está activado 1 botón de inicio. Puede cambiar esto más adelante.";
+"1 or 2 button start" = "inicio 1 o 2 botón";
+"Select how many buttons are needed to be pressed in order to activate the timer." = "Seleccionar el número de botones se necesitan para ser presionado para activar el temporizador.";
+"Pause saving solves" = "Pausa resuelve ahorro";
+"about" = "acerca de";
+"Pause Saving Solves" = "Pausa ahorro Solves";
+"Solves will not be saved until you turn pause saving solves back off" = "Resuelve no se guardarán hasta que active el ahorro de pausa resuelve marcha atrás";
+"Resumed Saving Solves" = "Continuación del ahorro de Solves";
+"Solves will not be recorded and saved" = "Resuelve no serán registrados y guardados";
+
+
+"Developer:" = "Desarrollador:";
+"Contact:" = "Contacto";
+"Website" = "Sitio web";
+"back" = "espalda";
+
+
+"CUBE" = "CUBO";
+"CUSTOM" = "PERSONALIZADO";
+"TAP TO ENTER A NAME" = "TAP para introducir un nombre";
+"CREATE A NEW GROUPING" = "CREAR UN NUEVO AGRUPACIÓN";
+"EDIT" = "EDITAR";
+"Enter a description" = "Introduzca una descripción";
+"MISSING PUZZLE NAME" = "NOMBRE falta del rompecabezas";
+"Please enter a name for the puzzle." = "Por favor, introduzca un nombre para el rompecabezas.";
+"Missing Description" = "Descripción desaparecida";
+"Please enter a description for the puzzle." = "Por favor, introduzca una descripción para el rompecabezas.";
+
+
+"Are you sure you want to delete %lld solves?" = "¿Estás segura de que quieres eliminar %lld veces?";
+"CANCEL" = "CANCELAR";
+"DELETE" = "ELIMINAR";
+
+
+"MOVE %lld SAVED TIMES TO..." = "MUEVA %lld TIEMPOS AHORRADOS A...";
+
+
+"YES" = "SI";
+"NO" = "NO";
+"ONE" = "UNO";
+"TWO" = "DOS";
+"ON" = "EN";
+"OFF" = "APAGADO";
+"DELETE" = "ELIMINAR";
+"UPDATE" = "ACTUALIZAR";
+"CREATE" = "CREAR";
+
+"Missing Puzzle Name" = "Nombre que falta del rompecabezas";

@@ -5,82 +5,103 @@
   Created by Kevin Crabbe on 1/3/21.
   Chinese Simplified
 */
-"CUBES" = "拼图"; // PUZZLES
 
-"EDIT CUBE" = "编辑难题"; // EDIT PUZZLE
-"Description" = "描述";
 
-"DELETE" = "编辑难题";
-"UPDATE" = "更新";
-"CREATE" = "创造";
+"Currently not saving solves, change in settings" = "目前不保存在设置可以解决，变化";
+"GROUPS" = "组";
 
-"ENTER A NEW CUBE" = "输入新立方体"; // trans: NEW CUBE
-"Are you sure you want to delete %lld solves?" = "您确定要删除 %lld 解决方案吗";
 
-"UPDATE CUBES FOR %lld SOLVES" = "更新 %lld 解决方案的清单";
-
-// ALERT STUFF
-"Pause Saving Solves" = "暂停保存解决方案";
-"Solves will not be saved until you turn pause saving solves back off" = "解决方案将不会保存，直到您将暂停保存解决方案重新启用";
-"Resumed Saving Solves" = "恢复的储蓄解决方案";
-"Solves will not be recorded and saved" = "解决方案将不会被记录和保存";
-"Currently not saving solves, change in settings" = "当前未保存求解，请更改设置";
-
-// SETTINGS STUFF
-"SETTINGS" = "设定";
-"Double press to stop" = "双击停止";
-"Requires both buttons to be pressed to record the solve." = "需要同时按下两个按钮来记录求解。";
-"Pause saving solves" = "暂停节省解决";
-"about" = "关于";
-
-"ABOUT" = "关于";
-"Developer:" = "开发者:";
-"Contact:" = "联系";
-"Website" = "웹 사이트";
-"back" = "背部";
-
-"NO" = "没有";
-"YES" = "是";
-"OFF" = "关";
-"ON" = "上";
-
-"3X" = "3X";
-"1D" = "1D";
-"1W" = "1W";
-"1M" = "1M";
-"3M" = "3M";
-"1Y" = "1Y";
-"ALL" = "一切";
-
+"BEST OF THREE" = "BEST三";
 "Best" = "最好";
-"Worst" = "最坏的";
+"Worst" = "最差";
 "Average" = "平均";
+"COMPLETE %lld MORE SOLVES" = "完成%lld个以上的解决方案";
 
-"COMPLETE %lld MORE SOLVES" = "完成 %lld 更多解决方案";
-"no solves found." = "找不到解决方法。 ☹️";
 
 "BEST" = "最好";
-"WORST" = "最坏的";
-"MEDIAN" = "中位数";
-"SOLVES" = "完成"; // trans: completions
+"WORST" = "最差";
+"MEDIAN" = "MEDIAN";
+"SOLVES" = "解决";
 "AVERAGE" = "平均";
-"STD. DEV" = "标准偏差";
+"STD. DEV" = "STD。 DEV";
 
 "today" = "今天";
 "yesterday" = "昨天";
 "last week" = "上个星期";
 "this month" = "这个月";
 "last month" = "上个月";
-
 "Jan" = "一月";
 "Feb" = "二月";
-"Mar" = "游行";
+"Mar" = "损伤";
 "Apr" = "四月";
 "May" = "可能";
-"Jun" = "六月";
+"Jun" = "君";
 "Jul" = "七月";
 "Aug" = "八月";
 "Sep" = "九月";
 "Oct" = "十月";
 "Nov" = "十一月";
 "Dec" = "十二月";
+"no solves found." = "没有发现解决了。";
+
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1S";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1A";
+"ALL" = "所有";
+
+
+"SETTINGS" = "设置";
+"Double press to stop" = "双按停止";
+"Requires both buttons to be pressed to record the solve." = "被压需要两个按钮来记录解决。";
+"This option is not available when 1 button start is enabled. You can change this below." = "当启用了1点键式启动，此选项不可用。您可以在下面更改此。";
+"1 or 2 button start" = "1个或2的按钮启动";
+"Select how many buttons are needed to be pressed in order to activate the timer." = "选择需要多少按钮，以激活定时器被按下。";
+"Pause saving solves" = "暂停节能解决了";
+"about" = "关于";
+"Pause Saving Solves" = "暂停保存解决";
+"Solves will not be saved until you turn pause saving solves back off" = "解决将不会被保存，直到你把暂停节省解决了后退";
+"Resumed Saving Solves" = "恢复保存解决";
+"Solves will not be recorded and saved" = "解决将不会被记录和保存";
+
+
+"Developer:" = "开发商：";
+"Contact:" = "联系";
+"Website" = "网站";
+"back" = "背部";
+
+
+"CUBE" = "立方体";
+"CUSTOM" = "CUSTOM";
+"TAP TO ENTER A NAME" = "TAP输入名称";
+"CREATE A NEW GROUPING" = "创建一个新的分组";
+"EDIT" = "编辑";
+"Enter a description" = "输入说明";
+"MISSING PUZZLE NAME" = "MISSING PUZZLE NAME";
+"Please enter a name for the puzzle." = "对于拼图请输入一个名称。";
+"Missing Description" = "缺少说明";
+"Please enter a description for the puzzle." = "请输入难题的描述。";
+
+
+"Are you sure you want to delete %lld solves?" = "您确定要删除%lld个解决方案吗？";
+"CANCEL" = "取消";
+"DELETE" = "删除";
+
+
+"MOVE %lld SAVED TIMES TO..." = "移动%lld次保存到...";
+
+
+"YES" = "是";
+"NO" = "没有";
+"ONE" = "一";
+"TWO" = "二";
+"ON" = "上";
+"OFF" = "关闭";
+"DELETE" = "删除";
+"UPDATE" = "UPDATE";
+"CREATE" = "创造";
+
+"Missing Puzzle Name" = "缺少益智名称";

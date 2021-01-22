@@ -5,44 +5,42 @@
   Created by Kevin Crabbe on 1/3/21.
   FRENCH
 */
-"CUBES" = "CUBES";
+"Currently not saving solves, change in settings" = "À l'heure actuelle n'épargnent permet de résoudre, le changement dans les paramètres";
+"GROUPS" = "GROUPES";
 
-"EDIT CUBE" = "MODIFIER LES CUBES";
-"Description" = "La description";
+"BEST OF THREE" = "MEILLEUR DE TROIS";
+"Best" = "Meilleur";
+"Worst" = "Pire";
+"Average" = "Moyenne";
+"COMPLETE %lld MORE SOLVES" = "COMPLETE %lld PLUS RÉSOUT";
 
-"DELETE" = "EFFACER";
-"UPDATE" = "ENSEMBLE"; // trans: set
-"CREATE" = "CRÉER";
 
-"ENTER A NEW CUBE" = "FAIRE UN NOUVEAU CUBE"; // trans: NEW CUBE
-"Are you sure you want to delete %lld solves?" = "Voulez-vous vraiment supprimer %lld résout?";
+"BEST" = "MEILLEUR";
+"WORST" = "PIRE";
+"MEDIAN" = "MÉDIAN";
+"SOLVES" = "RÉSOUT";
+"AVERAGE" = "MOYENNE";
+"STD. DEV" = "STD. DEV";
 
-"UPDATE CUBES FOR %lld SOLVES" = "MISE À JOUR DES CUBES POUR %lld SOLVES";
+"today" = "aujourd'hui";
+"yesterday" = "hier";
+"last week" = "la semaine dernière";
+"this month" = "ce mois-ci";
+"last month" = "le mois dernier";
+"Jan" = "Jan";
+"Feb" = "fév";
+"Mar" = "Mar";
+"Apr" = "avr";
+"May" = "Mai";
+"Jun" = "juin";
+"Jul" = "juil";
+"Aug" = "août";
+"Sep" = "SEP";
+"Oct" = "oct";
+"Nov" = "nov";
+"Dec" = "déc";
+"no solves found." = "pas trouvé résoud.";
 
-// ALERT STUFF
-"Pause Saving Solves" = "Arrêter d’enregistrer";
-"Solves will not be saved until you turn pause saving solves back off" = "Les résolutions ne seront pas enregistrées tant que vous ne désactiverez pas l'enregistrement des résolutions en pause";
-"Resumed Saving Solves" = "Reprise de l'enregistrement des résolutions";
-"Solves will not be recorded and saved" = "Les résolutions ne seront pas enregistrées et sauvegardées";
-"Currently not saving solves, change in settings" = "Pas de sauvegarde actuellement résolue";
-
-// SETTINGS STUFF
-"SETTINGS" = "RÉGLAGES";
-"Double press to stop" = "Double press to stop";
-"Requires both buttons to be pressed to record the solve." = "Appuyez deux fois pour arrêter";
-"Pause saving solves" = "Mettre en pause l'enregistrement résout";
-"about" = "à propos";
-
-"ABOUT" = "À PROPOS";
-"Developer:" = "Développeur:";
-"Contact:" = "Contact";
-"Website" = "Site Internet";
-"back" = "retour";
-
-"NO" = "NON";
-"YES" = "OUI";
-"OFF" = "DE";
-"ON" = "SUR";
 
 "3X" = "3X";
 "1D" = "1J";
@@ -52,35 +50,55 @@
 "1Y" = "1A";
 "ALL" = "ALL";
 
-"Best" = "Meilleur";
-"Worst" = "Pire";
-"Average" = "Moyenne";
 
-"COMPLETE %lld MORE SOLVES" = "COMPLETEZ %lld PLUS DE SOLVES";
-"no solves found." = "aucune solution trouvée. ☹️";
+"SETTINGS" = "RÉGLAGES";
+"Double press to stop" = "Appuyez deux fois sur l'arrêt";
+"Requires both buttons to be pressed to record the solve." = "EXIGE les deux boutons à presser pour enregistrer Solve.";
+"This option is not available when 1 button start is enabled. You can change this below." = "Cette option est pas disponible lorsque 1 bouton de démarrage est activé. Vous pouvez modifier ce ci-dessous.";
+"1 or 2 button start" = "1 ou 2 démarrage du bouton";
+"Select how many buttons are needed to be pressed in order to activate the timer." = "Sélectionnez le nombre de touches nécessaires pour être pressé afin d'activer la minuterie.";
+"Pause saving solves" = "Pause permet de résoudre sauver";
+"about" = "à propos";
+"Pause Saving Solves" = "Pause Enregistrement Résout";
+"Solves will not be saved until you turn pause saving solves back off" = "Résout ne seront pas enregistrées jusqu'à ce que vous tournez résoud sauver pause Dégagez";
+"Resumed Saving Solves" = "Enregistrement Résout repris";
+"Solves will not be recorded and saved" = "Résout ne seront pas enregistrées et sauvegardées";
 
-"BEST" = "MEILLEUR";
-"WORST" = "PIRE";
-"MEDIAN" = "MÉDIAN";
-"SOLVES" = "SOLVES";
-"AVERAGE" = "MOYENNE";
-"STD. DEV" = "ÉCART-TYPE";
 
-"today" = "aujourd'hui";
-"yesterday" = "hier";
-"last week" = "la semaine dernière";
-"this month" = "ce mois-ci";
-"last month" = "mois dernier";
+"Developer:" = "Développeur:";
+"Contact:" = "Contact";
+"Website" = "Site Internet";
+"back" = "retour";
 
-"Jan" = "janvier";
-"Feb" = "février";
-"Mar" = "mars";
-"Apr" = "avril";
-"May" = "mai";
-"Jun" = "juin";
-"Jul" = "juillet";
-"Aug" = "août";
-"Sep" = "septembre";
-"Oct" = "octobre";
-"Nov" = "novembre";
-"Dec" = "décembre";
+
+"CUBE" = "CUBE";
+"CUSTOM" = "DOUANE";
+"TAP TO ENTER A NAME" = "TAP PARTICIPER UN NOM";
+"CREATE A NEW GROUPING" = "CRÉATION D'UN NOUVEAU REGROUPEMENT";
+"EDIT" = "ÉDITER";
+"Enter a description" = "Une description";
+"MISSING PUZZLE NAME" = "NOM DE PUZZLE MISSING";
+"Please enter a name for the puzzle." = "S'il vous plaît entrez un nom pour le casse-tête.";
+"Missing Description" = "description manquant";
+"Please enter a description for the puzzle." = "S'il vous plaît entrer une description pour le casse-tête.";
+
+
+"Are you sure you want to delete %lld solves?" = "ÊTES-VOUS SÛR QUE VOUS VOULEZ SUPPRIMER %lld FOIS";
+"CANCEL" = "ANNULER";
+"DELETE" = "EFFACER";
+
+
+"MOVE %lld SAVED TIMES TO..." = "DÉMÉNAGEMENT %lld TEMPS DE ... ENREGISTRÉ";
+
+
+"YES" = "OUI";
+"NO" = "NON";
+"ONE" = "UNE";
+"TWO" = "DEUX";
+"ON" = "SUR";
+"OFF" = "DE";
+"DELETE" = "EFFACER";
+"UPDATE" = "METTRE À JOUR";
+"CREATE" = "CRÉER";
+
+"Missing Puzzle Name" = "Nom Puzzle manquant";
