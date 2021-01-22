@@ -165,7 +165,7 @@ struct TimerView: View {
                  */
                 StopwatchDisplayView(timer: timer)
                     .frame(width: 250, height: 60)
-                    //.offset(y: 10)
+                    .offset(y: (solveHandler.solves.count == 0 ? -15 : 0)) // push up if no solves
                 
             } // end main ZStack
                 
