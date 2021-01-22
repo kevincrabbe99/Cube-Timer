@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import SwiftUI
+import Firebase
 
 enum Timeframe: String {
     case Unknown = "unknown"
@@ -94,7 +95,7 @@ class SolveHandler: ObservableObject {
     public func addGenericSampleSolves(count: Int = 10) {
         
         for _ in 0..<count {
-            self.addCostumSolve(sec: Double.random(in: 31.23..<68.3), daysAgo: Int.random(in: 0..<90))
+            self.addCostumSolve(sec: Double.random(in: 31.23..<68.3), daysAgo: Int.random(in: 0..<400))
         }
 
     }
@@ -167,6 +168,17 @@ class SolveHandler: ObservableObject {
         for sElController in allSolvesController.selected {
             self.delete(sElController.si)
         }
+        
+        
+        /*
+         *  GOOGLE ANALYTICS STUFF
+         */
+        // lod deleted solve
+        Analytics.logEvent("deleted_solve", parameters: [
+            "count": allSolvesController.selected.count as NSObject
+        ])
+        
+        
         allSolvesController.clearSelected()
     }
     

@@ -20,15 +20,18 @@ class TimerController: ObservableObject {
     //@Published var  type: PuzzleType = .a3x3x3
     //@Published var  brand: PuzzleBrand = .rubiks
     
+  //  var singleBtnActivated: Bool = false
     var leftActivated: Bool = false
     var rightActivated: Bool = false
     var neitherActivated: Bool = true
+    var singleButtonActivated: Bool = false
     
     var acceptInput: Bool = true // used as a guard for pressing the buttons
     
     @Published var startApproved: Bool = false  // true when all the factors which initail the timer are true
     @Published var oneActivated: Bool = false   // true when one of the buttons is pressed
     @Published var bothActivated: Bool = false
+    @Published var oneBtnActivated: Bool = false
     
     @Published var timerGoing: Bool = false // true when the timer is counting up
     var timer: Timer? // the actual timer
@@ -102,6 +105,58 @@ class TimerController: ObservableObject {
     let heavyTap = UIImpactFeedbackGenerator(style: .heavy)
     let startTap = UINotificationFeedbackGenerator()
     
+    func startTimerFromSingleBtn() {
+        lightTap.impactOccurred()
+        print("[timer] one Activated")
+        oneBtnActivated = true
+        
+        testStart()
+        /*
+        activateLeft()
+        activateRight()
+        */
+    }
+    
+    func stopTimerFromSingleBtn() {
+        lightTap.impactOccurred()
+        print("[timer] one DeActivated")
+        oneBtnActivated = false
+        
+        testStart()
+        /*
+        deActivateLeft()
+        deActivateRight()
+        */
+        
+    }
+    
+    
+    /*
+     *  either starts or stops for singleButton inputs
+     */
+    func singleButtonPressed() {
+        self.oneActivated = false
+        self.bothActivated = false
+        self.singleButtonActivated = true
+        
+        if !timerGoing && acceptInput {
+            self.resetTimerStart()
+        } else {
+            self.stopTimer()
+        }
+        /*
+        if !startApproved {
+            abortResettingTimer()
+        } else if startApproved {
+            startTimer()
+        }
+        */
+    }
+    
+    func singleButtonAbort() {
+        abortResettingTimer()
+    }
+    
     func activateRight() {
         lightTap.impactOccurred()
         print("Right Activated")
@@ -135,16 +190,29 @@ class TimerController: ObservableObject {
             oneActivated = (leftActivated || rightActivated) && !(leftActivated && rightActivated) // bool expression for if one is active
             bothActivated = (leftActivated && rightActivated)
             neitherActivated = !(leftActivated && rightActivated)
+            singleButtonActivated = oneBtnActivated
             
             
-            // if both are activated
-            if bothActivated {
-                bothButtonsPressed()
-            } else if oneActivated { // if one is pressed
-                oneButtonPressed()
-            } else if neitherActivated { // none are pressed
-                neitherPressed()
+            if settingsController.oneButtonMode {
+                
+               // if singleButtonActivated {
+                    // brute force straight to timer start
+                    startTimer()
+                //}
+                
+            }else {
+                
+                // if both are activated
+                if bothActivated {
+                    bothButtonsPressed()
+                } else if oneActivated { // if one is pressed
+                    oneButtonPressed()
+                } else if neitherActivated { // none are pressed
+                    neitherPressed()
+                }
+                
             }
+            
                 
         }
       
@@ -157,6 +225,7 @@ class TimerController: ObservableObject {
         //startApproved = false
         self.oneActivated = false
         self.bothActivated = false
+        self.oneBtnActivated = false
         if timerGoing { // stop timer
             //stopTimer()
             //startApproved = false // prevent from starting timer without both buttons pressed
@@ -233,7 +302,7 @@ class TimerController: ObservableObject {
         /*
          *  GA: set user property, timer_going
          */
-        Analytics.setUserProperty("true", forName: "timer_going")
+        //Analytics.setUserProperty("true", forName: "timer_going")
     }
     
     func stopTimer() {
@@ -295,13 +364,13 @@ class TimerController: ObservableObject {
          */
         
         
-       Analytics.setUserProperty("false", forName: "timer_going")
+       //Analytics.setUserProperty("false", forName: "timer_going")
         
         let lastSolve = solveHandler.getLastSolve()
-        Analytics.logEvent(AnalyticsEventPostScore, parameters: [
-            AnalyticsParameterItemName: lastSolve!.cubeType.name as NSObject,
-            AnalyticsParameterItemBrand: lastSolve!.cubeType.descrip as NSObject,
-            AnalyticsParameterScore: lastSolve!.timeMS as NSObject
+        Analytics.logEvent("solve_saved", parameters: [
+            "name": lastSolve!.cubeType.name as NSObject,
+            "description": lastSolve!.cubeType.descrip as NSObject,
+            "seconds": lastSolve!.timeMS.rounded() as NSObject
         ])
     }
     

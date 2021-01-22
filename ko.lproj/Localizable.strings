@@ -5,82 +5,101 @@
   Created by Kevin Crabbe on 1/3/21.
   KOREAN
 */
-"CUBES" = "큐브";
+"Currently not saving solves, change in settings" = "현재 설정에서 해결할 수있는 문제, 변경 사항을 저장하지";
+"GROUPS" = "여러 떼";
 
-"EDIT CUBE" = "큐브 수정";
-"Description" = "기술";
 
-"DELETE" = "지우다";
-"UPDATE" = "최신 정보";
-"CREATE" = "창조하다";
-
-"ENTER A NEW CUBE" = "새로운 큐브"; // trans: NEW CUBE
-"Are you sure you want to delete %lld solves?" = "%lld 해결을 삭제 하시겠습니까?";
-
-"UPDATE CUBES FOR %lld SOLVES" = "%lld SOLVES의 큐브 업데이트";
-
-// ALERT STUFF
-"Pause Saving Solves" = "해결 저장 일시 중지";
-"Solves will not be saved until you turn pause saving solves back off" = "일시 중지 저장 해결을 다시 끌 때까지 해결이 저장되지 않습니다.";
-"Resumed Saving Solves" = "재개 된 저장 해결";
-"Solves will not be recorded and saved" = "해결은 기록 및 저장되지 않습니다.";
-"Currently not saving solves, change in settings" = "현재 해결을 저장하지 않고 설정 변경";
-
-// SETTINGS STUFF
-"SETTINGS" = "설정";
-"Double press to stop" = "중지하려면 두 번 누르세요.";
-"Requires both buttons to be pressed to record the solve." = "해결을 기록하려면 두 버튼을 모두 눌러야합니다.";
-"Pause saving solves" = "저장 일시 중지 해결";
-"about" = "약";
-
-"ABOUT" = "약";
-"Developer:" = "개발자:";
-"Contact:" = "접촉";
-"Website" = "웹 사이트";
-"back" = "뒤";
-
-"NO" = "아니";
-"YES" = "예";
-"OFF" = "아니"; // trans: NO
-"ON" = "예";
-
-"3X" = "3X";
-"1D" = "1D";
-"1W" = "1W";
-"1M" = "1M";
-"3M" = "3M";
-"1Y" = "1Y";
-"ALL" = "모두";
-
+"BEST OF THREE" = "세 BEST";
 "Best" = "베스트";
-"Worst" = "가장 긴";
+"Worst" = "가장 나쁜";
 "Average" = "평균";
+"COMPLETE %lld MORE SOLVES" = "해결 방법 %lld 개 더 완료";
 
-"COMPLETE %lld MORE SOLVES" = "ВЫПОЛНИТЬ %lld БОЛЬШЕ РЕШЕНИЙ";
-"no solves found." = "решений не найдено. ☹️";
 
 "BEST" = "베스트";
-"WORST" = "가장 긴"; // trans: longest
+"WORST" = "가장 나쁜";
 "MEDIAN" = "중앙값";
-"SOLVES" = "해결책";
+"SOLVES" = "해결";
 "AVERAGE" = "평균";
-"STD. DEV" = "표준 편차";
+"STD. DEV" = "STD. DEV";
 
 "today" = "오늘";
 "yesterday" = "어제";
 "last week" = "지난주";
 "this month" = "이번 달";
 "last month" = "지난 달";
-
-"Jan" = "일월";
-"Feb" = "2 월";
-"Mar" = "행진";
-"Apr" = "4 월";
+"Jan" = "월";
+"Feb" = "2월";
+"Mar" = "망치다";
+"Apr" = "4월";
 "May" = "할 수있다";
-"Jun" = "유월";
-"Jul" = "칠월";
-"Aug" = "팔월";
-"Sep" = "구월";
-"Oct" = "십월";
-"Nov" = "십일월";
-"Dec" = "12 월";
+"Jun" = "6월";
+"Jul" = "7월";
+"Aug" = "8월";
+"Sep" = "9월";
+"Oct" = "10월";
+"Nov" = "11월";
+"Dec" = "12월";
+"no solves found." = "더 해결할 수있는 문제가 없습니다.";
+
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1S";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1A";
+"ALL" = "모두";
+
+
+"SETTINGS" = "설정";
+"Double press to stop" = "정류장을 두 번 눌러";
+"Requires both buttons to be pressed to record the solve." = "필요 두 버튼은 해결 기록하기를 누르면된다.";
+"This option is not available when 1 button start is enabled. You can change this below." = "1 버튼 시작을 사용하는 경우이 옵션을 사용할 수 없습니다. 아래 변경할 수 있습니다.";
+"1 or 2 button start" = "1 개 또는 2 개의 버튼 시동";
+"Select how many buttons are needed to be pressed in order to activate the timer." = "타이머를 활성화하기 위해 눌러야하는 데 필요한 얼마나 많은 버튼을 선택합니다.";
+"Pause saving solves" = "저장을 해결해 일시 정지";
+"about" = "약";
+"Pause Saving Solves" = "저장 해결을 일시 정지";
+"Solves will not be saved until you turn pause saving solves back off" = "일시 정지 절약 해결할 수있는 문제가 물러나 당신이 설정 될 때까지 해결이 저장되지 않습니다";
+"Resumed Saving Solves" = "재개 절약 해결";
+"Solves will not be recorded and saved" = "해결 기록 및 저장되지 않습니다";
+
+
+"Developer:" = "개발자:";
+"Contact:" = "접촉";
+"Website" = "웹 사이트";
+"back" = "뒤";
+
+
+"CUBE" = "입방체";
+"CUSTOM" = "커스텀";
+"TAP TO ENTER A NAME" = "TAP는 이름을 입력";
+"CREATE A NEW GROUPING" = "새 그룹 만들기";
+"EDIT" = "편집하다";
+"Enter a description" = "설명을 입력";
+"MISSING PUZZLE NAME" = "MISSING 퍼즐 NAME";
+"Please enter a name for the puzzle." = "퍼즐의 이름을 입력 해주세요.";
+"Missing Description" = "설명이 없음";
+"Please enter a description for the puzzle." = "퍼즐에 대한 설명을 입력하십시오.";
+
+
+"Are you sure you want to delete %lld solves?" = "해결 방법 %lld 개를 삭제 하시겠습니까?";
+"CANCEL" = "취소";
+"DELETE" = "지우다";
+
+
+"MOVE %lld SAVED TIMES TO..." = "%lld 개의 절약 시간을 ...";
+
+
+"YES" = "예";
+"NO" = "아니";
+"ONE" = "하나";
+"TWO" = "두";
+"ON" = "의 위에";
+"OFF" = "떨어져서";
+"DELETE" = "지우다";
+"UPDATE" = "최신 정보";
+"CREATE" = "창조하다";
+
+"Missing Puzzle Name" = "누락 된 퍼즐 이름";

@@ -54,8 +54,7 @@ struct SolveElementView: View {
                 
                 //if controller != nil {
                     Text(controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")
-                        .fontWeight(.bold)
-                        .font(.system(size: 11))
+                        .font(Font.custom((controller.selected ? "Chivo-Bold" : "Chivo-Regular"), size: 11))
                 /*} else {
                     Text(solveItem!.getTimeCapture()?.getInSolidForm() ?? "0:00")
                         .fontWeight(.bold)

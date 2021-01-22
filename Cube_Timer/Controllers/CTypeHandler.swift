@@ -121,12 +121,16 @@ class CTypeHandler: ObservableObject {
         // google analytics update selected puzzle
         updateGASelectedPuzzle()
         
+        // unselect selected times
+        if allSolvesController != nil {
+            allSolvesController.unselectAll()
+        }
         
     }
     
     public func showEditPopupFor(id: UUID) {
         print("passed through CTypeHandler")
-        cvc.showCTPopupFor(id: id)
+        cvc.tappedEditCT(id: id)
     }
     
     public func getDefaultSelection() -> CubeType? {
@@ -253,7 +257,48 @@ class CTypeHandler: ObservableObject {
         return false
     }
     
+    public func edit(_ ct: CubeType, customName: String, desc: String) {
+        ct.setValue(nil, forKey: "d1")
+        //ct.dim1 = nil
+        ct.setValue(nil, forKey: "d2")
+        //ct.dim2 = nil
+        ct.setValue(nil, forKey: "d3")
+        //ct.dim3 = nil
+        
+        let rawName: String = customName
+        ct.setValue(customName, forKey: "rawName")
+        ct.rawName = customName
+        
+        ct.customName = customName
+        
+        ct.setValue(desc, forKey: "desc")
+        ct.desc = desc
+        ct.setValue(Date(), forKey: "lastModified")
+        
+        do {
+            try PersistenceController.shared.container.viewContext.save()
+            print("Cube Type Saved!")
+        } catch {
+            print("SAVE ERROR: saving a new CubeType, CTypeController.swift -> edit")
+        }
+        
+        for tc in typeControllers {
+            tc.updateFromCTObj()
+        }
+        
+        /*
+         * ANALYTICS, Log Edited Puzzle
+         */
+        Analytics.logEvent("edited_puzzle", parameters: [
+            "puzzle_name": ct.name as! NSObject,
+            "puzzle_description": ct.descrip as NSObject
+        ])
+    }
+    
     public func edit(_ ct: CubeType, d1: Int, d2: Int, d3: Int, desc: String) {
+        
+        ct.setValue(nil, forKey: "customName")
+        
         print("set to: ", d1, d2, d3, desc)
         ct.setValue(d1, forKey: "d1")
         ct.dim1 = d1
@@ -333,7 +378,7 @@ class CTypeHandler: ObservableObject {
         /*
          *  GOOGLE ANALYTICS, log created_puzzle
          */
-        Analytics.logEvent("created_puzzle", parameters: [
+        Analytics.logEvent("created_cube_puzzle", parameters: [
             "puzzle_name": newCT.name as NSObject,
             "puzzle_description": newCT.descrip as NSObject
         ])
@@ -341,6 +386,59 @@ class CTypeHandler: ObservableObject {
         // update the total puzzles for the user
         updateGATotalPuzzles()
     }
+    
+    /*
+     * Adds a custom solve
+        * called from NewCubeTypeView when its currentPTConfig = .custom
+     */
+    public func add(customName: String, desc: String) {
+        
+        // add to core data
+        let newCT = CTypeHandler.addCustomPtToCoreData(customName: customName, desc: desc)
+        
+        // create controller reference
+        let newCTController = SingleCubeTypeViewController(ct: newCT, ctHandler: self)
+        //newCTController.initView()
+        self.typeControllers.append(newCTController)
+        
+        self.size += 1
+        
+        /*
+         *  GOOGLE ANALYTICS, log created_puzzle
+         */
+        Analytics.logEvent("created_cube_puzzle", parameters: [
+            "puzzle_name": newCT.name as NSObject,
+            "puzzle_description": newCT.descrip as NSObject
+        ])
+        
+        // update the total puzzles for the user
+        updateGATotalPuzzles()
+        
+    }
+    
+    public static func addCustomPtToCoreData(customName: String, desc: String) -> CubeType {
+        
+        // create a raw CubeType with no data
+        let newPT = CubeType.init(entity: CubeType.entity(), insertInto: PersistenceController.shared.container.viewContext)
+        
+        // add all the data
+        newPT.id = UUID()
+        newPT.customName = customName
+        newPT.rawName = customName
+        newPT.desc = desc
+        newPT.lastModified = Date()
+        newPT.size = 0
+        
+        do {
+            try PersistenceController.shared.container.viewContext.save()
+            print("Custom Puzzle Type Saved!")
+        } catch {
+            print("SAVE ERROR: saving a new Custom Puzzle, CTypeController.swift -> addCtToCoreData")
+        }
+        return newPT
+        
+    }
+    
     
     public static func AddCtToCoreData(d1: Int, d2: Int, d3: Int, desc: String) -> CubeType {
         

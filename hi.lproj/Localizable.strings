@@ -5,81 +5,100 @@
   Created by Kevin Crabbe on 1/3/21.
   Hindi (PUZZLE)
 */
-"CUBES" = "पहेलि"; // trans: Puzzle
+"Currently not saving solves, change in settings" = "वर्तमान में बचत नहीं सेटिंग्स में हल करती है, परिवर्तन";
+"GROUPS" = "समूह";
 
-"EDIT CUBE" = "संपादित करें पहेलि";
-"Description" = "विवरण";
-
-"DELETE" = "हटाएँ";
-"UPDATE" = "सेट"; // trans: set
-"CREATE" = "बनाना"; // trans: make
-
-"ENTER A NEW CUBE" = "एक नया कूबड़ बनाएँ"; // trans: CREATE A NEW CUBE
-"Are you sure you want to delete %lld solves?" = "क्या आप सुनिश्चित हैं कि आप %lld विलोप हटाना चाहते हैं?";
-
-"UPDATE CUBES FOR %lld SOLVES" = "%lld SOLVES के लिए अद्यतन करें";
-
-// ALERT STUFF
-"Pause Saving Solves" = "सेविंग सॉल्व करें";
-"Solves will not be saved until you turn pause saving solves back off" = "जब तक आप सॉल्विंग सेविंग को विराम नहीं देते तब तक सॉल्व्स सेव नहीं होंगे";
-"Resumed Saving Solves" = "सेविंग सॉल्व्स को फिर से शुरू किया";
-"Solves will not be recorded and saved" = "हल को रिकॉर्ड और सहेजा नहीं जाएगा";
-"Currently not saving solves, change in settings" = "वर्तमान में सेविंग नहीं, सेटिंग्स में बदलाव";
-
-// SETTINGS STUFF
-"SETTINGS" = "समायोजन";
-"Double press to stop" = "बंद करने के लिए डबल प्रेस";
-"Requires both buttons to be pressed to record the solve." = "हल रिकॉर्ड करने के लिए दोनों बटन दबाने की आवश्यकता है।";
-"Pause saving solves" = "सेविंग विराम दें";
-"about" = "के बारे में";
-
-"ABOUT" = "के बारे में";
-"Developer:" = "डेवलपर:";
-"Contact:" = "संपर्क करें:";
-"Website" = "वेबसाइट";
-"back" = "वापस";
-
-"NO" = "नहीं";
-"YES" = "हाँ";
-"OFF" = "बंद";
-"ON" = "पर";
-
-"3X" = "3X";
-"1D" = "1D";
-"1W" = "1W";
-"1M" = "1M";
-"3M" = "3M";
-"1Y" = "1Y";
-"ALL" = "सब";
-
+"BEST OF THREE" = "श्रेष्ठ तीन में से";
 "Best" = "श्रेष्ठ";
-"Worst" = "पिछले";
-"Average" = "मध्य";
-
+"Worst" = "सबसे खराब";
+"Average" = "औसत";
 "COMPLETE %lld MORE SOLVES" = "पूरा %lld अधिक समाधान";
-"no solves found." = "कोई हल नहीं मिला। ☹️";
+
 
 "BEST" = "श्रेष्ठ";
-"WORST" = "पिछले"; // trans: last
-"MEDIAN" = "मध्यमध्य";
-"AVERAGE" = "मध्य";
-"STD. DEV" = "मानक विचलन";
+"WORST" = "सबसे खराब";
+"MEDIAN" = "MEDIAN";
+"SOLVES" = "हल करती है";
+"AVERAGE" = "औसत";
+"STD. DEV" = "एसटीडी। देव";
 
 "today" = "आज";
 "yesterday" = "बिता कल";
 "last week" = "पिछले सप्ताह";
 "this month" = "इस महीने";
 "last month" = "पिछले महीने";
-
 "Jan" = "जनवरी";
 "Feb" = "फ़रवरी";
-"Mar" = "जुलूस";
+"Mar" = "मार्च";
 "Apr" = "अप्रैल";
 "May" = "मई";
 "Jun" = "जून";
 "Jul" = "जुलाई";
 "Aug" = "अगस्त";
-"Sep" = "सितंबर";
+"Sep" = "सितम्बर";
 "Oct" = "अक्टूबर";
-"Nov" = "नवंबर";
-"Dec" = "दिसंबर";
+"Nov" = "नवम्बर";
+"Dec" = "दिसम्बर";
+"no solves found." = "कोई हल मिल गया।";
+
+
+"3X" = "3X";
+"1D" = "1D";
+"1W" = "1S";
+"1M" = "1M";
+"3M" = "3M";
+"1Y" = "1A";
+"ALL" = "सब";
+
+
+"SETTINGS" = "समायोजन";
+"Double press to stop" = "बंद करने के लिए डबल प्रेस";
+"Requires both buttons to be pressed to record the solve." = "आवश्यक दोनों बटन का समाधान रिकॉर्ड करने के लिए उसे दबाना होगा।";
+"This option is not available when 1 button start is enabled. You can change this below." = "जब 1 बटन शुरू सक्षम किया गया है तो यह विकल्प उपलब्ध नहीं है। आप नीचे दिए गए बदल सकते हैं।";
+"1 or 2 button start" = "1 या 2 बटन शुरू";
+"Select how many buttons are needed to be pressed in order to activate the timer." = "चयन करें कि कितने बटन क्रम टाइमर सक्रिय करने के लिए दबाया जा करने के लिए की जरूरत है।";
+"Pause saving solves" = "बचत को हल करती है रोकें";
+"about" = "के बारे में";
+"Pause Saving Solves" = "रोकें सहेजा जा रहा है हल करती है";
+"Solves will not be saved until you turn pause saving solves back off" = "हल करती है सहेजा नहीं जाएगा जब तक आप बारी ठहराव बचत को हल करती है पीछे";
+"Resumed Saving Solves" = "फिर से शुरू की बचत को हल करती है";
+"Solves will not be recorded and saved" = "हल दर्ज नहीं किया जाएगा और बचाया";
+
+
+"Developer:" = "डेवलपर:";
+"Contact:" = "संपर्क करें";
+"Website" = "वेबसाइट";
+"back" = "वापस";
+
+
+"CUBE" = "घनक्षेत्र";
+"CUSTOM" = "कस्टम";
+"TAP TO ENTER A NAME" = "नल जैसा नाम दर्ज करें";
+"CREATE A NEW GROUPING" = "बनाएँ एक नया समूहीकरण";
+"EDIT" = "संपादित करें";
+"Enter a description" = "वर्णन दर्ज करें";
+"MISSING PUZZLE NAME" = "लापता पहेली नाम";
+"Please enter a name for the puzzle." = "पहेली के लिए एक नाम दर्ज करें।";
+"Missing Description" = "गुम विवरण";
+"Please enter a description for the puzzle." = "पहेली के लिए एक विवरण दर्ज करें।";
+
+
+"Are you sure you want to delete %lld solves?" = "क्या आप वाकई %lld सॉल्व को हटाना चाहते हैं?";
+"CANCEL" = "रद्द करना";
+"DELETE" = "हटाएँ";
+
+
+"MOVE %lld SAVED TIMES TO..." = "%lld संशोधित समय के लिए ...";
+
+
+"YES" = "हाँ";
+"NO" = "नहीं";
+"ONE" = "एक";
+"TWO" = "दो";
+"ON" = "पर";
+"OFF" = "बंद";
+"DELETE" = "हटाएँ";
+"UPDATE" = "अपडेट करें";
+"CREATE" = "सृजन करना";
+
+"Missing Puzzle Name" = "गुम पहेली नाम";

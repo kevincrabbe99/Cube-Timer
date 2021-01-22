@@ -6,7 +6,8 @@ target 'Cube Timer' do
   use_frameworks!
 
   # Pods for Cube Timer
-
+  
+  pod 'Firebase/Crashlytics'
 	pod 'GoogleAnalytics'
   pod 'Firebase/Analytics'
 

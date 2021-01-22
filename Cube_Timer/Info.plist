@@ -19,11 +19,18 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
+	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Chivo-Italic.ttf</string>
+		<string>Chivo-Light.ttf</string>
+		<string>Chivo-Regular.ttf</string>
+		<string>Chivo-Black.ttf</string>
+		<string>Chivo-Bold.ttf</string>
 		<string>Dosis-Regular.ttf</string>
 		<string>Dosis-SemiBold.ttf</string>
 		<string>Dosis-ExtraBold.ttf</string>

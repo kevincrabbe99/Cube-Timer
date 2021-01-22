@@ -18,9 +18,10 @@ struct DeleteSolvesView: View {
         VStack {
             
             Text("Are you sure you want to delete \(allSolvesController.selected.count) solves?"/* \(allSolvesController.selected.count > 1 ? "solves?" : "solve?")"*/)
-                .font(Font.custom("Heebo-Black", size: 24))
+                .font(Font.custom("Play-Bold", size: 27))
                 .padding(.leading, 20)
                 .padding(.trailing, 20)
+                .multilineTextAlignment(.center)
             
             HStack(spacing: 20) {
                 
@@ -43,32 +44,12 @@ struct DeleteSolvesView: View {
             
         } // end main vstack
         .foregroundColor(.init("mint_cream"))
-        .padding(20)
+        .padding([.leading, .trailing], 20)
+        .offset(y: -10)
         
     }
 }
 
-struct RoundedButton: View {
-    
-    var color: Color
-    var text: LocalizedStringKey
-    var textColor: Color = Color.white
-    
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 3)
-                .fill(color.opacity(0.8))
-                .border(color, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                .cornerRadius(3)
-            
-            Text(text)
-                .fontWeight(.bold)
-                .foregroundColor(textColor)
-        }
-        .frame(width: 120, height: 35)
-    }
-    
-}
 
 struct DeleteSolvesView_Previews: PreviewProvider {
     static var previews: some View {

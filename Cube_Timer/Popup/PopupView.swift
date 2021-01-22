@@ -38,21 +38,49 @@ struct PopupView: View {
                         }
                     
                     /*
-                    x button
+                     *  Top bar
                      */
-                    Button(action: {
-                        self.hide()
-                    }, label: {
-                        Image.init(systemName: "xmark")
-                            .foregroundColor(.init("mint_cream"))
-                            .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
-                            .frame(width: 50, height: 50, alignment: .center)
-                    })
-                    .position(x: popupWidth - 25, y: 20)
+                    HStack(alignment: .bottom) {
+                        /*
+                         *  Title
+                         */
+                        if popupController.title != nil {
+                            Text(popupController.title!)
+                                .font(Font.custom("Play-Bold", size: 15))
+                                .foregroundColor(.init("mint_cream"))
+                        }
+                            
+                        Spacer()
+                        
+                        /*
+                        x button
+                         */
+                        Button(action: {
+                            self.hide()
+                        }, label: {
+                            
+                            IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"))
+                            
+                            /*
+                            Image.init(systemName: "xmark")
+                                .foregroundColor(.init("mint_cream"))
+                                .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                                .frame(width: 50, height: 50, alignment: .center)
+                            */
+                        })
+                    }
+                    .frame(width: geo.size.width/2)
+                    .position(x: popupWidth / 2, y: -20)
                     .zIndex(9)
                    
-                    
-                    popupController.currentView
+                    /*
+                     *  the current view
+                     */
+                    if cvc.popupShowing {
+                        popupController.currentView
+                            .transition(.opacity)
+                            .animation(.spring(response: 0.2))
+                    }
                     
                 }
                 .frame(width: geo.size.width/2, height: popupHeight, alignment: .center)

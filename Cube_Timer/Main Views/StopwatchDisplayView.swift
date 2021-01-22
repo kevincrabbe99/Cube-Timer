@@ -15,16 +15,18 @@ struct StopwatchDisplayView: View {
         
         HStack {
             Text(timer.lblMin)
-                .font(Font.custom("Heebo-Black", size: 67))
+                .font(Font.custom("Chivo-Bold", size: 63))
                 .frame(width: 80, height: 60)
             Text(":")
+                .font(Font.custom("Chivo-Bold", size: 15))
             Text(timer.lblSec)
                 
-                .font(Font.custom("Heebo-Black", size: 67))
+                .font(Font.custom("Chivo-Bold", size: 63))
                 .frame(width: 80, height: 60)
             Text(":")
+                .font(Font.custom("Chivo-Bold", size: 15))
             Text(timer.lblMS)
-                .font(Font.custom("Heebo-Black", size: 67))
+                .font(Font.custom("Chivo-Bold", size: 63))
                // .font(.system(size: 55))
                 .frame(width: 80, height: 60)
         }

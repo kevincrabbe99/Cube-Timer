@@ -40,6 +40,11 @@ class ContentViewController: ObservableObject {
     @Published var sbBgOpacity: Double = 0
     @Published var sbXPos: CGFloat = -1 * (UIScreen.main.bounds.width/6)+45 // initialize it to sidebarOutPos x value
     
+    
+    // sidebar edit mode
+    @Published var sbEditMode: Bool = false
+    
+    
     // popup stuff
     @Published var popupShowing: Bool = false
     let lightTap = UIImpactFeedbackGenerator(style: .light)
@@ -223,7 +228,6 @@ class ContentViewController: ObservableObject {
         
         if p == .settings {
             self.setStateForSettings()
-            self.onPage = p
         }else { // a button that was not settings was pressed
             // check if we need to exit settings
             if self.onPage == .settings {
@@ -244,6 +248,8 @@ class ContentViewController: ObservableObject {
         }
         
         
+        self.sbEditMode = false
+        
         self.pushOutSidebar()
         
         
@@ -253,12 +259,14 @@ class ContentViewController: ObservableObject {
     private func setStateForSettings() {
         if !inSettings  {
             self.inSettings = true
+            self.onPage = .settings
             
             Analytics.logEvent(AnalyticsEventScreenView, parameters: [
                 AnalyticsParameterDestination: "settingsView"
             ])
         } else {
             self.inSettings = false
+            self.setPageTo(.Main)
         }
         
     }
@@ -270,9 +278,7 @@ class ContentViewController: ObservableObject {
         self.allSolvesViewScale = 1
         
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
-            AnalyticsParameterDestination: "allSolvesView"
-        ])
+      
     }
     
     private func setStateForMain() {
@@ -281,9 +287,7 @@ class ContentViewController: ObservableObject {
         self.pageTransitionPercentage = 0
         self.allSolvesViewScale = 0.9
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
-            AnalyticsParameterDestination: "mainView"
-        ])
+       
     }
     
     
@@ -302,7 +306,8 @@ class ContentViewController: ObservableObject {
             * pass SolveElementController so we can use that to unselect within th epopup
      */
     public func tappedEditSolves(solves: [SolveElementController]) {
-        showPopup(v: AnyView(EditSolveView(/*controller: editSolveController, parent: popupController,*/ solves: solves, selection: 1)))
+        showPopup(  v: AnyView(EditSolveView(/*controller: editSolveController, parent: popupController,*/ solves: solves, selection: 1)),
+                    title: "MOVE \(allSolvesController.selected.count) SAVED TIMES TO...")
     }
     
     /*
@@ -311,20 +316,21 @@ class ContentViewController: ObservableObject {
      */
     public func tappedAddCT() {
         print("[cvc] creating popup for new CubeType")
-        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController)))
+        showPopup(v: AnyView(NewCubeTypeView(controller: ctEditController)), title: "CREATE A NEW GROUPING")
     }
     
     /*
      *  When editing a CT we bring up the add CT view and change it a lil
      */
-    public func showCTPopupFor(id: UUID) {
+    public func tappedEditCT(id: UUID) {
         let ct = cTypeHandler.getControllerFrom(id: id)!.ct
-        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, parent: popupController, setCT: ct)))
+        showPopup(v: AnyView(EditCubeTypeView(controller: ctEditController, parent: popupController, setCT: ct)),
+                  title: "EDIT, \(ct.name)")
     }
     
-    public func showPopup(v: AnyView) {
+    public func showPopup(v: AnyView, title: LocalizedStringKey? = nil) {
         lightTap.impactOccurred()
-        popupController.set(v)
+        popupController.set(v, title: title)
         popupShowing = true
         
         print("[cvc] popupShowing = ", popupShowing)
@@ -406,6 +412,9 @@ class ContentViewController: ObservableObject {
             self.sbXPos = self.sidebarOutPos.x
             self.sbBgOpacity = 0
        // }
+        
+        // cancel edit mode
+        self.sbEditMode = false
     }
     
     var peripheralOpacity: Double  {

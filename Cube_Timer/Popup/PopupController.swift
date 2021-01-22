@@ -16,13 +16,17 @@ class PopupController: ObservableObject {
     var contentView: ContentView!
     var cTypeHandler: CTypeHandler!
     
+    var title: LocalizedStringKey?
+    
+    
     // popup positioning
     @Published var popupOffsetY: CGFloat = 0
     @Published var popupOffsetX: CGFloat = 0
     
     @Published var currentView: AnyView = AnyView(PopupError())
     
-    func set(_ pvg: AnyView) {
+    func set(_ pvg: AnyView, title: LocalizedStringKey? = nil) {
+        self.title = title
         self.currentView = AnyView(pvg)
     }
     

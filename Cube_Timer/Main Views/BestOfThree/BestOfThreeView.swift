@@ -46,8 +46,7 @@ struct BestOfThreeView: View {
                             
                             LabelElement(label: self.controller.best.getAsReadable(), highlighted: self.controller.lastIsBest, bgColor: Color.init("green"))
                             Text("Best")
-                                .fontWeight(.bold)
-                                .font(.system(size: 13))
+                                .font(Font.custom("Play-Bold", size: 12))
                
                         }
                         .frame(width:  innerW / 3, alignment: .leading)
@@ -55,8 +54,7 @@ struct BestOfThreeView: View {
                             
                             LabelElement(label: self.controller.worst.getAsReadable(), highlighted: self.controller.lastIsWorst, bgColor: Color.init("red"))
                             Text("Worst")
-                                .fontWeight(.bold)
-                                .font(.system(size: 13))
+                                .font(Font.custom("Play-Bold", size: 12))
                     
                         }
                         .frame(width:  innerW / 3, alignment: .leading)
@@ -64,18 +62,18 @@ struct BestOfThreeView: View {
                             
                             LabelElement(label: String(format: "%.2f", self.controller.average))
                             Text("Average")
-                                .fontWeight(.bold)
-                                .font(.system(size: 13))
+                                .font(Font.custom("Play-Bold", size: 12))
                   
                         }
                         .frame(width: innerW / 3, alignment: .leading)
                     }
                     .opacity(0.8)
                     .padding(10)
-                    .offset(x: 15, y: 5)
+                    .offset(x: 15, y: 1)
                     //.frame(width:innerW)
                 }
             }
+            .offset(y: 10)
                 
         }
             
@@ -101,8 +99,7 @@ struct LabelElement: View {
             }
             
             Text(label)
-                .fontWeight(.bold)
-                .font(.system(size: 12))
+                .font(Font.custom("Chivo-Regular", size: 12))
         }
         .frame(width: 65, height: 15, alignment: .center)
     }

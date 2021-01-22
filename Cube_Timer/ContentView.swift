@@ -158,7 +158,7 @@ struct ContentView: View {
             
                 
                 Color.black
-                    .opacity(cvc.sbBgOpacity)
+                    .opacity(cvc.sbEditMode ? 1 : cvc.sbBgOpacity)
                     .animation(.spring())
                     .frame(width: geo.size.width, height: geo.size.height)
                     .position(x: geo.size.width/2, y: geo.size.height/2)
@@ -184,7 +184,7 @@ struct ContentView: View {
                     Color.black
                         .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.2)))
                         .zIndex(6)
-                        .opacity(0.5)
+                        .opacity(0.75)
                         .onTapGesture {
                             cvc.hidePopup()
                         }
@@ -197,6 +197,7 @@ struct ContentView: View {
                 }
                 
                 AlertView()
+                    .zIndex(100)
                 
             }
         
@@ -222,9 +223,9 @@ struct ContentView: View {
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
             
             // FOR DEV PURPOSE: Uncommenting this will create 50 random solves to the default cubetype
-            // solveHandler.addGenericSampleSolves(count: 30) are u sure?
+            //solveHandler.addGenericSampleSolves(count: 150) //are u sure?
         }
-      // .environment(\.locale, .init(identifier: "ja")) // DEV USE ONLY
+       //.environment(\.locale, .init(identifier: "hi")) // DEV USE ONLY
         .environmentObject(solveHandler)
         .environmentObject(cTypeHandler)
         .environmentObject(allSolvesController)

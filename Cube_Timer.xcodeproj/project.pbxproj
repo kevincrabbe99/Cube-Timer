@@ -53,6 +53,17 @@
 		7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */; };
 		7BA90EDC25B512CE00A03DE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA90EDB25B512CE00A03DE1 /* AppDelegate.swift */; };
 		7BA90EFA25B5231500A03DE1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90EF925B5231500A03DE1 /* GoogleService-Info.plist */; };
+		7BA90F8325B5924C00A03DE1 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA90F8225B5924B00A03DE1 /* RoundedButton.swift */; };
+		7BA90F8B25B59B8F00A03DE1 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA90F8A25B59B8F00A03DE1 /* IconButton.swift */; };
+		7BA90FC025B69BE900A03DE1 /* Chivo-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FB725B69BE900A03DE1 /* Chivo-LightItalic.ttf */; };
+		7BA90FC125B69BE900A03DE1 /* Chivo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FB825B69BE900A03DE1 /* Chivo-Bold.ttf */; };
+		7BA90FC225B69BE900A03DE1 /* Chivo-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FB925B69BE900A03DE1 /* Chivo-Italic.ttf */; };
+		7BA90FC325B69BE900A03DE1 /* Chivo-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FBA25B69BE900A03DE1 /* Chivo-BoldItalic.ttf */; };
+		7BA90FC425B69BE900A03DE1 /* Chivo-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FBB25B69BE900A03DE1 /* Chivo-Light.ttf */; };
+		7BA90FC525B69BE900A03DE1 /* Chivo-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FBC25B69BE900A03DE1 /* Chivo-BlackItalic.ttf */; };
+		7BA90FC625B69BE900A03DE1 /* Chivo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FBD25B69BE900A03DE1 /* Chivo-Regular.ttf */; };
+		7BA90FC725B69BE900A03DE1 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FBE25B69BE900A03DE1 /* OFL.txt */; };
+		7BA90FC825B69BE900A03DE1 /* Chivo-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA90FBF25B69BE900A03DE1 /* Chivo-Black.ttf */; };
 		7BAAE0FB259B386C00330533 /* Dosis-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */; };
 		7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */; };
 		7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */; };
@@ -176,6 +187,17 @@
 		7B9B79B3254A68880088ECD5 /* AllSolvesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesView.swift; sourceTree = "<group>"; };
 		7BA90EDB25B512CE00A03DE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BA90EF925B5231500A03DE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7BA90F8225B5924B00A03DE1 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		7BA90F8A25B59B8F00A03DE1 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
+		7BA90FB725B69BE900A03DE1 /* Chivo-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-LightItalic.ttf"; sourceTree = "<group>"; };
+		7BA90FB825B69BE900A03DE1 /* Chivo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-Bold.ttf"; sourceTree = "<group>"; };
+		7BA90FB925B69BE900A03DE1 /* Chivo-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-Italic.ttf"; sourceTree = "<group>"; };
+		7BA90FBA25B69BE900A03DE1 /* Chivo-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-BoldItalic.ttf"; sourceTree = "<group>"; };
+		7BA90FBB25B69BE900A03DE1 /* Chivo-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-Light.ttf"; sourceTree = "<group>"; };
+		7BA90FBC25B69BE900A03DE1 /* Chivo-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-BlackItalic.ttf"; sourceTree = "<group>"; };
+		7BA90FBD25B69BE900A03DE1 /* Chivo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-Regular.ttf"; sourceTree = "<group>"; };
+		7BA90FBE25B69BE900A03DE1 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		7BA90FBF25B69BE900A03DE1 /* Chivo-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-Black.ttf"; sourceTree = "<group>"; };
 		7BAAE0F0259B386C00330533 /* Dosis-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		7BAAE0F2259B386C00330533 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
 		7BAAE0F3259B386C00330533 /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
@@ -390,6 +412,7 @@
 		7B984CED253E02D900BC6402 /* Cube_Timer */ = {
 			isa = PBXGroup;
 			children = (
+				7BA90F8125B5922D00A03DE1 /* Buttons */,
 				7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */,
 				7B984CF0253E02D900BC6402 /* ContentView.swift */,
 				7BFF320F259AEEA30029EA19 /* ContentViewController.swift */,
@@ -440,9 +463,35 @@
 			path = Cube_TimerUITests;
 			sourceTree = "<group>";
 		};
+		7BA90F8125B5922D00A03DE1 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				7BA90F8225B5924B00A03DE1 /* RoundedButton.swift */,
+				7BA90F8A25B59B8F00A03DE1 /* IconButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		7BA90FB625B69BE800A03DE1 /* Chivo */ = {
+			isa = PBXGroup;
+			children = (
+				7BA90FB725B69BE900A03DE1 /* Chivo-LightItalic.ttf */,
+				7BA90FB825B69BE900A03DE1 /* Chivo-Bold.ttf */,
+				7BA90FB925B69BE900A03DE1 /* Chivo-Italic.ttf */,
+				7BA90FBA25B69BE900A03DE1 /* Chivo-BoldItalic.ttf */,
+				7BA90FBB25B69BE900A03DE1 /* Chivo-Light.ttf */,
+				7BA90FBC25B69BE900A03DE1 /* Chivo-BlackItalic.ttf */,
+				7BA90FBD25B69BE900A03DE1 /* Chivo-Regular.ttf */,
+				7BA90FBE25B69BE900A03DE1 /* OFL.txt */,
+				7BA90FBF25B69BE900A03DE1 /* Chivo-Black.ttf */,
+			);
+			path = Chivo;
+			sourceTree = "<group>";
+		};
 		7BAAE0EE259B384C00330533 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				7BA90FB625B69BE800A03DE1 /* Chivo */,
 				7BAAE125259B387900330533 /* Play */,
 				7BAAE108259B387300330533 /* Heebo */,
 				7BAAE0EF259B386C00330533 /* Dosis */,
@@ -760,23 +809,32 @@
 				7BAAE11B259B387300330533 /* Heebo-ExtraLight.ttf in Resources */,
 				7BAAE120259B387300330533 /* Heebo-VariableFont_wght.ttf in Resources */,
 				7B9B2E7D25A29F2200819159 /* Localizable.strings in Resources */,
+				7BA90FC125B69BE900A03DE1 /* Chivo-Bold.ttf in Resources */,
 				7BAAE0FC259B386C00330533 /* Dosis-Medium.ttf in Resources */,
+				7BA90FC325B69BE900A03DE1 /* Chivo-BoldItalic.ttf in Resources */,
 				7BAAE0FD259B386C00330533 /* Dosis-Regular.ttf in Resources */,
 				7BAAE11E259B387300330533 /* Heebo-Light.ttf in Resources */,
 				7BAAE0FF259B386C00330533 /* Dosis-Bold.ttf in Resources */,
 				7BAAE12B259B387900330533 /* Play-Bold.ttf in Resources */,
+				7BA90FC825B69BE900A03DE1 /* Chivo-Black.ttf in Resources */,
 				7BAAE100259B386C00330533 /* Dosis-ExtraBold.ttf in Resources */,
 				7BAAE11C259B387300330533 /* Heebo-Regular.ttf in Resources */,
 				7BAAE129259B387900330533 /* Play-Regular.ttf in Resources */,
 				7B984CF6253E02DC00BC6402 /* Preview Assets.xcassets in Resources */,
+				7BA90FC625B69BE900A03DE1 /* Chivo-Regular.ttf in Resources */,
+				7BA90FC525B69BE900A03DE1 /* Chivo-BlackItalic.ttf in Resources */,
 				7BAAE118259B387300330533 /* Heebo-Black.ttf in Resources */,
 				7BAAE102259B386C00330533 /* Dosis-ExtraLight.ttf in Resources */,
 				7BAAE117259B387300330533 /* Heebo-Medium.ttf in Resources */,
+				7BA90FC025B69BE900A03DE1 /* Chivo-LightItalic.ttf in Resources */,
 				7BAAE101259B386C00330533 /* Dosis-SemiBold.ttf in Resources */,
 				7B984CF3253E02DC00BC6402 /* Assets.xcassets in Resources */,
+				7BA90FC725B69BE900A03DE1 /* OFL.txt in Resources */,
 				7BA90EFA25B5231500A03DE1 /* GoogleService-Info.plist in Resources */,
+				7BA90FC225B69BE900A03DE1 /* Chivo-Italic.ttf in Resources */,
 				7BAAE119259B387300330533 /* Heebo-Bold.ttf in Resources */,
 				7BAAE0FE259B386C00330533 /* Dosis-Light.ttf in Resources */,
+				7BA90FC425B69BE900A03DE1 /* Chivo-Light.ttf in Resources */,
 				7BAAE116259B387300330533 /* Heebo-Thin.ttf in Resources */,
 				7BAAE11D259B387300330533 /* Heebo-ExtraBold.ttf in Resources */,
 				7BAAE11A259B387300330533 /* Heebo-SemiBold.ttf in Resources */,
@@ -930,6 +988,7 @@
 				7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */,
 				7B984CFB253E02DC00BC6402 /* Cube_Timer.xcdatamodeld in Sources */,
 				7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */,
+				7BA90F8325B5924C00A03DE1 /* RoundedButton.swift in Sources */,
 				7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */,
 				7BFF3210259AEEA40029EA19 /* ContentViewController.swift in Sources */,
 				7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */,
@@ -949,6 +1008,7 @@
 				7B4719E2256BBBEB009FFFEA /* BarController.swift in Sources */,
 				7BCC6DD5257238B8001663B1 /* SidebarView.swift in Sources */,
 				7B984CEF253E02D900BC6402 /* Cube_TimerApp.swift in Sources */,
+				7BA90F8B25B59B8F00A03DE1 /* IconButton.swift in Sources */,
 				7B607411258F0B5700D188CF /* CTypeHandler.swift in Sources */,
 				7B60740C258EF7ED00D188CF /* CubeType+CoreDataProperties.swift in Sources */,
 				7BCC6DB2256EC61B001663B1 /* BO3Controller.swift in Sources */,
@@ -1142,6 +1202,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cube_Timer/Preview Content\"";
 				DEVELOPMENT_TEAM = X4H69T3Q68;
 				ENABLE_PREVIEWS = YES;
@@ -1151,7 +1212,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2;
 				PRODUCT_BUNDLE_IDENTIFIER = "be.kevincrab.Cube-Timer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1166,6 +1227,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cube_Timer/Preview Content\"";
 				DEVELOPMENT_TEAM = X4H69T3Q68;
 				ENABLE_PREVIEWS = YES;
@@ -1175,7 +1237,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2;
 				PRODUCT_BUNDLE_IDENTIFIER = "be.kevincrab.Cube-Timer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

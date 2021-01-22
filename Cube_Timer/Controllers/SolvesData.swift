@@ -387,18 +387,7 @@ class SolvesFromTimeframe: ObservableObject {
         allSolvesController.updateSolves()
         print("Deleted from SolvesFromTimeframe.swift reference")
         
-        
-        /*
-         *  GOOGLE ANALYTICS STUFF
-         */
-        // lod deleted solve
-        Analytics.logEvent("deleted_solve", parameters: [
-            "puzzle_name": s.cubeType.name as NSObject,
-            "puzzle_description": s.cubeType.descrip as NSObject,
-            "time": s.timeMS as NSObject
-        ])
-        
-        updateGATotalSaves()
+       
         
         /*
         Analytics.logEvent(AnalyticsEvent, parameters: [

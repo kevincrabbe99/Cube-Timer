@@ -120,10 +120,9 @@ struct TimerView: View {
                              */
                             HStack {
                                 Text("\(timer.overUnderTime)")
-                                    .font(.system(size: 12))
-                                    .fontWeight(.bold)
+                                    .font(Font.custom("Chivo-Bold", size: 12))
                                 Text("(\(timer.overUnderPercentage, specifier: "%.0f")%)")
-                                    .font(.system(size: 12))
+                                    .font(Font.custom("Chivo-Regular", size: 12))
                             
                             }
                             .frame(width: 210, alignment: .leading)
@@ -147,7 +146,7 @@ struct TimerView: View {
                             }
                                 
                         }
-                        .offset(y: -5)
+                        .offset(y: 0)
                         .frame(width: 260, height: 20, alignment: .leading)
                     
                     } else {
@@ -166,7 +165,7 @@ struct TimerView: View {
                  */
                 StopwatchDisplayView(timer: timer)
                     .frame(width: 250, height: 60)
-                    //.offset(y: 10)
+                    .offset(y: (solveHandler.solves.count == 0 ? -15 : 0)) // push up if no solves
                 
             } // end main ZStack
                 
@@ -180,32 +179,40 @@ struct TimerView: View {
                         openShowAllSolves()
                     }, label: {
                         
-                        if !(solveHandler.currentTimeframe == .LastThree && solveHandler.solves.count < 3)  {
+                        if (solveHandler.currentTimeframe == .LastThree && solveHandler.solves.count >= 3)  {
                             if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) {
+                                
                                 ZStack {
                                     Color(.init("very_dark_black"))
                                         .cornerRadius(5)
                                         .frame(width: ((slvsBarWidth/3) * CGFloat(solveHandler.last3.count) ), height: slvsBarHeight)
                                         
-                                        .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
+                                        .addBorder(Color.black.opacity(0.95), width: 1, cornerRadius: 5)
                                         .animation(.easeOut(duration: 0.15))
 
                                 }
+                                .offset(y: 5)
                             }
-                        } else {
+                        } else if (solveHandler.currentTimeframe == .LastThree) {
+                            // background for last 3 solves
                             ZStack {
                                 Color.init("very_dark_black")
                                     .cornerRadius(5)
-                                    .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
+                                    .addBorder(Color.black.opacity(0.95), width: 1, cornerRadius: 5)
                                     .transition(.opacity)
                                 
+                                /*
+                                 * Complete more solves PROMPT
+                                 */
                                 Text("COMPLETE \( 3 - solveHandler.solves.count) MORE SOLVES")
                                     .foregroundColor(Color.init("mint_cream"))
                                     .fontWeight(.bold)
                                     .font(Font.custom("Heebo-Black", size: 12))
                                     .opacity(0.8)
                             }
-                            .frame(width: slvsBarWidth, height: slvsBarHeight)
+                            .frame(width: slvsBarWidth, height: 50)
+                            .offset(y: 5)
+                            
                         }
                 
                     })
@@ -228,7 +235,7 @@ struct TimerView: View {
                             }
                             
                         }else {
-                        
+                        /* THE LAST 3 DISPLAY
                             HStack(spacing: 30.0) {
                                 ForEach(solveHandler.last3) { s in
                                     Text(TimeCapture.init(s.timeMS).getAsReadable() )
@@ -247,7 +254,7 @@ struct TimerView: View {
                                 }
                             } // end last 3 bar [HStack]
                             .opacity(timer.peripheralOpacity)
-                            
+                        */
                         } // end if
                         
                     }
@@ -263,13 +270,13 @@ struct TimerView: View {
                  */
                 StatsBarView(timer: timer, solveHandler: solveHandler)
                     // .opacity(statBarGraphOpacity)
-                    .offset(y: 20)
+                    //.offset(y: 20)
                     .animation(Animation.easeOut(duration: 0.15))
                 
             } // end guard for pauseSavingSolves
         }
         .foregroundColor(.white)
-        .offset(y: solveHandler.size == 0 ? 50 : 0)
+        .offset(y: solveHandler.size == 0 ? 60 : 10)
         .onAppear() {
             timer.setDisplayToLastSolve()
         }

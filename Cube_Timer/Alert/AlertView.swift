@@ -29,7 +29,8 @@ struct AlertView: View {
                     HStack(spacing: 15) {
                         
                         if controller.icon != nil {
-                            controller.icon
+                            controller.icon!
+                                .foregroundColor(controller.iconColor)
                         }
                         
                         VStack(alignment: .leading) {

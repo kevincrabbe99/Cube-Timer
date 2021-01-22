@@ -38,6 +38,11 @@ struct EditSolveView: View {
     @State var selection: Int = 0
 
     
+    let gridLayout = [
+        GridItem(.flexible(), spacing: 5, alignment: .trailing),
+        GridItem(.flexible(), spacing: 5, alignment: .leading)
+    ]
+    
     var body: some View {
         
         GeometryReader { geo in
@@ -46,29 +51,59 @@ struct EditSolveView: View {
                 
        
                 
-                VStack(spacing: 0) {
-                    Text("UPDATE CUBES FOR \(allSolvesController.selected.count) SOLVES")
-                        .font(Font.custom("Heebo-Black", size: 20))
-                        .padding(20)
-                    
-                    Picker(selection: $selection, label: Text("Picker")) {
-                        ForEach(0..<controller.cTypeHandler.getCubeTypes().count) {
-                            SingleCubeTypeView(controller: controller.cTypeHandler.typeControllers[$0], asSidebar: false)
-                            //Text( controller.cTypeHandler.getCubeTypes()[$0].name )
+                VStack(alignment: .leading, spacing: 0) {
+                    /*
+                    Text("SELECT CONFIG FOR \(allSolvesController.selected.count) SOLVES")
+                        .font(Font.custom("Play-Bold", size: 15))
+                        .padding(10)
+                    */
+ 
+                    ScrollView {
+                        LazyVGrid( columns: gridLayout ) {
+                            ForEach(controller.cTypeHandler.typeControllers) { ctController in
+                                
+                                if !ctController.selected { // only show other puzzle types
+                                    Button(action: {
+                                        print("tapped")
+                                        self.controller.setCtTo(ct: ctController.ct, solves: solves)
+                                        
+                                        // goto tapped puzzle
+                                        cTypeHandler.newSelection(ctController)
+                                        
+                                        // hide popup
+                                        parent.hidePopup()
+                                    }, label: {
+                                        SingleCubeTypeView(controller: ctController, asSidebar: false, bgColor: Color.init("very_dark_black"))
+                                    })
+                                    .fixedSize()
+                                }
+                            }
                         }
+                        .padding(.top, 20)
+                        .padding(.bottom, 20)
+                    }
+                    
+                    /*  OLD Picker
+                    Picker(selection: $selection, label: Text("Picker")) {
+                     ForEach(0..<controller.cTypeHandler.getCubeTypes().count) {
+                         SingleCubeTypeView(controller: controller.cTypeHandler.typeControllers[$0], asSidebar: false)
+                         //Text( controller.cTypeHandler.getCubeTypes()[$0].name )
+                     }
                     }
                     .pickerStyle(WheelPickerStyle())
                     .frame(width: geo.size.width * 0.65, height: 70)
                     .labelsHidden()
                    // .clipped()
                     .offset(y: -15) // damn
+                    */
                     
                 }
-                .padding(.leading, 20)
-                .padding(.trailing, 20)
+                .padding(.leading, 5)
+                .padding(.trailing, 5)
                 .frame(width: geo.size.width, alignment: .center)
                 
                 
+                /* old button
                 ZStack {
                     Button(action: {
                         self.controller.setCtTo(ct: controller.cTypeHandler.getCubeTypes()[selection], solves: solves)
@@ -78,10 +113,11 @@ struct EditSolveView: View {
                             RoundedButton(color: Color.init("mint_cream"), text: "UPDATE", textColor: Color.init("very_dark_black"))
           
                         }
-                        .frame(width: 90, height: 35, alignment: .center)
+                        .frame(width: 70, height: 20, alignment: .center)
                     })
                 }
                 .frame(width: geo.size.width-100, alignment: .trailing)
+                */
                 
             }
             .foregroundColor(Color.init("mint_cream"))

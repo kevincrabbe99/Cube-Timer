@@ -28,7 +28,7 @@ struct EditSolvesBarView: View {
                     }, label: {
                         ZStack {
                             Color.clear
-                            Image(systemName: "trash.fill")
+                            IconButton(icon: Image(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 25, height: 25)
                         }
                     })
                     .frame(width: 30, height: 80)
@@ -39,7 +39,7 @@ struct EditSolvesBarView: View {
                     }, label: {
                         ZStack {
                             Color.clear
-                            Image(systemName: "square.and.pencil")
+                            IconButton(icon: Image(systemName: "pencil.tip"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 25, height: 25)
                         }
                     })
                     .frame(width: 30, height: 80)
@@ -50,7 +50,7 @@ struct EditSolvesBarView: View {
                     }, label: {
                         ZStack {
                             Color.clear
-                            Image(systemName: "clear.fill")
+                            IconButton(icon: Image(systemName: "xmark"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 25, height: 25)
                         }
                     })
                     .frame(width: 30, height: 80)
