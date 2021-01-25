@@ -192,12 +192,13 @@ class SolveHandler: ObservableObject {
             
             print("[SolveHandler] Deleting from CoreData")
             
+            self.solvesByTimeFrame.delete(s) // delete SolvesFromTimeframe() reference
+            
             // this deletes
             PersistenceController.shared.container.viewContext.delete(s)
             
             do { // saving it 
                 try PersistenceController.shared.container.viewContext.save()
-                self.solvesByTimeFrame.delete(s) // delete SolvesFromTimeframe() reference
                 //updateEverything() // updates EVERYTHING
             } catch {
                 print("[SolveHandler.delete(_ s:SolveItem)] error deleting solve")
