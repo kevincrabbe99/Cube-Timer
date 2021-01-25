@@ -35,6 +35,9 @@ extension CubeType: Identifiable {
         return false
     }
     
+    
+    
+    
     public func equals(_ ct: CubeType) -> Bool {
         if self.id == ct.id {
             return true
@@ -75,6 +78,26 @@ extension CubeType {
         }
     }
     
+    /*
+    @NSManaged public var scrambleRaw: String?
+    var scramble: String {
+        set {
+            scrambleRaw = newValue
+            //scrambleRaw = newValue.string
+        }get {
+            /*
+            let stringAsData = scrambleRaw?.data(using: String.Encoding.utf16)
+            let array: [String] = try! JSONDecoder().decode([String].self, from: stringAsData!)
+            
+            return array
+            */
+            //return Scramble(raw: scrambleRaw)
+            return scrambleRaw ?? "No scramble found"
+        }
+    }
+    */
+    
+
     
     @NSManaged public var d1: Int16
     var dim1: Int {

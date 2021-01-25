@@ -40,7 +40,7 @@ struct MainView: View {
                 
                 ButtonsView(timer: timer)
                 
-                
+                /*
                 if !settingsController.pauseSavingSolves {
                     VStack(alignment:.trailing) {
                         Text(cTypeHandler.selected.name)
@@ -64,6 +64,18 @@ struct MainView: View {
                     .opacity(cvc.mainViewOpacity - 0.3)
                     .foregroundColor(.white)
                 }
+                */
+                if !settingsController.pauseSavingSolves {
+                    
+                    ScrambleView()
+                        //.frame(width: geo.size.width - 200, alignment: .trailing)
+                       // .position(x: ((geo.size.width - 200) / 2) + 100, y: 40)
+                        //.offset(x: 140)
+                    
+                    
+                }
+                
+                
                 
                 
                 if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) { // only show when there is no timer active
@@ -79,7 +91,7 @@ struct MainView: View {
                     }
 
                     TimerView(p: self, t: timer, s: solveHandler, bo3c: bo3Controller /*solveHandler: solveHandler*/)
-                        .offset(y:-30)
+                        .offset(y:(solveHandler.solves.count > 0 ? 0 : -30))
                 
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)

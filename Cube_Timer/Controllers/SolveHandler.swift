@@ -198,14 +198,15 @@ class SolveHandler: ObservableObject {
             do { // saving it 
                 try PersistenceController.shared.container.viewContext.save()
                 self.solvesByTimeFrame.delete(s) // delete SolvesFromTimeframe() reference
+                
+                self.updateSolves()
+                timer.setDisplayToLastSolve()
                 //updateEverything() // updates EVERYTHING
             } catch {
                 print("[SolveHandler.delete(_ s:SolveItem)] error deleting solve")
             }
             
             // update solves gets called upon success ^
-            self.updateSolves()
-            timer.setDisplayToLastSolve()
             
             return true
         }
@@ -605,6 +606,7 @@ class SolveHandler: ObservableObject {
         return getMax().timeMS - getMin().timeMS
     }
     
+    
     func getLastSolve() -> SolveItem? {
         let orderedSolves = self.getSolvesNewestFirst()
         if solves.count > 0 {
@@ -613,6 +615,13 @@ class SolveHandler: ObservableObject {
         return nil
     }
     
+   var last: SolveItem? {
+        let orderedSolves = self.getSolvesNewestFirst()
+        if solves.count > 0 {
+            return orderedSolves[0]
+        }
+        return nil
+    }
     
 }
 

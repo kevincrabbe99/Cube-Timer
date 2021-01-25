@@ -164,9 +164,11 @@ class SolvesFromTimeframe: ObservableObject {
   
         case .Today:
             for s in solves {
-                if Calendar.current.isDateInToday(s.timestamp) {
-                    res.append(s)
-                }
+              //  if s.timestamp != nil {
+                    if Calendar.current.isDateInToday(s.timestamp) {
+                        res.append(s)
+                    }
+                //}
             }
         case .Week:
             

@@ -35,8 +35,10 @@ struct ContentView: View {
     @ObservedObject var editSolveController: EditSolveController = EditSolveController()
     @ObservedObject var settingsController: SettingsController = SettingsController()
     @ObservedObject var alertController: AlertController = AlertController()
+
+    // scramble
+    @ObservedObject var scrambleController: ScrambleController = ScrambleController()
     
-  
     @StateObject var cvc: ContentViewController = ContentViewController()
     
     /*
@@ -102,6 +104,10 @@ struct ContentView: View {
         
         // settings controller refs
         self.settingsController.alertController = alertController
+        
+        // scramble
+        self.scrambleController.cTypeHandler = cTypeHandler
+        self.scrambleController.solveHandler = solveHandler
         
         
         
@@ -237,6 +243,7 @@ struct ContentView: View {
         .environmentObject(settingsController)
         .environmentObject(alertController)
         .environmentObject(barGraphController)
+        .environmentObject(scrambleController)
         .onAppear(
         
         
