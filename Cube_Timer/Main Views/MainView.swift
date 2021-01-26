@@ -41,31 +41,6 @@ struct MainView: View {
                 ButtonsView(timer: timer)
                 
                 
-                if !settingsController.pauseSavingSolves {
-                    VStack(alignment:.trailing) {
-                        Text(cTypeHandler.selected.name)
-                            //.font(.system(size: 30))
-                            .font(Font.custom("Play-Bold", size: 33))
-                            //.fontWeight(.black)
-                            .tracking(cTypeHandler.selected.isCustom() ? 0 : 5)
-                            .lineLimit(1)
-                            .offset(x: 5)
-                            .frame(width: 300, alignment: .trailing)
-                        Text(cTypeHandler.selected.descrip)
-                            .font(Font.custom("Play-Regular", size: 15))
-                            .lineLimit(1)
-                            // .font(.system(size: 12))
-                            //.fontWeight(.bold)
-                            .opacity(0.75)
-                    }.frame(width: 150, alignment: .trailing)
-                    .position(x: geo.size.width - 120, y: 30)
-                    .padding(.top, 20)
-                    .padding(.bottom, 30)
-                    .opacity(cvc.mainViewOpacity - 0.3)
-                    .foregroundColor(.white)
-                }
-                
-                
                 if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) { // only show when there is no timer active
                  
                     if !settingsController.pauseSavingSolves {
@@ -79,7 +54,7 @@ struct MainView: View {
                     }
 
                     TimerView(p: self, t: timer, s: solveHandler, bo3c: bo3Controller /*solveHandler: solveHandler*/)
-                        .offset(y:-30)
+                        .offset(y:(solveHandler.solves.count > 0 ? 0 : -30))
                 
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)

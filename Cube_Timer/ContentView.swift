@@ -35,6 +35,8 @@ struct ContentView: View {
     @ObservedObject var editSolveController: EditSolveController = EditSolveController()
     @ObservedObject var settingsController: SettingsController = SettingsController()
     @ObservedObject var alertController: AlertController = AlertController()
+    //scramble
+    @ObservedObject var scrambleController: ScrambleController = ScrambleController()
     
   
     @StateObject var cvc: ContentViewController = ContentViewController()
@@ -49,12 +51,14 @@ struct ContentView: View {
         self.cTypeHandler.contentView = self
         self.cTypeHandler.solveHandler = solveHandler
         self.cTypeHandler.allSolvesController = allSolvesController
+        self.cTypeHandler.scrambleController = scrambleController
         
         // set timer controllers
         self.timer.solveHandler = solveHandler
         self.timer.bo3Controller = bo3Controller
         self.timer.cTypeHandler = cTypeHandler
         self.timer.settingsController = settingsController
+        self.timer.scrambleController = scrambleController
         
         // set solveHandler controllers
         self.solveHandler.timer = timer
@@ -103,6 +107,11 @@ struct ContentView: View {
         // settings controller refs
         self.settingsController.alertController = alertController
         
+        // scramble controller stuff
+        self.scrambleController.solveHandler = solveHandler
+        self.scrambleController.cTypeHandler = cTypeHandler
+        self.scrambleController.settingsController = settingsController
+        self.scrambleController.timer = timer
         
         
         // update the stopwatch display to show the last solve time
@@ -155,7 +164,7 @@ struct ContentView: View {
               
                 // add stuff for sidebar
                 // the tab for the sidebar
-            
+                
                 
                 Color.black
                     .opacity(cvc.sbEditMode ? 1 : cvc.sbBgOpacity)
@@ -166,6 +175,23 @@ struct ContentView: View {
                     .onTapGesture { // close sidebar when tapped
                         cvc.pushOutSidebar()
                     }
+                
+                
+                if scrambleController.isMaxamized {
+                    Color.black
+                        .opacity(0.85)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .position(x: geo.size.width/2, y: geo.size.height/2)
+                        .onTapGesture { // close sidebar when tapped
+                            scrambleController.unMaxamize()
+                        }
+                        .transition(AnyTransition.opacity.animation(.spring()))
+                }
+                
+                if !settingsController.pauseSavingSolves {
+                    TopHeader()
+                }
+                
                 
                 SidebarView(contentView: self, cTypeHandler: cTypeHandler)
                     //.frame(width: (UIDevice.current.hasNotch || UIDevice.IsIpad ? (geo.size.width / 3) : (geo.size.width / 2.4)), height: geo.size.height)
@@ -237,6 +263,7 @@ struct ContentView: View {
         .environmentObject(settingsController)
         .environmentObject(alertController)
         .environmentObject(barGraphController)
+        .environmentObject(scrambleController)
         .onAppear(
         
         

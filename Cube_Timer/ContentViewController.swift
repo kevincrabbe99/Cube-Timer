@@ -418,12 +418,17 @@ class ContentViewController: ObservableObject {
     }
     
     var peripheralOpacity: Double  {
+        if timer == nil {
+            return 0.5
+        }
+        
         if timer.startApproved || timer.timerGoing || timer.oneActivated{
             return -0.3
         }else {
             return 0.5
         }
     }
+    
     
 
     

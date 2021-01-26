@@ -36,6 +36,10 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "Cube_Timer")
+        
+        let description = container.persistentStoreDescriptions.first
+        description?.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

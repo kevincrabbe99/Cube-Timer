@@ -15,6 +15,7 @@ class CTypeHandler: ObservableObject {
     var contentView: ContentView!
     var solveHandler: SolveHandler!
     var allSolvesController: AllSolvesController!
+    var scrambleController: ScrambleController!
     
     var cvc: ContentViewController!
     
@@ -117,7 +118,11 @@ class CTypeHandler: ObservableObject {
             //solveHandler.setTimeFrame(.Today)
         }
         
-        
+        // update scramble
+        if scrambleController != nil {
+            self.scrambleController.generateNewScramble()
+        }
+            
         // google analytics update selected puzzle
         updateGASelectedPuzzle()
         
@@ -458,23 +463,23 @@ class CTypeHandler: ObservableObject {
         do {
             try PersistenceController.shared.container.viewContext.save()
             print("Cube Type Saved!")
-        } catch {
-            print("SAVE ERROR: saving a new CubeType, CTypeController.swift -> addCtToCoreData")
+        } catch let nserror as NSError {
+            print("SAVE ERROR: saving a new CubeType, CTypeController.swift -> addCtToCoreData: ", nserror)
         }
         return newCT
         
-    }
+    } 
     
     
     /*
      *  Google Analytics stuff
      */
     private func updateGATotalPuzzles() {
-        Analytics.setUserProperty("\(self.typeControllers.count)", forName: "total_puzzles")
+        //Analytics.setUserProperty("\(self.typeControllers.count)", forName: "total_puzzles")
     }
     
     private func updateGASelectedPuzzle() {
-        Analytics.setUserProperty("\(self.selected.toString())", forName: "last_puzzle_selected")
+        //Analytics.setUserProperty("\(self.selected.toString())", forName: "last_puzzle_selected")
     }
     
 }

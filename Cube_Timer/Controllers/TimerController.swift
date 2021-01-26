@@ -61,6 +61,7 @@ class TimerController: ObservableObject {
     var cTypeHandler: CTypeHandler!
     var settingsController: SettingsController!
     var cvc: ContentViewController!
+    var scrambleController: ScrambleController!
     
     
     init() {
@@ -328,12 +329,13 @@ class TimerController: ObservableObject {
         bothActivated = false
         timerGoing = false
         acceptInput = false
+        self.scrambleController.generateNewScramble()      // generates new scramble
         //let delayInputTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(acceptInputNow), userInfo: nil, repeats: false)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.acceptInput = true
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            self.cvc.blockGesture = false // allows the page to transition again
+            self.cvc.blockGesture = false               // allows the page to transition again
         }
         
         

@@ -26,6 +26,19 @@ extension CubeType: Identifiable {
         }
     }
     
+    public func getScrambleDimension() -> Int? {
+        if isCustom() {
+            return nil
+        }
+        
+        if d1 == d2 && d2 == d3 {
+            return Int(d1)
+        }
+        
+        return nil
+        
+    }
+    
     public func isCustom() -> Bool {
         if customName != nil {
             if !customName!.isEmpty {
