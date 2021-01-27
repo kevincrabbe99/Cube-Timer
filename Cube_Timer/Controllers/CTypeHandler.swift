@@ -122,6 +122,11 @@ class CTypeHandler: ObservableObject {
         if scrambleController != nil {
             self.scrambleController.generateNewScramble()
         }
+        
+        // close sidebar
+        if cvc != nil {
+            cvc.pushOutSidebar()
+        }
             
         // google analytics update selected puzzle
         updateGASelectedPuzzle()

@@ -10,7 +10,7 @@ import SwiftUI
 
 class ScrambleTurnController: ObservableObject, Identifiable {
     
-    var id: UUID
+    @Published var id: UUID
     
     @Published var value: String = ""
     

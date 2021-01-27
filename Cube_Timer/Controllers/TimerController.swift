@@ -329,7 +329,12 @@ class TimerController: ObservableObject {
         bothActivated = false
         timerGoing = false
         acceptInput = false
-        self.scrambleController.generateNewScramble()      // generates new scramble
+        
+        self.scrambleController.showingPrevious = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.scrambleController.generateNewScramble()      // generates new scramble
+        }
+        
         //let delayInputTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(acceptInputNow), userInfo: nil, repeats: false)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.acceptInput = true

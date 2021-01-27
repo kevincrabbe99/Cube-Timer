@@ -37,16 +37,51 @@ struct TopHeader: View {
                 /*
                  *  tab button
                  */
-                if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) {
-                    Image(systemName: "chevron.compact.right")
-                        .padding([.leading, .trailing], 10)
+                if !scrambleController.isMaxamized && scrambleController.hasScramble {
+                    if !(timer.timerGoing || timer.oneActivated || timer.bothActivated) {
+                        if cTypeHandler.selected.getScrambleDimension()! > 3 {
+                        
+                            Button {
+                                scrambleController.maxamize()
+                            } label: {
+                                IconButton(icon: Image(systemName: "chevron.compact.down"), bgColor: Color.init("mint_cream").opacity(0.8), iconColor: Color.init("very_dark_black"), width: 25, height: 15, weight: .regular)
+                                    .padding([.leading, .trailing], 10)
+                            }
+                            
+                        }
+                    }
                 }
                 
                 if scrambleController.showingScramble {
                     ScrambleView()
                 }
                    
-                VStack {
+                VStack(alignment: .trailing) {
+                    
+                    /*
+                     *  Options
+                     */
+                    if (scrambleController.isMaxamized && scrambleController.showingScramble) {
+                        VStack(alignment: .trailing, spacing: 10) {
+                            HStack {
+                                Text("Auto Expand")
+                                IconButton(icon: Image(systemName: "rectangle.expand.vertical"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"))
+                            }
+                            HStack {
+                                
+                                Button {
+                                    scrambleController.generateNewScramble()
+                                } label: {
+                                    Text("Refresh")
+                                    IconButton(icon: Image(systemName: "arrow.clockwise"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"))
+                                }
+
+                            }
+                        }
+                        .font(Font.custom("Play-Bold", size: 11))
+                        .padding(.top, 15)
+                        .padding(.trailing, 15)
+                    }
                     
                     Spacer()
                     
@@ -69,7 +104,7 @@ struct TopHeader: View {
                             //.fontWeight(.bold)
                             .opacity(0.75)
                     }
-                    .offset(y: -3)
+                    .offset(y: (scrambleController.isMaxamized ? -3 : 10))
                     .opacity(0.8)
                     .padding(.trailing, 15)
                     .padding(.bottom, 25)

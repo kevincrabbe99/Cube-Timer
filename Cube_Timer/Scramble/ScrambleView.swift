@@ -28,13 +28,29 @@ struct ScrambleView: View {
              */
             ZStack {
                 ScrollView(showsIndicators: false) {
-                    LazyVGrid(columns: gridItemLayout, alignment: .trailing)  {
                     
-                        ForEach(scrambleController.currnetScramble) { t in
-                            ScrambleTurn(controller: t)
+                    /*
+                    HStack {
+                        ForEach(scrambleController.currnetScramble[0..<10]) { sc in
+                            ScrambleTurn(controller: sc)
                         }
-                        
                     }
+                    */
+                    
+                    
+                    if scrambleController.hasScramble {
+                        LazyVGrid(columns: gridItemLayout, alignment: .trailing)  {
+                        
+                            ForEach(scrambleController.currnetScramble) { t in
+                                ScrambleTurn(controller: t)
+                            }
+                            
+                        }
+                    } else {
+                        Text("No Scramble")
+                    }
+                    
+                    
                 }
                 .frame(height: scrambleController.heightBasedOnCount)
                 .offset(y: 0)
@@ -43,6 +59,7 @@ struct ScrambleView: View {
                 }
                 .animation(.spring())
             }
+            .offset(x: 10)
             
             /*
              *  HEADER
@@ -78,6 +95,7 @@ struct ScrambleView: View {
             }
             //.padding(.top, 15)
             .animation(.spring())
+            .offset(x: 15)
             
             
         }

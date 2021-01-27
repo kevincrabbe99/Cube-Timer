@@ -96,8 +96,16 @@ class ScrambleController: ObservableObject {
         self.isMaxamized = false
     }
     
+    public func maxamize() {
+        if cTypeHandler.selected.getScrambleDimension()! > 3 {
+            self.isMaxamized = true
+        }
+    }
+    
     public func toggleMaxamize() {
-        self.isMaxamized.toggle()
+        if cTypeHandler.selected.getScrambleDimension()! > 3 {
+            self.isMaxamized.toggle()
+        }
     }
     
     var rows: Int  {
@@ -133,12 +141,19 @@ class ScrambleController: ObservableObject {
         if (timer.timerGoing || timer.oneActivated || timer.bothActivated) {
             return false
         } else {
-            if cTypeHandler.selected.isCustom() {
-                return false
-            } else {
+            if hasScramble {
                 return true
+            } else {
+                return false
             }
         }
+    }
+    
+    var hasScramble: Bool {
+        if cTypeHandler.selected.getScrambleDimension() != nil {
+            return true
+        }
+        return false
     }
     
     var dynamicWidth: CGFloat {
@@ -288,7 +303,7 @@ class ScrambleController: ObservableObject {
     }
     */
     
-    @Published var currnetScramble: [ScrambleTurnController] = []
+    @Published var currnetScramble: Array<ScrambleTurnController> = []
     init() {
        //self.currnetScramble = [ScrambleTurn](repeating: nil, count: 20)
        //generateNewScramble()
@@ -307,16 +322,29 @@ class ScrambleController: ObservableObject {
     //@Published var currnetScramble: [ScrambleTurnController] = []
     func generateNewScramble() {
         
+        if shouldMaxamized {
+            self.maxamize()
+        } else {
+            self.unMaxamize()
+        }
+        
         if !showingScramble { return }
         
         self.showingPrevious = true
+        
         
         self.currnetScramble = []
         
         for (i) in 0..<currentTurnCount {
             //self.currnetScramble[index] = ScrambleTurn(self.currentTurnOptions[Int.random(in: 0..<self.currentTurnOptions.count-1)].rawValue)
             //cs.set(self.currentTurnOptions[Int.random(in: 0..<self.currentTurnOptions.count-1)])
-            self.currnetScramble.append( ScrambleTurnController( self.currentTurnOptions[Int.random(in: 0..<self.currentTurnOptions.count-1)]) )
+            
+            if i < currnetScramble.count-1 {
+                self.currnetScramble[i].set(  self.currentTurnOptions[Int.random(in: 0..<self.currentTurnOptions.count-1)] )
+            } else {
+                self.currnetScramble.append( ScrambleTurnController( self.currentTurnOptions[Int.random(in: 0..<self.currentTurnOptions.count-1)]) )
+            }
+            
             
             if i == currentTurnCount-1 {
                 self.showingPrevious = false
@@ -325,11 +353,7 @@ class ScrambleController: ObservableObject {
        
         print(currnetScramble.count, " turns in the scramble" )
         
-        if shouldMaxamized {
-            self.isMaxamized = true
-        } else {
-            self.unMaxamize()
-        }
+        
         //self.newCurrnetScramble = res
         
     }
@@ -344,6 +368,8 @@ class ScrambleController: ObservableObject {
         return newScramble
     }
     
-    
+    var scrambleSegment1: Array<ScrambleTurnController> {
+        return Array(currnetScramble[0..<currnetScramble.count])
+    }
     
 }

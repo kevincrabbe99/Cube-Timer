@@ -177,16 +177,17 @@ struct ContentView: View {
                     }
                 
                 
-                if scrambleController.isMaxamized {
+               // if scrambleController.isMaxamized {
                     Color.black
-                        .opacity(0.85)
+                        .opacity((scrambleController.isMaxamized) ? 0.85 : 0)
                         .frame(width: geo.size.width, height: geo.size.height)
                         .position(x: geo.size.width/2, y: geo.size.height/2)
                         .onTapGesture { // close sidebar when tapped
                             scrambleController.unMaxamize()
                         }
                         .transition(AnyTransition.opacity.animation(.spring()))
-                }
+                        .animation(.spring())
+              //  }
                 
                 if !settingsController.pauseSavingSolves {
                     TopHeader()

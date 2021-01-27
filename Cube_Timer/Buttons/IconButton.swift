@@ -14,6 +14,7 @@ struct IconButton: View {
     var iconColor: Color
     var width: CGFloat = 20
     var height: CGFloat = 20
+    var weight: Font.Weight = .bold
     
     var body: some View {
     
@@ -25,7 +26,7 @@ struct IconButton: View {
             icon
                 .resizable()
                 .frame(width: width / 2.2, height: height / 2.2)
-                .font(Font.title.weight(.bold))
+                .font(Font.title.weight(weight))
                 .foregroundColor(iconColor)
             
         }
