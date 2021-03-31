@@ -51,6 +51,7 @@ struct MainView: View {
                 /*
                  *  VIDEO toggle button
                  */
+                if !(cameraController.videoState == .disabled && timer.timerGoing == true) { // only show if camera enabled or not timer (on standby)
                     ZStack {
                         
                         HStack {
@@ -104,6 +105,7 @@ struct MainView: View {
                     }
                     .frame(width: 300, height: 30, alignment: .leading)
                     .position(x: 200, y: 45)
+                }
                 
                 /*
                  * TOP RIGHT LARGE LABEL

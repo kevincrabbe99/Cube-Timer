@@ -9,7 +9,7 @@ import AVFoundation
 import Foundation
 import UIKit
 
-class CameraController: NSObject, ObservableObject {
+class CameraController: NSObject, ObservableObject, AVCaptureFileOutputRecordingDelegate {
     
     // @Environment vars
     var solveHandler: SolveHandler!
