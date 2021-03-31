@@ -38,6 +38,38 @@ class CameraController: NSObject, ObservableObject {
         case recording
     }
     
+    @Published var cameraInputState = CameraInput.frontCamera
+    enum CameraInput {
+        case frontCamera
+        case backCamera
+    }
+    
+    @Published var microphoneState = MicrophoneStates.enabled
+    enum MicrophoneStates {
+        case enabled
+        case muted
+    }
+    
+    
+    public func toggleMicrophoneEnabled() {
+        
+        if microphoneState == .enabled {
+            microphoneState = .muted
+        } else {
+            microphoneState = .enabled
+        }
+        
+    }
+    
+    public func toggleCameraInput() {
+        
+        if cameraInputState == .frontCamera {
+            cameraInputState = .backCamera
+        } else {
+            cameraInputState = .frontCamera
+        }
+        
+    }
     
     
     public func toggleVideoState() {

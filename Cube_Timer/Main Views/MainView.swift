@@ -51,9 +51,6 @@ struct MainView: View {
                 /*
                  *  VIDEO toggle button
                  */
-                Button(action: {
-                    cameraController.toggleVideoState()
-                }, label: {
                     ZStack {
                         
                         HStack {
@@ -68,24 +65,45 @@ struct MainView: View {
                                     .foregroundColor(Color.init("mint_cream"))
                                     .offset(y: -1)
                             } else if cameraController.videoState == .standby {
+                                
+                                IconButton(icon: Image.init(systemName: "xmark.square.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: Color.init("red"), width: 25, height: 25)
+                                    .onTapGesture {
+                                        cameraController.toggleVideoState()
+                                    }
+                                
+                                    
+                                IconButton(icon: Image.init(systemName: "arrow.triangle.2.circlepath.camera.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: (cameraController.cameraInputState == .backCamera ? Color.init("dark_black") : Color.init("very_dark_black")), width: 30, height: 25)
+                                    .padding(.leading, 10)
+                                    .onTapGesture {
+                                        cameraController.toggleCameraInput()
+                                    }
+                                
+                               
+                                IconButton(icon: (cameraController.microphoneState == .muted ? Image.init(systemName: "mic.slash.fill") : Image.init(systemName: "mic.fill")),
+                                           bgColor: Color.init("mint_cream").opacity(0.85), iconColor: (cameraController.microphoneState == .muted ? Color.init("red") : Color.init("very_dark_black")), width: 30, height: 25, iconWidth: 8, iconHeight: 12)
+                                    .onTapGesture {
+                                        cameraController.toggleMicrophoneEnabled()
+                                    }
+                                
+                                
                                 IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.init("very_dark_blue"), iconColor: Color.green, width: 20, height: 20)
                                 
-                                Text("Video Recording On")
+                                Text("Recording Standby")
                                     .font(Font.custom("Play-Bold", size: 13))
                                     .foregroundColor(Color.init("mint_cream"))
                                     .offset(y: -1)
                             } else if cameraController.videoState == .disabled {
-                                IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 25, height: 20)
-                                
+                                IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: Color.init("very_dark_black"), width: 30, height: 25, iconWidth: 15, iconHeight: 10)
+                                    .onTapGesture {
+                                        cameraController.toggleVideoState()
+                                    }
                                 Spacer()
                             }
                         }
                         
                     }
-                    .frame(width: 200, height: 30, alignment: .leading)
-                })
-                .frame(width: 200)
-                .position(x: 140, y: 45)
+                    .frame(width: 300, height: 30, alignment: .leading)
+                    .position(x: 200, y: 45)
                 
                 /*
                  * TOP RIGHT LARGE LABEL
