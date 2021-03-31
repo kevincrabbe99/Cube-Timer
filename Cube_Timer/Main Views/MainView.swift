@@ -36,7 +36,8 @@ struct MainView: View {
             Color.init("very_dark_black")
             ZStack {
                 
-               
+               CameraViewController()
+                .opacity(0.3)
                 
                 ButtonsView(timer: timer)
                 

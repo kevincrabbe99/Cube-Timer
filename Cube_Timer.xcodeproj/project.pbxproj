@@ -34,6 +34,9 @@
 		7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */; };
 		7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */; };
 		7B8B62F5254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */; };
+		7B8D5976261413E1008A6B49 /* CameraLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D5975261413E1008A6B49 /* CameraLayer.swift */; };
+		7B8D597E261413F1008A6B49 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D597D261413F1008A6B49 /* CameraController.swift */; };
+		7B8D598426141504008A6B49 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D598326141504008A6B49 /* CameraViewController.swift */; };
 		7B984CEF253E02D900BC6402 /* Cube_TimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */; };
 		7B984CF1253E02D900BC6402 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B984CF0253E02D900BC6402 /* ContentView.swift */; };
 		7B984CF3253E02DC00BC6402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B984CF2253E02DC00BC6402 /* Assets.xcassets */; };
@@ -155,6 +158,9 @@
 		7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDisplayView.swift; sourceTree = "<group>"; };
 		7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SolveItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SolveItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7B8D5975261413E1008A6B49 /* CameraLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLayer.swift; sourceTree = "<group>"; };
+		7B8D597D261413F1008A6B49 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		7B8D598326141504008A6B49 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		7B984CEB253E02D900BC6402 /* Cube Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cube Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube_TimerApp.swift; sourceTree = "<group>"; };
 		7B984CF0253E02D900BC6402 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -390,6 +396,15 @@
 			path = Single_CubeType_Components;
 			sourceTree = "<group>";
 		};
+		7B8D5982261414F0008A6B49 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				7B8D597D261413F1008A6B49 /* CameraController.swift */,
+				7B8D598326141504008A6B49 /* CameraViewController.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		7B984CE2253E02D900BC6402 = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +437,7 @@
 				7B984CF0253E02D900BC6402 /* ContentView.swift */,
 				7BFF320F259AEEA30029EA19 /* ContentViewController.swift */,
 				7BE885A62547665C00046D29 /* Controllers */,
+				7B8D5982261414F0008A6B49 /* Camera */,
 				7BE885A72547667200046D29 /* Main Views */,
 				7B55C60E25954A880076B913 /* All_Solves */,
 				7B7D56A4259E6CEC00A427ED /* Settings */,
@@ -603,6 +619,7 @@
 		7BE885A72547667200046D29 /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
+				7B8D5975261413E1008A6B49 /* CameraLayer.swift */,
 				7B9B7965254908380088ECD5 /* MainView.swift */,
 				7B984D27253E19A900BC6402 /* ButtonsView.swift */,
 				7B984D37253E226B00BC6402 /* TimerView.swift */,
@@ -1019,6 +1036,7 @@
 				7B60740C258EF7ED00D188CF /* CubeType+CoreDataProperties.swift in Sources */,
 				7BCC6DB2256EC61B001663B1 /* BO3Controller.swift in Sources */,
 				7B9B79B4254A68880088ECD5 /* AllSolvesView.swift in Sources */,
+				7B8D598426141504008A6B49 /* CameraViewController.swift in Sources */,
 				7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */,
 				7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */,
 				7BAAE14E259C678900330533 /* DeleteSolvesView.swift in Sources */,
@@ -1026,8 +1044,10 @@
 				7BFF31D02597FC9A0029EA19 /* TimeGroupController.swift in Sources */,
 				7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */,
 				7B7D56A6259E6DC900A427ED /* SettingsView.swift in Sources */,
+				7B8D597E261413F1008A6B49 /* CameraController.swift in Sources */,
 				7B607442258F30D200D188CF /* CTEditController.swift in Sources */,
 				7BCC6DCD25723860001663B1 /* SidebarController.swift in Sources */,
+				7B8D5976261413E1008A6B49 /* CameraLayer.swift in Sources */,
 				7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */,
 				7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */,
 			);
