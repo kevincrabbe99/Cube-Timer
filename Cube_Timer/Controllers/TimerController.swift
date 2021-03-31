@@ -61,6 +61,7 @@ class TimerController: ObservableObject {
     var cTypeHandler: CTypeHandler!
     var settingsController: SettingsController!
     var cvc: ContentViewController!
+    var cameraController: CameraController!
     
     
     init() {
@@ -290,6 +291,13 @@ class TimerController: ObservableObject {
             solveHandler.add(tempSolve!, newEntry: true)
         }
         
+        
+        // CAMERA STUFF
+        if cameraController.videoState != .disabled {
+            cameraController.startRecording()
+        }
+        
+        
         startTime = Date().timeIntervalSinceReferenceDate
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
         timerGoing = true
@@ -335,6 +343,14 @@ class TimerController: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             self.cvc.blockGesture = false // allows the page to transition again
         }
+        
+        // CAMERA STUFF
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // wait 3 seconds
+            if self.cameraController.isRecording { // if recording
+                self.cameraController.stopRecording()
+            }
+        }
+        
         
         
         // request rating after 1.5 seconds

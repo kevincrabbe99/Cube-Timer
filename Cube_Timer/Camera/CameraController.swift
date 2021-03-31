@@ -9,8 +9,12 @@ import AVFoundation
 import Foundation
 import UIKit
 
-class CameraController: NSObject {
+class CameraController: NSObject, ObservableObject {
     
+    // @Environment vars
+    var solveHandler: SolveHandler!
+    
+    // camera vars
     var captureSession: AVCaptureSession?
     var frontCamera: AVCaptureDevice?
     var frontCameraInput: AVCaptureDeviceInput?
@@ -24,6 +28,56 @@ class CameraController: NSObject {
         case noCamerasAvailable
         case unknown
     }
+    
+    // state vars
+    @Published var videoState: CameraMode = CameraMode.disabled
+    
+    enum CameraMode {
+        case disabled
+        case standby
+        case recording
+    }
+    
+    
+    
+    public func toggleVideoState() {
+        
+        print("toggling video state from : ", videoState)
+        
+        if videoState == .disabled { // video is disabled, -> enable
+            videoState = .standby
+        } else { // video is enabled, -> disable
+            videoState = .disabled
+        }
+        
+    }
+    
+    public func startRecording() {
+        
+        videoState = .recording
+        
+    }
+    
+    public func stopRecording() {
+        
+        videoState = .standby
+        
+    }
+    
+    public var isRecording: Bool {
+        if videoState == .recording {
+            return true
+        }
+        
+        return false
+    }
+    
+    
+    
+/*
+ *  general CAMREA METHODS
+ */
+    
     
     func displayPreview(on view: UIView) throws {
         guard let captureSession = self.captureSession, captureSession.isRunning else { throw CameraControllerError.captureSessionIsMissing }

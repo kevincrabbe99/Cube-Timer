@@ -126,8 +126,8 @@
             filePath = "Cube_Timer/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -142,13 +142,13 @@
             filePath = "Cube_Timer/Controllers/SolveHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "addGenericSampleSolves(count:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - 8dde89e9639d136b"
+                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - 8dde89e9639d10a9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -158,12 +158,12 @@
                   urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Controllers/SolveHandler.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
                   offsetFromSymbolStart = "8">
                </Location>
                <Location
-                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - a52604cfd5d4ae4e"
+                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - a52604cfd5d4ae00"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -173,8 +173,8 @@
                   urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Controllers/SolveHandler.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
                   offsetFromSymbolStart = "56">
                </Location>
             </Locations>

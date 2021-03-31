@@ -35,7 +35,7 @@ struct ContentView: View {
     @ObservedObject var editSolveController: EditSolveController = EditSolveController()
     @ObservedObject var settingsController: SettingsController = SettingsController()
     @ObservedObject var alertController: AlertController = AlertController()
-    
+    @ObservedObject var cameraController: CameraController = CameraController()
   
     @StateObject var cvc: ContentViewController = ContentViewController()
     
@@ -55,6 +55,7 @@ struct ContentView: View {
         self.timer.bo3Controller = bo3Controller
         self.timer.cTypeHandler = cTypeHandler
         self.timer.settingsController = settingsController
+        self.timer.cameraController = cameraController
         
         // set solveHandler controllers
         self.solveHandler.timer = timer
@@ -63,6 +64,7 @@ struct ContentView: View {
         self.solveHandler.cTypeHandler = cTypeHandler
         self.solveHandler.allSolvesController = allSolvesController
         self.solveHandler.barGraphController = barGraphController
+        self.solveHandler.cameraController = cameraController
         
         
         self.solveHandler.solvesByTimeFrame.cTypeHandler = cTypeHandler
@@ -102,6 +104,9 @@ struct ContentView: View {
         
         // settings controller refs
         self.settingsController.alertController = alertController
+        
+        // camera
+        self.cameraController.solveHandler = solveHandler
         
         
         
@@ -237,6 +242,7 @@ struct ContentView: View {
         .environmentObject(settingsController)
         .environmentObject(alertController)
         .environmentObject(barGraphController)
+        .environmentObject(cameraController)
         .onAppear(
         
         

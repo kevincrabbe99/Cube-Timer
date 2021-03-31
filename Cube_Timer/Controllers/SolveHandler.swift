@@ -35,6 +35,7 @@ class SolveHandler: ObservableObject {
     var sbController: SidebarController!
     var cTypeHandler: CTypeHandler!
     var allSolvesController: AllSolvesController!
+    var cameraController: CameraController!
 
     
     @Published var solves: [SolveItem] // array which changes to correspond with timeframe
@@ -58,7 +59,8 @@ class SolveHandler: ObservableObject {
     
    /* @ObservedObject */ var barGraphController: BarGraphController = BarGraphController()
     
-    //@EnvironmentObject var barGraphController: BarGraphController
+    
+    
     init() {
         
         // initialize solves to be empty

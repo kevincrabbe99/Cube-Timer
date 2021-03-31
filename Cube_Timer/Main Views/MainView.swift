@@ -13,6 +13,7 @@ struct MainView: View {
     @EnvironmentObject var cTypeHandler: CTypeHandler
     @EnvironmentObject var timer: TimerController
     @EnvironmentObject var settingsController: SettingsController
+    @EnvironmentObject var cameraController: CameraController
     
     var parent: ContentView
     //@ObservedObject var timer: TimerController
@@ -36,29 +37,55 @@ struct MainView: View {
             Color.init("very_dark_black")
             ZStack {
                 
-               CameraViewController()
-                .opacity(0.3)
+                /*
+                 *  CAMERA LAYER
+                 */
+                if cameraController.videoState != .disabled {
+                    CameraViewController()
+                        .opacity(0.3)
+                        .transition(.move(edge: .bottom))
+                }
                 
                 ButtonsView(timer: timer)
                 
                 /*
                  *  VIDEO toggle button
                  */
-                HStack {
-                    /*
-                    IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 25, height: 20)x
-                    IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.init("very_dark_blue"), iconColor: Color.green, width: 20, height: 20)
-                     */
-                    IconButton(icon: Image.init(systemName: "record.circle"), bgColor: Color.init("very_dark_blue"), iconColor: Color.red, width: 25, height: 25)
- 
-                    Text("Video Recording On")
-                        .font(Font.custom("Play-Bold", size: 13))
-                        .foregroundColor(Color.init("mint_cream"))
-                        .offset(y: -1)
-                }
-                .frame(width: 300)
+                Button(action: {
+                    cameraController.toggleVideoState()
+                }, label: {
+                    ZStack {
+                        
+                        HStack {
+                            /*
+                             *  CHOOSE WHICH VIDEO ICON TO DISPLAY
+                             */
+                            if cameraController.videoState == .recording {
+                                IconButton(icon: Image.init(systemName: "record.circle"), bgColor: Color.init("very_dark_blue"), iconColor: Color.red, width: 25, height: 25)
+                                
+                                Text("Recording...")
+                                    .font(Font.custom("Play-Bold", size: 13))
+                                    .foregroundColor(Color.init("mint_cream"))
+                                    .offset(y: -1)
+                            } else if cameraController.videoState == .standby {
+                                IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.init("very_dark_blue"), iconColor: Color.green, width: 20, height: 20)
+                                
+                                Text("Video Recording On")
+                                    .font(Font.custom("Play-Bold", size: 13))
+                                    .foregroundColor(Color.init("mint_cream"))
+                                    .offset(y: -1)
+                            } else if cameraController.videoState == .disabled {
+                                IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 25, height: 20)
+                                
+                                Spacer()
+                            }
+                        }
+                        
+                    }
+                    .frame(width: 200, height: 30, alignment: .leading)
+                })
+                .frame(width: 200)
                 .position(x: 140, y: 45)
-                
                 
                 /*
                  * TOP RIGHT LARGE LABEL
