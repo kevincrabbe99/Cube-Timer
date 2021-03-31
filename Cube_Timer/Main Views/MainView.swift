@@ -41,7 +41,28 @@ struct MainView: View {
                 
                 ButtonsView(timer: timer)
                 
+                /*
+                 *  VIDEO toggle button
+                 */
+                HStack {
+                    /*
+                    IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 25, height: 20)x
+                    IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.init("very_dark_blue"), iconColor: Color.green, width: 20, height: 20)
+                     */
+                    IconButton(icon: Image.init(systemName: "record.circle"), bgColor: Color.init("very_dark_blue"), iconColor: Color.red, width: 25, height: 25)
+ 
+                    Text("Video Recording On")
+                        .font(Font.custom("Play-Bold", size: 13))
+                        .foregroundColor(Color.init("mint_cream"))
+                        .offset(y: -1)
+                }
+                .frame(width: 300)
+                .position(x: 140, y: 45)
                 
+                
+                /*
+                 * TOP RIGHT LARGE LABEL
+                 */
                 if !settingsController.pauseSavingSolves {
                     VStack(alignment:.trailing) {
                         Text(cTypeHandler.selected.name)

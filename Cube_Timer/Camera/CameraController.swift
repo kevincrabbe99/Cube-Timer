@@ -18,11 +18,11 @@ class CameraController: NSObject {
     
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
-       case captureSessionIsMissing
-       case inputsAreInvalid
-       case invalidOperation
-       case noCamerasAvailable
-       case unknown
+        case captureSessionIsMissing
+        case inputsAreInvalid
+        case invalidOperation
+        case noCamerasAvailable
+        case unknown
     }
     
     func displayPreview(on view: UIView) throws {
