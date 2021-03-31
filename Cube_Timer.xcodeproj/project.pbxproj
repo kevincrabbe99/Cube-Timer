@@ -15,6 +15,7 @@
 		7B4719E2256BBBEB009FFFEA /* BarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E1256BBBEB009FFFEA /* BarController.swift */; };
 		7B4719E7256C2E8A009FFFEA /* BarGraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */; };
 		7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A1730253E8D0A0036A30D /* Persistance.swift */; };
+		7B54148D2614062700ED69F2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B54148C2614062700ED69F2 /* CloudKit.framework */; };
 		7B55C62E2596F29C0076B913 /* AllSolvesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55C62D2596F29B0076B913 /* AllSolvesController.swift */; };
 		7B6073F4258E4FFF00D188CF /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073F3258E4FFF00D188CF /* PopupController.swift */; };
 		7B6073FC258E500700D188CF /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073FB258E500700D188CF /* PopupView.swift */; };
@@ -135,6 +136,8 @@
 		7B4719E1256BBBEB009FFFEA /* BarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarController.swift; sourceTree = "<group>"; };
 		7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarGraphController.swift; sourceTree = "<group>"; };
 		7B4A1730253E8D0A0036A30D /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		7B54148B2614062400ED69F2 /* Cube Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "Cube Timer.entitlements"; path = "Cube Timer/Cube Timer.entitlements"; sourceTree = "<group>"; };
+		7B54148C2614062700ED69F2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7B55C62D2596F29B0076B913 /* AllSolvesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesController.swift; sourceTree = "<group>"; };
 		7B6073F3258E4FFF00D188CF /* PopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupController.swift; sourceTree = "<group>"; };
 		7B6073FB258E500700D188CF /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C5033AB7EC88AB43FE9F80F /* Pods_Cube_Timer.framework in Frameworks */,
+				7B54148D2614062700ED69F2 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +393,7 @@
 		7B984CE2253E02D900BC6402 = {
 			isa = PBXGroup;
 			children = (
+				7B54148B2614062400ED69F2 /* Cube Timer.entitlements */,
 				7B9B2E7F25A29F2200819159 /* Localizable.strings */,
 				7B984CED253E02D900BC6402 /* Cube_Timer */,
 				7B984D04253E02DC00BC6402 /* Cube_TimerTests */,
@@ -683,6 +688,7 @@
 		98B2E972299C200399B632B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B54148C2614062700ED69F2 /* CloudKit.framework */,
 				B30CD2AFCCB540728C72930C /* Pods_Cube_Timer.framework */,
 				0D6A6B6954C958B302824DB7 /* Pods_Cube_Timer_Cube_TimerUITests.framework */,
 				1B7E0655A5E191D0D58717E8 /* Pods_Cube_TimerTests.framework */,
@@ -1201,6 +1207,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Cube Timer/Cube Timer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cube_Timer/Preview Content\"";
@@ -1226,6 +1233,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Cube Timer/Cube Timer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cube_Timer/Preview Content\"";
