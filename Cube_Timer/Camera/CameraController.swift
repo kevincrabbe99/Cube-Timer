@@ -9,7 +9,7 @@ import AVFoundation
 import Foundation
 import UIKit
 
-class CameraController: NSObject, ObservableObject, AVCaptureFileOutputRecordingDelegate {
+class CameraController: NSObject, ObservableObject {
     
     // @Environment vars
     var solveHandler: SolveHandler!
@@ -17,8 +17,12 @@ class CameraController: NSObject, ObservableObject, AVCaptureFileOutputRecording
     // camera vars
     var captureSession: AVCaptureSession?
     var frontCamera: AVCaptureDevice?
+    var backCamera: AVCaptureDevice?
     var frontCameraInput: AVCaptureDeviceInput?
+    var backCameraInput: AVCaptureDeviceInput?
     var previewLayer: AVCaptureVideoPreviewLayer?
+    
+    
     
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
@@ -65,6 +69,18 @@ class CameraController: NSObject, ObservableObject, AVCaptureFileOutputRecording
         
         if cameraInputState == .frontCamera {
             cameraInputState = .backCamera
+            
+            do {
+                try self.setCameraBack()
+            } catch {
+                print("Error setting camera input")
+            }
+            
+            
+            
+            
+            
+            
         } else {
             cameraInputState = .frontCamera
         }
@@ -110,6 +126,29 @@ class CameraController: NSObject, ObservableObject, AVCaptureFileOutputRecording
  *  general CAMREA METHODS
  */
     
+    private func setCameraBack() throws {
+        
+        guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
+        
+        captureSession.beginConfiguration()
+        let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput
+        captureSession.removeInput(currentInput!)
+        
+        let newCameraDevice = getCamera(with: .back)
+        let newViewInput = try? AVCaptureDeviceInput(device: newCameraDevice!)
+        captureSession.addInput(newViewInput!)
+        captureSession.commitConfiguration()
+           
+    }
+    
+    func getCamera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        guard let devices = AVCaptureDevice.devices(for: AVMediaType.video) as? [AVCaptureDevice] else {
+            return nil
+        }
+        
+        return devices.filter {
+            $0.position == position}.first
+    }
     
     func displayPreview(on view: UIView) throws {
         guard let captureSession = self.captureSession, captureSession.isRunning else { throw CameraControllerError.captureSessionIsMissing }
@@ -122,17 +161,29 @@ class CameraController: NSObject, ObservableObject, AVCaptureFileOutputRecording
         self.previewLayer?.frame = view.frame
     }
     
+    
     func prepare(completionHandler: @escaping (Error?) -> Void){
         func createCaptureSession(){
             self.captureSession = AVCaptureSession()
         }
+        /*
+         *  sets the camera to face the front
+         */
         func configureCaptureDevices() throws {
-            let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front)
             
-            self.frontCamera = camera
+            // set front camera
+            let fCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front)
+            self.frontCamera = fCamera
             
-            try camera?.lockForConfiguration()
-            camera?.unlockForConfiguration()
+            // set back camera
+            let bCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .back)
+            self.backCamera = bCamera;
+            
+            try fCamera?.lockForConfiguration()
+            frontCamera?.unlockForConfiguration()
+            
+            try bCamera?.lockForConfiguration()
+            bCamera?.unlockForConfiguration()
                 
         }
         func configureDeviceInputs() throws {

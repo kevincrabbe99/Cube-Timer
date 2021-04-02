@@ -17,7 +17,7 @@ final class CameraViewController: UIViewController {
     override func viewDidLoad() {
         
         previewView = UIView(frame: CGRect(x:0, y:0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
-        previewView.contentMode = UIView.ContentMode.scaleAspectFill
+            previewView.contentMode = UIView.ContentMode.scaleAspectFit
             view.addSubview(previewView)
             
             cameraController.prepare {(error) in
@@ -33,9 +33,6 @@ final class CameraViewController: UIViewController {
 }
 
 
-/*
- *  Make compatable with SwiftUI
- */
 extension CameraViewController : UIViewControllerRepresentable{
     public typealias UIViewControllerType = CameraViewController
     

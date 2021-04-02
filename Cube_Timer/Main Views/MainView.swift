@@ -43,7 +43,7 @@ struct MainView: View {
                 if cameraController.videoState != .disabled {
                     CameraViewController()
                         .opacity(0.3)
-                        .transition(.move(edge: .bottom))
+                        .transition(.opacity)
                 }
                 
                 ButtonsView(timer: timer)
