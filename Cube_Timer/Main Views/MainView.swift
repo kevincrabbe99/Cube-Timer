@@ -19,6 +19,8 @@ struct MainView: View {
     @ObservedObject var solveHandler: SolveHandler
     @ObservedObject var bo3Controller: BO3Controller
 
+    @State private var inputImage: UIImage?
+    
     var peripheralOpacity: Double  {
         if timer.timerGoing {
             return -0.3
@@ -36,7 +38,7 @@ struct MainView: View {
             Color.init("very_dark_black")
             ZStack {
                 
-               
+                CameraView(image: $inputImage)
                 
                 ButtonsView(timer: timer)
                 
