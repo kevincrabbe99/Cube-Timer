@@ -35,8 +35,22 @@ extension SolveItem: Identifiable {
     @NSManaged public var id: String
     @NSManaged public var timeMS: Double
     @NSManaged public var timestamp: Date
-    
     @NSManaged public var cubeType: CubeType
+    
+    /*
+     @NSManaged public var d1: Int16
+     var dim1: Int {
+         set {
+             d1 = Int16(newValue)
+         }
+         get {
+             return Int(d2)
+         }
+     }
+     */
+    @NSManaged public var videoURL: String?
+    
+    
     /*
     convenience init(id: String, timeMS: Double, timestamp: Date, cubeType: CubeType) {
         self.init()
@@ -51,8 +65,6 @@ extension SolveItem: Identifiable {
     
     func setCubeType(_ ct: CubeType) {
         self.cubeType = ct
-        
-        
     }
  
 

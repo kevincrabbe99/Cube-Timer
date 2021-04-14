@@ -295,7 +295,8 @@ class TimerController: ObservableObject {
         // Start recording is not disabled
         if cameraController.videoState != .disabled {
             do {
-                try cameraController.startRecording()
+                let url = try cameraController.startRecording()
+                tempSolve?.videoURL = url.absoluteString
             } catch {
                 print("error: video not working, TimerController.swift")
             }

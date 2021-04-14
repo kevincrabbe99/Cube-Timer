@@ -154,7 +154,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     /*
      * record stuff
      */
-    public func startRecording() throws {
+    public func startRecording() throws  -> URL {
         
         //guard let connection = self.movieOutput.connection(with: .video) else { throw CameraControllerError.inputsAreInvalid }
         
@@ -196,14 +196,9 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         //captureSession?.addConnection(captureConnection!)
         self.movieOutput!.startRecording(to: outputURL!, recordingDelegate: self)
         
-        // create new movie output
-       // self.movieOutput =
         
-        /*
-        captureSession.beginConfiguration()
-        captureSession.addOutput(self.movieOutput!)
-        captureSession.commitConfiguration()
-        */
+        // return saveto url
+        return outputURL!
         
     }
     

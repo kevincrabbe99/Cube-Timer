@@ -31,7 +31,12 @@ struct SolveElementView: View {
         return false
     }
     
-    
+    var hasVideo: Bool {
+        if self.controller.si.videoURL != nil {
+            return true
+        }
+        return false
+    }
     
     var body: some View {
         
@@ -42,7 +47,10 @@ struct SolveElementView: View {
            // }
         } label: {
             ZStack {
-                    if isSelected {
+                if hasVideo {
+                    Color.red
+                }
+                    else if isSelected {
                         Color.black
                             .cornerRadius(3)
                             //.opacity(0.2)
