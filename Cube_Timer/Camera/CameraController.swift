@@ -9,6 +9,12 @@ import AVFoundation
 import Foundation
 import UIKit
 
+enum CameraMode {
+    case disabled
+    case standby
+    case recording
+}
+
 class CameraController: NSObject, ObservableObject {
     
     // @Environment vars
@@ -22,25 +28,14 @@ class CameraController: NSObject, ObservableObject {
     var backCameraInput: AVCaptureDeviceInput?
     var previewLayer: AVCaptureVideoPreviewLayer?
     
+    var delegate: CameraControllerDelegate!
     
-    
-    enum CameraControllerError: Swift.Error {
-        case captureSessionAlreadyRunning
-        case captureSessionIsMissing
-        case inputsAreInvalid
-        case invalidOperation
-        case noCamerasAvailable
-        case unknown
-    }
+
     
     // state vars
     @Published var videoState: CameraMode = CameraMode.disabled
     
-    enum CameraMode {
-        case disabled
-        case standby
-        case recording
-    }
+    
     
     @Published var cameraInputState = CameraInput.frontCamera
     enum CameraInput {
@@ -63,6 +58,8 @@ class CameraController: NSObject, ObservableObject {
             microphoneState = .enabled
         }
         
+        print("toggled microphone")
+        
     }
     
     public func toggleCameraInput() {
@@ -77,13 +74,11 @@ class CameraController: NSObject, ObservableObject {
             }
             
             
-            
-            
-            
-            
         } else {
             cameraInputState = .frontCamera
         }
+        
+        print("toggled cameras")
         
     }
     
@@ -101,7 +96,7 @@ class CameraController: NSObject, ObservableObject {
     }
     
     public func startRecording() {
-        
+        print("start recording from CameraController")
         videoState = .recording
         
     }
@@ -200,6 +195,7 @@ class CameraController: NSObject, ObservableObject {
                
             captureSession.startRunning()
                
+            
         }
            
         DispatchQueue(label: "prepare").async {
@@ -207,6 +203,8 @@ class CameraController: NSObject, ObservableObject {
                 createCaptureSession()
                 try configureCaptureDevices()
                 try configureDeviceInputs()
+                
+                self.delegate.cameraWorking()
             }
                 
             catch {

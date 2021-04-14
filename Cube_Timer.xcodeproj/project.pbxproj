@@ -34,6 +34,7 @@
 		7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */; };
 		7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */; };
 		7B8B62F5254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */; };
+		7B8D31F3262671760083E090 /* CameraControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D31F2262671760083E090 /* CameraControllerDelegate.swift */; };
 		7B8D5976261413E1008A6B49 /* CameraLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D5975261413E1008A6B49 /* CameraLayer.swift */; };
 		7B8D597E261413F1008A6B49 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D597D261413F1008A6B49 /* CameraController.swift */; };
 		7B8D598426141504008A6B49 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D598326141504008A6B49 /* CameraViewController.swift */; };
@@ -158,6 +159,7 @@
 		7B8B629F254158A300EAA9F9 /* StopwatchDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDisplayView.swift; sourceTree = "<group>"; };
 		7B8B62F2254682C800EAA9F9 /* SolveItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SolveItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7B8B62F3254682C800EAA9F9 /* SolveItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SolveItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7B8D31F2262671760083E090 /* CameraControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControllerDelegate.swift; sourceTree = "<group>"; };
 		7B8D5975261413E1008A6B49 /* CameraLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLayer.swift; sourceTree = "<group>"; };
 		7B8D597D261413F1008A6B49 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		7B8D598326141504008A6B49 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				7B8D597D261413F1008A6B49 /* CameraController.swift */,
 				7B8D598326141504008A6B49 /* CameraViewController.swift */,
+				7B8D31F2262671760083E090 /* CameraControllerDelegate.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -1040,6 +1043,7 @@
 				7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */,
 				7B60740B258EF7ED00D188CF /* CubeType+CoreDataClass.swift in Sources */,
 				7BAAE14E259C678900330533 /* DeleteSolvesView.swift in Sources */,
+				7B8D31F3262671760083E090 /* CameraControllerDelegate.swift in Sources */,
 				7BFF3203259986B80029EA19 /* EditSolveView.swift in Sources */,
 				7BFF31D02597FC9A0029EA19 /* TimeGroupController.swift in Sources */,
 				7B7DDD0A25907D7100E2197F /* SingleCubeTypeViewController.swift in Sources */,

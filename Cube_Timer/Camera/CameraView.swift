@@ -4,7 +4,7 @@
 //
 //  Created by Kevin Crabbe on 4/9/21.
 //
-
+/*
 import SwiftUI
 
 struct CameraView: View {
@@ -18,3 +18,5 @@ struct CameraView_Previews: PreviewProvider {
         CameraView()
     }
 }
+
+*/
