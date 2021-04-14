@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SwiftUI
+import PhotosUI
+import Photos
 
 final class CameraViewController: UIViewController {
     
@@ -45,10 +47,10 @@ final class CameraViewController: UIViewController {
     /*
      *  Routes recording command to -> cameraController
      *      called by: extension
-     */
     public func record() {
         cameraController.startRecording()
     }
+     */
     
     
 }
@@ -89,6 +91,13 @@ struct CameraView: UIViewControllerRepresentable {
          func stopRecord() {
              print("stop recording")
          }
+        
+        func recordingSaved(url: URL) {
+            print("recording saved to: ", url)
+            
+            
+            
+        }
          
          func cameraWorking() {
              print("camera working")

@@ -292,9 +292,13 @@ class TimerController: ObservableObject {
         }
         
         
-        // CAMERA STUFF
+        // Start recording is not disabled
         if cameraController.videoState != .disabled {
-            cameraController.startRecording()
+            do {
+                try cameraController.startRecording()
+            } catch {
+                print("error: video not working, TimerController.swift")
+            }
         }
         
         
@@ -344,7 +348,7 @@ class TimerController: ObservableObject {
             self.cvc.blockGesture = false // allows the page to transition again
         }
         
-        // CAMERA STUFF
+        // wait 3 seconds, then stop recording
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // wait 3 seconds
             if self.cameraController.isRecording { // if recording
                 self.cameraController.stopRecording()

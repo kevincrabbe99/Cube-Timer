@@ -15,22 +15,31 @@ enum CameraMode {
     case recording
 }
 
-class CameraController: NSObject, ObservableObject {
+class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     // @Environment vars
     var solveHandler: SolveHandler!
     
     // camera vars
     var captureSession: AVCaptureSession?
+    var movieOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
+    var captureConnection: AVCaptureConnection?
+    
     var frontCamera: AVCaptureDevice?
     var backCamera: AVCaptureDevice?
+    
     var frontCameraInput: AVCaptureDeviceInput?
     var backCameraInput: AVCaptureDeviceInput?
+    
+    var microphone: AVCaptureDevice?
+    var microphoneInput: AVCaptureDeviceInput?
+    
     var previewLayer: AVCaptureVideoPreviewLayer?
+    
     
     var delegate: CameraControllerDelegate!
     
-
+    
     
     // state vars
     @Published var videoState: CameraMode = CameraMode.disabled
@@ -50,39 +59,9 @@ class CameraController: NSObject, ObservableObject {
     }
     
     
-    public func toggleMicrophoneEnabled() {
-        
-        if microphoneState == .enabled {
-            microphoneState = .muted
-        } else {
-            microphoneState = .enabled
-        }
-        
-        print("toggled microphone")
-        
-    }
-    
-    public func toggleCameraInput() {
-        
-        if cameraInputState == .frontCamera {
-            cameraInputState = .backCamera
-            
-            do {
-                try self.setCameraBack()
-            } catch {
-                print("Error setting camera input")
-            }
-            
-            
-        } else {
-            cameraInputState = .frontCamera
-        }
-        
-        print("toggled cameras")
-        
-    }
-    
-    
+    /*
+     * Toggles whether camera is showing
+     */
     public func toggleVideoState() {
         
         print("toggling video state from : ", videoState)
@@ -95,17 +74,65 @@ class CameraController: NSObject, ObservableObject {
         
     }
     
-    public func startRecording() {
-        print("start recording from CameraController")
-        videoState = .recording
+    
+    
+    /*
+     *  Toggles either back or front camera
+     */
+    public func toggleCameraInput() {
+        
+        if cameraInputState == .frontCamera {
+            cameraInputState = .backCamera
+            
+            do {
+                try self.setCamera(pos: .back)
+            } catch {
+                print("Error setting camera input")
+            }
+    
+        } else {
+            cameraInputState = .frontCamera
+            
+            do {
+                try self.setCamera(pos: .front)
+            } catch {
+                print("Error flipping camera to front")
+            }
+            
+        }
+        
+        print("toggled cameras")
         
     }
     
-    public func stopRecording() {
+    /*
+     *  toggle microphone by remving and adding from inputs
+     */
+    public func toggleMicrophoneEnabled() {
         
-        videoState = .standby
+        
+        if microphoneState == .enabled {
+            microphoneState = .muted
+        } else {
+            microphoneState = .enabled
+        }
+        
+        do {
+            try setMicrophone(microphoneState)
+        } catch {
+            self.handleError(e: CameraControllerError.captureSessionIsMissing)
+        }
+        
+        
+        print("toggled microphone")
         
     }
+    
+    
+    
+    
+    
+    
     
     public var isRecording: Bool {
         if videoState == .recording {
@@ -117,11 +144,18 @@ class CameraController: NSObject, ObservableObject {
     
     
     
+    
+    
+    
 /*
  *  general CAMREA METHODS
  */
     
-    private func setCameraBack() throws {
+    
+    /*
+     *   switches out the camera input
+     */
+    private func setCamera(pos: AVCaptureDevice.Position) throws {
         
         guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
         
@@ -129,13 +163,106 @@ class CameraController: NSObject, ObservableObject {
         let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput
         captureSession.removeInput(currentInput!)
         
-        let newCameraDevice = getCamera(with: .back)
+        let newCameraDevice = getCamera(with: pos)
         let newViewInput = try? AVCaptureDeviceInput(device: newCameraDevice!)
         captureSession.addInput(newViewInput!)
         captureSession.commitConfiguration()
-           
+        
     }
     
+    
+    
+    private func setMicrophone(_ state: MicrophoneStates) throws {
+        
+        guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
+        
+        if microphoneState == .muted {
+            
+            captureSession.beginConfiguration()
+            captureSession.removeInput(microphoneInput!)
+            captureSession.commitConfiguration()
+            
+        } else {
+            
+            captureSession.beginConfiguration()
+            if captureSession.canAddInput(microphoneInput!) {
+                captureSession.addInput(microphoneInput!)
+            } else { throw CameraControllerError.noMicFound }
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    /*
+     * record stuff
+     */
+    public func startRecording() throws {
+        
+        //guard let connection = self.movieOutput.connection(with: .video) else { throw CameraControllerError.inputsAreInvalid }
+        
+        
+        
+        print("start recording from CameraController")
+        videoState = .recording
+        
+        // define URL
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+        
+        // define date string
+        let date = Date()
+        let dFormatter = DateFormatter()
+        dFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dFormatter.timeZone = NSTimeZone.local
+        let dateString = dFormatter.string(from: date)
+        
+        // define output url
+        let outputURL =  URL(fileURLWithPath: "\(documentsPath)/StatTimer/videos/\(dateString)")
+       
+        // remove item incase it already exists
+        try? FileManager.default.removeItem(at: outputURL)
+        
+        print("recording to URL: ", outputURL)
+        
+        self.movieOutput.startRecording(to: outputURL, recordingDelegate: self)
+        
+        // create new movie output
+       // self.movieOutput =
+        
+        /*
+        captureSession.beginConfiguration()
+        captureSession.addOutput(self.movieOutput!)
+        captureSession.commitConfiguration()
+        */
+        
+    }
+    
+    /*
+     * stop recording and save
+     */
+    public func stopRecording() {
+        
+        if videoState != .recording { return }
+        videoState = .standby
+        
+        
+        self.movieOutput.stopRecording()
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    /*
+     * returns first video camera
+     */
     func getCamera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
         guard let devices = AVCaptureDevice.devices(for: AVMediaType.video) as? [AVCaptureDevice] else {
             return nil
@@ -157,6 +284,10 @@ class CameraController: NSObject, ObservableObject {
     }
     
     
+    
+    /*
+     * The Main Initiation Method
+     */
     func prepare(completionHandler: @escaping (Error?) -> Void){
         func createCaptureSession(){
             self.captureSession = AVCaptureSession()
@@ -179,22 +310,48 @@ class CameraController: NSObject, ObservableObject {
             
             try bCamera?.lockForConfiguration()
             bCamera?.unlockForConfiguration()
+            
+            
+            self.microphone = AVCaptureDevice.default(for: .audio)
+            
                 
         }
         func configureDeviceInputs() throws {
             guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
                
+            // setup camera, init front camera
             if let frontCamera = self.frontCamera {
                 self.frontCameraInput = try AVCaptureDeviceInput(device: frontCamera)
-                   
-                if captureSession.canAddInput(self.frontCameraInput!) { captureSession.addInput(self.frontCameraInput!)}
+                  
+                // add front camera input
+                if captureSession.canAddInput(self.frontCameraInput!) {
+                    captureSession.addInput(self.frontCameraInput!)
+                    
+                }
                 else { throw CameraControllerError.inputsAreInvalid }
                    
             }
             else { throw CameraControllerError.noCamerasAvailable }
                
+            
+            // setup microphone
+            if let defMic = self.microphone {
+                self.microphoneInput = try AVCaptureDeviceInput(device: defMic)
+                
+                // add microphone input
+                if captureSession.canAddInput(self.microphoneInput!) {
+                    captureSession.addInput(self.microphoneInput!)
+                }
+                else { throw CameraControllerError.noMicFound }
+            }
+            
             captureSession.startRunning()
-               
+            
+        }
+        func configureOutputs() throws {
+            guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
+            
+            captureSession.addOutput(self.movieOutput)
             
         }
            
@@ -203,6 +360,7 @@ class CameraController: NSObject, ObservableObject {
                 createCaptureSession()
                 try configureCaptureDevices()
                 try configureDeviceInputs()
+                try configureOutputs()
                 
                 self.delegate.cameraWorking()
             }
@@ -220,4 +378,30 @@ class CameraController: NSObject, ObservableObject {
             }
         }
     }
+    
+    
+    
+    
+    
+    
+    /*
+     * ERROR ROUTER
+     */
+    private func handleError(e: CameraControllerError) {
+        print("error: ", e.localizedDescription)
+    }
+    
+}
+
+
+
+extension CameraController: AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        print("recording saved! url: ", outputFileURL.absoluteURL)
+        
+        delegate.recordingSaved(url: outputFileURL)
+        
+    }
+    
+    
 }
