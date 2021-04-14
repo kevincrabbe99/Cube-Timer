@@ -63,6 +63,7 @@ struct CameraView: UIViewControllerRepresentable {
     typealias UIViewControllerType = CameraViewController
  
     var cameraController: CameraController!
+    var cvc: ContentViewController!
     
     //@Environment(\.presentationMode) var presentationMode
  
@@ -93,8 +94,27 @@ struct CameraView: UIViewControllerRepresentable {
          }
         
         func recordingSaved(url: URL) {
-            print("recording saved to: ", url)
+            print("camera vc: recording saved to: ", url)
             
+            /*
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+            }) { saved, error in
+                if saved {
+                    /*
+                    let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    */
+                    print("SAVED VIDEO TO CAMERA ROLL")
+                }else {
+                    print("ERROR SAVING VIDEO TO CAMERA ROLL: ", error)
+                }
+            }
+            */
+            
+            parent.cvc.playVideo(url: url)
             
             
         }

@@ -22,7 +22,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     // camera vars
     var captureSession: AVCaptureSession?
-    var movieOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
+    var movieOutput: AVCaptureMovieFileOutput?
     var captureConnection: AVCaptureConnection?
     
     var frontCamera: AVCaptureDevice?
@@ -147,10 +147,106 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     
     
+
+    
+    
+    
+    /*
+     * record stuff
+     */
+    public func startRecording() throws {
+        
+        //guard let connection = self.movieOutput.connection(with: .video) else { throw CameraControllerError.inputsAreInvalid }
+        
+        
+        
+        print("start recording from CameraController")
+        videoState = .recording
+        
+        // define URL
+        //let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        
+        // define date string
+        let date = Date()
+        let dFormatter = DateFormatter()
+        dFormatter.dateFormat = "yyyy MM dd HH mm ss"
+        dFormatter.timeZone = NSTimeZone.local
+        let dateString = dFormatter.string(from: date)
+        
+        // define output url
+        let outputURL =  documentsPath?.appendingPathComponent("\(dateString).mov")
+       
+        // remove item incase it already exists
+        try? FileManager.default.removeItem(at: outputURL!)
+        
+        print("recording to URL: ", outputURL)
+        
+        // define output
+        self.movieOutput = AVCaptureMovieFileOutput()
+        captureSession?.addOutput(movieOutput!)
+        
+        /*
+         self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+         self.previewLayer?.connection?.videoOrientation = .landscapeLeft
+         */
+        self.movieOutput?.connection(with: .video)?.videoOrientation = .landscapeLeft
+        
+        //self.captureConnection = AVCaptureConnection(inputPorts: csInputPorts, output: movieOutput!)
+        //captureSession?.addConnection(captureConnection!)
+        self.movieOutput!.startRecording(to: outputURL!, recordingDelegate: self)
+        
+        // create new movie output
+       // self.movieOutput =
+        
+        /*
+        captureSession.beginConfiguration()
+        captureSession.addOutput(self.movieOutput!)
+        captureSession.commitConfiguration()
+        */
+        
+    }
+    
+    var csInputPorts: [AVCaptureInput.Port] {
+        
+        
+        guard let captureSession = self.captureSession else { return [] }
+        
+        var ports: [AVCaptureInput.Port] = []
+        for p in self.captureSession!.inputs {
+            ports.append(contentsOf: p.ports)
+        }
+        return ports
+    }
+    
+    /*
+     * stop recording and save
+     */
+    private var lastURL: URL?
+    public func stopRecording() {
+        
+        if videoState != .recording { return }
+        videoState = .standby
+        
+        
+        self.movieOutput!.stopRecording()
+        
+        print("video: stop recording")
+        
+        //delegate.recordingSaved(url: lastURL!)
+        
+        
+        
+    }
+    
+    
+    
+
+
 /*
  *  general CAMREA METHODS
  */
-    
+        
     
     /*
      *   switches out the camera input
@@ -188,77 +284,13 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             if captureSession.canAddInput(microphoneInput!) {
                 captureSession.addInput(microphoneInput!)
             } else { throw CameraControllerError.noMicFound }
+            captureSession.commitConfiguration()
             
         }
         
     }
-    
-    
-    
-    
-    
-    /*
-     * record stuff
-     */
-    public func startRecording() throws {
-        
-        //guard let connection = self.movieOutput.connection(with: .video) else { throw CameraControllerError.inputsAreInvalid }
         
         
-        
-        print("start recording from CameraController")
-        videoState = .recording
-        
-        // define URL
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
-        
-        // define date string
-        let date = Date()
-        let dFormatter = DateFormatter()
-        dFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dFormatter.timeZone = NSTimeZone.local
-        let dateString = dFormatter.string(from: date)
-        
-        // define output url
-        let outputURL =  URL(fileURLWithPath: "\(documentsPath)/StatTimer/videos/\(dateString)")
-       
-        // remove item incase it already exists
-        try? FileManager.default.removeItem(at: outputURL)
-        
-        print("recording to URL: ", outputURL)
-        
-        self.movieOutput.startRecording(to: outputURL, recordingDelegate: self)
-        
-        // create new movie output
-       // self.movieOutput =
-        
-        /*
-        captureSession.beginConfiguration()
-        captureSession.addOutput(self.movieOutput!)
-        captureSession.commitConfiguration()
-        */
-        
-    }
-    
-    /*
-     * stop recording and save
-     */
-    public func stopRecording() {
-        
-        if videoState != .recording { return }
-        videoState = .standby
-        
-        
-        self.movieOutput.stopRecording()
-        
-        
-    }
-    
-    
-    
-    
-    
-    
     
     /*
      * returns first video camera
@@ -276,7 +308,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         guard let captureSession = self.captureSession, captureSession.isRunning else { throw CameraControllerError.captureSessionIsMissing }
             
         self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-            self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         self.previewLayer?.connection?.videoOrientation = .landscapeLeft
         
         view.layer.insertSublayer(self.previewLayer!, at: 0)
@@ -345,14 +377,14 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
                 else { throw CameraControllerError.noMicFound }
             }
             
-            captureSession.startRunning()
             
         }
         func configureOutputs() throws {
             guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
             
-            captureSession.addOutput(self.movieOutput)
-            
+            //captureSession.addOutput(self.movieOutput)
+            //captureSession.commitConfiguration()
+            captureSession.startRunning()
         }
            
         DispatchQueue(label: "prepare").async {
@@ -397,8 +429,9 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
 
 extension CameraController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        print("recording saved! url: ", outputFileURL.absoluteURL)
         
+        print("AVCAPTURE DELEGATE: recording saved! url: ", outputFileURL.absoluteURL)
+        self.lastURL = outputFileURL
         delegate.recordingSaved(url: outputFileURL)
         
     }

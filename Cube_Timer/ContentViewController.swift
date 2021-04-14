@@ -70,6 +70,11 @@ class ContentViewController: ObservableObject {
     @Published var inSettings: Bool = false
     
     
+    // video stuff
+    @Published var showingVideo: Bool = false
+    @Published var videoURL: URL?
+    
+    
     init() {
         let notificationCenter = NotificationCenter.default
             notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
@@ -86,6 +91,21 @@ class ContentViewController: ObservableObject {
             self.setStateForAllSolves()
         }
     }
+    
+    
+    /*
+     *  listens for a play video call
+     */
+    public func playVideo(url: URL) {
+        
+        print("playing video, current in cvc, url: ", url)
+        self.videoURL = url
+        self.showingVideo = true
+        
+        
+        
+    }
+    
     
     /*
      *  THE DRAG GESTURE TO SWITCH VIEWS

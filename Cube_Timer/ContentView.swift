@@ -201,6 +201,14 @@ struct ContentView: View {
                         .zIndex(9)
                 }
                 
+                
+                /*
+                 * Video View
+                 */
+                if cvc.showingVideo {
+                    VideoPlayerView(url: cvc.videoURL!)
+                }
+                
                 AlertView()
                     .zIndex(100)
                 

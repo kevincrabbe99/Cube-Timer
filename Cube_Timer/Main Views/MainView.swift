@@ -41,7 +41,7 @@ struct MainView: View {
                  *  CAMERA LAYER
                  */
                 if cameraController.videoState != .disabled {
-                    CameraView(cameraController: cameraController)
+                    CameraView(cameraController: cameraController, cvc: cvc)
                         .opacity(0.3)
                         .transition(.opacity)
                 }
