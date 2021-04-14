@@ -22,7 +22,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     // camera vars
     var captureSession: AVCaptureSession?
-    var movieOutput: AVCaptureMovieFileOutput?
+    var movieOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     var captureConnection: AVCaptureConnection?
     
     var frontCamera: AVCaptureDevice?
@@ -59,6 +59,15 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     }
     
     
+    public func turnOffCamera() {
+        captureSession?.stopRunning()
+    }
+    
+    public func turnOnCamera() {
+        captureSession?.startRunning()
+    }
+    
+    
     /*
      * Toggles whether camera is showing
      */
@@ -70,9 +79,13 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             videoState = .standby
         } else { // video is enabled, -> disable
             videoState = .disabled
+            
+            // stp[ camera
+            captureSession?.stopRunning()
         }
         
     }
+    
     
     
     
@@ -145,8 +158,6 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     
     
-    
-    
 
     
     
@@ -158,7 +169,17 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         //guard let connection = self.movieOutput.connection(with: .video) else { throw CameraControllerError.inputsAreInvalid }
         
-        
+        /*
+         * check if already reacording so add 2 inputs
+        if movieOutput != nil {
+            if movieOutput!.isRecording {
+                
+                self.stopRecording(save: false)
+                
+                throw CameraControllerError.inputsAreInvalid
+            }
+        }
+         */
         
         print("start recording from CameraController")
         videoState = .recording
@@ -176,62 +197,65 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         // define output url
         let outputURL =  documentsPath?.appendingPathComponent("\(dateString).mov")
-       
+        
+        // set lastURL ref to be used by the TimerController to link this video and the current solve
+        self.lastURL = outputURL
+        
         // remove item incase it already exists
         try? FileManager.default.removeItem(at: outputURL!)
         
         print("recording to URL: ", outputURL)
         
-        // define output
-        self.movieOutput = AVCaptureMovieFileOutput()
-        captureSession?.addOutput(movieOutput!)
+        
         
         /*
          self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
          self.previewLayer?.connection?.videoOrientation = .landscapeLeft
          */
-        self.movieOutput?.connection(with: .video)?.videoOrientation = .landscapeLeft
+        self.movieOutput.connection(with: .video)?.videoOrientation = .landscapeLeft
         
         //self.captureConnection = AVCaptureConnection(inputPorts: csInputPorts, output: movieOutput!)
         //captureSession?.addConnection(captureConnection!)
-        self.movieOutput!.startRecording(to: outputURL!, recordingDelegate: self)
+        self.movieOutput.startRecording(to: outputURL!, recordingDelegate: self)
         
         
         // return saveto url
         return outputURL!
         
+        delegate.recordingStarted()
+        
     }
     
-    var csInputPorts: [AVCaptureInput.Port] {
-        
-        
-        guard let captureSession = self.captureSession else { return [] }
-        
-        var ports: [AVCaptureInput.Port] = []
-        for p in self.captureSession!.inputs {
-            ports.append(contentsOf: p.ports)
-        }
-        return ports
-    }
+    
+   public var lastURL: URL?
     
     /*
-     * stop recording and save
+     * stop recording, save if timer has started
      */
-    private var lastURL: URL?
-    public func stopRecording() {
+    public func stopRecording(save: Bool = true) {
+        print("video: stop recording")
+        
         
         if videoState != .recording { return }
         videoState = .standby
         
         
-        self.movieOutput!.stopRecording()
+        self.movieOutput.stopRecording()
         
-        print("video: stop recording")
+        // delete video if save = false
+        if !save {
+            do {
+                try FileManager.default.removeItem(at: (self.movieOutput.outputFileURL)!)
+                print("deleted video that was just created")
+            } catch {
+                print("Error deleting video which never got initiated: CameraController().stopRecording()")
+            }
+        }
         
-        //delegate.recordingSaved(url: lastURL!)
         
-        
-        
+        // call to delegate (just incase)
+        delegate.recordingStopped(saved: save)
+    
     }
     
     
@@ -251,12 +275,19 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
         
         captureSession.beginConfiguration()
-        let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput
-        captureSession.removeInput(currentInput!)
-        
+        //let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput
+        if pos == .back {
+            captureSession.removeInput(frontCameraInput!)
+            captureSession.addInput(backCameraInput!)
+        } else {
+            captureSession.removeInput(backCameraInput!)
+            captureSession.addInput(frontCameraInput!)
+        }
+            /*
         let newCameraDevice = getCamera(with: pos)
         let newViewInput = try? AVCaptureDeviceInput(device: newCameraDevice!)
         captureSession.addInput(newViewInput!)
+ */
         captureSession.commitConfiguration()
         
     }
@@ -346,7 +377,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         func configureDeviceInputs() throws {
             guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
                
-            // setup camera, init front camera
+            // setup camera, init front camera input
             if let frontCamera = self.frontCamera {
                 self.frontCameraInput = try AVCaptureDeviceInput(device: frontCamera)
                   
@@ -358,8 +389,12 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
                 else { throw CameraControllerError.inputsAreInvalid }
                    
             }
-            else { throw CameraControllerError.noCamerasAvailable }
-               
+            else { throw CameraControllerError.noFrontCameraAvailable }
+            
+            // setup back camera, dont set as output at first tho
+            if let backCamera = self.backCamera {
+                self.backCameraInput = try AVCaptureDeviceInput(device: backCamera)
+            } else { throw CameraControllerError.noBackCameraAvailable }
             
             // setup microphone
             if let defMic = self.microphone {
@@ -373,13 +408,27 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             }
             
             
+            
         }
         func configureOutputs() throws {
             guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
             
+            // define new MovieOut Instance
+            self.movieOutput = AVCaptureMovieFileOutput()
+            // remove all outputs from captureSession
+            for output in captureSession.outputs {
+                captureSession.removeOutput(output)
+            }
+            // add new movieOutputInstance
+            if captureSession.canAddOutput(movieOutput) {
+                captureSession.addOutput(movieOutput)
+            }
+
+            
             //captureSession.addOutput(self.movieOutput)
             //captureSession.commitConfiguration()
             captureSession.startRunning()
+            
         }
            
         DispatchQueue(label: "prepare").async {
@@ -426,7 +475,6 @@ extension CameraController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         
         print("AVCAPTURE DELEGATE: recording saved! url: ", outputFileURL.absoluteURL)
-        self.lastURL = outputFileURL
         delegate.recordingSaved(url: outputFileURL)
         
     }

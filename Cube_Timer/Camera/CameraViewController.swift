@@ -85,13 +85,13 @@ struct CameraView: UIViewControllerRepresentable {
          /*
           *  Camera FUNCTIONS ROUTER
           */
-         func startRecord() {
-             print("start recording")
-         }
+        func recordingStopped(saved: Bool) {
+            print("stop recording, saved = ", saved)
+        }
          
-         func stopRecord() {
-             print("stop recording")
-         }
+        func recordingStarted() {
+            print("start recording")
+        }
         
         func recordingSaved(url: URL) {
             print("camera vc: recording saved to: ", url)
@@ -114,7 +114,12 @@ struct CameraView: UIViewControllerRepresentable {
             }
             */
             
-            parent.cvc.playVideo(url: url)
+            /*
+             * check if path exists before offering to open
+             */
+            if FileManager.default.fileExists(atPath: url.absoluteString) {
+                parent.cvc.openVideo(url: url)
+            }
             
             
         }

@@ -41,24 +41,32 @@ struct SolveElementView: View {
     var body: some View {
         
         Button {
-            print("tapped 1")
-            //if controller != nil {
-                controller.tapped()
-           // }
+            controller.tapped()
         } label: {
             ZStack {
-                if hasVideo {
-                    Color.red
+                
+               
+                /*
+                 * background color
+                 */
+                if isSelected {
+                    Color.black
+                        .cornerRadius(3)
+                        //.opacity(0.2)
+                } else {
+                    controller.bgColor
+                        .cornerRadius(3)
+                        //.opacity(0.2)
                 }
-                    else if isSelected {
-                        Color.black
-                            .cornerRadius(3)
-                            //.opacity(0.2)
-                    } else {
-                        controller.bgColor
-                            .cornerRadius(3)
-                            //.opacity(0.2)
-                    }
+                
+                /*
+                 *  apply a RED DOT if the solve has a video saved
+                 */
+                if hasVideo {
+                    IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.clear, iconColor: Color.init("red"), width: 9, height: 9)
+                        .offset(x: 16.5, y: -7)
+                }
+                    
                 
                 //if controller != nil {
                     Text(controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")

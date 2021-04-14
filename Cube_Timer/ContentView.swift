@@ -35,8 +35,10 @@ struct ContentView: View {
     @ObservedObject var editSolveController: EditSolveController = EditSolveController()
     @ObservedObject var settingsController: SettingsController = SettingsController()
     @ObservedObject var alertController: AlertController = AlertController()
+    
     @ObservedObject var cameraController: CameraController = CameraController()
-  
+    @ObservedObject var videoPlayerController: VideoPlayerController = VideoPlayerController()
+    
     @StateObject var cvc: ContentViewController = ContentViewController()
     
     /*
@@ -107,6 +109,9 @@ struct ContentView: View {
         
         // camera
         self.cameraController.solveHandler = solveHandler
+        //video player
+        self.videoPlayerController.solveHandler = solveHandler
+        self.videoPlayerController.cvc = cvc
         
         
         
@@ -206,7 +211,7 @@ struct ContentView: View {
                  * Video View
                  */
                 if cvc.showingVideo {
-                    VideoPlayerView(url: cvc.videoURL!)
+                    VideoPlayerView()
                 }
                 
                 AlertView()
@@ -231,6 +236,8 @@ struct ContentView: View {
             self.cvc.cTypeHandler = cTypeHandler
             self.cvc.timer = timer
             self.cvc.allSolvesController = allSolvesController
+            self.cvc.videoPlayerController = videoPlayerController
+            self.cvc.cameraController = cameraController
         
             
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
@@ -251,6 +258,7 @@ struct ContentView: View {
         .environmentObject(alertController)
         .environmentObject(barGraphController)
         .environmentObject(cameraController)
+        .environmentObject(videoPlayerController)
         .onAppear(
         
         

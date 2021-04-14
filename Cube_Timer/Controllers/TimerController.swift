@@ -227,6 +227,9 @@ class TimerController: ObservableObject {
         self.oneActivated = false
         self.bothActivated = false
         self.oneBtnActivated = false
+        
+        
+        
         if timerGoing { // stop timer
             //stopTimer()
             //startApproved = false // prevent from starting timer without both buttons pressed
@@ -244,6 +247,20 @@ class TimerController: ObservableObject {
         //self.peripheralOpacity = 0
         self.oneActivated = true
         self.bothActivated = false
+        
+        // Start recording on first touch
+        //  Im add all three if dependencies just incase I add extra videoStates in the future
+        if  cameraController.videoState != .disabled &&
+            cameraController.videoState != .recording &&
+            cameraController.videoState == .standby {
+            do {
+                let url = try cameraController.startRecording()
+                tempSolve?.videoURL = url.absoluteString
+            } catch {
+                print("error: video not working, TimerController.swift")
+            }
+        }
+        
         if !timerGoing { // if timer is not going
             self.resetTimerStart()  // start reseting the timer
         } else {
@@ -288,19 +305,15 @@ class TimerController: ObservableObject {
             tempSolve!.timestamp = Date()
             tempSolve!.cubeType = cTypeHandler.selected!
             
-            solveHandler.add(tempSolve!, newEntry: true)
-        }
-        
-        
-        // Start recording is not disabled
-        if cameraController.videoState != .disabled {
-            do {
-                let url = try cameraController.startRecording()
-                tempSolve?.videoURL = url.absoluteString
-            } catch {
-                print("error: video not working, TimerController.swift")
+            // link video
+            if cameraController.isRecording {
+                tempSolve?.videoURL = cameraController.lastURL?.absoluteString
             }
+            
+            solveHandler.add(tempSolve!, newEntry: true)
+            
         }
+
         
         
         startTime = Date().timeIntervalSinceReferenceDate
@@ -547,6 +560,11 @@ class TimerController: ObservableObject {
         peripheralOpacity = 1
         setDisplayToLastSolve()
         solveHandler.barGraphController.animateIn() // hide bars
+        
+        // stop recording and delete
+        if cameraController.videoState == .recording {
+            cameraController.stopRecording(save: false)
+        }
     }
     
     

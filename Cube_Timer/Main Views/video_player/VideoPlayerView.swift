@@ -10,12 +10,10 @@ import AVKit
 
 struct VideoPlayerView: View {
     
-    private let player: AVPlayer
+    @EnvironmentObject var cvc: ContentViewController
     
-    init(url: URL) {
-        self.player = AVPlayer(url: url)
-        print("initiated video player w url: ", url)
-    }
+    // controller
+    @EnvironmentObject var controller: VideoPlayerController
     
     var body: some View {
         
@@ -44,7 +42,11 @@ struct VideoPlayerView: View {
                     
                     IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"))
                         .padding(.trailing, 10)
+                
                     IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"))
+                        .onTapGesture {
+                            cvc.closeVideo()
+                        }
                 }
                 
                 ZStack {
@@ -53,9 +55,9 @@ struct VideoPlayerView: View {
                         .cornerRadius(5)
                         .opacity(0.8)
                     
-                    VideoPlayer(player: self.player)
+                    VideoPlayer(player: self.controller.player)
                         .onAppear() {
-                            player.play()
+                            self.controller.player!.play()
                         }
                         .padding(.all, 5)
                 }
@@ -72,6 +74,6 @@ struct VideoPlayerView: View {
 
 struct VideoPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoPlayerView(url: URL(fileURLWithPath: "fake_url"))
+        VideoPlayerView()
     }
 }

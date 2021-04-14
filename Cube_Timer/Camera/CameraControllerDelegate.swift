@@ -18,8 +18,8 @@ protocol CameraControllerDelegate {
     func setControllerRef(_ ref: CameraController)
     
     
-    func startRecord()
-    func stopRecord()
+    func recordingStopped(saved: Bool)
+    func recordingStarted()
     func recordingSaved(url: URL)
     func cameraWorking()
     func cameraNowWorking(error: CameraControllerError)
@@ -31,6 +31,8 @@ enum CameraControllerError: Swift.Error {
     case inputsAreInvalid
     case invalidOperation
     case noCamerasAvailable
+    case noFrontCameraAvailable
+    case noBackCameraAvailable
     case noMicFound
     case unknown
 }

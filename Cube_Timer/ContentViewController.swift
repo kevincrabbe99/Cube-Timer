@@ -69,10 +69,12 @@ class ContentViewController: ObservableObject {
     // settigns page
     @Published var inSettings: Bool = false
     
+    // camera stuff
+    var cameraController: CameraController!
     
     // video stuff
+    var videoPlayerController: VideoPlayerController!
     @Published var showingVideo: Bool = false
-    @Published var videoURL: URL?
     
     
     init() {
@@ -94,17 +96,22 @@ class ContentViewController: ObservableObject {
     
     
     /*
-     *  listens for a play video call
+     *  listens for a play video call from anywhere
      */
-    public func playVideo(url: URL) {
+    public func openVideo(url: URL) {
         
         print("playing video, current in cvc, url: ", url)
-        self.videoURL = url
+        self.videoPlayerController.goto(url: url)
         self.showingVideo = true
         
-        
-        
     }
+    /*
+     *  listens for a close video call from VideoPlayerController.swift
+     */
+    public func closeVideo() {
+        self.showingVideo = false
+    }
+    
     
     
     /*
@@ -297,7 +304,14 @@ class ContentViewController: ObservableObject {
         self.pageTransitionPercentage = 1
         self.allSolvesViewScale = 1
         
-        
+        /*
+         *  hide camera layer if not disabled
+         */
+        if cameraController.videoState != .disabled {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.cameraController.turnOffCamera()
+            }
+        }
       
     }
     
@@ -307,7 +321,14 @@ class ContentViewController: ObservableObject {
         self.pageTransitionPercentage = 0
         self.allSolvesViewScale = 0.9
         
-       
+        /*
+         *  hide camera layer if not disabled
+         */
+        if cameraController.videoState != .disabled {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.cameraController.turnOnCamera()
+            }
+        }
     }
     
     

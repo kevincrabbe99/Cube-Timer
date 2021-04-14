@@ -40,7 +40,8 @@ struct MainView: View {
                 /*
                  *  CAMERA LAYER
                  */
-                if cameraController.videoState != .disabled {
+                if  cameraController.videoState != .disabled &&
+                    cvc.onPage != .showAll {
                     CameraView(cameraController: cameraController, cvc: cvc)
                         .opacity(0.3)
                         .transition(.opacity)
