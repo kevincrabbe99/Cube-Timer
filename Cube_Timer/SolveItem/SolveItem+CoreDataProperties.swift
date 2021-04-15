@@ -48,9 +48,9 @@ extension SolveItem: Identifiable {
          }
      }
      */
-    @NSManaged public var videoURL: String?
+    @NSManaged public var videoName: String?
     public var hasVideo: Bool {
-        if videoURL != nil {
+        if videoName != nil {
             return true
         }
         return false

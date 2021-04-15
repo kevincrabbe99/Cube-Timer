@@ -199,7 +199,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         let outputURL =  documentsPath.appendingPathComponent("\(dateString).mov")
         
         // set lastURL ref to be used by the TimerController to link this video and the current solve
-        self.lastURL = outputURL
+        self.lastVideoName = outputURL.lastPathComponent
         
         // remove item incase it already exists
         try? FileManager.default.removeItem(at: outputURL)
@@ -227,7 +227,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     }
     
     
-   public var lastURL: URL?
+   public var lastVideoName: String?
     
     /*
      * stop recording, save if timer has started

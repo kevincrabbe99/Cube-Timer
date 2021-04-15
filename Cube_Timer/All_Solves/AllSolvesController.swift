@@ -108,12 +108,12 @@ class AllSolvesController: ObservableObject {
         /*
          *  REMOVE SOON: extract name
          */
-        print("playback: AllSolvesController().openVideoFor(solveItem) | stored URL = ", solveItem.videoURL ?? "[no url]")
-        let tURL = URL(fileURLWithPath: solveItem.videoURL!)
-        let tNAME = tURL.lastPathComponent
-        print("playback: AllSolvesController().openVideoFor(solveItem) | concatanated NAME = ", tNAME ?? "[no url]")
+        print("playback: AllSolvesController().openVideoFor(solveItem) | stored NAME = ", solveItem.videoName ?? "[no url]")
+        //let tURL = URL(fileURLWithPath: solveItem.videoName!)
+        //let tNAME = tURL.lastPathComponent
+        //print("playback: AllSolvesController().openVideoFor(solveItem) | concatanated NAME = ", tNAME ?? "[no url]")
         
-        cvc.openVideo(name: tNAME)
+        cvc.openVideo(name: solveItem.videoName!)
     }
     
     /*

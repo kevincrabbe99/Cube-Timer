@@ -32,7 +32,7 @@ struct SolveElementView: View {
     }
     
     var hasVideo: Bool {
-        if self.controller.si.videoURL != nil {
+        if self.controller.si.videoName != nil {
             return true
         }
         return false

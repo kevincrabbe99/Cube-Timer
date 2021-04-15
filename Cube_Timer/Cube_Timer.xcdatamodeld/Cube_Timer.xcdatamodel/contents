@@ -16,7 +16,7 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="timeMS" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="videoURL" optional="YES" attributeType="String"/>
+        <attribute name="videoName" optional="YES" attributeType="String"/>
         <relationship name="cubeType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CubeType" inverseName="solves" inverseEntity="CubeType"/>
         <fetchedProperty name="fetchedProperty" optional="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="SolveItem"/>
@@ -29,7 +29,7 @@
         </fetchedProperty>
     </entity>
     <elements>
-        <element name="CubeType" positionX="-225" positionY="72" width="128" height="179"/>
-        <element name="SolveItem" positionX="-222.2095336914062" positionY="11.59173583984375" width="128" height="155"/>
+        <element name="CubeType" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="SolveItem" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

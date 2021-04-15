@@ -255,7 +255,7 @@ class TimerController: ObservableObject {
             cameraController.videoState == .standby {
             do {
                 let url = try cameraController.startRecording()
-                tempSolve?.videoURL = url.absoluteString
+                //tempSolve?.videoName = url.absoluteString
             } catch {
                 print("error: video not working, TimerController.swift")
             }
@@ -307,7 +307,7 @@ class TimerController: ObservableObject {
             
             // link video
             if cameraController.isRecording {
-                tempSolve?.videoURL = cameraController.lastURL?.absoluteString
+                tempSolve?.videoName = cameraController.lastVideoName
             }
             
             solveHandler.add(tempSolve!, newEntry: true)
