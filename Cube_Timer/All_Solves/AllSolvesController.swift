@@ -12,6 +12,7 @@ class AllSolvesController: ObservableObject {
     var contentView: ContentView!
     var solvesData: SolvesFromTimeframe!
     var cTypeHandler: CTypeHandler!
+    var cvc: ContentViewController!
     
     @Published var best: SolveItem?
     @Published var worst: SolveItem?
@@ -93,6 +94,27 @@ class AllSolvesController: ObservableObject {
         
     }
     
+    
+    /*
+     * opens video for solveItem tapped
+     */
+    public func openVideoFor(solveItem: SolveItem) {
+        //cvc.openVideo(url: URL(fileURLWithPath: solveItem.videoURL!))
+        
+        if !solveItem.hasVideo {
+            return
+        }
+        
+        /*
+         *  REMOVE SOON: extract name
+         */
+        print("playback: AllSolvesController().openVideoFor(solveItem) | stored URL = ", solveItem.videoURL ?? "[no url]")
+        let tURL = URL(fileURLWithPath: solveItem.videoURL!)
+        let tNAME = tURL.lastPathComponent
+        print("playback: AllSolvesController().openVideoFor(solveItem) | concatanated NAME = ", tNAME ?? "[no url]")
+        
+        cvc.openVideo(name: tNAME)
+    }
     
     /*
      * clears the selected array

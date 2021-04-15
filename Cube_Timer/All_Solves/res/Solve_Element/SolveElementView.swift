@@ -40,9 +40,7 @@ struct SolveElementView: View {
     
     var body: some View {
         
-        Button {
-            controller.tapped()
-        } label: {
+       
             ZStack {
                 
                
@@ -80,7 +78,12 @@ struct SolveElementView: View {
             }
             .frame(width: 45, height: 25)
             .foregroundColor(controller.textColor)
-        }
+            .onTapGesture {
+                controller.tapped()
+            }
+            .onLongPressGesture(minimumDuration: 0.7) {
+                
+            }
 
         
     }

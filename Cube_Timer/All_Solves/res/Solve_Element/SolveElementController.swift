@@ -67,6 +67,12 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
         print("tapped!")
         lightTap.impactOccurred()
         
+        allSolvesController.openVideoFor(solveItem: si)
+        
+    }
+
+    public func longPressed() {
+        
         if !selected { // if not selected
             self.selected = true
             allSolvesController.tap(self)

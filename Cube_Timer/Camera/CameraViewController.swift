@@ -117,9 +117,9 @@ struct CameraView: UIViewControllerRepresentable {
             /*
              * check if path exists before offering to open
              */
-            if FileManager.default.fileExists(atPath: url.absoluteString) {
+            //if FileManager.default.fileExists(atPath: url.absoluteString) {
                 parent.cvc.openVideo(url: url)
-            }
+            //}
             
             
         }

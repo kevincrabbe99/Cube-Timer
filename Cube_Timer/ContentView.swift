@@ -229,6 +229,7 @@ struct ContentView: View {
             self.cTypeHandler.cvc = cvc
             self.popupController.cvc = cvc
             self.timer.cvc = cvc
+            self.allSolvesController.cvc = cvc
             
             // objects which cvc needs to reference 
             self.cvc.ctEditController = ctEditController

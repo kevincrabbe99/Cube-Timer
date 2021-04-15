@@ -186,23 +186,23 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         // define URL
         //let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let documentsPath = DocumentDirectory.getVideosDirectory() 
         
         // define date string
         let date = Date()
         let dFormatter = DateFormatter()
-        dFormatter.dateFormat = "yyyy MM dd HH mm ss"
+        dFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
         dFormatter.timeZone = NSTimeZone.local
         let dateString = dFormatter.string(from: date)
         
         // define output url
-        let outputURL =  documentsPath?.appendingPathComponent("\(dateString).mov")
+        let outputURL =  documentsPath.appendingPathComponent("\(dateString).mov")
         
         // set lastURL ref to be used by the TimerController to link this video and the current solve
         self.lastURL = outputURL
         
         // remove item incase it already exists
-        try? FileManager.default.removeItem(at: outputURL!)
+        try? FileManager.default.removeItem(at: outputURL)
         
         print("recording to URL: ", outputURL)
         
@@ -216,11 +216,11 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         //self.captureConnection = AVCaptureConnection(inputPorts: csInputPorts, output: movieOutput!)
         //captureSession?.addConnection(captureConnection!)
-        self.movieOutput.startRecording(to: outputURL!, recordingDelegate: self)
+        self.movieOutput.startRecording(to: outputURL, recordingDelegate: self)
         
         
         // return saveto url
-        return outputURL!
+        return outputURL
         
         delegate.recordingStarted()
         

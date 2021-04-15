@@ -105,6 +105,15 @@ class ContentViewController: ObservableObject {
         self.showingVideo = true
         
     }
+    
+    public func openVideo(name: String) {
+        
+        print("playing video, current in cvc, name: ", name)
+        self.videoPlayerController.goto(name: name)
+        self.showingVideo = true
+        
+    }
+    
     /*
      *  listens for a close video call from VideoPlayerController.swift
      */
@@ -324,6 +333,7 @@ class ContentViewController: ObservableObject {
         /*
          *  hide camera layer if not disabled
          */
+        if cameraController == nil { return }
         if cameraController.videoState != .disabled {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.cameraController.turnOnCamera()

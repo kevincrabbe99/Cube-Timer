@@ -49,7 +49,12 @@ extension SolveItem: Identifiable {
      }
      */
     @NSManaged public var videoURL: String?
-    
+    public var hasVideo: Bool {
+        if videoURL != nil {
+            return true
+        }
+        return false
+    }
     
     /*
     convenience init(id: String, timeMS: Double, timestamp: Date, cubeType: CubeType) {
