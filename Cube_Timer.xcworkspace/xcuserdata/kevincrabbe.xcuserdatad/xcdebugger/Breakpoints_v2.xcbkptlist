@@ -46,8 +46,8 @@
             filePath = "Cube_Timer/Camera/CameraController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "CameraController"
             landmarkType = "3">
          </BreakpointContent>
@@ -156,6 +156,69 @@
             endingLineNumber = "119"
             landmarkName = "openVideo(url:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEA1A7FC-2A6E-4E71-B02A-C9741374E4D3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cube_Timer/Popup/Delete_Solve_Confirm/DeleteSolvesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "CEA1A7FC-2A6E-4E71-B02A-C9741374E4D3 - 15314c7b5bb7a319"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Cube_Timer.DeleteSolvesView.body.getter : some"
+                  moduleName = "Cube Timer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Popup/Delete_Solve_Confirm/DeleteSolvesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "816">
+               </Location>
+               <Location
+                  uuid = "CEA1A7FC-2A6E-4E71-B02A-C9741374E4D3 - 6ee9284be0a8a0f2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.multilineTextAlignment(SwiftUI.TextAlignment) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Button&lt;Cube_Timer.RoundedButton&gt;, SwiftUI.Button&lt;Cube_Timer.RoundedButton&gt;)&gt;&gt;)&gt; in Cube_Timer.DeleteSolvesView.body.getter : some"
+                  moduleName = "Cube Timer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Popup/Delete_Solve_Confirm/DeleteSolvesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "696">
+               </Location>
+               <Location
+                  uuid = "CEA1A7FC-2A6E-4E71-B02A-C9741374E4D3 - 6ee9284be0a8a134"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.multilineTextAlignment(SwiftUI.TextAlignment) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Button&lt;Cube_Timer.RoundedButton&gt;, SwiftUI.Button&lt;Cube_Timer.RoundedButton&gt;)&gt;&gt;)&gt; in Cube_Timer.DeleteSolvesView.body.getter : some"
+                  moduleName = "Cube Timer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Popup/Delete_Solve_Confirm/DeleteSolvesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "2500">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

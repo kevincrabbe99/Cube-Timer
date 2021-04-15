@@ -95,8 +95,8 @@ class AllSolvesController: ObservableObject {
         
     }
     
-    
     let lightTap = UIImpactFeedbackGenerator(style: .light)
+    let hapticGenerator = UINotificationFeedbackGenerator()
     /*
      * opens video for solveItem tapped
      */
@@ -144,7 +144,15 @@ class AllSolvesController: ObservableObject {
     public func tap(_ sec: SolveElementController) {
         print("tapped for selection: ", sec.si.timeMS)
         
+        
+        //provide haptic feedback if just started selecting
+        if selecting == false {
+            hapticGenerator.notificationOccurred(.success)
+        }
+        
         self.selecting = true // set to true just incase
+        
+        
         
         self.selected.append(sec)
     }
@@ -156,6 +164,7 @@ class AllSolvesController: ObservableObject {
         
         if selected.count == 0 {
             self.selecting = false
+            hapticGenerator.notificationOccurred(.error)
         }
     }
     

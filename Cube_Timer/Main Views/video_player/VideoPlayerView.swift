@@ -49,9 +49,15 @@ struct VideoPlayerView: View {
                     
                     IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
                         .padding(.trailing, 10)
+                        .onTapGesture {
+                            controller.deleteVideo() // UPDATE THIS to route to cvc
+                        }
                     
                     IconButton(icon: Image.init(systemName: "square.and.arrow.down.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24, iconWidth: 10, iconHeight: 11)
                         .padding(.trailing, 20)
+                        .onTapGesture {
+                            controller.saveVideoToPhotos()
+                        }
                 
                     IconButton(icon: Image.init(systemName: "info"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 24, height: 24, iconWidth: 8, iconHeight: 11)
                         .padding(.trailing, 20)

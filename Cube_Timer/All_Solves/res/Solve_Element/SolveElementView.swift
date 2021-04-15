@@ -31,12 +31,14 @@ struct SolveElementView: View {
         return false
     }
     
+    /*
     var hasVideo: Bool {
         if self.controller.si.videoName != nil {
             return true
         }
         return false
     }
+    */
     
     var body: some View {
         
@@ -60,7 +62,7 @@ struct SolveElementView: View {
                 /*
                  *  apply a RED DOT if the solve has a video saved
                  */
-                if hasVideo {
+                if controller.si.hasVideo {
                     IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.clear, iconColor: Color.init("red"), width: 9, height: 9)
                         .offset(x: 16.5, y: -7)
                 }

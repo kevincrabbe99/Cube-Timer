@@ -33,6 +33,11 @@ class DetailsViewController: ObservableObject {
     
     
     var readableDate: String {
+        
+        if solveItem.timestamp == nil {
+            return "Error #3kf20"
+        }
+        
         let df = DateFormatter()
         df.dateFormat = "MMM dd, yyyy hh:mm:ss a"
         return  df.string(from: solveItem!.timestamp)

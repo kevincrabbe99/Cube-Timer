@@ -99,6 +99,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
      */
     public func toggleCameraInput() {
         
+        lightTap.impactOccurred()
         
         if cameraInputState == .frontCamera {
             cameraInputState = .backCamera

@@ -96,26 +96,9 @@ struct CameraView: UIViewControllerRepresentable {
         func recordingSaved(url: URL) {
             print("camera vc: recording saved to: ", url)
             
-            /*
-            PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-            }) { saved, error in
-                if saved {
-                    /*
-                    let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alertController.addAction(defaultAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    */
-                    print("SAVED VIDEO TO CAMERA ROLL")
-                }else {
-                    print("ERROR SAVING VIDEO TO CAMERA ROLL: ", error)
-                }
-            }
-            */
             
             /*
-             * check if path exists before offering to open
+             * check if path exists before offering to open  UPDATE THIS BEFORE RELEASE
              */
             //if FileManager.default.fileExists(atPath: url.absoluteString) {
                 //parent.cvc.openVideo(url: url)

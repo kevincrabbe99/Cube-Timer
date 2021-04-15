@@ -369,7 +369,23 @@ class ContentViewController: ObservableObject {
     }
     
     
+    /*
+     *  shows popup to confirm they want to delete a single video
+     * triggered by AllSolvesView popups from within MainView
+     */
+    public func tappedDeleteSingleVideoFor(solveItem: SolveItem) {
+        showPopup(v: AnyView(DeleteVideoConfirmVieew(itemWithVideo: solveItem)))
+        //self.showingDetails = false
+    }
     
+    /*
+     *  shows popup to confirm they want to delete a single solve
+     * triggered by AllSolvesView popups from within MainView
+     */
+    public func tappedDeleteSingleSolve(itemToDelete: SolveItem) {
+        showPopup(v: AnyView(DeleteSingleSolveConfirmView(toDelete: itemToDelete)))
+        //self.showingDetails = false
+    }
     
     /*
      *  shows popup to confirm they want to delete

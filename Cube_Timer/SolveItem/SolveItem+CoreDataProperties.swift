@@ -8,6 +8,9 @@
 
 import Foundation
 import CoreData
+import Photos
+import SwiftUI
+import AVFoundation
 
 /*
 enum PuzzleType: String {
@@ -56,16 +59,33 @@ extension SolveItem: Identifiable {
         return false
     }
     
-    /*
-    convenience init(id: String, timeMS: Double, timestamp: Date, cubeType: CubeType) {
-        self.init()
-        self.id = id
-        self.timeMS = timeMS
-        self.timestamp = timestamp
-        self.cubeType = cubeType
+    
+    
+    public func saveVideoToPhotos() {
+        
+        
+        if !hasVideo { return }
+        
+        let videoPathURL = DocumentDirectory.getVideosDirectory().appendingPathComponent(videoName!)
+        
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoPathURL )
+        }) { saved, error in
+            if saved {
+                
+             
+                
+                print("SAVED VIDEO TO CAMERA ROLL")
+            }else {
+                
+                
+                print("VideoPlayerController.saveVideoToPhotos() | ERROR SAVING VIDEO TO CAMERA ROLL: ", error)
+                
+            }
+        }
+        
     }
-    */
-  
+    
     
     
     func setCubeType(_ ct: CubeType) {

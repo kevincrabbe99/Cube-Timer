@@ -9,6 +9,10 @@ import Foundation
 import SwiftUI
 
 class SolveElementController: ObservableObject, Identifiable, Equatable {
+    
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
+    let hapticGenerator = UINotificationFeedbackGenerator()
+    
     static func == (lhs: SolveElementController, rhs: SolveElementController) -> Bool {
         if lhs.id == rhs.id {
             return true
@@ -31,7 +35,6 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
     
     @Published var selected: Bool = false
     
-    let lightTap = UIImpactFeedbackGenerator(style: .light)
     
     // sets the color green if the solve is the best solve
     var bgColor: Color {
@@ -64,6 +67,10 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
      */
     public func tapped() {
         print("tapped!")
+        
+        DispatchQueue.main.async {
+            self.lightTap.impactOccurred()
+        }
         
         // if ASC isSelecting the rout to longPress
         // else tapSolveItem

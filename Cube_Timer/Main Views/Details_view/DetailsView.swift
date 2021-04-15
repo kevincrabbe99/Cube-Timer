@@ -40,8 +40,13 @@ struct DetailsView: View {
                         })
                     }
                     
-                    IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
-                        .padding(.trailing, 20)
+                    Button(action: {
+                        cvc.tappedDeleteSingleSolve(itemToDelete: controller.solveItem)
+                    }, label: {
+                        IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
+                            .padding(.trailing, 20)
+                    })
+                    
                 
                     IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"), width: 24, height: 24)
                         .onTapGesture {

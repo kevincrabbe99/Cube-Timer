@@ -71,6 +71,7 @@ struct ContentView: View {
         self.solveHandler.allSolvesController = allSolvesController
         self.solveHandler.barGraphController = barGraphController
         self.solveHandler.cameraController = cameraController
+        self.solveHandler.alertController = alertController
         
         
         self.solveHandler.solvesByTimeFrame.cTypeHandler = cTypeHandler
@@ -113,9 +114,10 @@ struct ContentView: View {
         
         // camera
         self.cameraController.solveHandler = solveHandler
+        
         //video player
         self.videoPlayerController.solveHandler = solveHandler
-        //self.videoPlayerController.cvc = cvc
+        self.videoPlayerController.alertController = alertController
         
         self.detailsViewController.allSolveController = allSolvesController
         
@@ -269,6 +271,9 @@ struct ContentView: View {
             self.timer.cvc = cvc
             self.allSolvesController.cvc = cvc
             self.cameraController.cvc = cvc
+            self.videoPlayerController.cvc = cvc
+            self.detailsViewController.cvc = cvc
+            self.solveHandler.cvc = cvc
             
             // objects which cvc needs to reference 
             self.cvc.ctEditController = ctEditController
