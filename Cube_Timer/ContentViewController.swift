@@ -17,6 +17,7 @@ class ContentViewController: ObservableObject {
     var cTypeHandler: CTypeHandler!
     var timer: TimerController!
     var allSolvesController: AllSolvesController!
+    var detailsViewController: DetailsViewController!
     
     
     // sidebar positioning
@@ -76,6 +77,8 @@ class ContentViewController: ObservableObject {
     var videoPlayerController: VideoPlayerController!
     @Published var showingVideo: Bool = false
     
+    @Published var showingDetails: Bool = false
+    
     
     init() {
         let notificationCenter = NotificationCenter.default
@@ -94,6 +97,21 @@ class ContentViewController: ObservableObject {
         }
     }
     
+    /*
+     *  opens details popup
+     */
+    public func openDetails(solveItem: SolveItem) {
+        
+        print("opening_details for SolveItem: ", solveItem.timeMS)
+        self.detailsViewController.goto(solveItem: solveItem)
+        self.showingDetails = true
+        
+    }
+    
+    public func closeDetails() {
+        lightTap.impactOccurred()
+        self.showingDetails = false
+    }
     
     /*
      *  listens for a play video call from anywhere
@@ -114,10 +132,19 @@ class ContentViewController: ObservableObject {
         
     }
     
+    public func openVideo(solveItem: SolveItem) {
+        
+        print("playing video, current in cvc, solveItem: ", solveItem.timeMS)
+        self.videoPlayerController.goto(solveItem: solveItem)
+        self.showingVideo = true
+        
+    }
+    
     /*
      *  listens for a close video call from VideoPlayerController.swift
      */
     public func closeVideo() {
+        lightTap.impactOccurred()
         self.showingVideo = false
     }
     
@@ -317,7 +344,7 @@ class ContentViewController: ObservableObject {
          *  hide camera layer if not disabled
          */
         if cameraController.videoState != .disabled {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.cameraController.turnOffCamera()
             }
         }

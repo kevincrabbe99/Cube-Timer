@@ -39,6 +39,10 @@ struct ContentView: View {
     @ObservedObject var cameraController: CameraController = CameraController()
     @ObservedObject var videoPlayerController: VideoPlayerController = VideoPlayerController()
     
+    // details popup
+    @ObservedObject var detailsViewController: DetailsViewController = DetailsViewController()
+    
+    
     @StateObject var cvc: ContentViewController = ContentViewController()
     
     /*
@@ -111,8 +115,9 @@ struct ContentView: View {
         self.cameraController.solveHandler = solveHandler
         //video player
         self.videoPlayerController.solveHandler = solveHandler
-        self.videoPlayerController.cvc = cvc
+        //self.videoPlayerController.cvc = cvc
         
+        self.detailsViewController.allSolveController = allSolvesController
         
         
         // update the stopwatch display to show the last solve time
@@ -207,12 +212,45 @@ struct ContentView: View {
                 }
                 
                 
+           
+             
+                
                 /*
                  * Video View
                  */
                 if cvc.showingVideo {
-                    VideoPlayerView()
+                    Color.black
+                        .opacity(0.75)
+                        .transition(.opacity)
+                        .onTapGesture {
+                            cvc.closeVideo()
+                        }
                 }
+                
+                if cvc.showingVideo {
+                    VideoPlayerView()
+                        .transition(.move(edge: .top)).animation(.spring())
+                }
+                
+                
+                
+                /*
+                 * details view
+                 */
+                if cvc.showingDetails {
+                    Color.black
+                        .opacity(0.9)
+                        .transition(.opacity).animation(.easeIn)
+                        .onTapGesture {
+                            cvc.closeDetails()
+                        }
+                }
+                
+                if cvc.showingDetails {
+                    DetailsView()
+                        .transition(.move(edge: .top)).animation(.spring())
+                }
+                
                 
                 AlertView()
                     .zIndex(100)
@@ -230,6 +268,7 @@ struct ContentView: View {
             self.popupController.cvc = cvc
             self.timer.cvc = cvc
             self.allSolvesController.cvc = cvc
+            self.cameraController.cvc = cvc
             
             // objects which cvc needs to reference 
             self.cvc.ctEditController = ctEditController
@@ -239,6 +278,7 @@ struct ContentView: View {
             self.cvc.allSolvesController = allSolvesController
             self.cvc.videoPlayerController = videoPlayerController
             self.cvc.cameraController = cameraController
+            self.cvc.detailsViewController = detailsViewController
         
             
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
@@ -260,6 +300,7 @@ struct ContentView: View {
         .environmentObject(barGraphController)
         .environmentObject(cameraController)
         .environmentObject(videoPlayerController)
+        .environmentObject(detailsViewController)
         .onAppear(
         
         

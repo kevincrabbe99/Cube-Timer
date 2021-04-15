@@ -32,6 +32,8 @@ struct MainView: View {
         cvc.setPageTo(p)
     }
     
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
+    
     var body: some View {
         GeometryReader { geo in
             Color.init("very_dark_black")
@@ -77,6 +79,8 @@ struct MainView: View {
                                 IconButton(icon: Image.init(systemName: "arrow.triangle.2.circlepath.camera.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: (cameraController.cameraInputState == .backCamera ? Color.init("dark_black") : Color.init("very_dark_black")), width: 30, height: 25)
                                     .padding(.leading, 10)
                                     .onTapGesture {
+                                        
+                                        lightTap.impactOccurred()
                                         cameraController.toggleCameraInput()
                                     }
                                 

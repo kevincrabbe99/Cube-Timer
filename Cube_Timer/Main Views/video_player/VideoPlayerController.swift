@@ -19,6 +19,7 @@ class VideoPlayerController: ObservableObject {
     var solveHandler: SolveHandler!
     
     var player: AVPlayer?
+    var solveItem: SolveItem?
     
     init() {
         self.player = nil
@@ -34,6 +35,29 @@ class VideoPlayerController: ObservableObject {
         let url = DocumentDirectory.getVideosDirectory().appendingPathComponent(name)
         print("playback: VideoPlayerController().goto(name) | Attempting to play constructed url: ", url)
         self.goto(url: url)
+    }
+    
+    public func goto(solveItem: SolveItem) {
+        let url = DocumentDirectory.getVideosDirectory().appendingPathComponent(solveItem.videoName!)
+        self.solveItem = solveItem
+        
+        self.goto(url: url)
+    }
+    
+    public var hasSolveItem: Bool {
+        if solveItem == nil {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    
+    
+    var readableDate: String {
+        let df = DateFormatter()
+        df.dateFormat = "MMM dd, yyyy hh:mm:ss"
+        return  df.string(from: solveItem!.timestamp)
     }
     
     

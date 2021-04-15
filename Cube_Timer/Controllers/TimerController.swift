@@ -111,13 +111,17 @@ class TimerController: ObservableObject {
         print("[timer] one Activated")
         oneBtnActivated = true
         
+        // shoud always pass
         testStart()
+        
+        
         /*
         activateLeft()
         activateRight()
         */
     }
     
+    /*
     func stopTimerFromSingleBtn() {
         lightTap.impactOccurred()
         print("[timer] one DeActivated")
@@ -130,6 +134,7 @@ class TimerController: ObservableObject {
         */
         
     }
+    */
     
     
     /*
@@ -142,6 +147,17 @@ class TimerController: ObservableObject {
         
         if !timerGoing && acceptInput {
             self.resetTimerStart()
+            
+            // check if recording mode is on
+            if cameraController.videoState == .standby {
+                // start recording
+                do {
+                    try cameraController.startRecording()
+                } catch {
+                    print("Error starting recording")
+                }
+            }
+            
         } else {
             self.stopTimer()
         }
@@ -156,6 +172,7 @@ class TimerController: ObservableObject {
     
     func singleButtonAbort() {
         abortResettingTimer()
+        cameraController.stopRecording(save: false)
     }
     
     func activateRight() {

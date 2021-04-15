@@ -19,6 +19,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     // @Environment vars
     var solveHandler: SolveHandler!
+    var cvc: ContentViewController!
     
     // camera vars
     var captureSession: AVCaptureSession?
@@ -39,6 +40,8 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     var delegate: CameraControllerDelegate!
     
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
+    let hapticGenerator = UINotificationFeedbackGenerator()
     
     
     // state vars
@@ -76,8 +79,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         print("toggling video state from : ", videoState)
         
         if videoState == .disabled { // video is disabled, -> enable
+            hapticGenerator.notificationOccurred(.success)
             videoState = .standby
         } else { // video is enabled, -> disable
+            hapticGenerator.notificationOccurred(.error)
             videoState = .disabled
             
             // stp[ camera
@@ -93,6 +98,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
      *  Toggles either back or front camera
      */
     public func toggleCameraInput() {
+        
         
         if cameraInputState == .frontCamera {
             cameraInputState = .backCamera
@@ -123,6 +129,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
      */
     public func toggleMicrophoneEnabled() {
         
+        lightTap.impactOccurred()
         
         if microphoneState == .enabled {
             microphoneState = .muted
@@ -243,9 +250,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         self.movieOutput.stopRecording()
         
         // delete video if save = false
-        if !save {
+        if !save &&
+            self.movieOutput.outputFileURL == nil{
             do {
-                try FileManager.default.removeItem(at: (self.movieOutput.outputFileURL)!)
+                try FileManager.default.removeItem(at: DocumentDirectory.getVideosDirectory().appendingPathComponent(lastVideoName!))
                 print("deleted video that was just created")
             } catch {
                 print("Error deleting video which never got initiated: CameraController().stopRecording()")

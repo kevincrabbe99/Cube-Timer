@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class AllSolvesController: ObservableObject {
     
@@ -95,25 +96,22 @@ class AllSolvesController: ObservableObject {
     }
     
     
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
     /*
      * opens video for solveItem tapped
      */
-    public func openVideoFor(solveItem: SolveItem) {
-        //cvc.openVideo(url: URL(fileURLWithPath: solveItem.videoURL!))
+    public func openDetailsFor(solveItem: SolveItem) {
         
-        if !solveItem.hasVideo {
-            return
+        // success LIGHT TAP
+        lightTap.impactOccurred()
+        
+        // route to open video if solveItem has video
+        if solveItem.hasVideo {
+            cvc.openVideo(solveItem: solveItem)
+        } else { // open details if no video found
+            cvc.openDetails(solveItem: solveItem)
         }
         
-        /*
-         *  REMOVE SOON: extract name
-         */
-        print("playback: AllSolvesController().openVideoFor(solveItem) | stored NAME = ", solveItem.videoName ?? "[no url]")
-        //let tURL = URL(fileURLWithPath: solveItem.videoName!)
-        //let tNAME = tURL.lastPathComponent
-        //print("playback: AllSolvesController().openVideoFor(solveItem) | concatanated NAME = ", tNAME ?? "[no url]")
-        
-        cvc.openVideo(name: solveItem.videoName!)
     }
     
     /*

@@ -18,32 +18,48 @@ struct VideoPlayerView: View {
     var body: some View {
         
         ZStack {
-            
-            Color.black
-                .opacity(0.9)
-            
+           
+                
             VStack {
                 HStack {
-                    Text("Apr 14, 2020 at 1:29am")
-                        .font(Font.custom("Play-Bold", size: 14))
                     
-                    ZStack {
-                        Color.init("green")
-                            .cornerRadius(3)
-                            .opacity(0.8)
-                        Text("55 seconds")
-                            .font(Font.custom("Play-Bold", size: 13))
+                    // dont show if SolveItem is not present
+                    if controller.hasSolveItem {
+                        
+                        Text(controller.readableDate)
+                            .font(Font.custom("Play-Bold", size: 14))
+                        
+                        ZStack {
+                            Color.init("green")
+                                .cornerRadius(3)
+                                .opacity(0.8)
+                            Text((controller.solveItem?.getTimeCapture()?.getAsReadable())!)
+                                .font(Font.custom("Play-Bold", size: 13))
+                        }
+                        .frame(width: 65, height: 24)
+                        .padding(.leading, 10)
+                        
                     }
-                    .frame(width: 90, height: 20)
-                    .padding(.leading, 10)
-                    
+                        
                     Spacer()
                     
                     
-                    IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"))
+                    IconButton(icon: Image.init(systemName: "star"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
                         .padding(.trailing, 10)
+                    
+                    IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
+                        .padding(.trailing, 10)
+                    
+                    IconButton(icon: Image.init(systemName: "square.and.arrow.down.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24, iconWidth: 10, iconHeight: 11)
+                        .padding(.trailing, 20)
                 
-                    IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"))
+                    IconButton(icon: Image.init(systemName: "info"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 24, height: 24, iconWidth: 8, iconHeight: 11)
+                        .padding(.trailing, 20)
+                        .onTapGesture {
+                            cvc.openDetails(solveItem: controller.solveItem!)
+                        }
+                    
+                    IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"), width: 24, height: 24)
                         .onTapGesture {
                             cvc.closeVideo()
                         }

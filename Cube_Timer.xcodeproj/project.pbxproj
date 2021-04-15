@@ -95,6 +95,8 @@
 		7BBA7186258C763300FED3A2 /* CubeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7185258C763300FED3A2 /* CubeIcon.swift */; };
 		7BBA7194258C7E6C00FED3A2 /* SidebarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */; };
 		7BBA7199258D356600FED3A2 /* SidebarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA7198258D356600FED3A2 /* SidebarShape.swift */; };
+		7BBD0A022627FA020048E437 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD0A012627FA020048E437 /* DetailsViewController.swift */; };
+		7BBD0A072627FA0B0048E437 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD0A062627FA0B0048E437 /* DetailsView.swift */; };
 		7BCC6DB2256EC61B001663B1 /* BO3Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DB1256EC61B001663B1 /* BO3Controller.swift */; };
 		7BCC6DCD25723860001663B1 /* SidebarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DCC2572385F001663B1 /* SidebarController.swift */; };
 		7BCC6DD5257238B8001663B1 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC6DD4257238B8001663B1 /* SidebarView.swift */; };
@@ -236,6 +238,8 @@
 		7BBA7185258C763300FED3A2 /* CubeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeIcon.swift; sourceTree = "<group>"; };
 		7BBA7193258C7E6C00FED3A2 /* SidebarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTab.swift; sourceTree = "<group>"; };
 		7BBA7198258D356600FED3A2 /* SidebarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarShape.swift; sourceTree = "<group>"; };
+		7BBD0A012627FA020048E437 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		7BBD0A062627FA0B0048E437 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		7BCC6DB1256EC61B001663B1 /* BO3Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BO3Controller.swift; sourceTree = "<group>"; };
 		7BCC6DCC2572385F001663B1 /* SidebarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarController.swift; sourceTree = "<group>"; };
 		7BCC6DD4257238B8001663B1 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
@@ -601,6 +605,15 @@
 			path = Delete_Solve_Confirm;
 			sourceTree = "<group>";
 		};
+		7BBD0A002627F9EF0048E437 /* Details_view */ = {
+			isa = PBXGroup;
+			children = (
+				7BBD0A012627FA020048E437 /* DetailsViewController.swift */,
+				7BBD0A062627FA0B0048E437 /* DetailsView.swift */,
+			);
+			path = Details_view;
+			sourceTree = "<group>";
+		};
 		7BCC6DB0256EC5E4001663B1 /* BestOfThree */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,6 +648,7 @@
 		7BE885A72547667200046D29 /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
+				7BBD0A002627F9EF0048E437 /* Details_view */,
 				7B8D32632626AC5E0083E090 /* video_player */,
 				7B8D5975261413E1008A6B49 /* CameraLayer.swift */,
 				7B9B7965254908380088ECD5 /* MainView.swift */,
@@ -1023,6 +1037,7 @@
 				7BCC6DDA257242A6001663B1 /* SingleCubeTypeView.swift in Sources */,
 				7B7D56E925A1AD6100A427ED /* AboutView.swift in Sources */,
 				7BAAE142259C5E7C00330533 /* EditSolvesBarView.swift in Sources */,
+				7BBD0A072627FA0B0048E437 /* DetailsView.swift in Sources */,
 				7BFF32082599870F0029EA19 /* EditSolveController.swift in Sources */,
 				7B607424258F29D000D188CF /* PopupError.swift in Sources */,
 				7B9B79612548F2100088ECD5 /* BestOfThreeView.swift in Sources */,
@@ -1030,6 +1045,7 @@
 				7B8B62F4254682C800EAA9F9 /* SolveItem+CoreDataClass.swift in Sources */,
 				7BA90F8325B5924C00A03DE1 /* RoundedButton.swift in Sources */,
 				7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */,
+				7BBD0A022627FA020048E437 /* DetailsViewController.swift in Sources */,
 				7BFF3210259AEEA40029EA19 /* ContentViewController.swift in Sources */,
 				7BFF31BC2596FEBF0029EA19 /* SolveElementController.swift in Sources */,
 				7B984D5A253E72D700BC6402 /* SolveHandler.swift in Sources */,

@@ -63,15 +63,23 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
      * called by view, then alerts AllSolvesView of its selected state
      */
     public func tapped() {
-        
         print("tapped!")
-        lightTap.impactOccurred()
         
-        allSolvesController.openVideoFor(solveItem: si)
+        // if ASC isSelecting the rout to longPress
+        // else tapSolveItem
+        if allSolvesController.selecting {
+            longPressed()
+        } else {
+            // tap solve item -> openVideo
+            allSolvesController.openDetailsFor(solveItem: si)
+        }
+        
+        
         
     }
 
     public func longPressed() {
+        lightTap.impactOccurred()
         
         if !selected { // if not selected
             self.selected = true

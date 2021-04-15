@@ -82,7 +82,7 @@ struct SolveElementView: View {
                 controller.tapped()
             }
             .onLongPressGesture(minimumDuration: 0.7) {
-                
+                controller.longPressed()
             }
 
         
