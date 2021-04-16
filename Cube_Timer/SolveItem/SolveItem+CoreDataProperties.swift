@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import Photos
 import SwiftUI
-import AVFoundation
 
 /*
 enum PuzzleType: String {
@@ -60,6 +59,28 @@ extension SolveItem: Identifiable {
     }
     
     
+    @NSManaged public var favorite: NSNumber?
+    var isFavorite: Bool {
+        get {
+            if favorite == nil {
+                return false
+            }
+            
+            return Bool(favorite!)
+        }
+        set {
+            favorite = NSNumber(value: newValue)
+        }
+    }
+    
+    public func toggleFavorite() {
+        if isFavorite {
+            favorite = false
+        } else {
+            favorite = true
+        }
+    }
+    
     
     public func saveVideoToPhotos() {
         
@@ -72,13 +93,8 @@ extension SolveItem: Identifiable {
             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoPathURL )
         }) { saved, error in
             if saved {
-                
-             
-                
                 print("SAVED VIDEO TO CAMERA ROLL")
             }else {
-                
-                
                 print("VideoPlayerController.saveVideoToPhotos() | ERROR SAVING VIDEO TO CAMERA ROLL: ", error)
                 
             }

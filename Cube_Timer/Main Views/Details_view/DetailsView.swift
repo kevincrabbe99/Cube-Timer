@@ -27,8 +27,11 @@ struct DetailsView: View {
                     
                     Spacer()
                     
-                    IconButton(icon: Image.init(systemName: "star"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
+                    IconButton(icon: (controller.solveItem.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.solveItem.isFavorite ? Color.init("yellow") : Color.init("black_chocolate")), width: 24, height: 24)
                         .padding(.trailing, 10)
+                        .onTapGesture {
+                            controller.solveItem.toggleFavorite()
+                        }
                     
                     if controller.solveItem!.hasVideo {
                         Button(action: {

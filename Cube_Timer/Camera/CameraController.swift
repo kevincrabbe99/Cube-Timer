@@ -63,12 +63,19 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     
     public func turnOffCamera() {
+        
+        if captureSession == nil { return }
+        
         captureSession?.stopRunning()
+        
     }
     
     public func turnOnCamera() {
+        if captureSession == nil { return }
+        
         captureSession?.startRunning()
     }
+    
     
     
     /*
@@ -79,6 +86,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         print("toggling video state from : ", videoState)
         
         if videoState == .disabled { // video is disabled, -> enable
+            hapticGenerator.prepare()
             hapticGenerator.notificationOccurred(.success)
             videoState = .standby
         } else { // video is enabled, -> disable
@@ -283,7 +291,12 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
         
+        
+        
         captureSession.beginConfiguration()
+        
+    
+        
         //let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput
         if pos == .back {
             captureSession.removeInput(frontCameraInput!)
@@ -356,6 +369,15 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
      * The Main Initiation Method
      */
     func prepare(completionHandler: @escaping (Error?) -> Void){
+        
+        print("new camera feed")
+        
+        do {
+            try AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
+        } catch {
+            print(error)
+        }
+        
         func createCaptureSession(){
             self.captureSession = AVCaptureSession()
         }
@@ -380,6 +402,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             
             
             self.microphone = AVCaptureDevice.default(for: .audio)
+            
             
                 
         }
@@ -415,7 +438,6 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
                 }
                 else { throw CameraControllerError.noMicFound }
             }
-            
             
             
         }

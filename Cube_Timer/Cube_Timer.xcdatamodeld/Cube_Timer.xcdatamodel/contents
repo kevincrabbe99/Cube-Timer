@@ -13,6 +13,7 @@
         <relationship name="solves" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SolveItem" inverseName="cubeType" inverseEntity="SolveItem"/>
     </entity>
     <entity name="SolveItem" representedClassName=".SolveItem" syncable="YES">
+        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="timeMS" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -29,7 +30,7 @@
         </fetchedProperty>
     </entity>
     <elements>
-        <element name="CubeType" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SolveItem" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CubeType" positionX="-225" positionY="72" width="128" height="179"/>
+        <element name="SolveItem" positionX="-222.2095336914062" positionY="11.59173583984375" width="128" height="170"/>
     </elements>
 </model>
