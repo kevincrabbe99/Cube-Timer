@@ -19,9 +19,14 @@ class VideoPlayerController: ObservableObject {
     var cvc: ContentViewController!
     var solveHandler: SolveHandler!
     var alertController: AlertController!
+    var allSolvesController: AllSolvesController!
     
     var player: AVPlayer?
     var solveItem: SolveItem?
+    
+    @Published public var isFavorite: Bool = false
+    
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
     
     init() {
         self.player = nil
@@ -42,6 +47,7 @@ class VideoPlayerController: ObservableObject {
     public func goto(solveItem: SolveItem) {
         let url = DocumentDirectory.getVideosDirectory().appendingPathComponent(solveItem.videoName!)
         self.solveItem = solveItem
+        self.isFavorite = solveItem.isFavorite
         
         self.goto(url: url)
     }
@@ -53,6 +59,14 @@ class VideoPlayerController: ObservableObject {
             return true
         }
     }
+    
+    
+    public func toggleIsFavorite() {
+        lightTap.impactOccurred()
+        self.isFavorite = self.solveItem!.toggleFavorite()
+        self.allSolvesController.updateSolves()
+    }
+    
     
     var readableDate: String {
         

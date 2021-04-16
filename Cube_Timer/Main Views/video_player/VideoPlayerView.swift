@@ -44,8 +44,14 @@ struct VideoPlayerView: View {
                     Spacer()
                     
                     
-                    IconButton(icon: Image.init(systemName: "star"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
-                        .padding(.trailing, 10)
+                    Button(action: {
+                        controller.toggleIsFavorite()
+                    }, label: {
+                        IconButton(icon: (controller.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.isFavorite ? Color.init("yellow") : Color.init("black_chocolate")), width: 24, height: 24)
+                            .padding(20)
+                    })
+                    .padding(.trailing, 10)
+                    .frame(width: 30, height: 30, alignment: .center)
                     
                     IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
                         .padding(.trailing, 10)

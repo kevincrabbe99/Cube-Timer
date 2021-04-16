@@ -118,9 +118,10 @@ struct ContentView: View {
         //video player
         self.videoPlayerController.solveHandler = solveHandler
         self.videoPlayerController.alertController = alertController
+        self.videoPlayerController.allSolvesController = allSolvesController
         
         self.detailsViewController.allSolveController = allSolvesController
-        
+        self.detailsViewController.solveHandler = solveHandler
         
         // update the stopwatch display to show the last solve time
         self.timer.setDisplayToLastSolve()

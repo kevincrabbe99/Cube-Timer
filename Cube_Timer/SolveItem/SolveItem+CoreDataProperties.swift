@@ -73,12 +73,21 @@ extension SolveItem: Identifiable {
         }
     }
     
-    public func toggleFavorite() {
+    public func toggleFavorite() -> Bool {
         if isFavorite {
-            favorite = false
+            isFavorite = false
         } else {
-            favorite = true
+            isFavorite = true
         }
+        
+        do {
+            try PersistenceController.shared.container.viewContext.save()
+            print("Set isFavorite = ", isFavorite)
+        } catch {
+            print("SAVE ERROR: updating isFavorite to ", isFavorite)
+        }
+        
+        return isFavorite
     }
     
     

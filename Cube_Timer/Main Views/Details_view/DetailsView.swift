@@ -21,17 +21,21 @@ struct DetailsView: View {
                 HStack {
                     if controller.hasSolveItem {
                         
-                        Text(controller.readableDate)
+                        Text(controller.readableDate ?? "Deleted Solve ERROR @903k")
                             .font(Font.custom("Play-Bold", size: 14))
                     }
                     
                     Spacer()
                     
-                    IconButton(icon: (controller.solveItem.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.solveItem.isFavorite ? Color.init("yellow") : Color.init("black_chocolate")), width: 24, height: 24)
-                        .padding(.trailing, 10)
-                        .onTapGesture {
-                            controller.solveItem.toggleFavorite()
-                        }
+                    Button(action: {
+                        controller.toggleIsFavorite()
+                    }, label: {
+                        IconButton(icon: (controller.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.isFavorite ? Color.init("yellow") : Color.init("black_chocolate")), width: 24, height: 24)
+                            .padding(20)
+                    })
+                    .padding(.trailing, 10)
+                    .frame(width: 30, height: 30, alignment: .center)
+                    
                     
                     if controller.solveItem!.hasVideo {
                         Button(action: {

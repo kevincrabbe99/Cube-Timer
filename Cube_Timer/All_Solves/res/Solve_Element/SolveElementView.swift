@@ -63,8 +63,16 @@ struct SolveElementView: View {
                  *  apply a RED DOT if the solve has a video saved
                  */
                 if controller.si.hasVideo {
-                    IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.clear, iconColor: Color.init("red"), width: 9, height: 9)
-                        .offset(x: 16.5, y: -7)
+                    IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.clear, iconColor: Color.init("red"), width: 10, height: 10)
+                        .offset(x: 16.5, y: -8)
+                }
+                
+                /*
+                 *  apply a yellow star is item is marked favorite
+                 */
+                if controller.si.isFavorite {
+                    IconButton(icon: Image.init(systemName: "star.fill"), bgColor: Color.clear, iconColor: Color.init("yellow"), width: 11, height: 11)
+                        .offset(x: -16.5, y: -8)
                 }
                     
                 
@@ -83,7 +91,7 @@ struct SolveElementView: View {
             .onTapGesture {
                 controller.tapped()
             }
-            .onLongPressGesture(minimumDuration: 0.7) {
+            .onLongPressGesture(minimumDuration: 0.2) {
                 controller.longPressed()
             }
 

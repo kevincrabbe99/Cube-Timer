@@ -6,12 +6,19 @@
 //
 
 import Foundation
+import SwiftUI
 
 class DetailsViewController: ObservableObject {
     
     var cvc: ContentViewController!
-    var solveItem: SolveItem!
+    @Published var solveItem: SolveItem!
     var allSolveController: AllSolvesController!
+    var solveHandler: SolveHandler!
+    
+    @Published public var isFavorite: Bool = false
+    
+    
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
     
     init() {
         
@@ -19,6 +26,7 @@ class DetailsViewController: ObservableObject {
     
     public func goto(solveItem: SolveItem) {
         self.solveItem = solveItem
+        self.isFavorite = solveItem.isFavorite
     }
     
     
@@ -31,16 +39,22 @@ class DetailsViewController: ObservableObject {
     }
     
     
+    public func toggleIsFavorite() {
+        lightTap.impactOccurred()
+        self.isFavorite = self.solveItem.toggleFavorite()
+        self.allSolveController.updateSolves()
+    }
     
-    var readableDate: String {
+    
+    var readableDate: String? {
         
-        if solveItem.timestamp == nil {
+        if solveItem == nil {
             return "Error #3kf20"
         }
         
         let df = DateFormatter()
         df.dateFormat = "MMM dd, yyyy hh:mm:ss a"
-        return  df.string(from: solveItem!.timestamp)
+        return  df.string(from: solveItem?.timestamp ?? Date())
     }
     
     var compareAvg: TimeCapture {
