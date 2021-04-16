@@ -70,34 +70,122 @@ struct DetailsView: View {
                     // dont show if SolveItem is not present
                     if controller.hasSolveItem {
                         
+                        
                         VStack {
-                            HStack {
-                                LabelDisplay(label: "Recorded Time")
+                            
+                            
+                            HStack(alignment: .center) {
+                                
+                                
+                                if !controller.solveItem.cubeType.isCustom() { // not editing or not as sidebar
+                                    CubeIcon(Int(controller.solveItem.cubeType.d1),Int(controller.solveItem.cubeType.d2),Int(controller.solveItem.cubeType.d3), width: 20)
+                                        .opacity(0.8)
+                                        .offset(y: 3)
+                                } else {
+                                    IconButton(icon: Image(systemName: "app.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 20, height: 20)
+                                    //Image(systemName: "app")
+                                    //    .frame(width: 15, height: 15)
+                                }
+                                
+                                VStack(alignment:.leading) {
+                                    
+                                    
+                                    Text(controller.solveItem.cubeType.name)
+                                        .font(Font.custom("Play-Bold", size: 22))
+                                        .tracking(controller.solveItem.cubeType.isCustom() ? 0 : 5)
+                                        .lineLimit(1)
+                                    Text(controller.solveItem.cubeType.descrip)
+                                        .font(Font.custom("Play-Regular", size: 10))
+                                        .lineLimit(1)
+                                        .opacity(0.75)
+                                }
+                                .frame(alignment: .center)
+                                .offset(x: 10)
+                                
+                                
                                 Spacer()
-                                TimeDisplay(label: (controller.solveItem?.getTimeCapture()?.getAsReadable())!)
+                                
+                                VStack(alignment: .trailing) {
+                                    Text("Recorded Time")
+                                        .font(Font.custom(("Play-Bold"), size: 10))
+                                        .offset(y: 6)
+                                    
+                                    ZStack {
+                                        Color.init("mint_cream")
+                                            .opacity(0.8)
+                                            .cornerRadius(3)
+                                        
+                                        Text((controller.solveItem?.getTimeCapture()?.getAsReadable())!)
+                                            .font(Font.custom(("Chivo-Bold"), size: 11))
+                                            .foregroundColor(Color.init("black_chocolate"))
+                                    }
+                                    .frame(width: 55, height: 24)
+                                    
+                                }
+                                .frame(alignment: .trailing)
+                                
                             }
+                            .padding(.top, 10)
+                            
                             HStack {
-                                LabelDisplay(label: "Avg. Comparison")
+                                
+                                VStack(alignment: .leading) {
+                                    LabelDisplay(label: "Compared to .Avg.")
+                                    TimeDisplay(label: controller.compareAvg)
+                                }
+                                .frame(alignment: .leading)
+                                
                                 Spacer()
-                                TimeDisplay(label: controller.compareAvg.getAsReadable())
+                                
+                                VStack(alignment: .trailing) {
+                                    LabelDisplay(label: "Compared to Med.")
+                                    TimeDisplay(label: controller.compareMed)
+                                }
+                                .frame(alignment: .trailing)
+                                
+                                
                             }
+                            
+                            
                             HStack {
-                                LabelDisplay(label: "Med. Comparison")
+                                
+                                VStack(alignment: .leading) {
+                                    LabelDisplay(label: "Compared to Best")
+                                    TimeDisplay(label: controller.compareBest)
+                                }
+                                .frame(alignment: .leading)
+                                
                                 Spacer()
-                                TimeDisplay(label: controller.compareMed.getAsReadable())
+                                
+                                VStack(alignment: .trailing) {
+                                    LabelDisplay(label: "Compared to Worst")
+                                    TimeDisplay(label: controller.compareWorst)
+                                }
+                                .frame(alignment: .trailing)
+                                
+                                
                             }
+                            
                             HStack {
-                                LabelDisplay(label: "Best Comparison")
+                                
+                                VStack(alignment: .leading) {
+                                    LabelDisplay(label: "Percentile")
+                                    TimeDisplay(label: controller.percentile)
+                                }
+                                .frame(alignment: .leading)
+                                
                                 Spacer()
-                                TimeDisplay(label: controller.compareBest.getAsReadable())
+                                
+                                VStack(alignment: .trailing) {
+                                    LabelDisplay(label: "z-score")
+                                    TimeDisplay(label: controller.zScore)
+                                }
+                                .frame(alignment: .trailing)
                             }
-                            HStack {
-                                LabelDisplay(label: "Worst Comparison")
-                                Spacer()
-                                TimeDisplay(label: controller.compareWorst.getInSolidForm())
-                            }
+                            
                         }
-                        .frame(width: 300, alignment: .topLeading)
+                        .frame(width: 290, alignment: .leading)
+                        .offset(y: -15)
                         // .font(Font.custom(("Chivo-Regular"), size: 11))
                         //.font(Font.custom(("Chivo-Regular"), size: 11))
                         
@@ -128,12 +216,13 @@ struct TimeDisplay: View {
         ZStack {
             Color.init("mint_cream")
                 .opacity(0.8)
+                .cornerRadius(3)
             
             Text(label)
                 .font(Font.custom(("Chivo-Regular"), size: 11))
                 .foregroundColor(Color.init("black_chocolate"))
         }
-        .frame(width: 65, height: 24)
+        .frame(width: 55, height: 24)
     }
     
 }
@@ -145,7 +234,9 @@ struct LabelDisplay: View {
     var body: some View {
         
         Text(label)
-            .font(Font.custom(("Play-Bold"), size: 13))
+            .font(Font.custom(("Play-Bold"), size: 10))
+            .offset(y: 6)
+            .opacity(0.8)
     
     }
     

@@ -168,7 +168,9 @@ class AllSolvesController: ObservableObject {
         }
     }
     
-    
+    func getSolvesOrderedByTimeMS() -> [SolveItem] {
+        return solves.sorted(by:{ $0.timeMS < $1.timeMS })
+    }
     
     /*
      * this is called by CTypeHandler and updates the solves

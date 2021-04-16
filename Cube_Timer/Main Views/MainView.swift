@@ -74,6 +74,7 @@ struct MainView: View {
                                     .onTapGesture {
                                         cameraController.toggleVideoState()
                                     }
+                                    .shadow(color: .init("shadow_color"), radius: 4, x: 0, y:0)
                                 
                                     
                                 IconButton(icon: Image.init(systemName: "arrow.triangle.2.circlepath.camera.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: (cameraController.cameraInputState == .backCamera ? Color.init("dark_black") : Color.init("very_dark_black")), width: 30, height: 25)
@@ -98,11 +99,12 @@ struct MainView: View {
                                     .font(Font.custom("Play-Bold", size: 13))
                                     .foregroundColor(Color.init("mint_cream"))
                                     .offset(y: -1)
-                            } else if cameraController.videoState == .disabled {
+                            } else if cameraController.videoState == .disabled && !(timer.oneActivated || timer.bothActivated){
                                 IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: Color.init("very_dark_black"), width: 30, height: 25, iconWidth: 15, iconHeight: 10)
                                     .onTapGesture {
                                         cameraController.toggleVideoState()
                                     }
+                                    .shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
                                 Spacer()
                             }
                         }
