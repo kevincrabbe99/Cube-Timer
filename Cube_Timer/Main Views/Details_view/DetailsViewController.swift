@@ -46,7 +46,9 @@ class DetailsViewController: ObservableObject {
     }
     
     
-    var readableDate: String? {
+    public func  getReadableDate() -> String? {
+        
+        guard self.solveItem != nil else { return String("Not Found @e3dd2") }
         
         if solveItem == nil {
             return "Error #3kf20"
@@ -54,10 +56,13 @@ class DetailsViewController: ObservableObject {
         
         let df = DateFormatter()
         df.dateFormat = "MMM dd, yyyy hh:mm:ss a"
-        return  df.string(from: solveItem?.timestamp ?? Date())
+        
+        return  df.string(from: solveItem!.timestamp)
     }
     
     var compareAvg: String {
+        
+        guard self.solveItem != nil else { return String("Not Found @e3dd2") }
         
         if solveItem.timeMS > allSolveController.average! {
             return "+\(TimeCapture(solveItem!.timeMS - allSolveController.average!).getInSolidForm())"
@@ -96,7 +101,9 @@ class DetailsViewController: ObservableObject {
         return "\(zScore.rounded(toPlaces: 2))"
     }
     
-    var percentile: String {
+    public func getPercentile() -> String {
+        
+        guard self.solveItem != nil else { return String("Not Found @039") }
         
         let allSolvesOrderedByTimeMS = allSolveController.getSolvesOrderedByTimeMS()
         

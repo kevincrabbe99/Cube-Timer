@@ -21,7 +21,10 @@ struct DeleteSingleSolveConfirmView: View {
     
     var body: some View {
         
+        
+        
         VStack {
+            
             
             Text("Are you sure you want to delete: \((self.solveItem.getTimeCapture()?.getAsReadable())!)")
                 .font(Font.custom("Play-Bold", size: 27))
@@ -41,15 +44,16 @@ struct DeleteSingleSolveConfirmView: View {
                 Button(action: {
                     
                     // hide cvc popups before deleting
-                    self.cvc.showingDetails = false
-                    self.cvc.showingVideo = false
+                    self.cvc.closeVideo()
+                    self.cvc.closeDetails()
+                    cvc.hidePopup()
                     
                     solveHandler.deleteSingleSolve(solveItemToDelete: self.solveItem)
-                    cvc.hidePopup()
                 }, label: {
                     RoundedButton(color: Color.init("red"), text: "DELETE")
                 })
                 
+                    
                 
             }
             

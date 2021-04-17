@@ -166,8 +166,6 @@ class SolveHandler: ObservableObject {
     
     public func deleteSingleSolve(solveItemToDelete: SolveItem) {
         self.delete(solveItemToDelete)
-        
-        
     }
     
     /*
@@ -203,6 +201,8 @@ class SolveHandler: ObservableObject {
         
         //let deleteIndex = getIndexOf(s)
         if solvesByTimeFrame.exists(solveItem: s) {
+            
+            s.objectWillChange.send()
             
             print("[SolveHandler] Deleting from CoreData")
             
