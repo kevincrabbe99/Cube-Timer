@@ -35,6 +35,9 @@ class VideoPlayerController: ObservableObject {
     
     public func goto(url: URL) {
         self.player = AVPlayer(url: url)
+        self.player!.allowsExternalPlayback = true
+        self.player!.preventsDisplaySleepDuringVideoPlayback = true
+        self.player!.play()
         print("playback: playing url: ", url)
     }
     
@@ -50,6 +53,17 @@ class VideoPlayerController: ObservableObject {
         self.isFavorite = solveItem.isFavorite
         
         self.goto(url: url)
+    }
+    
+    func stopPlayer() {
+        if let play = player {
+            print("stopped")
+            play.pause()
+            player = nil
+            print("player deallocated")
+        } else {
+            print("player was already deallocated")
+        }
     }
     
     public var hasSolveItem: Bool {

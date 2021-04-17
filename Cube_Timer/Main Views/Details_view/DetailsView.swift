@@ -33,20 +33,18 @@ struct DetailsView: View {
                         Button(action: {
                             self.shareDetails()
                         }, label: {
-                            IconButton(icon: Image.init(systemName:"square.and.arrow.up"), bgColor: Color.init("mint_cream"), iconColor: Color.init("black_chocolate"), width: 24, height: 24, iconWidth: 9, iconHeight: 11)
-                                .padding(20)
+                            IconButton(icon: Image.init(systemName:"square.and.arrow.up"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 24, height: 24, iconWidth: 9, iconHeight: 11)
+                                .padding(.trailing, 20)
                         })
-                        .padding(.trailing, 10)
                         .frame(width: 30, height: 30, alignment: .center)
                         
                         
                         Button(action: {
                             controller.toggleIsFavorite()
                         }, label: {
-                            IconButton(icon: (controller.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.isFavorite ? Color.init("yellow") : Color.init("black_chocolate")), width: 24, height: 24)
-                                .padding(20)
+                            IconButton(icon: (controller.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.isFavorite ? Color.init("yellow") : Color.init("very_dark_black")), width: 24, height: 24)
+                                .padding(.trailing, 20)
                         })
-                        .padding(.trailing, 10)
                         .frame(width: 30, height: 30, alignment: .center)
                         
                         
@@ -56,8 +54,9 @@ struct DetailsView: View {
                                 cvc.openVideo(solveItem: controller.solveItem!)
                             }, label: {
                                 IconButton(icon: Image.init(systemName: "play.rectangle.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24, iconWidth: 12, iconHeight: 9)
-                                    .padding(.trailing, 10)
+                                    .padding(.trailing, 20)
                             })
+                            .frame(width: 30, height: 30, alignment: .center)
                         }
                         
                         Button(action: {
@@ -66,12 +65,14 @@ struct DetailsView: View {
                             IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
                                 .padding(.trailing, 20)
                         })
+                        .frame(width: 30, height: 30, alignment: .center)
                         
-                    
-                        IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"), width: 24, height: 24)
-                            .onTapGesture {
-                                cvc.closeDetails()
-                            }
+                        Button(action: {
+                            cvc.closeDetails()
+                        }, label: {
+                            IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"), width: 24, height: 24)
+                        })
+                        .frame(width: 30, height: 30, alignment: .center)
                     }
                     
                     ZStack {
