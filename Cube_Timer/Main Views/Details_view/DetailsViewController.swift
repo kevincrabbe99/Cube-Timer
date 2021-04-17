@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 class DetailsViewController: ObservableObject {
     
@@ -37,6 +38,13 @@ class DetailsViewController: ObservableObject {
             return true
         }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
     public func toggleIsFavorite() {

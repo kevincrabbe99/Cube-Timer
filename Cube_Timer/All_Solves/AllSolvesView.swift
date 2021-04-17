@@ -68,6 +68,7 @@ struct AllSolvesView: View {
                     .offset(y: -100)
                     .opacity(0.25)
                 }
+                    
                 
                 if controller.solves.count  > 0 || controller.isApplyingFilter() { // dont show anything if there are no solves
                 
@@ -81,8 +82,7 @@ struct AllSolvesView: View {
                          */
                         VStack {
                             
-                       
-                                
+                            
                             VStack(alignment:.trailing) {
                                 Text(controller.cTypeHandler.selected.name)
                                     //.font(.system(size: 30))
