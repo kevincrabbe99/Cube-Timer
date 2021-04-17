@@ -37,6 +37,14 @@ struct SettingsView: View {
         }
     }
     
+    var defaultCameraOnLabel: String {
+        if controller.defaultVideoOn {
+            return "YES"
+        } else {
+            return "NO"
+        }
+    }
+    
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     var body: some View {
         GeometryReader { geo in
@@ -64,7 +72,7 @@ struct SettingsView: View {
                      */
                     Text(controller.aboutState ? "ABOUT" : "SETTINGS")
                         .font(Font.custom("Dosis-ExtraBold", size: 25))
-                        .padding(.top, 20)
+                        .padding(.top, 10)
                     
                     
                     /*&
@@ -93,15 +101,21 @@ struct SettingsView: View {
                                     }, label: {
                                         SettingsOption(label: "Pause saving solves", value: pauseSavingSolvesLabel)
                                     })
+                                    
+                                    
+                                    Button(action: {
+                                        controller.toggleDefaultVideoOn()
+                                    }, label: {
+                                        SettingsOption(label: "Default to Camera On", value: defaultCameraOnLabel, info: "Choose whether the camera is enabled by default upon opening the app.")
+                                    })
+                                    
+                                    
                                 }
-                                .padding([.top], 15)
                             }
-                            .frame(height: h-150)
                             .padding(.trailing, 5)
                         } else {
                             
                             AboutView()
-                                .frame(height: h-150)
                             
                         }
                         
@@ -115,7 +129,7 @@ struct SettingsView: View {
                         controller.toggleAbout()
                     }, label: {
                         SettingsOption(label: (controller.aboutState ? "back" : "about"))
-                           .padding(.bottom, 15)
+                           .padding(.bottom, 30)
                             .opacity(0.8)
                     })
                     

@@ -161,6 +161,12 @@ struct MainView: View {
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
         }
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            if settingsController.defaultVideoOn {
+                cameraController.enableVideoState()
+            }
+        }
+       
     }
 }
 

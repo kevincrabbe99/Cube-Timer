@@ -148,7 +148,7 @@ struct AllSolvesView: View {
                                 ZStack {
                                     EditSolvesBarView()
                                 }
-                                .frame(height: 30, alignment: .trailing)
+                                .frame(height: 30, alignment: .leading)
                                 .padding(.top, 20)
                                 .padding(.trailing, 60)
                                 .padding(.leading, 5)

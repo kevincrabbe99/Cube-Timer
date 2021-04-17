@@ -17,6 +17,7 @@ class SettingsController: ObservableObject {
     @Published var requireDoublePressToStop: Bool = false
     @Published var pauseSavingSolves:  Bool = false
     @Published var oneButtonMode: Bool = true
+    @Published var defaultVideoOn: Bool = false
     
     // about stuff
     @Published var aboutState: Bool = false // changethis
@@ -58,6 +59,19 @@ class SettingsController: ObservableObject {
             
             // set analytics
             Analytics.setUserProperty("false", forName: "pause_saving_solves")
+        }
+        
+        // check if defaultToVideoOn is in userDefaults
+        if let dvoVal = defaults.object(forKey: "default_to_camera_on") as? Bool {
+            // set from user defaults
+            self.defaultVideoOn = dvoVal
+        } else {
+            print("No value in defaultToVideoOn, initializing to false")
+            defaults.set(false, forKey: "default_to_camera_on")
+            self.oneButtonMode = false // changethis
+            
+            // set analytics
+            Analytics.setUserProperty("false", forName: "default_to_camera_on")
         }
         
         
@@ -136,6 +150,33 @@ class SettingsController: ObservableObject {
         }
         
         defaults.set(pauseSavingSolves, forKey: "pauseSavingSolves")
+    }
+    
+    /*
+     *  Toggles whether the video is on by default
+     */
+    public func toggleDefaultVideoOn() {
+        let defaults = UserDefaults.standard
+        lightTap.impactOccurred()
+        
+        if defaultVideoOn == false { // set to true
+            self.defaultVideoOn = true
+            
+            // show alert
+            alertController.makeAlert(icon: Image(systemName: "video.fill"), title: "Camera default set to enabled", text: "Camera will initiate upon opening the app.")
+            
+            
+            Analytics.setUserProperty("true", forName: "default_to_camera_on")
+        } else {
+            self.defaultVideoOn = false // turn off
+            
+            // show alert
+            alertController.makeAlert(icon: Image(systemName: "video.slash.fill"), title: "Camera default set to disabled", text: "Camera will not initiate upon opening the app.")
+            
+            Analytics.setUserProperty("false", forName: "default_to_camera_on")
+        }
+        
+        defaults.set(defaultVideoOn, forKey: "default_to_camera_on")
     }
     
     

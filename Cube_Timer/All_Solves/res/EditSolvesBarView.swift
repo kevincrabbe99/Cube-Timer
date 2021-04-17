@@ -77,7 +77,7 @@ struct EditSolvesBarView: View {
                             }
                         }
                     }
-                    .frame(width: geo.size.width - 220, height: 30, alignment: .top) // subtract width of icons
+                    .frame(height: 30, alignment: .top) // subtract width of icons
                     
                     
                     

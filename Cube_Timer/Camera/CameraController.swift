@@ -66,6 +66,8 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         if captureSession == nil { return }
         
+        captureSession?.commitConfiguration()
+        
         captureSession?.stopRunning()
         
     }
@@ -73,6 +75,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     public func turnOnCamera() {
         if captureSession == nil { return }
         
+        captureSession?.commitConfiguration()
         captureSession?.startRunning()
     }
     
@@ -86,9 +89,8 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         print("toggling video state from : ", videoState)
         
         if videoState == .disabled { // video is disabled, -> enable
-            hapticGenerator.prepare()
             hapticGenerator.notificationOccurred(.success)
-            videoState = .standby
+            self.enableVideoState()
         } else { // video is enabled, -> disable
             hapticGenerator.notificationOccurred(.error)
             videoState = .disabled
@@ -97,6 +99,12 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             captureSession?.stopRunning()
         }
         
+    }
+    
+    
+    public func enableVideoState() {
+        hapticGenerator.prepare()
+        videoState = .standby
     }
     
     
@@ -300,10 +308,14 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         //let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput
         if pos == .back {
             captureSession.removeInput(frontCameraInput!)
-            captureSession.addInput(backCameraInput!)
+            if captureSession.canAddInput(backCameraInput!) {
+                captureSession.addInput(backCameraInput!)
+            }
         } else {
             captureSession.removeInput(backCameraInput!)
-            captureSession.addInput(frontCameraInput!)
+            if captureSession.canAddInput(frontCameraInput!) {
+                captureSession.addInput(frontCameraInput!)
+            }
         }
             /*
         let newCameraDevice = getCamera(with: pos)
@@ -413,12 +425,13 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             if let frontCamera = self.frontCamera {
                 self.frontCameraInput = try AVCaptureDeviceInput(device: frontCamera)
                   
-                // add front camera input
-                if captureSession.canAddInput(self.frontCameraInput!) {
-                    captureSession.addInput(self.frontCameraInput!)
-                    
+                if self.cameraInputState == .frontCamera {
+                    if captureSession.canAddInput(self.frontCameraInput!) {
+                        captureSession.addInput(self.frontCameraInput!)
+                        
+                    }
+                    else { throw CameraControllerError.inputsAreInvalid }
                 }
-                else { throw CameraControllerError.inputsAreInvalid }
                    
             }
             else { throw CameraControllerError.noFrontCameraAvailable }
@@ -426,6 +439,15 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             // setup back camera, dont set as output at first tho
             if let backCamera = self.backCamera {
                 self.backCameraInput = try AVCaptureDeviceInput(device: backCamera)
+                
+                if self.cameraInputState == .backCamera {
+                    if captureSession.canAddInput(self.backCameraInput!) {
+                        captureSession.addInput(self.backCameraInput!)
+                        
+                    }
+                    else { throw CameraControllerError.inputsAreInvalid }
+                }
+                
             } else { throw CameraControllerError.noBackCameraAvailable }
             
             // setup microphone

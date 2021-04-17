@@ -46,8 +46,8 @@
             filePath = "Cube_Timer/Camera/CameraController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
             landmarkName = "CameraController"
             landmarkType = "3">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "Cube_Timer/Camera/CameraController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
             landmarkName = "fileOutput(_:didFinishRecordingTo:from:error:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "Cube_Timer/Camera/CameraController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "507"
-            endingLineNumber = "507"
+            startingLineNumber = "529"
+            endingLineNumber = "529"
             landmarkName = "fileOutput(_:didFinishRecordingTo:from:error:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "Cube_Timer/Camera/CameraController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "511"
-            endingLineNumber = "511"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
             landmarkName = "fileOutput(_:didFinishRecordingTo:from:error:)"
             landmarkType = "7">
          </BreakpointContent>
