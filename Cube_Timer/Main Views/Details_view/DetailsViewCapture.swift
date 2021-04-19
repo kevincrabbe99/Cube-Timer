@@ -49,12 +49,12 @@ struct DetailsViewCapture: View {
                             .frame(width: 15, height: 15)
                             .padding(.trailing, 20)
                         
-                        
-                        Image.init(systemName: "film")
-                            .resizable()
-                            .foregroundColor(Color.init("mint_cream"))
-                            .frame(width: 15, height: 13)
-                        
+                        if controller.solveItem.hasVideo {
+                            Image.init(systemName: "film")
+                                .resizable()
+                                .foregroundColor(Color.init("mint_cream"))
+                                .frame(width: 15, height: 13)
+                        }
              
                     }
                     .frame(width: 290)
