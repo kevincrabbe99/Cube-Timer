@@ -379,8 +379,16 @@ class TimerController: ObservableObject {
             self.cvc.blockGesture = false // allows the page to transition again
         }
         
+        /*
+         *  countdown
+         */
+        // get buffertime from settings controller
+        let tempCountdownTime = settingsController.recordingBufferTime
+        // have camera controller start countdown from specefied ct time
+        cameraController.startRecordingCountdown(from: tempCountdownTime)
+        
         // wait 3 seconds, then stop recording
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // wait 3 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(tempCountdownTime) ) { // wait 3 seconds
             if self.cameraController.isRecording { // if recording
                 self.cameraController.stopRecording()
             }

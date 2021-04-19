@@ -68,8 +68,9 @@ struct AllSolvesView: View {
                     .offset(y: -100)
                     .opacity(0.25)
                 }
+                    
                 
-                if controller.solves.count  > 0 { // dont show anything if there are no solves
+                if controller.solves.count  > 0 || controller.isApplyingFilter() { // dont show anything if there are no solves
                 
                     /*
                      *  outer stack contains 2 cells left and right
@@ -81,8 +82,7 @@ struct AllSolvesView: View {
                          */
                         VStack {
                             
-                       
-                                
+                            
                             VStack(alignment:.trailing) {
                                 Text(controller.cTypeHandler.selected.name)
                                     //.font(.system(size: 30))
@@ -97,30 +97,43 @@ struct AllSolvesView: View {
                                     // .font(.system(size: 12))
                                     //.fontWeight(.bold)
                                     .opacity(0.75)
+                                
                             }.frame(width: 150, alignment: .trailing)
                             .padding(.top, 20)
                             .padding(.bottom, 30)
                             
-                            
-                            StatLabelVertical(label: "BEST", solve: controller.best)
-                            
-                            Spacer()
-                            
-                            StatLabelVertical(label: "WORST", solve: controller.worst)
-                            
+                            /*
+                             * Filter options
+                             */
                             
                             Spacer()
                             
-                            StatLabelVertical(label: "MEDIAN", value: TimeCapture(controller.median).getAsReadable())
-                                
-     
+                          //  if controller.solves.count  > 0 {
+                                HStack {
+                                    VStack {
+                                        StatLabelVertical(label: "SOLVES", value: (controller.hasSolves ? String(controller.count ?? 0) : "-"))
+                                        Spacer()
+                                        StatLabelVertical(label: "AVERAGE", value: (controller.hasSolves ? TimeCapture(controller.average ?? 0).getAsReadable() : "-"))
+                                        Spacer()
+                                        StatLabelVertical(label: "STD. DEV", value: (controller.hasSolves ? TimeCapture(controller.stdDev!).getAsReadable() : "-"))
+                                    }
+                                    VStack {
+                                        StatLabelVertical(label: "BEST", value: (controller.hasSolves ? controller.best!.getTimeCapture()?.getAsReadable() as! String  : "-"))
+                                        Spacer()
+                                        StatLabelVertical(label: "WORST", value: (controller.hasSolves ? controller.worst!.getTimeCapture()?.getAsReadable() as! String : "-"))
+                                        Spacer()
+                                        StatLabelVertical(label: "MEDIAN", value: (controller.hasSolves ? TimeCapture(controller.median).getAsReadable() : "-"))
+                                    }
+                                }
+                         //   }
                             
                             
                             
                         }// end sidebar vstack
-                        .frame(width: 150, height: (!UIDevice.IsIpad ? geo.size.height : 450), alignment: .top)
+                        .frame(width: 200)
                         .foregroundColor(.white)
-                        .padding(.leading, 20)
+                        .padding(.leading, 60)
+                        .padding(.top, 0)
                         
                         
                         /*
@@ -131,30 +144,15 @@ struct AllSolvesView: View {
                             /*
                              *  hStack with topBar stats
                              */
-                            HStack {
-                                     
-                                
-                                if !(controller.selected.count > 0)  { // if there are no selected solves
-                                    if (controller.solves.count > 0) {
-                                        StatLabelHorizontal(label: "SOLVES", value: String(controller.count ?? 0), showDecimal: false)
-                                        StatLabelHorizontal(label: "AVERAGE", value: TimeCapture(controller.average ?? -1).getAsReadable())
-                                        StatLabelHorizontal(label: "STD. DEV", value: TimeCapture(controller.stdDev ?? -1).getAsReadable())
-                                    }
-                                } else {
-                                    
-                                    
-                                    EditSolvesBarView()                               //     .frame(width: geo.size.width - 400)
-                                    
-                                    
-                                } // end if
-                             
+                            if (controller.selected.count > 0)  { // if there are no selected solves
+                                ZStack {
+                                    EditSolvesBarView()
+                                }
+                                .frame(height: 30, alignment: .leading)
+                                .padding(.top, 20)
+                                .padding(.trailing, 60)
+                                .padding(.leading, 5)
                             }
-                          // .allowsHitTesting(false)
-                            .frame(height: 30, alignment: .trailing)
-                            .padding(.top, 20)
-                            .padding(.bottom, 10)
-                            .padding(.trailing, 60)
-                            .padding(.leading, 5)
 
                             
                             /*
@@ -282,12 +280,60 @@ struct AllSolvesView: View {
                                 .padding(.bottom, 2)
                                 .padding(.leading, 20)
                                 .padding(.trailing, 20)
+                                
+                                
+                                /*
+                                 *  TABS View
+                                 */
+                                VStack(spacing: 10) {
+                              
+                                    Button(action: {
+                                        controller.toggleFavoriteFilter()
+                                    }, label: {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 2)
+                                                .addBorder(Color.black.opacity(0.95), width: ( controller.favoriteFilterOn ? 1 : 0), cornerRadius: 7)
+                                                .foregroundColor(.init("very_dark_black"))
+                                                .shadow(radius: 2)
+                                                
+                                        
+                                            Image.init(systemName: "star.fill")
+                                                .resizable()
+                                                .frame(width: 10 , height: 10)
+                                                .font(Font.title.weight(.bold))
+                                                .foregroundColor( (controller.favoriteFilterOn ? Color.init("yellow") : Color.init("mint_cream") ))
+                                            
+                                        }
+                                        .frame(width: 29, height: 29)
+                                    })
+                                    
+                                    
+                                    Button(action: {
+                                        controller.toggleHasVideoFilter()
+                                    }, label: {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 2)
+                                                .addBorder(Color.black.opacity(0.95), width: ( controller.videoOnlyFilterOn ? 1 : 0), cornerRadius: 7)
+                                                .foregroundColor(.init("very_dark_black"))
+                                                .shadow(radius: 2)
+                                        
+                                            Image.init(systemName: "circle.fill")
+                                                .resizable()
+                                                .frame(width: 9 , height: 9)
+                                                .font(Font.title.weight(.bold))
+                                                .foregroundColor( (controller.videoOnlyFilterOn ? Color.init("red") : Color.init("mint_cream") ))
+                                            
+                                        }
+                                        .frame(width: 29, height: 29)
+                                    })
+                                    
+                               }
+                               .position(x: -4, y: 40)
+                                
                             }
-                            //.padding(.top, 20)
-                            //.padding(20)
-                            .padding(.leading, 40)
                             .padding(.trailing, 40)
                             .padding(.bottom, 20)
+                            .padding(.top, 10)
                         }
                         
                     } // end main hStack

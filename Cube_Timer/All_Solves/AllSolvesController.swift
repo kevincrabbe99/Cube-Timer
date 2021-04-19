@@ -52,6 +52,14 @@ class AllSolvesController: ObservableObject {
     @Published var selected: [SolveElementController] = []
   
     
+    // filter stuff
+    enum FilterOption {
+        case favorited
+        case videoExist
+    }
+    @Published var filters: [FilterOption] = []
+    
+    
     init() {
         self.tgControllerToday = TimeGroupController(tg: .today, solves: [])
         self.tgControllerYesterday = TimeGroupController(tg: .yesterday, solves: [])
@@ -97,6 +105,123 @@ class AllSolvesController: ObservableObject {
     
     let lightTap = UIImpactFeedbackGenerator(style: .light)
     let hapticGenerator = UINotificationFeedbackGenerator()
+    
+    
+    public func isApplyingFilter() -> Bool{
+        if filters.count > 0 {
+            return true
+        }
+        return false
+    }
+    
+    
+    public func toggleFavoriteFilter() {
+        if filters.contains(.favorited) {
+            filters = filters.filter { $0 != .favorited }
+        } else {
+            filters.append(.favorited)
+        }
+        
+        applyFilters()
+    }
+    
+    public func toggleHasVideoFilter() {
+        if filters.contains(.videoExist) {
+            filters = filters.filter { $0 != .videoExist }
+        } else {
+            filters.append(.videoExist)
+        }
+        
+        applyFilters()
+    }
+    
+    public var favoriteFilterOn: Bool {
+        if filters.contains(.favorited) {
+            return true
+        }
+        return false
+    }
+    
+    public var videoOnlyFilterOn: Bool {
+        if filters.contains(.videoExist) {
+            return true
+        }
+        return false
+    }
+    
+    public var hasSolves: Bool {
+        if solves.count > 0 {
+            return true
+        }
+        return false
+    }
+    
+    
+    private func applyFilters() {
+        lightTap.impactOccurred()
+        print("applying filters: ", filters.description)
+        
+        // reset view if no filters available 
+        if filters.count == 0 {
+            self.updateSolves()
+            
+            return
+        }
+        self.clearTimeGroups()
+        
+        
+        // reset solves
+        self.solves = solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
+        
+        var newList: [SolveItem] = []
+        
+        
+        
+        if filters.contains(.videoExist) && filters.contains(.favorited) {
+            newList = solves.filter { $0.hasVideo || $0.isFavorite  }
+        }else {
+        
+            if filters.contains(.videoExist) {
+                newList.append(contentsOf: solves.filter { $0.hasVideo == true } )
+            }
+            
+            if filters.contains(.favorited) {
+                newList.append(contentsOf: solves.filter { $0.isFavorite == true } )
+            }
+            
+        }
+        
+        self.solves = newList
+        
+        for s in solves {
+            addSolveToCorrespondingTGController(s: s)
+        }
+        
+        updateBest()
+        updateWorst()
+        updateMedian()
+        updateCount()
+        updateAverage()
+        updateStdDev()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /*
      * opens video for solveItem tapped
      */
@@ -178,6 +303,7 @@ class AllSolvesController: ObservableObject {
      */
     public func updateSolves() {
         self.clearTimeGroups()
+        self.filters = []
         self.solves = solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
 
         

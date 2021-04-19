@@ -43,7 +43,7 @@ struct MainView: View {
                  *  CAMERA LAYER
                  */
                 if  cameraController.videoState != .disabled &&
-                    cvc.onPage != .showAll {
+                        cvc.onPage != .showAll && !settingsController.pauseSavingSolves {
                     CameraView(cameraController: cameraController, cvc: cvc)
                         .opacity(0.3)
                         .transition(.opacity)
@@ -54,7 +54,7 @@ struct MainView: View {
                 /*
                  *  VIDEO toggle button
                  */
-                if !(cameraController.videoState == .disabled && timer.timerGoing == true) { // only show if camera enabled or not timer (on standby)
+                if (/*cameraController.videoState == .disabled && */timer.timerGoing == false && !settingsController.pauseSavingSolves) { // only show if camera enabled or not timer (on standby)
                     ZStack {
                         
                         HStack {
@@ -64,7 +64,7 @@ struct MainView: View {
                             if cameraController.videoState == .recording {
                                 IconButton(icon: Image.init(systemName: "record.circle"), bgColor: Color.init("very_dark_blue"), iconColor: Color.red, width: 25, height: 25)
                                 
-                                Text("Recording...")
+                                Text(cameraController.recordingText)
                                     .font(Font.custom("Play-Bold", size: 13))
                                     .foregroundColor(Color.init("mint_cream"))
                                     .offset(y: -1)
@@ -161,6 +161,12 @@ struct MainView: View {
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
         }
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            if settingsController.defaultVideoOn {
+                cameraController.enableVideoState()
+            }
+        }
+       
     }
 }
 

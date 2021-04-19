@@ -145,6 +145,7 @@ class ContentViewController: ObservableObject {
      */
     public func closeVideo() {
         lightTap.impactOccurred()
+        self.videoPlayerController.stopPlayer()
         self.showingVideo = false
     }
     

@@ -41,7 +41,7 @@ struct StatLabelVertical: View {
                 
                 ZStack {
                     Color.init("mint_cream")
-                        .frame(width: geo.size.width * (0.5), height: 30)
+                        .frame(width: geo.size.width * (0.8), height: 30)
                         .cornerRadius(4)
                         .opacity(0.2)
                     
@@ -53,7 +53,7 @@ struct StatLabelVertical: View {
                 }
             }
             .foregroundColor(.init("mint_cream"))
-            .frame(width: 150, alignment: .trailing)
+           // .frame(width: 150, alignment: .trailing)
             
         } // end geo
         

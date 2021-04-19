@@ -37,6 +37,17 @@ struct SettingsView: View {
         }
     }
     
+    var defaultCameraOnLabel: String {
+        if controller.defaultVideoOn {
+            return "YES"
+        } else {
+            return "NO"
+        }
+    }
+    
+    var recordingBufferOptions = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @State private var selectedRecordingBufferTime = 3
+    
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     var body: some View {
         GeometryReader { geo in
@@ -64,7 +75,7 @@ struct SettingsView: View {
                      */
                     Text(controller.aboutState ? "ABOUT" : "SETTINGS")
                         .font(Font.custom("Dosis-ExtraBold", size: 25))
-                        .padding(.top, 20)
+                        .padding(.top, 10)
                     
                     
                     /*&
@@ -93,15 +104,53 @@ struct SettingsView: View {
                                     }, label: {
                                         SettingsOption(label: "Pause saving solves", value: pauseSavingSolvesLabel)
                                     })
+                                    
+                                    
+                                    Button(action: {
+                                        controller.toggleDefaultVideoOn()
+                                    }, label: {
+                                        SettingsOption(label: "Default to Camera On", value: defaultCameraOnLabel, info: "Choose whether the camera is enabled by default upon opening the app.")
+                                    })
+                                    
+                                    HStack {
+                                        VStack {
+                                            Text(LocalizedStringKey("Recording Stop Buffer Timer"))
+                                                .fontWeight(.bold)
+                                                .font(Font.custom("Dosis-Bold", size: 19))
+                                                .frame(width: 220, alignment: .leading)
+                                            Text(LocalizedStringKey("Select how many seconds the should pass after stopping the timer before the video recording gets cut off."))
+                                                //.font(.system(size:12))
+                                                .font(Font.custom("Dosis", size: 13))
+                                                .frame(width: 220, alignment: .leading)
+                                                .opacity(0.8)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        ZStack {
+                                            Picker("", selection: $selectedRecordingBufferTime) {
+                                                ForEach(recordingBufferOptions, id: \.self) {
+                                                    Text(String($0))
+                                                        .font(Font.custom("Play-Bold", size: 14))
+                                                }
+                                            }
+                                            .frame(width: 40, height: 80)
+                                            .clipped()
+                                            .onChange(of: selectedRecordingBufferTime) { (value) in
+                                                controller.setRecordingBuffer(to: value)
+                                            }
+                                        }
+                                        .frame(width: 60)
+                                        
+                                    }
+                                    
+                                    
                                 }
-                                .padding([.top], 15)
+                                .padding(.trailing, 5)
                             }
-                            .frame(height: h-150)
-                            .padding(.trailing, 5)
                         } else {
                             
                             AboutView()
-                                .frame(height: h-150)
                             
                         }
                         
@@ -115,7 +164,7 @@ struct SettingsView: View {
                         controller.toggleAbout()
                     }, label: {
                         SettingsOption(label: (controller.aboutState ? "back" : "about"))
-                           .padding(.bottom, 15)
+                           .padding(.bottom, 30)
                             .opacity(0.8)
                     })
                     
@@ -124,6 +173,8 @@ struct SettingsView: View {
                 .frame(width: 280, alignment: .topLeading)
                 
             } // end zstack bg
+        }.onAppear() {
+            self.selectedRecordingBufferTime = controller.recordingBufferTime
         } // end geo
     }
 }

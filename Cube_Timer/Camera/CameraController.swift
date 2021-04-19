@@ -40,6 +40,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     var delegate: CameraControllerDelegate!
     
+    
+    @Published public var recordingText: String = "Recording..."
+    
+    
     let lightTap = UIImpactFeedbackGenerator(style: .light)
     let hapticGenerator = UINotificationFeedbackGenerator()
     
@@ -66,6 +70,8 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         if captureSession == nil { return }
         
+        captureSession?.commitConfiguration()
+        
         captureSession?.stopRunning()
         
     }
@@ -73,6 +79,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     public func turnOnCamera() {
         if captureSession == nil { return }
         
+        captureSession?.commitConfiguration()
         captureSession?.startRunning()
     }
     
@@ -86,9 +93,8 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         print("toggling video state from : ", videoState)
         
         if videoState == .disabled { // video is disabled, -> enable
-            hapticGenerator.prepare()
             hapticGenerator.notificationOccurred(.success)
-            videoState = .standby
+            self.enableVideoState()
         } else { // video is enabled, -> disable
             hapticGenerator.notificationOccurred(.error)
             videoState = .disabled
@@ -97,6 +103,12 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             captureSession?.stopRunning()
         }
         
+    }
+    
+    
+    public func enableVideoState() {
+        hapticGenerator.prepare()
+        videoState = .standby
     }
     
     
@@ -185,20 +197,17 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         //guard let connection = self.movieOutput.connection(with: .video) else { throw CameraControllerError.inputsAreInvalid }
         
-        /*
-         * check if already reacording so add 2 inputs
-        if movieOutput != nil {
-            if movieOutput!.isRecording {
-                
-                self.stopRecording(save: false)
-                
-                throw CameraControllerError.inputsAreInvalid
-            }
+        // check if already recording
+        if self.isRecording {
+            // stop current recording
+            self.stopRecording()
         }
-         */
+        
+        
         
         print("start recording from CameraController")
         videoState = .recording
+        recordingText = "Recording..."
         
         // define URL
         //let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
@@ -276,6 +285,35 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     }
     
     
+    /*
+     * Enterance for TimerController to start countdown for mainview camera buttons and status
+     */
+    var recordingCountDownTimer: Timer?
+    var currentTimerCountdown: Int? = 3 // init to 3 cause fuck it
+    public func startRecordingCountdown(from: Int) {
+        currentTimerCountdown = from + 1 // idk why but adding 1 here makes everything below work...
+        recordingText = ""
+        countTimerDown()
+        recordingCountDownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countTimerDown), userInfo: nil, repeats: true)
+        
+    }
+    
+    /*
+     *  counds down the timer by 1, called by method above on timer
+     */
+    @objc func countTimerDown() {
+        // if 0 then invalidate and set recordingText back to origional state
+        if currentTimerCountdown == 0 {
+            recordingCountDownTimer?.invalidate()
+            self.recordingText = "Recording..."
+        } else {
+            DispatchQueue.main.async {
+                self.recordingText.append( String("\(self.currentTimerCountdown!)... ") )
+            }
+        }
+        self.currentTimerCountdown! -= 1
+    }
+    
     
 
 
@@ -300,10 +338,14 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         //let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput
         if pos == .back {
             captureSession.removeInput(frontCameraInput!)
-            captureSession.addInput(backCameraInput!)
+            if captureSession.canAddInput(backCameraInput!) {
+                captureSession.addInput(backCameraInput!)
+            }
         } else {
             captureSession.removeInput(backCameraInput!)
-            captureSession.addInput(frontCameraInput!)
+            if captureSession.canAddInput(frontCameraInput!) {
+                captureSession.addInput(frontCameraInput!)
+            }
         }
             /*
         let newCameraDevice = getCamera(with: pos)
@@ -413,12 +455,13 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             if let frontCamera = self.frontCamera {
                 self.frontCameraInput = try AVCaptureDeviceInput(device: frontCamera)
                   
-                // add front camera input
-                if captureSession.canAddInput(self.frontCameraInput!) {
-                    captureSession.addInput(self.frontCameraInput!)
-                    
+                if self.cameraInputState == .frontCamera {
+                    if captureSession.canAddInput(self.frontCameraInput!) {
+                        captureSession.addInput(self.frontCameraInput!)
+                        
+                    }
+                    else { throw CameraControllerError.inputsAreInvalid }
                 }
-                else { throw CameraControllerError.inputsAreInvalid }
                    
             }
             else { throw CameraControllerError.noFrontCameraAvailable }
@@ -426,6 +469,15 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             // setup back camera, dont set as output at first tho
             if let backCamera = self.backCamera {
                 self.backCameraInput = try AVCaptureDeviceInput(device: backCamera)
+                
+                if self.cameraInputState == .backCamera {
+                    if captureSession.canAddInput(self.backCameraInput!) {
+                        captureSession.addInput(self.backCameraInput!)
+                        
+                    }
+                    else { throw CameraControllerError.inputsAreInvalid }
+                }
+                
             } else { throw CameraControllerError.noBackCameraAvailable }
             
             // setup microphone

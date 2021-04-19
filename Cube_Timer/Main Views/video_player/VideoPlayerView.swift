@@ -30,7 +30,7 @@ struct VideoPlayerView: View {
                             .font(Font.custom("Play-Bold", size: 14))
                         
                         ZStack {
-                            Color.init("green")
+                            controller.timeBGColor
                                 .cornerRadius(3)
                                 .opacity(0.8)
                             Text((controller.solveItem?.getTimeCapture()?.getAsReadable())!)
@@ -47,35 +47,47 @@ struct VideoPlayerView: View {
                     Button(action: {
                         controller.toggleIsFavorite()
                     }, label: {
-                        IconButton(icon: (controller.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.isFavorite ? Color.init("yellow") : Color.init("black_chocolate")), width: 24, height: 24)
+                        IconButton(icon: (controller.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.isFavorite ? Color.init("yellow") : Color.init("very_dark_black")), width: 24, height: 24)
                             .padding(20)
                     })
-                    .padding(.trailing, 10)
                     .frame(width: 30, height: 30, alignment: .center)
                     
-                    IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
-                        .padding(.trailing, 10)
-                        .onTapGesture {
-                            controller.deleteVideo() // UPDATE THIS to route to cvc
-                        }
                     
-                    IconButton(icon: Image.init(systemName: "square.and.arrow.down.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24, iconWidth: 10, iconHeight: 11)
-                        .padding(.trailing, 20)
-                        .onTapGesture {
-                            controller.saveVideoToPhotos()
-                        }
-                
-                    IconButton(icon: Image.init(systemName: "info"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 24, height: 24, iconWidth: 8, iconHeight: 11)
-                        .padding(.trailing, 20)
-                        .onTapGesture {
-                            cvc.openDetails(solveItem: controller.solveItem!)
-                        }
+                    Button(action: {
+                        controller.deleteVideo() // UPDATE THIS to route to cvc
+                    }, label: {
+                        IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
+                            .padding(20)
+                    })
+                    .frame(width: 30, height: 30, alignment: .center)
                     
-                    IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"), width: 24, height: 24)
-                        .onTapGesture {
-                            cvc.closeVideo()
-                        }
+                    Button(action: {
+                        controller.saveVideoToPhotos()
+                    }, label: {
+                        IconButton(icon: Image.init(systemName: "square.and.arrow.down.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24, iconWidth: 10, iconHeight: 11)
+                            .padding(20)
+                    })
+                    .frame(width: 30, height: 30, alignment: .center)
+                    
+                    Button(action: {
+                        cvc.openDetails(solveItem: controller.solveItem!)
+                    }, label: {
+                        IconButton(icon: Image.init(systemName: "info"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 24, height: 24, iconWidth: 8, iconHeight: 11)
+                            .padding(30)
+                    })
+                    .frame(width: 30, height: 30, alignment: .center)
+                    .padding(.trailing, 20)
+                    
+                    Button(action: {
+                        cvc.closeVideo()
+                    }, label: {
+                        IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"), width: 24, height: 24)
+                            .padding(20)
+                    })
+                    .frame(width: 30, height: 30, alignment: .center)
+                    
                 }
+                .frame(height: 35)
                 
                 ZStack {
                     

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 class DetailsViewController: ObservableObject {
     
@@ -37,6 +38,13 @@ class DetailsViewController: ObservableObject {
             return true
         }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
     public func toggleIsFavorite() {
@@ -101,13 +109,16 @@ class DetailsViewController: ObservableObject {
         return "\(zScore.rounded(toPlaces: 2))"
     }
     
-    public func getPercentile() -> String {
+    var getPercentile: String {
         
-        guard self.solveItem != nil else { return String("Not Found @039") }
+        guard self.solveItem != nil  else { return String("Not Found @039") }
+        
         
         let allSolvesOrderedByTimeMS = allSolveController.getSolvesOrderedByTimeMS()
         
-        let index: Double = Double( allSolvesOrderedByTimeMS.firstIndex(of: self.solveItem)! )
+        guard allSolvesOrderedByTimeMS.firstIndex(of: self.solveItem) != nil else { return String("ERROR @(0djd") }
+        
+        let index: Double = Double( allSolvesOrderedByTimeMS.firstIndex(of: self.solveItem!)! )
         let total: Double = Double(allSolvesOrderedByTimeMS.count)
         
         print("index: ", index)

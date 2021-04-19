@@ -44,11 +44,13 @@ struct AlertView: View {
                         }
                         
                     }
-                    .frame(width: w-290, alignment: .leading)
+                    .padding([.leading, .trailing], 30)
                     
                 }
-                .frame(width: w-250, height: 60)
-                .position(x: ((w-250)/2)+60, y: 60)
+                .frame(/*width: w-250,*/ height: 60)
+                //.position(x: ((w-250)/2)+60, y: 60)
+                .padding([.leading, .trailing], 150)
+                .padding(.top, 20)
                 .transition(.move(edge: .top))
                 .animation(.spring())
                 .foregroundColor(.init("black_chocolate"))
