@@ -93,6 +93,17 @@ class VideoPlayerController: ObservableObject {
         return  df.string(from: solveItem!.timestamp)
     }
     
+    /*
+     *  return color for time indicator depending on comparison to average
+     */
+    public var timeBGColor: Color {
+        if solveItem!.timeMS < allSolvesController.average! {
+            return Color.init("green")
+        } else {
+            return Color.init("red")
+        }
+    }
+    
     
     /*
      * called by VideoPlayer ontap()

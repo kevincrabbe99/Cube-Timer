@@ -30,7 +30,7 @@ struct VideoPlayerView: View {
                             .font(Font.custom("Play-Bold", size: 14))
                         
                         ZStack {
-                            Color.init("green")
+                            controller.timeBGColor
                                 .cornerRadius(3)
                                 .opacity(0.8)
                             Text((controller.solveItem?.getTimeCapture()?.getAsReadable())!)

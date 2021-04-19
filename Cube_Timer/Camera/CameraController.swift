@@ -193,17 +193,13 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         //guard let connection = self.movieOutput.connection(with: .video) else { throw CameraControllerError.inputsAreInvalid }
         
-        /*
-         * check if already reacording so add 2 inputs
-        if movieOutput != nil {
-            if movieOutput!.isRecording {
-                
-                self.stopRecording(save: false)
-                
-                throw CameraControllerError.inputsAreInvalid
-            }
+        // check if already recording
+        if self.isRecording {
+            // stop current recording
+            self.stopRecording()
         }
-         */
+        
+        
         
         print("start recording from CameraController")
         videoState = .recording

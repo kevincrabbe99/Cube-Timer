@@ -176,7 +176,7 @@ class BarGraphController: ObservableObject {
         let barIndex = self.getBarIndexWhichIncludes(solve: lastSolve!)  // get the index of the bar with that solve
         
         // highlight the bar
-        if barIndex < numOfBars / 2 {
+        if lastSolve!.timeMS < solveHandler.average.timeInMS {
             barControllers[barIndex].highlight(Color.init("green"));
         } else {
             barControllers[barIndex].highlight(Color.init("red"));

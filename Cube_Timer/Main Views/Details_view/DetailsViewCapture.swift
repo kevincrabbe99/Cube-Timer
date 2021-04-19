@@ -165,7 +165,7 @@ struct DetailsViewCapture: View {
                                     
                                     VStack(alignment: .leading) {
                                         LabelDisplay(label: "Percentile")
-                                        TimeDisplay(label: controller.getPercentile())
+                                        TimeDisplay(label: controller.getPercentile)
                                     }
                                     .frame(alignment: .leading)
                                     
