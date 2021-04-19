@@ -53,7 +53,11 @@ extension SolveItem: Identifiable {
     @NSManaged public var videoName: String?
     public var hasVideo: Bool {
         if videoName != nil {
-            return true
+            if FileManager.default.fileExists(atPath: DocumentDirectory.getVideosDirectory().appendingPathComponent(videoName!).path) {
+                return true
+            } else {
+                print("Video file recorded, but not available")
+            }
         }
         return false
     }

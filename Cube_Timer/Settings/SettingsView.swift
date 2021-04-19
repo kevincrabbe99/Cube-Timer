@@ -45,6 +45,9 @@ struct SettingsView: View {
         }
     }
     
+    var recordingBufferOptions = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @State private var selectedRecordingBufferTime = 3
+    
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
     var body: some View {
         GeometryReader { geo in
@@ -109,10 +112,42 @@ struct SettingsView: View {
                                         SettingsOption(label: "Default to Camera On", value: defaultCameraOnLabel, info: "Choose whether the camera is enabled by default upon opening the app.")
                                     })
                                     
+                                    HStack {
+                                        VStack {
+                                            Text(LocalizedStringKey("Recording Stop Buffer Timer"))
+                                                .fontWeight(.bold)
+                                                .font(Font.custom("Dosis-Bold", size: 19))
+                                                .frame(width: 220, alignment: .leading)
+                                            Text(LocalizedStringKey("Select how many seconds the should pass after stopping the timer before the video recording gets cut off."))
+                                                //.font(.system(size:12))
+                                                .font(Font.custom("Dosis", size: 13))
+                                                .frame(width: 220, alignment: .leading)
+                                                .opacity(0.8)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        ZStack {
+                                            Picker("", selection: $selectedRecordingBufferTime) {
+                                                ForEach(recordingBufferOptions, id: \.self) {
+                                                    Text(String($0))
+                                                        .font(Font.custom("Play-Bold", size: 14))
+                                                }
+                                            }
+                                            .frame(width: 40, height: 80)
+                                            .clipped()
+                                            .onChange(of: selectedRecordingBufferTime) { (value) in
+                                                controller.setRecordingBuffer(to: value)
+                                            }
+                                        }
+                                        .frame(width: 60)
+                                        
+                                    }
+                                    
                                     
                                 }
+                                .padding(.trailing, 5)
                             }
-                            .padding(.trailing, 5)
                         } else {
                             
                             AboutView()

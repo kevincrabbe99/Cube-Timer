@@ -40,6 +40,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     var delegate: CameraControllerDelegate!
     
+    
+    @Published public var recordingText: String = "Recording..."
+    
+    
     let lightTap = UIImpactFeedbackGenerator(style: .light)
     let hapticGenerator = UINotificationFeedbackGenerator()
     
@@ -203,6 +207,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         print("start recording from CameraController")
         videoState = .recording
+        recordingText = "Recording..."
         
         // define URL
         //let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
@@ -279,6 +284,35 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     }
     
+    
+    /*
+     * Enterance for TimerController to start countdown for mainview camera buttons and status
+     */
+    var recordingCountDownTimer: Timer?
+    var currentTimerCountdown: Int? = 3 // init to 3 cause fuck it
+    public func startRecordingCountdown(from: Int) {
+        currentTimerCountdown = from + 1 // idk why but adding 1 here makes everything below work...
+        recordingText = ""
+        countTimerDown()
+        recordingCountDownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countTimerDown), userInfo: nil, repeats: true)
+        
+    }
+    
+    /*
+     *  counds down the timer by 1, called by method above on timer
+     */
+    @objc func countTimerDown() {
+        // if 0 then invalidate and set recordingText back to origional state
+        if currentTimerCountdown == 0 {
+            recordingCountDownTimer?.invalidate()
+            self.recordingText = "Recording..."
+        } else {
+            DispatchQueue.main.async {
+                self.recordingText.append( String("\(self.currentTimerCountdown!)... ") )
+            }
+        }
+        self.currentTimerCountdown! -= 1
+    }
     
     
 

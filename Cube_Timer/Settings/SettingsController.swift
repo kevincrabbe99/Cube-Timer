@@ -18,6 +18,7 @@ class SettingsController: ObservableObject {
     @Published var pauseSavingSolves:  Bool = false
     @Published var oneButtonMode: Bool = true
     @Published var defaultVideoOn: Bool = false
+    @Published var recordingBufferTime: Int = 3
     
     // about stuff
     @Published var aboutState: Bool = false // changethis
@@ -74,6 +75,18 @@ class SettingsController: ObservableObject {
             Analytics.setUserProperty("false", forName: "default_to_camera_on")
         }
         
+        // check if defaultToVideoOn is in userDefaults
+        if let rbtVal = defaults.object(forKey: "recording_buffer_timer") as? Int {
+            // set from user defaults
+            self.recordingBufferTime = rbtVal
+        } else {
+            print("No value in recording_buffer_timer, initializing to 3")
+            defaults.set(3, forKey: "recording_buffer_timer")
+            self.recordingBufferTime = 3
+            
+            // set analytics
+            Analytics.setUserProperty("3", forName: "recording_buffer_time")
+        }
         
     }
     
@@ -177,6 +190,20 @@ class SettingsController: ObservableObject {
         }
         
         defaults.set(defaultVideoOn, forKey: "default_to_camera_on")
+    }
+    
+    public func setRecordingBuffer(to: Int) {
+        print("recording buffer: ", to)
+        
+        let newBufferTime = to
+        let defaults = UserDefaults.standard
+        lightTap.impactOccurred()
+        
+        self.recordingBufferTime = newBufferTime
+        defaults.set(newBufferTime, forKey: "recording_buffer_timer")
+       
+        alertController.makeAlert(icon: Image(systemName: "timer"), title: "Recording buffer updated", text: "Video recordings will not stop for \(newBufferTime) seconds after the timer is stopped.")
+        
     }
     
     
