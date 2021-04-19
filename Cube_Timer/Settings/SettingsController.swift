@@ -192,6 +192,9 @@ class SettingsController: ObservableObject {
         defaults.set(defaultVideoOn, forKey: "default_to_camera_on")
     }
     
+    /*
+     * sets time for stop recording buffer
+     */
     public func setRecordingBuffer(to: Int) {
         print("recording buffer: ", to)
         
@@ -199,10 +202,14 @@ class SettingsController: ObservableObject {
         let defaults = UserDefaults.standard
         lightTap.impactOccurred()
         
+        // if statement stops from running upon init
+        if newBufferTime != self.recordingBufferTime {
+            alertController.makeAlert(icon: Image(systemName: "timer"), title: "Recording buffer updated", text: "Video recordings will not stop for \(newBufferTime) seconds after the timer is stopped.")
+        }
+        
         self.recordingBufferTime = newBufferTime
         defaults.set(newBufferTime, forKey: "recording_buffer_timer")
        
-        alertController.makeAlert(icon: Image(systemName: "timer"), title: "Recording buffer updated", text: "Video recordings will not stop for \(newBufferTime) seconds after the timer is stopped.")
         
     }
     

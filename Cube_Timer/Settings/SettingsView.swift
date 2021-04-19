@@ -173,6 +173,8 @@ struct SettingsView: View {
                 .frame(width: 280, alignment: .topLeading)
                 
             } // end zstack bg
+        }.onAppear() {
+            self.selectedRecordingBufferTime = controller.recordingBufferTime
         } // end geo
     }
 }
