@@ -132,7 +132,8 @@ struct AllSolvesView: View {
                         }// end sidebar vstack
                         .frame(width: 200)
                         .foregroundColor(.white)
-                        .padding(.leading, 60)
+                        .padding(.leading, 50)
+                        .padding(.trailing, 20)
                         .padding(.top, 0)
                         
                         
@@ -169,110 +170,117 @@ struct AllSolvesView: View {
                                 
                                 ScrollView(showsIndicators: false) {
                                     VStack {
-                                        Group {
-                                            if controller.timeGroupHasSolves(controller.tgControllerToday) {
-                                                TimeGroupView(controller: controller.tgControllerToday)
-                                                    .frame(height: controller.tgControllerToday.height)
+                                        
+                                        if controller.order != .time {
+                                            TimeGroupView(controller: controller.tgControllerUnknown)
+                                                .frame(height: controller.tgControllerUnknown.height)
                                                     .zIndex(30)
-                                            }
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerYesterday) {
-                                                TimeGroupView(controller: controller.tgControllerYesterday)
-                                                    .frame(height: controller.tgControllerYesterday.height)
-                                            }
-                                                
-                                            if controller.timeGroupHasSolves(controller.tgControllerThisWeek) {
-                                                TimeGroupView(controller: controller.tgControllerThisWeek)
-                                                    .frame(height: controller.tgControllerThisWeek.height)
-                                            }
-                                                
-                                            if controller.timeGroupHasSolves(controller.tgControllerThisMonth) {
-                                                TimeGroupView(controller: controller.tgControllerThisMonth)
-                                                    .frame(height: controller.tgControllerThisMonth.height)
-                                            }
-                                                
-                                            if controller.timeGroupHasSolves(controller.tgControllerLastMonth) {
-                                                TimeGroupView(controller: controller.tgControllerLastMonth)
-                                                    .frame(height: controller.tgControllerLastMonth.height)
-                                            }
-                                        }
+                                        }else {
                                         
-                                        Group {
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerJan) {
-                                                TimeGroupView(controller: controller.tgControllerJan)
-                                                    .frame(height: controller.tgControllerJan.height)
+                                            Group {
+                                                if controller.timeGroupHasSolves(controller.tgControllerToday) {
+                                                    TimeGroupView(controller: controller.tgControllerToday)
+                                                        .frame(height: controller.tgControllerToday.height)
+                                                        .zIndex(30)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerYesterday) {
+                                                    TimeGroupView(controller: controller.tgControllerYesterday)
+                                                        .frame(height: controller.tgControllerYesterday.height)
+                                                }
+                                                    
+                                                if controller.timeGroupHasSolves(controller.tgControllerThisWeek) {
+                                                    TimeGroupView(controller: controller.tgControllerThisWeek)
+                                                        .frame(height: controller.tgControllerThisWeek.height)
+                                                }
+                                                    
+                                                if controller.timeGroupHasSolves(controller.tgControllerThisMonth) {
+                                                    TimeGroupView(controller: controller.tgControllerThisMonth)
+                                                        .frame(height: controller.tgControllerThisMonth.height)
+                                                }
+                                                    
+                                                if controller.timeGroupHasSolves(controller.tgControllerLastMonth) {
+                                                    TimeGroupView(controller: controller.tgControllerLastMonth)
+                                                        .frame(height: controller.tgControllerLastMonth.height)
+                                                }
                                             }
                                             
-                                            if controller.timeGroupHasSolves(controller.tgControllerFeb) {
-                                                TimeGroupView(controller: controller.tgControllerFeb)
-                                                    .frame(height: controller.tgControllerFeb.height)
+                                            Group {
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerJan) {
+                                                    TimeGroupView(controller: controller.tgControllerJan)
+                                                        .frame(height: controller.tgControllerJan.height)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerFeb) {
+                                                    TimeGroupView(controller: controller.tgControllerFeb)
+                                                        .frame(height: controller.tgControllerFeb.height)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerMar) {
+                                                    TimeGroupView(controller: controller.tgControllerMar)
+                                                        .frame(height: controller.tgControllerMar.height)
+                                                }
+                                                
+                                                
                                             }
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerMar) {
-                                                TimeGroupView(controller: controller.tgControllerMar)
-                                                    .frame(height: controller.tgControllerMar.height)
+                                            Group {
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerApr) {
+                                                    TimeGroupView(controller: controller.tgControllerApr)
+                                                        .frame(height: controller.tgControllerApr.height)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerMay) {
+                                                    TimeGroupView(controller: controller.tgControllerMay)
+                                                        .frame(height: controller.tgControllerMay.height)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerJun) {
+                                                    TimeGroupView(controller: controller.tgControllerJun)
+                                                        .frame(height: controller.tgControllerJun.height)
+                                                }
+                                                
+                                                
                                             }
-                                            
-                                            
+                                            Group {
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerJul) {
+                                                    TimeGroupView(controller: controller.tgControllerJul)
+                                                        .frame(height: controller.tgControllerJul.height)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerAug) {
+                                                    TimeGroupView(controller: controller.tgControllerAug)
+                                                        .frame(height: controller.tgControllerAug.height)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerSep) {
+                                                    TimeGroupView(controller: controller.tgControllerSep)
+                                                        .frame(height: controller.tgControllerSep.height)
+                                                }
+                                                
+                                            }
+                                            Group {
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerOct) {
+                                                    TimeGroupView(controller: controller.tgControllerOct)
+                                                        .frame(height: controller.tgControllerOct.height)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerNov) {
+                                                    TimeGroupView(controller: controller.tgControllerNov)
+                                                        .frame(height: controller.tgControllerNov.height)
+                                                }
+                                                
+                                                if controller.timeGroupHasSolves(controller.tgControllerDec) {
+                                                    TimeGroupView(controller: controller.tgControllerDec)
+                                                        .frame(height: controller.tgControllerDec.height)
+                                                }
+                                                
+                                                
+                                            }
                                         }
-                                        Group {
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerApr) {
-                                                TimeGroupView(controller: controller.tgControllerApr)
-                                                    .frame(height: controller.tgControllerApr.height)
-                                            }
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerMay) {
-                                                TimeGroupView(controller: controller.tgControllerMay)
-                                                    .frame(height: controller.tgControllerMay.height)
-                                            }
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerJun) {
-                                                TimeGroupView(controller: controller.tgControllerJun)
-                                                    .frame(height: controller.tgControllerJun.height)
-                                            }
-                                            
-                                            
-                                        }
-                                        Group {
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerJul) {
-                                                TimeGroupView(controller: controller.tgControllerJul)
-                                                    .frame(height: controller.tgControllerJul.height)
-                                            }
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerAug) {
-                                                TimeGroupView(controller: controller.tgControllerAug)
-                                                    .frame(height: controller.tgControllerAug.height)
-                                            }
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerSep) {
-                                                TimeGroupView(controller: controller.tgControllerSep)
-                                                    .frame(height: controller.tgControllerSep.height)
-                                            }
-                                            
-                                        }
-                                        Group {
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerOct) {
-                                                TimeGroupView(controller: controller.tgControllerOct)
-                                                    .frame(height: controller.tgControllerOct.height)
-                                            }
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerNov) {
-                                                TimeGroupView(controller: controller.tgControllerNov)
-                                                    .frame(height: controller.tgControllerNov.height)
-                                            }
-                                            
-                                            if controller.timeGroupHasSolves(controller.tgControllerDec) {
-                                                TimeGroupView(controller: controller.tgControllerDec)
-                                                    .frame(height: controller.tgControllerDec.height)
-                                            }
-                                            
-                                            
-                                        }
-                                        
                                     }
                                   //  .frame(width: 300, height: 200, alignment: <#T##Alignment#>)
                                 }
@@ -290,45 +298,55 @@ struct AllSolvesView: View {
                                     Button(action: {
                                         controller.toggleFavoriteFilter()
                                     }, label: {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 2)
-                                                .addBorder(Color.black.opacity(0.95), width: ( controller.favoriteFilterOn ? 1 : 0), cornerRadius: 7)
-                                                .foregroundColor(.init("very_dark_black"))
-                                                .shadow(radius: 2)
-                                                
-                                        
-                                            Image.init(systemName: "star.fill")
-                                                .resizable()
-                                                .frame(width: 10 , height: 10)
-                                                .font(Font.title.weight(.bold))
-                                                .foregroundColor( (controller.favoriteFilterOn ? Color.init("yellow") : Color.init("mint_cream") ))
-                                            
-                                        }
-                                        .frame(width: 29, height: 29)
+                                        SideButtonOption(icon: Image.init(systemName: "star.fill"), selectColor: Color.init("yellow"), isOn: controller.favoriteFilterOn)
                                     })
                                     
                                     
                                     Button(action: {
                                         controller.toggleHasVideoFilter()
                                     }, label: {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 2)
-                                                .addBorder(Color.black.opacity(0.95), width: ( controller.videoOnlyFilterOn ? 1 : 0), cornerRadius: 7)
-                                                .foregroundColor(.init("very_dark_black"))
-                                                .shadow(radius: 2)
-                                        
-                                            Image.init(systemName: "circle.fill")
-                                                .resizable()
-                                                .frame(width: 9 , height: 9)
-                                                .font(Font.title.weight(.bold))
-                                                .foregroundColor( (controller.videoOnlyFilterOn ? Color.init("red") : Color.init("mint_cream") ))
-                                            
-                                        }
-                                        .frame(width: 29, height: 29)
+                                        SideButtonOption(icon: Image.init(systemName: "circle.fill"), selectColor: Color.init("red"), isOn: controller.videoOnlyFilterOn)
                                     })
                                     
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        self.controller.setOrderOption(to: .bestFirst)
+                                    }, label: {
+                                        SideButtonOption(icon: Image.init(systemName: "lessthan.square.fill"), selectColor: Color.init("green"), isOn: controller.order == .bestFirst)
+                                    })
+                                    
+                                    Button(action: {
+                                        self.controller.setOrderOption(to: .worstFirst)
+                                    }, label: {
+                                        SideButtonOption(icon: Image.init(systemName: "greaterthan.square.fill"), selectColor: Color.init("red"), isOn: controller.order == .worstFirst)
+                                    })
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        self.controller.setLabelDispOption(to: .percentile)
+                                    }, label: {
+                                        SideButtonOption(icon: Image.init(systemName: "percent"), selectColor: Color.init("black_chocolate"), isOn: controller.labelDispOption == .percentile)
+                                    })
+                                    
+                                    Button(action: {
+                                        self.controller.setLabelDispOption(to: .averageCompare)
+                                    }, label: {
+                                        SideButtonOption(icon: Image.init(systemName: "a.square.fill"), selectColor: Color.init("black_chocolate"), isOn: controller.labelDispOption == .averageCompare)
+                                    })
+                                    
+                                    Button(action: {
+                                        self.controller.setLabelDispOption(to: .zScore)
+                                    }, label: {
+                                        SideButtonOption(icon: Image.init(systemName: "z.square.fill"), selectColor: Color.init("black_chocolate"), isOn: controller.labelDispOption == .zScore)
+                                    })
+                                    
+                                    Spacer()
+                                    
                                }
-                               .position(x: -4, y: 40)
+                                .position(x: -4, y: (geo.size.height - 40) / 2)
+                                .frame(height: geo.size.height - 40)
                                 
                             }
                             .padding(.trailing, 40)
@@ -368,6 +386,33 @@ struct AllSolvesView_Previews: PreviewProvider {
         AllSolvesView(parent: ContentView())
                 .previewLayout(.fixed(width: 2436 / 3.0, height: 1125 / 3.0))
     }
+}
+
+
+struct SideButtonOption: View {
+    
+    var icon: Image
+    var selectColor: Color
+    var isOn: Bool
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 2)
+                .addBorder(Color.black.opacity(0.95), width: ( isOn ? 1 : 0), cornerRadius: 7)
+                .foregroundColor(.init("very_dark_black"))
+                .shadow(radius: 2)
+                
+        
+            icon
+                .resizable()
+                .frame(width: 10 , height: 10)
+                .font(Font.title.weight(.bold))
+                .foregroundColor( (isOn ? selectColor : Color.init("mint_cream") ))
+            
+        }
+        .frame(width: 29, height: 29)
+    }
+    
 }
 
 

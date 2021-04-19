@@ -31,14 +31,58 @@ struct SolveElementView: View {
         return false
     }
     
-    /*
-    var hasVideo: Bool {
-        if self.controller.si.videoName != nil {
-            return true
+    var labelDisp: String {
+        
+        switch allSolvesController.labelDispOption {
+        case .time:
+            return (controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")
+        case .averageCompare:
+            
+            //guard self.solveItem != nil else { return String("Not Found @e3dd2") }
+            
+            if controller.si.timeMS > allSolvesController.average! {
+                return "+\(TimeCapture(controller.si.timeMS - allSolvesController.average!).getInSolidForm())"
+            } else {
+                return "-\(TimeCapture(allSolvesController.average! - controller.si.timeMS).getInSolidForm())"
+            }
+            
+        case .percentile:
+            
+                
+            guard self.controller.si != nil  else { return String("Not Found @039") }
+            
+            let allSolvesOrderedByTimeMS = allSolvesController.getSolvesOrderedByTimeMS()
+            
+            guard allSolvesOrderedByTimeMS.firstIndex(of: self.controller.si) != nil else { return String("ERROR @(0djd") }
+            
+            let index: Double = Double( allSolvesOrderedByTimeMS.firstIndex(of: self.controller.si)! )
+            let total: Double = Double(allSolvesOrderedByTimeMS.count)
+            
+            print("index: ", index)
+            print("total: ", total)
+            
+            let percentile: Double = (index / total) * 100
+            
+            let formatter = NumberFormatter()
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 1
+
+            // Avoid not getting a zero on numbers lower than 1
+            // Eg: .5, .67, etc...
+            formatter.numberStyle = .decimal
+            
+            
+            return "%\(  Int(percentile))"
+               
+        case .zScore:
+            
+            let zScore = ( controller.si.timeMS - allSolvesController.average! ) / allSolvesController.stdDev!
+            return "\(zScore.rounded(toPlaces: 2))"
+            
+        default:
+            return (controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")
         }
-        return false
     }
-    */
     
     var body: some View {
         
@@ -77,10 +121,10 @@ struct SolveElementView: View {
                     
                 
                 //if controller != nil {
-                    Text(controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")
+                Text(self.labelDisp)
                         .font(Font.custom((controller.selected ? "Chivo-Bold" : "Chivo-Regular"), size: 11))
                 /*} else {
-                    Text(solveItem!.getTimeCapture()?.getInSolidForm() ?? "0:00")
+                    Text(controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")
                         .fontWeight(.bold)
                         .font(.system(size: 11))
                 }*/

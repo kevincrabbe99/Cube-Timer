@@ -99,12 +99,6 @@ struct SettingsView: View {
                                         SettingsOption(label: "1 or 2 button start", value: oneButtonModeLabel, info: "Select how many buttons are needed to be pressed in order to activate the timer.")
                                     })
                                     
-                                    Button(action: {
-                                        controller.togglePauseSavingSolves()
-                                    }, label: {
-                                        SettingsOption(label: "Pause saving solves", value: pauseSavingSolvesLabel)
-                                    })
-                                    
                                     
                                     Button(action: {
                                         controller.toggleDefaultVideoOn()
@@ -143,6 +137,12 @@ struct SettingsView: View {
                                         .frame(width: 60)
                                         
                                     }
+                                    
+                                    Button(action: {
+                                        controller.togglePauseSavingSolves()
+                                    }, label: {
+                                        SettingsOption(label: "Pause saving solves", value: pauseSavingSolvesLabel)
+                                    })
                                     
                                     
                                 }

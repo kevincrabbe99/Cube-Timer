@@ -36,6 +36,11 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
     @Published var selected: Bool = false
     
     
+    var displayLabel: String {
+        return "work"
+    }
+    
+    
     // sets the color green if the solve is the best solve
     var bgColor: Color {
         if allSolvesController.best == si {
@@ -80,8 +85,6 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
             // tap solve item -> openVideo
             allSolvesController.openDetailsFor(solveItem: si)
         }
-        
-        
         
     }
 
