@@ -320,9 +320,11 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
      */
     var recordingCountDownTimer: Timer?
     var currentTimerCountdown: Int? = 3 // init to 3 cause fuck it
+    var isInRecordingBuffer: Bool = false
     public func startRecordingCountdown(from: Int) {
         currentTimerCountdown = from + 1 // idk why but adding 1 here makes everything below work...
         recordingText = ""
+        isInRecordingBuffer = true
         countTimerDown()
         recordingCountDownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countTimerDown), userInfo: nil, repeats: true)
         
@@ -335,13 +337,14 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         // if 0 then invalidate and set recordingText back to origional state
         if currentTimerCountdown == 0 {
             recordingCountDownTimer?.invalidate()
+            self.isInRecordingBuffer = false
             self.recordingText = "Recording..."
         } else {
             DispatchQueue.main.async {
                 self.recordingText.append( String("\(self.currentTimerCountdown!)... ") )
             }
+            self.currentTimerCountdown! -= 1
         }
-        self.currentTimerCountdown! -= 1
     }
     
     

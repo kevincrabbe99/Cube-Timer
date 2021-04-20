@@ -54,7 +54,7 @@ struct MainView: View {
                 /*
                  *  VIDEO toggle button
                  */
-                if (timer.timerGoing == false && !settingsController.pauseSavingSolves) { // only show if camera enabled or not timer (on standby)
+                if (!settingsController.pauseSavingSolves ) { // only show if camera enabled or not timer (on standby)
                     ZStack {
                         
                         HStack {
@@ -62,12 +62,14 @@ struct MainView: View {
                              *  CHOOSE WHICH VIDEO ICON TO DISPLAY
                              */
                             if cameraController.videoState == .disabled && !(timer.oneActivated || timer.bothActivated) {
-                                IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: Color.init("very_dark_black"), width: 30, height: 25, iconWidth: 15, iconHeight: 10)
-                                    .onTapGesture {
-                                        cameraController.toggleVideoState()
-                                    }
-                                    .shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
-                                Spacer()
+                                if !timer.timerGoing {
+                                    IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: Color.init("very_dark_black"), width: 30, height: 25, iconWidth: 15, iconHeight: 10)
+                                        .onTapGesture {
+                                            cameraController.toggleVideoState()
+                                        }
+                                        .shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
+                                    Spacer()
+                                }
                             }
                              else if cameraController.videoState == .standby {
                                 
