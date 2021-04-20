@@ -54,21 +54,22 @@ struct MainView: View {
                 /*
                  *  VIDEO toggle button
                  */
-                if (/*cameraController.videoState == .disabled && */timer.timerGoing == false && !settingsController.pauseSavingSolves) { // only show if camera enabled or not timer (on standby)
+                if (timer.timerGoing == false && !settingsController.pauseSavingSolves) { // only show if camera enabled or not timer (on standby)
                     ZStack {
                         
                         HStack {
                             /*
                              *  CHOOSE WHICH VIDEO ICON TO DISPLAY
                              */
-                            if cameraController.videoState == .recording {
-                                IconButton(icon: Image.init(systemName: "record.circle"), bgColor: Color.init("very_dark_blue"), iconColor: Color.red, width: 25, height: 25)
-                                
-                                Text(cameraController.recordingText)
-                                    .font(Font.custom("Play-Bold", size: 13))
-                                    .foregroundColor(Color.init("mint_cream"))
-                                    .offset(y: -1)
-                            } else if cameraController.videoState == .standby {
+                            if cameraController.videoState == .disabled && !(timer.oneActivated || timer.bothActivated) {
+                                IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: Color.init("very_dark_black"), width: 30, height: 25, iconWidth: 15, iconHeight: 10)
+                                    .onTapGesture {
+                                        cameraController.toggleVideoState()
+                                    }
+                                    .shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
+                                Spacer()
+                            }
+                             else if cameraController.videoState == .standby {
                                 
                                 IconButton(icon: Image.init(systemName: "xmark.square.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: Color.init("red"), width: 25, height: 25)
                                     .onTapGesture {
@@ -86,8 +87,8 @@ struct MainView: View {
                                     }
                                 
                                
-                                IconButton(icon: (cameraController.microphoneState == .muted ? Image.init(systemName: "mic.slash.fill") : Image.init(systemName: "mic.fill")),
-                                           bgColor: Color.init("mint_cream").opacity(0.85), iconColor: (cameraController.microphoneState == .muted ? Color.init("red") : Color.init("very_dark_black")), width: 30, height: 25, iconWidth: 8, iconHeight: 12)
+                                IconButton(icon: (cameraController.microphoneState == .muted || !cameraController.micPermissionsGranted ? Image.init(systemName: "mic.slash.fill") : Image.init(systemName: "mic.fill")),
+                                           bgColor: Color.init("mint_cream").opacity(0.85), iconColor: (cameraController.microphoneState == .muted && cameraController.micPermissionsGranted ? Color.init("red") : Color.init("very_dark_black")), width: 30, height: 25, iconWidth: 8, iconHeight: 12)
                                     .onTapGesture {
                                         cameraController.toggleMicrophoneEnabled()
                                     }
@@ -99,12 +100,13 @@ struct MainView: View {
                                     .font(Font.custom("Play-Bold", size: 13))
                                     .foregroundColor(Color.init("mint_cream"))
                                     .offset(y: -1)
-                            } else if cameraController.videoState == .disabled && !(timer.oneActivated || timer.bothActivated){
-                                IconButton(icon: Image.init(systemName: "video.fill"), bgColor: Color.init("mint_cream").opacity(0.85), iconColor: Color.init("very_dark_black"), width: 30, height: 25, iconWidth: 15, iconHeight: 10)
-                                    .onTapGesture {
-                                        cameraController.toggleVideoState()
-                                    }
-                                    .shadow(color: .init("shadow_color"), radius: 7, x: 0, y: 6)
+                            } else if cameraController.videoState == .recording {
+                                IconButton(icon: Image.init(systemName: "record.circle"), bgColor: Color.init("very_dark_blue"), iconColor: Color.red, width: 25, height: 25)
+                                
+                                Text(cameraController.recordingText)
+                                    .font(Font.custom("Play-Bold", size: 13))
+                                    .foregroundColor(Color.init("mint_cream"))
+                                    .offset(y: -1)
                                 Spacer()
                             }
                         }

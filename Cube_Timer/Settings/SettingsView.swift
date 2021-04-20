@@ -135,8 +135,11 @@ struct SettingsView: View {
                                             }
                                         }
                                         .frame(width: 60)
+                                        .offset(x: 3)
+                                        .foregroundColor(Color.init("mint_cream"))
                                         
                                     }
+                                    .padding(.bottom, 10)
                                     
                                     Button(action: {
                                         controller.togglePauseSavingSolves()

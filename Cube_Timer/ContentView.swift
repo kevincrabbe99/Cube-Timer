@@ -114,6 +114,7 @@ struct ContentView: View {
         
         // camera
         self.cameraController.solveHandler = solveHandler
+        self.cameraController.alertController = alertController
         
         //video player
         self.videoPlayerController.solveHandler = solveHandler

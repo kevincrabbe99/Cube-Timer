@@ -33,6 +33,10 @@ struct SolveElementView: View {
     
     var labelDisp: String {
         
+        if allSolvesController.solves.count == 0 {
+            return "0:00  "
+        }
+        
         switch allSolvesController.labelDispOption {
         case .time:
             return (controller.si.getTimeCapture()?.getInSolidForm() ?? "0:00")

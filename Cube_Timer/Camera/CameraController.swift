@@ -8,6 +8,7 @@
 import AVFoundation
 import Foundation
 import UIKit
+import SwiftUI
 
 enum CameraMode {
     case disabled
@@ -20,6 +21,7 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     // @Environment vars
     var solveHandler: SolveHandler!
     var cvc: ContentViewController!
+    var alertController: AlertController!
     
     // camera vars
     var captureSession: AVCaptureSession?
@@ -47,6 +49,9 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     let lightTap = UIImpactFeedbackGenerator(style: .light)
     let hapticGenerator = UINotificationFeedbackGenerator()
     
+    
+    var micPermissionsGranted = false
+    var videoPermissionsGranted = false
     
     // state vars
     @Published var videoState: CameraMode = CameraMode.disabled
@@ -92,6 +97,15 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         print("toggling video state from : ", videoState)
         
+        // check for permissions
+        self.checkPermissions()
+        // apply permissions
+        if !self.videoPermissionsGranted {
+            self.videoPermissionsAlert()
+            hapticGenerator.notificationOccurred(.error)
+            return
+        }
+        
         if videoState == .disabled { // video is disabled, -> enable
             hapticGenerator.notificationOccurred(.success)
             self.enableVideoState()
@@ -105,8 +119,21 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
     }
     
+    private func videoPermissionsAlert() {
+        self.alertController.makeAlert(icon: Image.init(systemName: "video.slash.fill"),  title: "Camera permissions not granted", text: "Please enable camera permissions within the device settings in order to use this feature.")
+    }
+    
+    private func audioPermissionsAlert() {
+        self.alertController.makeAlert(icon: Image.init(systemName: "mic.slash.fill"),  title: "Microphone permissions not granted", text: "Please enable microphone permissions whithin the device settings in order to use this feature.")
+    }
+    
     
     public func enableVideoState() {
+        
+        if !self.videoPermissionsGranted {
+            return
+        }
+        
         hapticGenerator.prepare()
         videoState = .standby
     }
@@ -195,7 +222,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
      */
     public func startRecording() throws  -> URL {
         
-        //guard let connection = self.movieOutput.connection(with: .video) else { throw CameraControllerError.inputsAreInvalid }
+        // check permissions
+        if !self.videoPermissionsGranted {
+            throw CameraControllerError.noCamerasAvailable
+        }
         
         // check if already recording
         if self.isRecording {
@@ -360,6 +390,12 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     private func setMicrophone(_ state: MicrophoneStates) throws {
         
+    
+        guard micPermissionsGranted else {
+            self.audioPermissionsAlert()
+            
+            throw CameraControllerError.noMicFound }
+        
         guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
         
         if microphoneState == .muted {
@@ -379,7 +415,43 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         }
         
     }
+    
+    
+    /*
+     *  Checks for permissions before configuring the camera
+     */
+    func checkPermissions() {
         
+        // check for video permissions
+        if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {
+            self.videoPermissionsGranted = true
+        } else {
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+                if granted {
+                    self.videoPermissionsGranted = true
+                } else {
+                   self.videoPermissionsGranted = false
+                }
+            })
+        }
+        
+        // check for audio permissions
+        if AVCaptureDevice.authorizationStatus(for: .audio) ==  .authorized {
+            self.micPermissionsGranted = true
+        } else {
+            AVCaptureDevice.requestAccess(for: .audio, completionHandler: { (granted: Bool) in
+                if granted {
+                    self.micPermissionsGranted = true
+                } else {
+                   self.micPermissionsGranted = false
+                }
+            })
+        }
+        
+        print("VIDEOPERMS: ", self.videoPermissionsGranted)
+        print("MICPERMS: ", self.micPermissionsGranted)
+        
+    }
         
     
     /*
@@ -423,6 +495,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         func createCaptureSession(){
             self.captureSession = AVCaptureSession()
         }
+        
+        
+        
+        
         /*
          *  sets the camera to face the front
          */
@@ -446,8 +522,13 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             self.microphone = AVCaptureDevice.default(for: .audio)
             
             
-                
         }
+        
+        
+        /*
+         * sets input and device vars
+         *  adds inputs to captureSession
+         */
         func configureDeviceInputs() throws {
             guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
                
@@ -480,15 +561,18 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
                 
             } else { throw CameraControllerError.noBackCameraAvailable }
             
-            // setup microphone
-            if let defMic = self.microphone {
-                self.microphoneInput = try AVCaptureDeviceInput(device: defMic)
-                
-                // add microphone input
-                if captureSession.canAddInput(self.microphoneInput!) {
-                    captureSession.addInput(self.microphoneInput!)
+            // check mic premissions
+            if self.micPermissionsGranted {
+                // setup microphone
+                if let defMic = self.microphone {
+                    self.microphoneInput = try AVCaptureDeviceInput(device: defMic)
+                    
+                    // add microphone input
+                    if captureSession.canAddInput(self.microphoneInput!) {
+                        captureSession.addInput(self.microphoneInput!)
+                    }
+                    else { throw CameraControllerError.noMicFound }
                 }
-                else { throw CameraControllerError.noMicFound }
             }
             
             
@@ -515,22 +599,29 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         }
            
         DispatchQueue(label: "prepare").async {
-            do {
-                createCaptureSession()
-                try configureCaptureDevices()
-                try configureDeviceInputs()
-                try configureOutputs()
-                
-                self.delegate.cameraWorking()
-            }
-                
-            catch {
-                DispatchQueue.main.async{
-                    completionHandler(error)
+            createCaptureSession()
+            self.checkPermissions()
+            if self.videoPermissionsGranted {
+                do {
+                    try configureCaptureDevices()
+                    try configureDeviceInputs()
+                    try configureOutputs()
+                    
+                    self.delegate.cameraWorking()
+                }  catch {
+                    DispatchQueue.main.async{
+                        completionHandler(error)
+                    }
+                    
+                    return
                 }
-                
-                return
+            } else {
+                // video permissions not granted
+                print("VIDEOPERMS not granted")
+                self.videoPermissionsAlert()
             }
+                
+            
             
             DispatchQueue.main.async {
                 completionHandler(nil)

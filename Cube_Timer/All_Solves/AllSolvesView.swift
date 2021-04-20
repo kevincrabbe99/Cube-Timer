@@ -398,7 +398,7 @@ struct SideButtonOption: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 2)
-                .addBorder(Color.black.opacity(0.95), width: ( isOn ? 1 : 0), cornerRadius: 7)
+                .addBorder(selectColor.opacity(0.95), width: ( isOn ? 1 : 0), cornerRadius: 7)
                 .foregroundColor(.init("very_dark_black"))
                 .shadow(radius: 2)
                 
