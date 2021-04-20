@@ -126,6 +126,7 @@ struct SettingsView: View {
                                                 ForEach(recordingBufferOptions, id: \.self) {
                                                     Text(String($0))
                                                         .font(Font.custom("Play-Bold", size: 14))
+                                                        .foregroundColor(Color.init("mint_cream"))
                                                 }
                                             }
                                             .frame(width: 40, height: 80)
@@ -136,7 +137,6 @@ struct SettingsView: View {
                                         }
                                         .frame(width: 60)
                                         .offset(x: 3)
-                                        .foregroundColor(Color.init("mint_cream"))
                                         
                                     }
                                     .padding(.bottom, 10)

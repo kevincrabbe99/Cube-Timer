@@ -166,6 +166,8 @@ class SolveHandler: ObservableObject {
     
     public func deleteSingleSolve(solveItemToDelete: SolveItem) {
         self.delete(solveItemToDelete)
+        
+        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Record", text: "Successfully deleted a record.", duration: 3, iconColor: Color.init("black_chocolate"))
     }
     
     /*
@@ -176,7 +178,7 @@ class SolveHandler: ObservableObject {
         
         
         // alert that solves have been deleted
-        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Records!", text: "Successfully deleted \(allSolvesController.selected.count)", duration: 3, iconColor: Color.init("black_chocolate"))
+        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Records", text: "\(allSolvesController.selected.count) records have been successfully deleted ", duration: 3, iconColor: Color.init("black_chocolate"))
         
         
         // loop through and call read delete method for all
@@ -243,6 +245,7 @@ class SolveHandler: ObservableObject {
             if FileManager.default.fileExists(atPath: urlToDelete.path) {
                 do {
                     try FileManager.default.removeItem(at: urlToDelete)
+                    alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Video", text: "Successfully deleted a video.", duration: 3, iconColor: Color.init("black_chocolate"))
                     print("Success deleting movie file for this solve.")
                 } catch {
                     print("Error deleting movie file for this solve.")

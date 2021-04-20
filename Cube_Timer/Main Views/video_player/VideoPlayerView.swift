@@ -28,6 +28,7 @@ struct VideoPlayerView: View {
                         
                         Text(controller.readableDate)
                             .font(Font.custom("Play-Bold", size: 14))
+                            .foregroundColor(Color.init("mint_cream"))
                         
                         ZStack {
                             controller.timeBGColor
