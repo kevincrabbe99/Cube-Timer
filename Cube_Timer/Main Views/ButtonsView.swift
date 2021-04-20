@@ -127,7 +127,6 @@ struct ButtonsView: View {
                             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                             .opacity(oneBtnOpacity)
                         
-                        
                     }
                     //.frame(width: geometry.size.width / 2 - 15, alignment: .leading)
                     .frame(width: geometry.size.width - 30, height: geometry.size.height - 35)
@@ -182,7 +181,7 @@ struct ButtonsView: View {
                                 .fill(LinearGradient(gradient: gradient, startPoint: .topLeading, endPoint: .bottomTrailing))
                                 .cornerRadius(topCRs, corners: [.topLeft])
                                 .cornerRadius(4, corners: [.bottomRight, .topRight])
-                                .cornerRadius(10, corners: [.bottomLeft])
+                                .cornerRadius(topCRs, corners: [.bottomLeft])
                                 .opacity(leftBtnOpacity)
                             
                             
@@ -242,7 +241,7 @@ struct ButtonsView: View {
                                 .fill(LinearGradient(gradient: gradient, startPoint: .topTrailing, endPoint: .bottomLeading))
                                 .cornerRadius(topCRs, corners: [.topRight])
                                 .cornerRadius(4, corners: [.bottomLeft, .topLeft])
-                                .cornerRadius(10, corners: [.bottomRight])
+                                .cornerRadius(topCRs, corners: [.bottomRight])
                                 .opacity(rightBtnOpacity)
                          
                                 Image("two_fingers")
@@ -286,7 +285,7 @@ struct ButtonsView: View {
                         
                         
                     }
-                    .frame(width: geometry.size.width - 10, height: geometry.size.height - 35)
+                    .frame(width: geometry.size.width - 10, height: geometry.size.height - 20)
                     .offset(x:5)
                     .offset(y:10)
                 } // end if

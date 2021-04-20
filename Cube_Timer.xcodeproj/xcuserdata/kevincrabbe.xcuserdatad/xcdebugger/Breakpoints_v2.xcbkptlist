@@ -144,7 +144,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
             endingLineNumber = "99"
-            landmarkName = "init()"
+            landmarkName = "addGenericSampleSolves(count:)"
             landmarkType = "7">
             <Locations>
                <Location
