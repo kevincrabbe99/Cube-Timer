@@ -46,6 +46,7 @@ class BarGraphController: ObservableObject {
             print("Iteration: ", i, " ID: ", self.barControllers[i].id)
         }
         
+        
     }
 
     
@@ -151,6 +152,11 @@ class BarGraphController: ObservableObject {
         
         
         highlightLastSolvesBar() // highlight the last bar added
+        
+        let averageBarIndex = getBarIndexWhichIncludesAverage(barIntervals: barIntervals)
+        if averageBarIndex != -1 {
+            highlightBar(index: averageBarIndex, color: Color.init("yellow"))
+        }
 
     }
     
@@ -181,6 +187,21 @@ class BarGraphController: ObservableObject {
         } else {
             barControllers[barIndex].highlight(Color.init("red"));
         }
+    }
+    
+    private func highlightBar(index: Int, color: Color) {
+        print("hightlighting bar, ", index)
+        barControllers[index].highlight(color);
+    }
+    
+    private func getBarIndexWhichIncludesAverage(barIntervals: [Double]) -> Int {
+        let avg = solveHandler.average
+        for (i, val) in barIntervals.enumerated() {
+            if val > avg.timeInMS {
+                return i - 1
+            }
+        }
+        return -1
     }
     
     /*

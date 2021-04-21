@@ -108,6 +108,7 @@ struct ContentView: View {
         self.editSolveController.cTypeHandler = cTypeHandler
         self.editSolveController.solvesData = solveHandler.solvesByTimeFrame
         self.editSolveController.allSolvesController = allSolvesController
+        self.editSolveController.alertController = alertController
         
         // settings controller refs
         self.settingsController.alertController = alertController

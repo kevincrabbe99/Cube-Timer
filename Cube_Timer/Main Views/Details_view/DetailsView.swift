@@ -33,19 +33,23 @@ struct DetailsView: View {
                         Button(action: {
                             self.shareDetails()
                         }, label: {
+                            ZStack {
                             IconButton(icon: Image.init(systemName:"square.and.arrow.up"), bgColor: Color.init("mint_cream"), iconColor: Color.init("very_dark_black"), width: 24, height: 24, iconWidth: 9, iconHeight: 11)
                                 .padding(.trailing, 20)
+                            }
+                            .frame(width: 30, height: 30, alignment: .center)
                         })
-                        .frame(width: 30, height: 30, alignment: .center)
                         
                         
                         Button(action: {
                             controller.toggleIsFavorite()
                         }, label: {
+                            ZStack {
                             IconButton(icon: (controller.isFavorite ? Image.init(systemName:"star.fill") : Image.init(systemName:"star")), bgColor: .init("mint_cream"), iconColor: (controller.isFavorite ? Color.init("yellow") : Color.init("very_dark_black")), width: 24, height: 24)
                                 .padding(.trailing, 20)
+                            }
+                            .frame(width: 30, height: 30, alignment: .center)
                         })
-                        .frame(width: 30, height: 30, alignment: .center)
                         
                         
                         if controller.solveItem!.hasVideo {
@@ -53,26 +57,32 @@ struct DetailsView: View {
                                 cvc.closeDetails()
                                 cvc.openVideo(solveItem: controller.solveItem!)
                             }, label: {
+                                ZStack {
                                 IconButton(icon: Image.init(systemName: "play.rectangle.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24, iconWidth: 12, iconHeight: 9)
                                     .padding(.trailing, 20)
+                                }
+                                .frame(width: 30, height: 30, alignment: .center)
                             })
-                            .frame(width: 30, height: 30, alignment: .center)
                         }
                         
                         Button(action: {
                             cvc.tappedDeleteSingleSolve(itemToDelete: controller.solveItem)
                         }, label: {
+                            ZStack {
                             IconButton(icon: Image.init(systemName: "trash.fill"), bgColor: .init("mint_cream"), iconColor: .init("very_dark_black"), width: 24, height: 24)
                                 .padding(.trailing, 20)
+                            }
+                            .frame(width: 30, height: 30, alignment: .center)
                         })
-                        .frame(width: 30, height: 30, alignment: .center)
                         
                         Button(action: {
                             cvc.closeDetails()
                         }, label: {
-                            IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"), width: 24, height: 24)
+                            ZStack {
+                                IconButton(icon: Image.init(systemName: "xmark"), bgColor: Color.init("red"), iconColor: Color.init("mint_cream"), width: 24, height: 24)
+                            }
+                            .frame(width: 30, height: 30, alignment: .center)
                         })
-                        .frame(width: 30, height: 30, alignment: .center)
                     }
                     
                     ZStack {

@@ -282,7 +282,7 @@ struct AllSolvesView: View {
                                             }
                                         }
                                     }
-                                  //  .frame(width: 300, height: 200, alignment: <#T##Alignment#>)
+                                    .animation(.none)
                                 }
                                 .padding(.top, 2)
                                 .padding(.bottom, 2)
