@@ -62,7 +62,7 @@ class TimerController: ObservableObject {
     var settingsController: SettingsController!
     var cvc: ContentViewController!
     var cameraController: CameraController!
-    
+    var alertController: AlertController!
     
     init() {
        
@@ -349,6 +349,18 @@ class TimerController: ObservableObject {
             self.acceptInput = true
         }
         
+        if !settingsController.pauseSavingSolves {
+            do {
+                try PersistenceController.shared.container.viewContext.save()
+                
+                //presentationMode.wrappedValue.dismiss()  //idk
+            } catch {
+                print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
+                alertController.makeAlert(icon: Image.init(systemName: "exclamationmark.icloud.fill"), title: "Error Saving Record", text: "A iCloud merge error occurred.")
+                    print("[timer.stopTimer] Solve Saved!")
+            }
+        }
+        
         /*
          *  GA: set user property, timer_going
          */
@@ -361,15 +373,7 @@ class TimerController: ObservableObject {
         self.peripheralOpacity = 1 // show the peripherals
         
         
-        if !settingsController.pauseSavingSolves {
-            do {
-                try PersistenceController.shared.container.viewContext.save()
-                    print("[timer.stopTimer] Solve Saved!")
-                //presentationMode.wrappedValue.dismiss()  //idk
-            } catch {
-                print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
-            }
-        }
+      
         
         startTime = 0
         timer?.invalidate()
@@ -423,15 +427,19 @@ class TimerController: ObservableObject {
             }
         }
         
-        /*
-         *  Google Analytics log new solve
-        Analytics.logEvent("time_saved", parameters: [
-            "puzzle_name": lastSolve!.cubeType.rawName! as NSObject,
-            "puzzle_description": lastSolve!.cubeType.description as NSObject,
-            "seconds": lastSolve!.timeMS as NSObject
-        ])
-         */
         
+        /*
+        if !settingsController.pauseSavingSolves {
+            do {
+                try PersistenceController.shared.container.viewContext.save()
+                //presentationMode.wrappedValue.dismiss()  //idk
+            } catch {
+                print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
+                alertController.makeAlert(icon: Image.init(systemName: "exclamationmark.icloud.fill"), title: "Error Saving Record", text: "A iCloud merge error occurred.")
+                    print("[timer.stopTimer] Solve Saved!")
+            }
+        }
+        */
         
        //Analytics.setUserProperty("false", forName: "timer_going")
         
