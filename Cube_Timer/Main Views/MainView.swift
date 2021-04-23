@@ -167,6 +167,7 @@ struct MainView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             if settingsController.defaultVideoOn {
+                print("Def video on")
                 cameraController.enableVideoState()
             }
         }

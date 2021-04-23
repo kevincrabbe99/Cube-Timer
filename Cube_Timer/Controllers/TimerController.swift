@@ -356,7 +356,7 @@ class TimerController: ObservableObject {
                 //presentationMode.wrappedValue.dismiss()  //idk
             } catch {
                 print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
-                alertController.makeAlert(icon: Image.init(systemName: "exclamationmark.icloud.fill"), title: "Error Saving Record", text: "A iCloud merge error occurred.")
+                  alertController.makeAlert(icon: Image.init(systemName: "exclamationmark.icloud.fill"), title: "Error Saving Record", text: "A iCloud merge error occurred.")
                     print("[timer.stopTimer] Solve Saved!")
             }
         }
@@ -404,6 +404,18 @@ class TimerController: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(tempCountdownTime) ) { // wait 3 seconds
                 if self.cameraController.isRecording { // if recording
                     self.cameraController.stopRecording()
+                    
+                    if !self.settingsController.pauseSavingSolves {
+                        do {
+                            try PersistenceController.shared.container.viewContext.save()
+                            //presentationMode.wrappedValue.dismiss()  //idk
+                        } catch {
+                            print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
+                            self.alertController.makeAlert(icon: Image.init(systemName: "exclamationmark.icloud.fill"), title: "Error Saving Record", text: "A iCloud merge error occurred.")
+                                print("[timer.stopTimer] Solve Saved!")
+                        }
+                    }
+                    
                 }
             }
         }
@@ -428,7 +440,7 @@ class TimerController: ObservableObject {
         }
         
         
-        /*
+       /*
         if !settingsController.pauseSavingSolves {
             do {
                 try PersistenceController.shared.container.viewContext.save()
@@ -439,7 +451,8 @@ class TimerController: ObservableObject {
                     print("[timer.stopTimer] Solve Saved!")
             }
         }
-        */
+ */
+        
         
        //Analytics.setUserProperty("false", forName: "timer_going")
         

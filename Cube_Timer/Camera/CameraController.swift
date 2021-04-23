@@ -130,12 +130,15 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
     
     public func enableVideoState() {
         
+        self.checkPermissions()
         if !self.videoPermissionsGranted {
             return
         }
         
         hapticGenerator.prepare()
+    
         videoState = .standby
+        print("VS: ", videoState)
     }
     
     
