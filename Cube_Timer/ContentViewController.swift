@@ -320,8 +320,16 @@ class ContentViewController: ObservableObject {
     }
     
     
+    /*
+     *  Sets all the states for Settings page
+     */
     private func setStateForSettings() {
         if !inSettings  {
+            
+            if cameraController.isInRecordingBuffer {
+                cameraController.stopRecording(save: true)
+            }
+            
             self.inSettings = true
             self.onPage = .settings
             
