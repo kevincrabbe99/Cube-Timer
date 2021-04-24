@@ -52,7 +52,7 @@ struct AboutView: View {
                     }
                     .frame(width: geo.size.width, alignment: .leading)
                 }
-
+//work
                 Spacer()
                 
                 HStack {
