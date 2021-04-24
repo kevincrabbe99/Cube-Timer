@@ -364,7 +364,6 @@ class TimerController: ObservableObject {
         /*
          *  GA: set user property, timer_going
          */
-        //Analytics.setUserProperty("true", forName: "timer_going")
     }
     
     func stopTimer() {
@@ -454,13 +453,19 @@ class TimerController: ObservableObject {
  */
         
         
-       //Analytics.setUserProperty("false", forName: "timer_going")
-        
         let lastSolve = solveHandler.getLastSolve()
+       //Analytics.setUserProperty("false", forName: "timer_going")
+        /*
         Analytics.logEvent("solve_saved", parameters: [
-            "name": lastSolve!.cubeType.name as NSObject,
-            "description": lastSolve!.cubeType.descrip as NSObject,
+            "group": "\(lastSolve!.cubeType.name), \(lastSolve!.cubeType.descrip)" as NSObject,
             "seconds": lastSolve!.timeMS.rounded() as NSObject
+        ])
+        */
+ 
+        Analytics.logEvent(AnalyticsParameterScore, parameters: [
+            "group": lastSolve!.cubeType.name as NSObject,
+            "description": lastSolve!.cubeType.descrip as NSObject,
+            "seconds": lastSolve!.timeMS.rounded() as NSObject,
         ])
     }
     

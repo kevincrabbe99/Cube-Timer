@@ -389,13 +389,6 @@ class SolvesFromTimeframe: ObservableObject {
         
        
         
-        /*
-        Analytics.logEvent(AnalyticsEvent, parameters: [
-            AnalyticsParameterItemName: lastSolve!.cubeType.rawName as! NSObject,
-            AnalyticsParameterItemBrand: lastSolve!.cubeType.desc as! NSObject,
-            AnalyticsParameterScore: lastSolve!.timeMS as! NSObject
-        ])
-        */
     }
      
     /*

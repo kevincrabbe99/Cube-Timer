@@ -43,11 +43,15 @@ struct AboutView: View {
                     Analytics.logEvent("goto_website", parameters: [
                         AnalyticsParameterDestination: "StatTimer Website" as NSObject
                     ])
+                    if let url = URL(string: "http://kevincrab.be/cubetimer") {
+                        UIApplication.shared.open(url)
+                    }
                 } label: {
                     VStack(alignment: .leading) {
                         Text("Website")
                             .font(Font.custom("Play-Bold", size: 20))
-                        Link("kevincrab.be/cubetimer", destination: URL(string: "http://kevincrab.be/cubetimer")!)
+                       // Link("kevincrab.be/cubetimer", destination: URL(string: "http://kevincrab.be/cubetimer")!)
+                         Text("kevincrab.be/cubetimer")
                             .font(Font.custom("Play-Regular", size: 16))
                     }
                     .frame(width: geo.size.width, alignment: .leading)

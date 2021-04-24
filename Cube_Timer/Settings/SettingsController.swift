@@ -209,7 +209,9 @@ class SettingsController: ObservableObject {
         
         self.recordingBufferTime = newBufferTime
         defaults.set(newBufferTime, forKey: "recording_buffer_timer")
-       
+        
+        // set analytics
+        Analytics.setUserProperty("\(newBufferTime)", forName: "recording_buffer_time")
         
     }
     

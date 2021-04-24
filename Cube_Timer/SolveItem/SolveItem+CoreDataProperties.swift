@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import Photos
 import SwiftUI
+import Firebase
 
 /*
 enum PuzzleType: String {
@@ -107,6 +108,13 @@ extension SolveItem: Identifiable {
         }) { saved, error in
             if saved {
                 print("SAVED VIDEO TO CAMERA ROLL")
+            
+                Analytics.logEvent("download_video", parameters: [
+                    "group": self.cubeType.name as NSObject,
+                    "group_description": self.cubeType.descrip as NSObject,
+                    "seconds": self.timeMS as NSObject,
+                ])
+                
             }else {
                 print("VideoPlayerController.saveVideoToPhotos() | ERROR SAVING VIDEO TO CAMERA ROLL: ", error)
                 

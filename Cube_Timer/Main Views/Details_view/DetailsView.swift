@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct DetailsView: View {
     
@@ -246,7 +247,14 @@ struct DetailsView: View {
         
         let capImage = capView.snapshot()
         
-        let shareText = "Checkout this \(String((controller.solveItem.getTimeCapture()?.getAsText())!)) solve I recorded using StatTimer - Timer Tracker! https://apple.co/2Q9a3Hb"
+        let shareText = "Checkout this \(String((controller.solveItem.getTimeCapture()?.getAsText())!)) solve I recorded using StatTimer - Timer Tracker! #StatTimerApp https://apple.co/2Q9a3Hb"
+        
+        Analytics.logEvent(AnalyticsEventShare, parameters: [
+            "group": controller.solveItem.cubeType.name as NSObject,
+            "group_description": controller.solveItem.cubeType.descrip as NSObject,
+            "seconds": controller.solveItem.timeMS as NSObject,
+            "z_score": controller.zScore as NSObject
+        ])
         
         let vc = UIActivityViewController(activityItems: [capImage, shareText], applicationActivities: [])
         UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true)

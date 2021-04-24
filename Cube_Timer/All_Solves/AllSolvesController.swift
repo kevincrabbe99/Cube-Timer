@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 class AllSolvesController: ObservableObject {
     
@@ -143,6 +144,32 @@ class AllSolvesController: ObservableObject {
         }else {
             self.labelDispOption = to
         }
+        
+        switch self.labelDispOption {
+        
+        case .averageCompare:
+            Analytics.logEvent("set_label_option", parameters: [
+                "label": "averageCompare"
+            ])
+        case .percentile:
+            Analytics.logEvent("set_label_option", parameters: [
+                "label": "percentile"
+            ])
+        case .time:
+            Analytics.logEvent("set_label_option", parameters: [
+                "label": "time"
+            ])
+        case .zScore:
+            Analytics.logEvent("set_label_option", parameters: [
+                "label": "zScore"
+            ])
+            
+        default:
+            Analytics.logEvent("set_label_option", parameters: [
+                "label": "this_is_a_problem"
+            ])
+        }
+        
     }
     
     
@@ -163,10 +190,18 @@ class AllSolvesController: ObservableObject {
             filters = filters.filter { $0 != .favorited }
         } else {
             filters.append(.favorited)
+            
+            
         }
+        
         
         print("filters: ", filters)
         updateSolves()
+        
+        Analytics.logEvent("filter_by_favorites", parameters: [
+            "new_count": self.solves.count as NSObject,
+            "filters_applied": self.filters.count as NSObject
+        ])
     }
     
     public func toggleHasVideoFilter() {
@@ -175,9 +210,16 @@ class AllSolvesController: ObservableObject {
             filters = filters.filter { $0 != .videoExist }
         } else {
             filters.append(.videoExist)
+            
+            
         }
         print("filters: ", filters)
         updateSolves()
+        
+        Analytics.logEvent("filter_by_hasVideo", parameters: [
+            "new_count": self.solves.count as NSObject,
+            "filters_applied": self.filters.count as NSObject
+        ])
     }
     
     public var favoriteFilterOn: Bool {
@@ -207,13 +249,35 @@ class AllSolvesController: ObservableObject {
     private func getSolvesOrdered(by: OrderOption) -> [SolveItem] {
         switch by {
         case .bestFirst:
+            
+            Analytics.logEvent("set_order_option", parameters: [
+                "label": "bestFirst"
+            ])
             return solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timeMS < $1.timeMS })
+            
         case .worstFirst:
+            
+            Analytics.logEvent("set_order_option", parameters: [
+                "label": "worstFirst"
+            ])
             return solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timeMS > $1.timeMS })
+            
         case .time:
+            /*
+            Analytics.logEvent("set_order_option", parameters: [
+                "label": "time"
+            ])
+            */
             return solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
+            
         default:
+            /*
+            Analytics.logEvent("set_order_option", parameters: [
+                "label": "time"
+            ])
+             */
             return solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
+            
         }
     }
     

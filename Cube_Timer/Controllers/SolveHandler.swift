@@ -165,9 +165,19 @@ class SolveHandler: ObservableObject {
     }
     
     public func deleteSingleSolve(solveItemToDelete: SolveItem) {
+        
+        
+        // GOOGLE ANALYTICS STUFF
+        Analytics.logEvent("deleted_single_solves", parameters: [
+            "group": solveItemToDelete.cubeType.name as NSObject,
+            "group_description": solveItemToDelete.cubeType.descrip as NSObject,
+            "seconds": allSolvesController.selected.count as NSObject
+        ])
+        
         self.delete(solveItemToDelete)
         
         alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Record", text: "Successfully deleted a record.", duration: 3, iconColor: Color.init("black_chocolate"))
+        
     }
     
     /*
@@ -189,7 +199,7 @@ class SolveHandler: ObservableObject {
         
         
         // GOOGLE ANALYTICS STUFF
-        Analytics.logEvent("deleted_solve", parameters: [
+        Analytics.logEvent("deleted_multiple_solves", parameters: [
             "count": allSolvesController.selected.count as NSObject
         ])
         
@@ -269,6 +279,12 @@ class SolveHandler: ObservableObject {
         } catch {
             print("[SolveHandler.delete(_ s:SolveItem)] error deleting solve")
         }
+        
+        Analytics.logEvent("deleted_video", parameters: [
+            "group": solveItem.cubeType.name as NSObject,
+            "group_description": solveItem.cubeType.descrip as NSObject,
+            "seconds": solveItem.timeMS
+        ])
         
     }
     

@@ -9,6 +9,7 @@ import AVFoundation
 import Foundation
 import UIKit
 import SwiftUI
+import Firebase
 
 enum CameraMode {
     case disabled
@@ -156,6 +157,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             
             do {
                 try self.setCamera(pos: .back)
+                
+                Analytics.logEvent("camera_switch", parameters: [
+                    "facing": "back" as NSObject
+                ])
             } catch {
                 print("Error setting camera input")
             }
@@ -165,6 +170,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             
             do {
                 try self.setCamera(pos: .front)
+                
+                Analytics.logEvent("camera_switch", parameters: [
+                    "facing": "front" as NSObject
+                ])
             } catch {
                 print("Error flipping camera to front")
             }
@@ -184,8 +193,16 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
         
         if microphoneState == .enabled {
             microphoneState = .muted
+            
+            Analytics.logEvent("microphone_toggled", parameters: [
+                "is_muted": "true" as NSObject
+            ])
         } else {
             microphoneState = .enabled
+            
+            Analytics.logEvent("microphone_toggled", parameters: [
+                "is_muted": "false" as NSObject
+            ])
         }
         
         do {
@@ -435,8 +452,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
                 if granted {
                     self.videoPermissionsGranted = true
+                    Analytics.setUserProperty("true", forName: "video_permissions")
                 } else {
                    self.videoPermissionsGranted = false
+                    Analytics.setUserProperty("false", forName: "video_permissions")
                 }
             })
         }
@@ -448,8 +467,10 @@ class CameraController: NSObject, ObservableObject, AVCaptureVideoDataOutputSamp
             AVCaptureDevice.requestAccess(for: .audio, completionHandler: { (granted: Bool) in
                 if granted {
                     self.micPermissionsGranted = true
+                    Analytics.setUserProperty("true", forName: "mic_permissions")
                 } else {
                    self.micPermissionsGranted = false
+                    Analytics.setUserProperty("false", forName: "mic_permissions")
                 }
             })
         }

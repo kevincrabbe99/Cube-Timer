@@ -106,6 +106,13 @@ class ContentViewController: ObservableObject {
         self.detailsViewController.goto(solveItem: solveItem)
         self.showingDetails = true
         
+        Analytics.logEvent("open_details_popup", parameters: [
+            "group": solveItem.cubeType.name as NSObject,
+            "group_description": solveItem.cubeType.descrip as NSObject,
+            "seconds": solveItem.timeMS as NSObject,
+            "hasVideo": solveItem.hasVideo.description as NSObject
+        ])
+        
     }
     
     public func closeDetails() {
@@ -122,6 +129,8 @@ class ContentViewController: ObservableObject {
         self.videoPlayerController.goto(url: url)
         self.showingVideo = true
         
+        
+        
     }
     
     public func openVideo(name: String) {
@@ -137,6 +146,12 @@ class ContentViewController: ObservableObject {
         print("playing video, current in cvc, solveItem: ", solveItem.timeMS)
         self.videoPlayerController.goto(solveItem: solveItem)
         self.showingVideo = true
+            
+        Analytics.logEvent("open_vieo_popup", parameters: [
+            "group": solveItem.cubeType.name as NSObject,
+            "group_description": solveItem.cubeType.descrip as NSObject,
+            "seconds": solveItem.timeMS as NSObject
+        ])
         
     }
     
@@ -333,9 +348,6 @@ class ContentViewController: ObservableObject {
             self.inSettings = true
             self.onPage = .settings
             
-            Analytics.logEvent(AnalyticsEventScreenView, parameters: [
-                AnalyticsParameterDestination: "settingsView"
-            ])
         } else {
             self.inSettings = false
             self.setPageTo(.Main)
