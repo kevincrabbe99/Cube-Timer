@@ -200,6 +200,11 @@ class CTypeHandler: ObservableObject {
         self.typeControllers.remove(at: i)
         self.size  -= 1
         
+        // delete all solves
+        for item in solveHandler.solvesByTimeFrame.getSolvesFrom(ct: refToDelete!.ct) {
+            solveHandler.delete(item)
+        }
+        
         CTypeHandler.DeleteCtFromCoreData(ct: refToDelete!.ct) // passes a reference to the static function
     
         /*

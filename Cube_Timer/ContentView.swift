@@ -36,7 +36,13 @@ struct ContentView: View {
     @ObservedObject var settingsController: SettingsController = SettingsController()
     @ObservedObject var alertController: AlertController = AlertController()
     
-  
+    @ObservedObject var cameraController: CameraController = CameraController()
+    @ObservedObject var videoPlayerController: VideoPlayerController = VideoPlayerController()
+    
+    // details popup
+    @ObservedObject var detailsViewController: DetailsViewController = DetailsViewController()
+    
+    
     @StateObject var cvc: ContentViewController = ContentViewController()
     
     /*
@@ -55,6 +61,8 @@ struct ContentView: View {
         self.timer.bo3Controller = bo3Controller
         self.timer.cTypeHandler = cTypeHandler
         self.timer.settingsController = settingsController
+        self.timer.cameraController = cameraController
+        self.timer.alertController = alertController
         
         // set solveHandler controllers
         self.solveHandler.timer = timer
@@ -63,6 +71,8 @@ struct ContentView: View {
         self.solveHandler.cTypeHandler = cTypeHandler
         self.solveHandler.allSolvesController = allSolvesController
         self.solveHandler.barGraphController = barGraphController
+        self.solveHandler.cameraController = cameraController
+        self.solveHandler.alertController = alertController
         
         
         self.solveHandler.solvesByTimeFrame.cTypeHandler = cTypeHandler
@@ -99,11 +109,22 @@ struct ContentView: View {
         self.editSolveController.cTypeHandler = cTypeHandler
         self.editSolveController.solvesData = solveHandler.solvesByTimeFrame
         self.editSolveController.allSolvesController = allSolvesController
+        self.editSolveController.alertController = alertController
         
         // settings controller refs
         self.settingsController.alertController = alertController
         
+        // camera
+        self.cameraController.solveHandler = solveHandler
+        self.cameraController.alertController = alertController
         
+        //video player
+        self.videoPlayerController.solveHandler = solveHandler
+        self.videoPlayerController.alertController = alertController
+        self.videoPlayerController.allSolvesController = allSolvesController
+        
+        self.detailsViewController.allSolveController = allSolvesController
+        self.detailsViewController.solveHandler = solveHandler
         
         // update the stopwatch display to show the last solve time
         self.timer.setDisplayToLastSolve()
@@ -196,6 +217,47 @@ struct ContentView: View {
                         .zIndex(9)
                 }
                 
+                
+           
+             
+                
+                /*
+                 * Video View
+                 */
+                if cvc.showingVideo {
+                    Color.black
+                        .opacity(0.75)
+                        .transition(.opacity)
+                        .onTapGesture {
+                            cvc.closeVideo()
+                        }
+                }
+                
+                if cvc.showingVideo {
+                    VideoPlayerView()
+                        .transition(.move(edge: .top)).animation(.spring())
+                }
+                
+                
+                
+                /*
+                 * details view
+                 */
+                if cvc.showingDetails {
+                    Color.black
+                        .opacity(0.9)
+                        .transition(.opacity).animation(.easeIn)
+                        .onTapGesture {
+                            cvc.closeDetails()
+                        }
+                }
+                
+                if cvc.showingDetails {
+                    DetailsView()
+                        .transition(.move(edge: .top)).animation(.spring())
+                }
+                
+                
                 AlertView()
                     .zIndex(100)
                 
@@ -211,6 +273,11 @@ struct ContentView: View {
             self.cTypeHandler.cvc = cvc
             self.popupController.cvc = cvc
             self.timer.cvc = cvc
+            self.allSolvesController.cvc = cvc
+            self.cameraController.cvc = cvc
+            self.videoPlayerController.cvc = cvc
+            self.detailsViewController.cvc = cvc
+            self.solveHandler.cvc = cvc
             
             // objects which cvc needs to reference 
             self.cvc.ctEditController = ctEditController
@@ -218,12 +285,15 @@ struct ContentView: View {
             self.cvc.cTypeHandler = cTypeHandler
             self.cvc.timer = timer
             self.cvc.allSolvesController = allSolvesController
+            self.cvc.videoPlayerController = videoPlayerController
+            self.cvc.cameraController = cameraController
+            self.cvc.detailsViewController = detailsViewController
         
             
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
             
             // FOR DEV PURPOSE: Uncommenting this will create 50 random solves to the default cubetype
-            //solveHandler.addGenericSampleSolves(count: 150) //are u sure?
+            //    solveHandler.addGenericSampleSolves(count: 120, range: 7.26..<14.85, maxDaysAgo: 170) //are u sure?
         }
        //.environment(\.locale, .init(identifier: "hi")) // DEV USE ONLY
         .environmentObject(solveHandler)
@@ -237,6 +307,9 @@ struct ContentView: View {
         .environmentObject(settingsController)
         .environmentObject(alertController)
         .environmentObject(barGraphController)
+        .environmentObject(cameraController)
+        .environmentObject(videoPlayerController)
+        .environmentObject(detailsViewController)
         .onAppear(
         
         
@@ -256,6 +329,22 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 extension View {
+    
+    func snapshot() -> UIImage {
+            let controller = UIHostingController(rootView: self)
+            let view = controller.view
+
+            let targetSize = controller.view.intrinsicContentSize
+            view?.bounds = CGRect(origin: .zero, size: targetSize)
+            view?.backgroundColor = .clear
+
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+
+            return renderer.image { _ in
+                view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+            }
+        }
+    
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }

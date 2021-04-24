@@ -14,6 +14,9 @@ struct IconButton: View {
     var iconColor: Color
     var width: CGFloat = 20
     var height: CGFloat = 20
+    var aspectLock: Bool = false
+    var iconWidth: CGFloat? = nil
+    var iconHeight: CGFloat? = nil
     
     var body: some View {
     
@@ -22,11 +25,19 @@ struct IconButton: View {
                 .cornerRadius(3)
                 .shadow(radius: 2)
             
-            icon
-                .resizable()
-                .frame(width: width / 2.2, height: height / 2.2)
-                .font(Font.title.weight(.bold))
-                .foregroundColor(iconColor)
+            if iconWidth != nil && iconHeight != nil {
+                icon
+                    .resizable()
+                    .frame(width: iconWidth , height: iconHeight)
+                    .font(Font.title.weight(.bold))
+                    .foregroundColor(iconColor)
+            } else {
+                icon
+                    .resizable()
+                    .frame(width: (aspectLock ? height / 2.2 : width / 2.2), height: height / 2.2)
+                    .font(Font.title.weight(.bold))
+                    .foregroundColor(iconColor)
+            }
             
         }
         .frame(width: width, height: height)

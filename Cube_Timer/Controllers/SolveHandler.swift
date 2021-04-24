@@ -28,6 +28,7 @@ enum Timeframe: String {
  */
 class SolveHandler: ObservableObject {
     
+    var cvc: ContentViewController!
     var timer: TimerController!
     var bo3Controller: BO3Controller!
     /*  controller for the sidebar,
@@ -35,6 +36,8 @@ class SolveHandler: ObservableObject {
     var sbController: SidebarController!
     var cTypeHandler: CTypeHandler!
     var allSolvesController: AllSolvesController!
+    var cameraController: CameraController!
+    var alertController: AlertController!
 
     
     @Published var solves: [SolveItem] // array which changes to correspond with timeframe
@@ -58,7 +61,8 @@ class SolveHandler: ObservableObject {
     
    /* @ObservedObject */ var barGraphController: BarGraphController = BarGraphController()
     
-    //@EnvironmentObject var barGraphController: BarGraphController
+    
+    
     init() {
         
         // initialize solves to be empty
@@ -92,10 +96,10 @@ class SolveHandler: ObservableObject {
      *  Adds a costum defined solve to the dataset
      *  FOR DEV PURPOSES ONLY
      */
-    public func addGenericSampleSolves(count: Int = 10) {
+    public func addGenericSampleSolves(count: Int = 10, range: Range<Double> = 34.92..<71.42, maxDaysAgo: Int = 400) {
         
         for _ in 0..<count {
-            self.addCostumSolve(sec: Double.random(in: 31.23..<68.3), daysAgo: Int.random(in: 0..<400))
+            self.addCostumSolve(sec: Double.random(in: range), daysAgo: Int.random(in: 0..<maxDaysAgo))
         }
 
     }
@@ -160,20 +164,31 @@ class SolveHandler: ObservableObject {
         self.delete(getLastSolve()!)
     }
     
+    public func deleteSingleSolve(solveItemToDelete: SolveItem) {
+        self.delete(solveItemToDelete)
+        
+        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Record", text: "Successfully deleted a record.", duration: 3, iconColor: Color.init("black_chocolate"))
+    }
+    
     /*
      * deletes any solve thats stored in the AllSolvesView.selected array
      * called by DeleteSolvesView popup,
      */
     public func deleteSelectedSolves() {
+        
+        
+        // alert that solves have been deleted
+        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Records", text: "\(allSolvesController.selected.count) records have been successfully deleted ", duration: 3, iconColor: Color.init("black_chocolate"))
+        
+        
+        // loop through and call read delete method for all
         for sElController in allSolvesController.selected {
+            print("[SolveHandler.delete(_ s:SolveItem)] deleting ", sElController.si)
             self.delete(sElController.si)
         }
         
         
-        /*
-         *  GOOGLE ANALYTICS STUFF
-         */
-        // lod deleted solve
+        // GOOGLE ANALYTICS STUFF
         Analytics.logEvent("deleted_solve", parameters: [
             "count": allSolvesController.selected.count as NSObject
         ])
@@ -190,20 +205,29 @@ class SolveHandler: ObservableObject {
         //let deleteIndex = getIndexOf(s)
         if solvesByTimeFrame.exists(solveItem: s) {
             
+            s.objectWillChange.send()
+            
             print("[SolveHandler] Deleting from CoreData")
             
-            self.solvesByTimeFrame.delete(s) // delete SolvesFromTimeframe() reference
             
-            // this deletes
+            // delete video file
+            self.deleteVideoFor(solveItem: s)
+            
+            // delete SolvesFromTimeframe() reference
+            self.solvesByTimeFrame.delete(s)
+            
+            
+            // Delete from CoreData
             PersistenceController.shared.container.viewContext.delete(s)
             
             do { // saving it 
                 try PersistenceController.shared.container.viewContext.save()
+                print("[SolveHandler.delete(_ s:SolveItem)] deleted: ", s)
                 //updateEverything() // updates EVERYTHING
             } catch {
                 print("[SolveHandler.delete(_ s:SolveItem)] error deleting solve")
             }
-            
+        
             // update solves gets called upon success ^
             self.updateSolves()
             timer.setDisplayToLastSolve()
@@ -213,6 +237,40 @@ class SolveHandler: ObservableObject {
         return false
     }
     
+    
+    /*
+     *  just deleted the video reference and file
+     */
+    public func deleteVideoFor(solveItem: SolveItem) {
+        if solveItem.hasVideo {
+            
+            let urlToDelete = DocumentDirectory.getVideosDirectory().appendingPathComponent(solveItem.videoName!)
+            
+            if FileManager.default.fileExists(atPath: urlToDelete.path) {
+                do {
+                    try FileManager.default.removeItem(at: urlToDelete)
+                    alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Video", text: "Successfully deleted a video.", duration: 3, iconColor: Color.init("black_chocolate"))
+                    print("Success deleting movie file for this solve.")
+                } catch {
+                    print("Error deleting movie file for this solve.")
+                }
+            }
+            
+        }
+        
+        // delete video reference
+        solveItem.videoName = nil
+        allSolvesController.updateSolves()
+        
+        // save to persistance controller that video ref is gone
+        do { // saving it
+            try PersistenceController.shared.container.viewContext.save()
+            //updateEverything() // updates EVERYTHING
+        } catch {
+            print("[SolveHandler.delete(_ s:SolveItem)] error deleting solve")
+        }
+        
+    }
     
     /*
      *  Returns the index of a SolveItem from with self.solves

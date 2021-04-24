@@ -24,6 +24,16 @@
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow this app to use the camera for full functionality. </string>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string>Allow this app to save videos to your phone</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow this app to use the microphone for full functionality. </string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Allow this app to save videos to your phone</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Chivo-Italic.ttf</string>

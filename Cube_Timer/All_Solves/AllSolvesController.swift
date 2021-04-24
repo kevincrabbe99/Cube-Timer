@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 class AllSolvesController: ObservableObject {
     
     var contentView: ContentView!
     var solvesData: SolvesFromTimeframe!
     var cTypeHandler: CTypeHandler!
+    var cvc: ContentViewController!
     
     @Published var best: SolveItem?
     @Published var worst: SolveItem?
@@ -50,6 +52,28 @@ class AllSolvesController: ObservableObject {
     @Published var selected: [SolveElementController] = []
   
     
+    // filter stuff
+    enum FilterOption {
+        case favorited
+        case videoExist
+    }
+    @Published var filters: [FilterOption] = []
+    
+    enum OrderOption {
+        case time
+        case bestFirst
+        case worstFirst
+    }
+    @Published var order: OrderOption = .time
+    
+    enum ItemLabelDispOption {
+        case time
+        case percentile
+        case averageCompare
+        case zScore
+    }
+    @Published var labelDispOption: ItemLabelDispOption = .time
+    
     init() {
         self.tgControllerToday = TimeGroupController(tg: .today, solves: [])
         self.tgControllerYesterday = TimeGroupController(tg: .yesterday, solves: [])
@@ -71,7 +95,7 @@ class AllSolvesController: ObservableObject {
         self.tgControllerNov = TimeGroupController(tg: .nov, solves: [])
         self.tgControllerDec = TimeGroupController(tg: .dec, solves: [])
         
-        
+        self.tgControllerUnknown.setParent(self)
         self.tgControllerToday.setParent(self)
         self.tgControllerYesterday.setParent(self)
         self.tgControllerThisWeek.setParent(self)
@@ -93,6 +117,136 @@ class AllSolvesController: ObservableObject {
         
     }
     
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
+    let hapticGenerator = UINotificationFeedbackGenerator()
+    
+    
+    // ordering
+    public func setOrderOption(to: OrderOption) {
+        if to == self.order {
+            self.order = .time
+        } else {
+            self.order = to
+        }
+        
+        lightTap.impactOccurred()
+        updateSolves()
+        
+    }
+    
+    
+    
+    public func setLabelDispOption(to: ItemLabelDispOption) {
+        lightTap.impactOccurred()
+        if to == self.labelDispOption {
+            self.labelDispOption = .time
+        }else {
+            self.labelDispOption = to
+        }
+    }
+    
+    
+    
+    
+    
+    public func isApplyingFilter() -> Bool{
+        if filters.count > 0 {
+            return true
+        }
+        return false
+    }
+    
+    
+    public func toggleFavoriteFilter() {
+        lightTap.impactOccurred()
+        if filters.contains(.favorited) {
+            filters = filters.filter { $0 != .favorited }
+        } else {
+            filters.append(.favorited)
+        }
+        
+        print("filters: ", filters)
+        updateSolves()
+    }
+    
+    public func toggleHasVideoFilter() {
+        lightTap.impactOccurred()
+        if filters.contains(.videoExist) {
+            filters = filters.filter { $0 != .videoExist }
+        } else {
+            filters.append(.videoExist)
+        }
+        print("filters: ", filters)
+        updateSolves()
+    }
+    
+    public var favoriteFilterOn: Bool {
+        if filters.contains(.favorited) {
+            return true
+        }
+        return false
+    }
+    
+    public var videoOnlyFilterOn: Bool {
+        if filters.contains(.videoExist) {
+            return true
+        }
+        return false
+    }
+    
+    public var hasSolves: Bool {
+        if solves.count > 0 {
+            return true
+        }
+        return false
+    }
+    
+    
+    
+    
+    private func getSolvesOrdered(by: OrderOption) -> [SolveItem] {
+        switch by {
+        case .bestFirst:
+            return solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timeMS < $1.timeMS })
+        case .worstFirst:
+            return solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timeMS > $1.timeMS })
+        case .time:
+            return solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
+        default:
+            return solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+     * opens video for solveItem tapped
+     */
+    public func openDetailsFor(solveItem: SolveItem) {
+        
+        // success LIGHT TAP
+        lightTap.impactOccurred()
+        
+        // route to open video if solveItem has video
+        if solveItem.hasVideo {
+            cvc.openVideo(solveItem: solveItem)
+        } else { // open details if no video found
+            cvc.openDetails(solveItem: solveItem)
+        }
+        
+    }
     
     /*
      * clears the selected array
@@ -124,7 +278,15 @@ class AllSolvesController: ObservableObject {
     public func tap(_ sec: SolveElementController) {
         print("tapped for selection: ", sec.si.timeMS)
         
+        
+        //provide haptic feedback if just started selecting
+        if selecting == false {
+            hapticGenerator.notificationOccurred(.success)
+        }
+        
         self.selecting = true // set to true just incase
+        
+        
         
         self.selected.append(sec)
     }
@@ -136,10 +298,13 @@ class AllSolvesController: ObservableObject {
         
         if selected.count == 0 {
             self.selecting = false
+            hapticGenerator.notificationOccurred(.error)
         }
     }
     
-    
+    func getSolvesOrderedByTimeMS() -> [SolveItem] {
+        return solves.sorted(by:{ $0.timeMS < $1.timeMS })
+    }
     
     /*
      * this is called by CTypeHandler and updates the solves
@@ -147,17 +312,50 @@ class AllSolvesController: ObservableObject {
      */
     public func updateSolves() {
         self.clearTimeGroups()
-        self.solves = solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
-
+        //self.filters = []
+       
+        //self.solves = solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
+        self.solves = self.getSolvesOrdered(by: self.order)
         
         print("updating AllSolvesView to: ", cTypeHandler.selected.name)
         print("analyzing ", solves.count, " solves")
+    
         
-        // routes the solves to the tg controllers
-        for s in solves {
-            addSolveToCorrespondingTGController(s: s)
+        // remove filtered items
+        if filters.count > 0 {
+            
+            var newList: [SolveItem] = []
+            
+            if filters.contains(.videoExist) && filters.contains(.favorited) {
+                newList = solves.filter { $0.hasVideo && $0.isFavorite  }
+            }else {
+            
+                if filters.contains(.videoExist) {
+                    newList.append(contentsOf: solves.filter { $0.hasVideo == true } )
+                }
+                
+                if filters.contains(.favorited) {
+                    newList.append(contentsOf: solves.filter { $0.isFavorite == true } )
+                }
+            }
+            
+            self.solves = newList
         }
         
+        
+        
+        // routes the solves to the tg controllers
+        if order == .time {
+            for s in solves {
+                addSolveToCorrespondingTGController(s: s)
+            }
+        } else {
+            for s in solves {
+                addSolveToUnknownTGController(s)
+            }
+        }
+        
+    
         // unselect everything
       // unselectAll() // this goes to all the views and unselects 
         
@@ -169,6 +367,62 @@ class AllSolvesController: ObservableObject {
         updateAverage()
         updateStdDev()
     }
+    
+    
+    /*
+    private func applyFilters() {
+        lightTap.impactOccurred()
+        print("applying filters: ", filters.description)
+        
+        // reset view if no filters available
+        if filters.count == 0 {
+            self.updateSolves()
+            
+            return
+        }
+        self.clearTimeGroups()
+        
+        
+        // reset solves
+        self.solves = self.getSolvesOrdered(by: self.order)
+        //self.solves = solvesData.getSolvesFrom(ct: cTypeHandler.selected!).sorted(by:{ $0.timestamp > $1.timestamp })
+        
+        var newList: [SolveItem] = []
+        
+        
+        
+        if filters.contains(.videoExist) && filters.contains(.favorited) {
+            newList = solves.filter { $0.hasVideo && $0.isFavorite  }
+        }else {
+        
+            if filters.contains(.videoExist) {
+                newList.append(contentsOf: solves.filter { $0.hasVideo == true } )
+            }
+            
+            if filters.contains(.favorited) {
+                newList.append(contentsOf: solves.filter { $0.isFavorite == true } )
+            }
+            
+        }
+        
+        self.solves = newList
+        
+        for s in solves {
+            addSolveToCorrespondingTGController(s: s)
+        }
+        
+        updateBest()
+        updateWorst()
+        updateMedian()
+        updateCount()
+        updateAverage()
+        updateStdDev()
+        
+    }
+ */
+    
+    
+    
     
     
     
@@ -256,6 +510,10 @@ class AllSolvesController: ObservableObject {
         }
         //self.best = convertTime(ms: b)
         self.best = b
+    }
+    
+    private func addSolveToUnknownTGController(_ s: SolveItem) {
+        self.tgControllerUnknown.add(s: s)
     }
     
     /*

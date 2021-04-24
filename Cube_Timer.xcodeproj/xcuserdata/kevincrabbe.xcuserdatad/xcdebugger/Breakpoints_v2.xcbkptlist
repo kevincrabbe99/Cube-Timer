@@ -126,8 +126,8 @@
             filePath = "Cube_Timer/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -136,46 +136,76 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "49435F5E-D235-4110-911E-D064E97302D0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cube_Timer/Controllers/SolveHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "addGenericSampleSolves(count:)"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "addGenericSampleSolves(count:range:maxDaysAgo:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - 8dde89e9639d136b"
+                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - 29ca619a4785b09"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "default argument 0 of Cube_Timer.SolveHandler.addGenericSampleSolves(count: Swift.Int) -&gt; ()"
+                  symbolName = "default argument 0 of Cube_Timer.SolveHandler.addGenericSampleSolves(count: Swift.Int, range: Swift.Range&lt;Swift.Double&gt;, maxDaysAgo: Swift.Int) -&gt; ()"
                   moduleName = "Cube Timer"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Controllers/SolveHandler.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
                   offsetFromSymbolStart = "8">
                </Location>
                <Location
-                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - a52604cfd5d4ae4e"
+                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - 244936a2bc54ad0e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Cube_Timer.SolveHandler.addGenericSampleSolves(count: Swift.Int) -&gt; ()"
+                  symbolName = "default argument 1 of Cube_Timer.SolveHandler.addGenericSampleSolves(count: Swift.Int, range: Swift.Range&lt;Swift.Double&gt;, maxDaysAgo: Swift.Int) -&gt; ()"
                   moduleName = "Cube Timer"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Controllers/SolveHandler.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
-                  offsetFromSymbolStart = "56">
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - ce65812bb4b1ff0f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 2 of Cube_Timer.SolveHandler.addGenericSampleSolves(count: Swift.Int, range: Swift.Range&lt;Swift.Double&gt;, maxDaysAgo: Swift.Int) -&gt; ()"
+                  moduleName = "Cube Timer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Controllers/SolveHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "8">
+               </Location>
+               <Location
+                  uuid = "49435F5E-D235-4110-911E-D064E97302D0 - 750e47048c076286"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Cube_Timer.SolveHandler.addGenericSampleSolves(count: Swift.Int, range: Swift.Range&lt;Swift.Double&gt;, maxDaysAgo: Swift.Int) -&gt; ()"
+                  moduleName = "Cube Timer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevincrabbe/Desktop/ios_dev/Stat_Timer/working%20repo/Cube-Timer/Cube_Timer/Controllers/SolveHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "92">
                </Location>
             </Locations>
          </BreakpointContent>

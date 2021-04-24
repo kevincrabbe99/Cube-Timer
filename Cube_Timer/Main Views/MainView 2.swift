@@ -41,6 +41,10 @@ struct MainView: View {
             Color.init("very_dark_black")
             ZStack {
                 
+<<<<<<< HEAD
+                CameraView(image: $inputImage)
+                
+=======
                 /*
                  *  CAMERA LAYER
                  */
@@ -51,6 +55,7 @@ struct MainView: View {
                         .transition(.opacity)
                 }
                  
+>>>>>>> dev
                 ButtonsView(timer: timer)
                 
                 /*

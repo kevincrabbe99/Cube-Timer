@@ -17,6 +17,8 @@ class SettingsController: ObservableObject {
     @Published var requireDoublePressToStop: Bool = false
     @Published var pauseSavingSolves:  Bool = false
     @Published var oneButtonMode: Bool = true
+    @Published var defaultVideoOn: Bool = false
+    @Published var recordingBufferTime: Int = 3
     
     // about stuff
     @Published var aboutState: Bool = false // changethis
@@ -60,6 +62,31 @@ class SettingsController: ObservableObject {
             Analytics.setUserProperty("false", forName: "pause_saving_solves")
         }
         
+        // check if defaultToVideoOn is in userDefaults
+        if let dvoVal = defaults.object(forKey: "default_to_camera_on") as? Bool {
+            // set from user defaults
+            self.defaultVideoOn = dvoVal
+        } else {
+            print("No value in defaultToVideoOn, initializing to false")
+            defaults.set(false, forKey: "default_to_camera_on")
+            self.oneButtonMode = false // changethis
+            
+            // set analytics
+            Analytics.setUserProperty("false", forName: "default_to_camera_on")
+        }
+        
+        // check if defaultToVideoOn is in userDefaults
+        if let rbtVal = defaults.object(forKey: "recording_buffer_timer") as? Int {
+            // set from user defaults
+            self.recordingBufferTime = rbtVal
+        } else {
+            print("No value in recording_buffer_timer, initializing to 3")
+            defaults.set(3, forKey: "recording_buffer_timer")
+            self.recordingBufferTime = 3
+            
+            // set analytics
+            Analytics.setUserProperty("3", forName: "recording_buffer_time")
+        }
         
     }
     
@@ -136,6 +163,54 @@ class SettingsController: ObservableObject {
         }
         
         defaults.set(pauseSavingSolves, forKey: "pauseSavingSolves")
+    }
+    
+    /*
+     *  Toggles whether the video is on by default
+     */
+    public func toggleDefaultVideoOn() {
+        let defaults = UserDefaults.standard
+        lightTap.impactOccurred()
+        
+        if defaultVideoOn == false { // set to true
+            self.defaultVideoOn = true
+            
+            // show alert
+            alertController.makeAlert(icon: Image(systemName: "video.fill"), title: "Camera default set to enabled", text: "Camera will initiate upon opening the app.")
+            
+            
+            Analytics.setUserProperty("true", forName: "default_to_camera_on")
+        } else {
+            self.defaultVideoOn = false // turn off
+            
+            // show alert
+            alertController.makeAlert(icon: Image(systemName: "video.slash.fill"), title: "Camera default set to disabled", text: "Camera will not initiate upon opening the app.")
+            
+            Analytics.setUserProperty("false", forName: "default_to_camera_on")
+        }
+        
+        defaults.set(defaultVideoOn, forKey: "default_to_camera_on")
+    }
+    
+    /*
+     * sets time for stop recording buffer
+     */
+    public func setRecordingBuffer(to: Int) {
+        print("recording buffer: ", to)
+        
+        let newBufferTime = to
+        let defaults = UserDefaults.standard
+        lightTap.impactOccurred()
+        
+        // if statement stops from running upon init
+        if newBufferTime != self.recordingBufferTime {
+            alertController.makeAlert(icon: Image(systemName: "timer"), title: "Recording buffer updated", text: "Video recordings will not stop for \(newBufferTime) seconds after the timer is stopped.")
+        }
+        
+        self.recordingBufferTime = newBufferTime
+        defaults.set(newBufferTime, forKey: "recording_buffer_timer")
+       
+        
     }
     
     

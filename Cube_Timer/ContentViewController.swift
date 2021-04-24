@@ -17,6 +17,7 @@ class ContentViewController: ObservableObject {
     var cTypeHandler: CTypeHandler!
     var timer: TimerController!
     var allSolvesController: AllSolvesController!
+    var detailsViewController: DetailsViewController!
     
     
     // sidebar positioning
@@ -69,6 +70,15 @@ class ContentViewController: ObservableObject {
     // settigns page
     @Published var inSettings: Bool = false
     
+    // camera stuff
+    var cameraController: CameraController!
+    
+    // video stuff
+    var videoPlayerController: VideoPlayerController!
+    @Published var showingVideo: Bool = false
+    
+    @Published var showingDetails: Bool = false
+    
     
     init() {
         let notificationCenter = NotificationCenter.default
@@ -86,6 +96,60 @@ class ContentViewController: ObservableObject {
             self.setStateForAllSolves()
         }
     }
+    
+    /*
+     *  opens details popup
+     */
+    public func openDetails(solveItem: SolveItem) {
+        
+        print("opening_details for SolveItem: ", solveItem.timeMS)
+        self.detailsViewController.goto(solveItem: solveItem)
+        self.showingDetails = true
+        
+    }
+    
+    public func closeDetails() {
+        lightTap.impactOccurred()
+        self.showingDetails = false
+    }
+    
+    /*
+     *  listens for a play video call from anywhere
+     */
+    public func openVideo(url: URL) {
+        
+        print("playing video, current in cvc, url: ", url)
+        self.videoPlayerController.goto(url: url)
+        self.showingVideo = true
+        
+    }
+    
+    public func openVideo(name: String) {
+        
+        print("playing video, current in cvc, name: ", name)
+        self.videoPlayerController.goto(name: name)
+        self.showingVideo = true
+        
+    }
+    
+    public func openVideo(solveItem: SolveItem) {
+        
+        print("playing video, current in cvc, solveItem: ", solveItem.timeMS)
+        self.videoPlayerController.goto(solveItem: solveItem)
+        self.showingVideo = true
+        
+    }
+    
+    /*
+     *  listens for a close video call from VideoPlayerController.swift
+     */
+    public func closeVideo() {
+        lightTap.impactOccurred()
+        self.videoPlayerController.stopPlayer()
+        self.showingVideo = false
+    }
+    
+    
     
     /*
      *  THE DRAG GESTURE TO SWITCH VIEWS
@@ -256,8 +320,16 @@ class ContentViewController: ObservableObject {
     }
     
     
+    /*
+     *  Sets all the states for Settings page
+     */
     private func setStateForSettings() {
         if !inSettings  {
+            
+            if cameraController.isInRecordingBuffer {
+                cameraController.stopRecording(save: true)
+            }
+            
             self.inSettings = true
             self.onPage = .settings
             
@@ -277,7 +349,14 @@ class ContentViewController: ObservableObject {
         self.pageTransitionPercentage = 1
         self.allSolvesViewScale = 1
         
-        
+        /*
+         *  hide camera layer if not disabled
+         */
+        if cameraController.videoState != .disabled {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.cameraController.turnOffCamera()
+            }
+        }
       
     }
     
@@ -287,11 +366,35 @@ class ContentViewController: ObservableObject {
         self.pageTransitionPercentage = 0
         self.allSolvesViewScale = 0.9
         
-       
+        /*
+         *  hide camera layer if not disabled
+         */
+        if cameraController == nil { return }
+        if cameraController.videoState != .disabled {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.cameraController.turnOnCamera()
+            }
+        }
     }
     
     
+    /*
+     *  shows popup to confirm they want to delete a single video
+     * triggered by AllSolvesView popups from within MainView
+     */
+    public func tappedDeleteSingleVideoFor(solveItem: SolveItem) {
+        showPopup(v: AnyView(DeleteVideoConfirmVieew(itemWithVideo: solveItem)))
+        //self.showingDetails = false
+    }
     
+    /*
+     *  shows popup to confirm they want to delete a single solve
+     * triggered by AllSolvesView popups from within MainView
+     */
+    public func tappedDeleteSingleSolve(itemToDelete: SolveItem) {
+        showPopup(v: AnyView(DeleteSingleSolveConfirmView(toDelete: itemToDelete)))
+        //self.showingDetails = false
+    }
     
     /*
      *  shows popup to confirm they want to delete

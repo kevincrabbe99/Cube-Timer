@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+import Photos
+import SwiftUI
 
 /*
 enum PuzzleType: String {
@@ -35,24 +37,88 @@ extension SolveItem: Identifiable {
     @NSManaged public var id: String
     @NSManaged public var timeMS: Double
     @NSManaged public var timestamp: Date
-    
     @NSManaged public var cubeType: CubeType
+    
     /*
-    convenience init(id: String, timeMS: Double, timestamp: Date, cubeType: CubeType) {
-        self.init()
-        self.id = id
-        self.timeMS = timeMS
-        self.timestamp = timestamp
-        self.cubeType = cubeType
+     @NSManaged public var d1: Int16
+     var dim1: Int {
+         set {
+             d1 = Int16(newValue)
+         }
+         get {
+             return Int(d2)
+         }
+     }
+     */
+    @NSManaged public var videoName: String?
+    public var hasVideo: Bool {
+        if videoName != nil {
+            if FileManager.default.fileExists(atPath: DocumentDirectory.getVideosDirectory().appendingPathComponent(videoName!).path) {
+                return true
+            } else {
+                print("Video file recorded, but not available")
+            }
+        }
+        return false
     }
-    */
-  
+    
+    
+    @NSManaged public var favorite: NSNumber?
+    var isFavorite: Bool {
+        get {
+            if favorite == nil {
+                return false
+            }
+            
+            return Bool(favorite!)
+        }
+        set {
+            favorite = NSNumber(value: newValue)
+        }
+    }
+    
+    public func toggleFavorite() -> Bool {
+        if isFavorite {
+            isFavorite = false
+        } else {
+            isFavorite = true
+        }
+        
+        do {
+            try PersistenceController.shared.container.viewContext.save()
+            print("Set isFavorite = ", isFavorite)
+        } catch {
+            print("SAVE ERROR: updating isFavorite to ", isFavorite)
+        }
+        
+        return isFavorite
+    }
+    
+    
+    public func saveVideoToPhotos() {
+        
+        
+        if !hasVideo { return }
+        
+        let videoPathURL = DocumentDirectory.getVideosDirectory().appendingPathComponent(videoName!)
+        
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoPathURL )
+        }) { saved, error in
+            if saved {
+                print("SAVED VIDEO TO CAMERA ROLL")
+            }else {
+                print("VideoPlayerController.saveVideoToPhotos() | ERROR SAVING VIDEO TO CAMERA ROLL: ", error)
+                
+            }
+        }
+        
+    }
+    
     
     
     func setCubeType(_ ct: CubeType) {
         self.cubeType = ct
-        
-        
     }
  
 

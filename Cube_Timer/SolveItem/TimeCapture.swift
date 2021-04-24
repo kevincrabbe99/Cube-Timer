@@ -91,6 +91,29 @@ struct TimeCapture {
         }
     }
     
-    
+    func getAsText() -> String {
+        var time = timeInMS
+        
+        // calculate min
+        let minutes = Int(timeInMS / 60.0)
+        time -= (TimeInterval(minutes) * 60)
+        
+        // calculate sec
+        let seconds = Int(time)
+        time -= TimeInterval(seconds)
+        
+        // calculate ms
+        let milliseconds = Int(time * 100)
+        
+        let strMin = String(format: "%2d", minutes)
+        let strSec = String(format: "%2d", seconds)
+        let strMS = String(format: "%02d",milliseconds)
+        
+        if minutes == 0 {
+            return strSec + "." + strMS + " second"
+        }else {
+            return (strMin + " minute " + strSec + " second")
+        }
+    }
     
 }
