@@ -62,6 +62,7 @@ struct ContentView: View {
         self.timer.cTypeHandler = cTypeHandler
         self.timer.settingsController = settingsController
         self.timer.cameraController = cameraController
+        self.timer.alertController = alertController
         
         // set solveHandler controllers
         self.solveHandler.timer = timer
@@ -108,12 +109,14 @@ struct ContentView: View {
         self.editSolveController.cTypeHandler = cTypeHandler
         self.editSolveController.solvesData = solveHandler.solvesByTimeFrame
         self.editSolveController.allSolvesController = allSolvesController
+        self.editSolveController.alertController = alertController
         
         // settings controller refs
         self.settingsController.alertController = alertController
         
         // camera
         self.cameraController.solveHandler = solveHandler
+        self.cameraController.alertController = alertController
         
         //video player
         self.videoPlayerController.solveHandler = solveHandler
@@ -290,7 +293,7 @@ struct ContentView: View {
             solveHandler.updateSolves(to: solveHandler.currentTimeframe) // sets timeframe and updates everything
             
             // FOR DEV PURPOSE: Uncommenting this will create 50 random solves to the default cubetype
-            //solveHandler.addGenericSampleSolves(count: 150) //are u sure?
+            //    solveHandler.addGenericSampleSolves(count: 120, range: 7.26..<14.85, maxDaysAgo: 170) //are u sure?
         }
        //.environment(\.locale, .init(identifier: "hi")) // DEV USE ONLY
         .environmentObject(solveHandler)

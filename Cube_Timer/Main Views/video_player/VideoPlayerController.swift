@@ -90,7 +90,13 @@ class VideoPlayerController: ObservableObject {
         
         let df = DateFormatter()
         df.dateFormat = "MMM dd, yyyy hh:mm:ss"
-        return  df.string(from: solveItem!.timestamp)
+        
+        if let timestamp = solveItem?.timestamp {
+            return df.string(from: timestamp)
+        } else {
+            return "error @0d9k"
+        }
+        
     }
     
     /*
@@ -120,13 +126,13 @@ class VideoPlayerController: ObservableObject {
         
         self.alertController.makeAlert(icon: Image.init(systemName: "film"), title: "Video Saved!", text: "Successfully saved video to camera roll!", duration: 3, iconColor: Color.init("black_chocolate"))
         
-        solveItem!.saveVideoToPhotos()
         
         //print("Exported blurred video to camera roll: ", videoPathURL)
         
         /*
          * Save to photos
          */
+        solveItem!.saveVideoToPhotos()
         
             
     }

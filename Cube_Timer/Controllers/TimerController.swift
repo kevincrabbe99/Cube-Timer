@@ -62,7 +62,7 @@ class TimerController: ObservableObject {
     var settingsController: SettingsController!
     var cvc: ContentViewController!
     var cameraController: CameraController!
-    
+    var alertController: AlertController!
     
     init() {
        
@@ -148,7 +148,7 @@ class TimerController: ObservableObject {
         if !timerGoing && acceptInput {
             self.resetTimerStart()
             
-            // check if recording mode is on
+            /* check if recording mode is on
             if cameraController.videoState == .standby {
                 // start recording
                 do {
@@ -157,6 +157,7 @@ class TimerController: ObservableObject {
                     print("Error starting recording")
                 }
             }
+            */
             
         } else {
             self.stopTimer()
@@ -202,6 +203,10 @@ class TimerController: ObservableObject {
     }
     
     private func testStart() {
+        
+        if self.cameraController.isInRecordingBuffer {
+            return 
+        }
         
         if acceptInput {
         print("[timer] testStart: called")
@@ -267,6 +272,7 @@ class TimerController: ObservableObject {
         
         // Start recording on first touch
         //  Im add all three if dependencies just incase I add extra videoStates in the future
+        /*
         if  cameraController.videoState != .disabled &&
             cameraController.videoState != .recording &&
             cameraController.videoState == .standby {
@@ -277,6 +283,7 @@ class TimerController: ObservableObject {
                 print("error: video not working, TimerController.swift")
             }
         }
+        */
         
         if !timerGoing { // if timer is not going
             self.resetTimerStart()  // start reseting the timer
@@ -342,6 +349,18 @@ class TimerController: ObservableObject {
             self.acceptInput = true
         }
         
+        if !settingsController.pauseSavingSolves {
+            do {
+                try PersistenceController.shared.container.viewContext.save()
+                
+                //presentationMode.wrappedValue.dismiss()  //idk
+            } catch {
+                print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
+                  alertController.makeAlert(icon: Image.init(systemName: "exclamationmark.icloud.fill"), title: "Error Saving Record", text: "A iCloud merge error occurred.")
+                    print("[timer.stopTimer] Solve Saved!")
+            }
+        }
+        
         /*
          *  GA: set user property, timer_going
          */
@@ -354,15 +373,7 @@ class TimerController: ObservableObject {
         self.peripheralOpacity = 1 // show the peripherals
         
         
-        if !settingsController.pauseSavingSolves {
-            do {
-                try PersistenceController.shared.container.viewContext.save()
-                    print("[timer.stopTimer] Solve Saved!")
-                //presentationMode.wrappedValue.dismiss()  //idk
-            } catch {
-                print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
-            }
-        }
+      
         
         startTime = 0
         timer?.invalidate()
@@ -382,15 +393,30 @@ class TimerController: ObservableObject {
         /*
          *  countdown
          */
-        // get buffertime from settings controller
-        let tempCountdownTime = settingsController.recordingBufferTime
-        // have camera controller start countdown from specefied ct time
-        cameraController.startRecordingCountdown(from: tempCountdownTime)
-        
-        // wait 3 seconds, then stop recording
-        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(tempCountdownTime) ) { // wait 3 seconds
-            if self.cameraController.isRecording { // if recording
-                self.cameraController.stopRecording()
+        // only start buffer if we are recording
+        if cameraController.isRecording {
+            // get buffertime from settings controller
+            let tempCountdownTime = settingsController.recordingBufferTime
+            // have camera controller start countdown from specefied ct time
+            cameraController.startRecordingCountdown(from: tempCountdownTime)
+            
+            // wait 3 seconds, then stop recording
+            DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(tempCountdownTime) ) { // wait 3 seconds
+                if self.cameraController.isRecording { // if recording
+                    self.cameraController.stopRecording()
+                    
+                    if !self.settingsController.pauseSavingSolves {
+                        do {
+                            try PersistenceController.shared.container.viewContext.save()
+                            //presentationMode.wrappedValue.dismiss()  //idk
+                        } catch {
+                            print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
+                            self.alertController.makeAlert(icon: Image.init(systemName: "exclamationmark.icloud.fill"), title: "Error Saving Record", text: "A iCloud merge error occurred.")
+                                print("[timer.stopTimer] Solve Saved!")
+                        }
+                    }
+                    
+                }
             }
         }
         
@@ -413,14 +439,19 @@ class TimerController: ObservableObject {
             }
         }
         
-        /*
-         *  Google Analytics log new solve
-        Analytics.logEvent("time_saved", parameters: [
-            "puzzle_name": lastSolve!.cubeType.rawName! as NSObject,
-            "puzzle_description": lastSolve!.cubeType.description as NSObject,
-            "seconds": lastSolve!.timeMS as NSObject
-        ])
-         */
+        
+       /*
+        if !settingsController.pauseSavingSolves {
+            do {
+                try PersistenceController.shared.container.viewContext.save()
+                //presentationMode.wrappedValue.dismiss()  //idk
+            } catch {
+                print("[timer.stopTimer] SAVE ERROR: ", error.localizedDescription)
+                alertController.makeAlert(icon: Image.init(systemName: "exclamationmark.icloud.fill"), title: "Error Saving Record", text: "A iCloud merge error occurred.")
+                    print("[timer.stopTimer] Solve Saved!")
+            }
+        }
+ */
         
         
        //Analytics.setUserProperty("false", forName: "timer_going")
@@ -522,6 +553,23 @@ class TimerController: ObservableObject {
     let iterationDelay: Double = 0.02 // initial delay before timeFactor is applies
     let timeFactor: Double = 30 // the higher this number the faster
     private func resetTimerStart() {
+        
+        // escape if we are in a buffer
+        if cameraController.isInRecordingBuffer {
+            return
+        }
+        
+        // start recording
+        if  cameraController.videoState != .disabled &&
+            cameraController.videoState != .recording &&
+            cameraController.videoState == .standby {
+            do {
+                let url = try cameraController.startRecording()
+                //tempSolve?.videoName = url.absoluteString
+            } catch {
+                print("error: video not working, TimerController.swift")
+            }
+        }
         
         abortTimerReset = false // reset abort var
         peripheralOpacity = 0 // hide peripherals

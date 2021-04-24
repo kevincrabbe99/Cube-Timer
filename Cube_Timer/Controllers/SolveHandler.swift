@@ -96,10 +96,10 @@ class SolveHandler: ObservableObject {
      *  Adds a costum defined solve to the dataset
      *  FOR DEV PURPOSES ONLY
      */
-    public func addGenericSampleSolves(count: Int = 10) {
+    public func addGenericSampleSolves(count: Int = 10, range: Range<Double> = 34.92..<71.42, maxDaysAgo: Int = 400) {
         
         for _ in 0..<count {
-            self.addCostumSolve(sec: Double.random(in: 31.23..<68.3), daysAgo: Int.random(in: 0..<400))
+            self.addCostumSolve(sec: Double.random(in: range), daysAgo: Int.random(in: 0..<maxDaysAgo))
         }
 
     }
@@ -166,6 +166,8 @@ class SolveHandler: ObservableObject {
     
     public func deleteSingleSolve(solveItemToDelete: SolveItem) {
         self.delete(solveItemToDelete)
+        
+        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Record", text: "Successfully deleted a record.", duration: 3, iconColor: Color.init("black_chocolate"))
     }
     
     /*
@@ -176,11 +178,12 @@ class SolveHandler: ObservableObject {
         
         
         // alert that solves have been deleted
-        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Records!", text: "Successfully deleted \(allSolvesController.selected.count)", duration: 3, iconColor: Color.init("black_chocolate"))
+        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Records", text: "\(allSolvesController.selected.count) records have been successfully deleted ", duration: 3, iconColor: Color.init("black_chocolate"))
         
         
         // loop through and call read delete method for all
         for sElController in allSolvesController.selected {
+            print("[SolveHandler.delete(_ s:SolveItem)] deleting ", sElController.si)
             self.delete(sElController.si)
         }
         
@@ -206,17 +209,20 @@ class SolveHandler: ObservableObject {
             
             print("[SolveHandler] Deleting from CoreData")
             
-            // delete SolvesFromTimeframe() reference
-            self.solvesByTimeFrame.delete(s)
             
             // delete video file
             self.deleteVideoFor(solveItem: s)
+            
+            // delete SolvesFromTimeframe() reference
+            self.solvesByTimeFrame.delete(s)
+            
             
             // Delete from CoreData
             PersistenceController.shared.container.viewContext.delete(s)
             
             do { // saving it 
                 try PersistenceController.shared.container.viewContext.save()
+                print("[SolveHandler.delete(_ s:SolveItem)] deleted: ", s)
                 //updateEverything() // updates EVERYTHING
             } catch {
                 print("[SolveHandler.delete(_ s:SolveItem)] error deleting solve")
@@ -243,6 +249,7 @@ class SolveHandler: ObservableObject {
             if FileManager.default.fileExists(atPath: urlToDelete.path) {
                 do {
                     try FileManager.default.removeItem(at: urlToDelete)
+                    alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Video", text: "Successfully deleted a video.", duration: 3, iconColor: Color.init("black_chocolate"))
                     print("Success deleting movie file for this solve.")
                 } catch {
                     print("Error deleting movie file for this solve.")

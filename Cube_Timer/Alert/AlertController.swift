@@ -41,6 +41,9 @@ class AlertController: ObservableObject {
         }
     }
     
+    public func hideAlert() {
+        self.showing = false
+    }
     
     
 }

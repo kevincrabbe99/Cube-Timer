@@ -15,49 +15,56 @@ struct AlertView: View {
         
         GeometryReader { geo in
             
-            let w = geo.size.width
-           // let h = geo.size.height
-            
-            if controller.showing {
-                ZStack {
-                    
-                    Color.init("mint_cream")
-                        .opacity(0.9)
-                        .cornerRadius(5)
-                        .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
-                    
-                    HStack(spacing: 15) {
+            ZStack {
+                
+                if controller.showing {
+                    ZStack {
                         
-                        if controller.icon != nil {
-                            controller.icon!
-                                .foregroundColor(controller.iconColor)
-                        }
+                        Color.init("mint_cream")
+                            .opacity(0.9)
+                            .cornerRadius(5)
+                            .addBorder(Color.init("mint_cream"), width: 1, cornerRadius: 5)
                         
-                        VStack(alignment: .leading) {
-                            if controller.title != nil {
-                                Text(LocalizedStringKey(controller.title!))
-                                    .font(Font.custom("Play-Bold", size: 15))
+                        HStack(spacing: 15) {
+                            
+                            if controller.icon != nil {
+                                controller.icon!
+                                    .foregroundColor(controller.iconColor)
                             }
                             
-                            Text(LocalizedStringKey(controller.text))
-                                .font(Font.custom("Play-Regular", size: 13))
+                            VStack(alignment: .leading) {
+                                if controller.title != nil {
+                                    Text(LocalizedStringKey(controller.title!))
+                                        .font(Font.custom("Play-Bold", size: 15))
+                                }
+                                
+                                Text(LocalizedStringKey(controller.text))
+                                    .font(Font.custom("Play-Regular", size: 13))
+                            }
+                            
                         }
+                        .padding([.leading, .trailing], 30)
+                        .padding(.bottom, 10)
+                        .padding(.top, 15)
                         
                     }
-                    .padding([.leading, .trailing], 30)
-                    
-                }
-                .frame(/*width: w-250,*/ height: 60)
-                //.position(x: ((w-250)/2)+60, y: 60)
-                .padding([.leading, .trailing], 150)
-                .padding(.top, 20)
-                .transition(.move(edge: .top))
-                .animation(.spring())
-                .foregroundColor(.init("black_chocolate"))
+                    .fixedSize()
+                    .frame(/*width: w-250,*/ height: 60)
+                    .position(x: geo.size.width / 2, y: 20)
+                    //.position(x: ((w-250)/2)+60, y: 60)
+                    //.padding([.leading, .trailing], 150)
+                    //.padding(.top, 20)
+                    .transition(.move(edge: .top))
+                    .animation(.spring())
+                    .foregroundColor(.init("black_chocolate"))                }
+                
             }
+            .onTapGesture {
+                controller.hideAlert()
+            }
+     
+        } // end geo
             
-        }
-        
     }
 }
 
