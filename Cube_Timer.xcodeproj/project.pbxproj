@@ -15,6 +15,8 @@
 		7B4719E2256BBBEB009FFFEA /* BarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E1256BBBEB009FFFEA /* BarController.swift */; };
 		7B4719E7256C2E8A009FFFEA /* BarGraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */; };
 		7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A1730253E8D0A0036A30D /* Persistance.swift */; };
+		7B4D8F2C2617A42A00F3E116 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D8F2B2617A42A00F3E116 /* CameraView.swift */; };
+		7B4D8F342617A5D200F3E116 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D8F332617A5D200F3E116 /* CameraController.swift */; };
 		7B55C62E2596F29C0076B913 /* AllSolvesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55C62D2596F29B0076B913 /* AllSolvesController.swift */; };
 		7B6073F4258E4FFF00D188CF /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073F3258E4FFF00D188CF /* PopupController.swift */; };
 		7B6073FC258E500700D188CF /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073FB258E500700D188CF /* PopupView.swift */; };
@@ -147,6 +149,8 @@
 		7B4719E1256BBBEB009FFFEA /* BarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarController.swift; sourceTree = "<group>"; };
 		7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarGraphController.swift; sourceTree = "<group>"; };
 		7B4A1730253E8D0A0036A30D /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		7B4D8F2B2617A42A00F3E116 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		7B4D8F332617A5D200F3E116 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		7B55C62D2596F29B0076B913 /* AllSolvesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSolvesController.swift; sourceTree = "<group>"; };
 		7B6073F3258E4FFF00D188CF /* PopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupController.swift; sourceTree = "<group>"; };
 		7B6073FB258E500700D188CF /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -316,6 +320,15 @@
 			path = "Stat Bar";
 			sourceTree = "<group>";
 		};
+		7B4D8F2A2617A41800F3E116 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				7B4D8F2B2617A42A00F3E116 /* CameraView.swift */,
+				7B4D8F332617A5D200F3E116 /* CameraController.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		7B55C60E25954A880076B913 /* All_Solves */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +473,7 @@
 		7B984CED253E02D900BC6402 /* Cube_Timer */ = {
 			isa = PBXGroup;
 			children = (
+				7B4D8F2A2617A41800F3E116 /* Camera */,
 				7BA90F8125B5922D00A03DE1 /* Buttons */,
 				7B984CEE253E02D900BC6402 /* Cube_TimerApp.swift */,
 				7B984CF0253E02D900BC6402 /* ContentView.swift */,
@@ -1114,6 +1128,7 @@
 				7B9B799A25493D280088ECD5 /* SolvesData.swift in Sources */,
 				7B8D326D2626D4290083E090 /* VideoPlayerController.swift in Sources */,
 				7B8B62A0254158A300EAA9F9 /* StopwatchDisplayView.swift in Sources */,
+				7B4D8F2C2617A42A00F3E116 /* CameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
