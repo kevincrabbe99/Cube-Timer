@@ -9,11 +9,15 @@ import SwiftUI
 import Firebase
 
 struct AboutView: View {
+    
+    let appVersionLabel = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    
     var body: some View {
         
         GeometryReader { geo in
             
             VStack {
+                
                 
                 VStack(alignment: .leading) {
                     Text("Developer:")
@@ -49,10 +53,24 @@ struct AboutView: View {
                     .frame(width: geo.size.width, alignment: .leading)
                 }
 
+                Spacer()
+                
+                HStack {
+                    Text("Version:")
+                        .font(Font.custom("Play-Bold", size: 16))
+                    Spacer()
+                    Text(Bundle.main.versionAndBuildPretty)
+                        .font(Font.custom("Play-Regular", size: 12))
+                }
+                .frame(width: geo.size.width, alignment: .leading)
+                
                 
             }
+            .padding([.top, .bottom], 30)
+            /*
             .frame(height: geo.size.height / 2)
             .position(x: geo.size.width / 2, y: geo.size.height / 2)
+            */
             .foregroundColor(.init("mint_cream"))
             
         } // end geo
@@ -67,5 +85,21 @@ struct AboutView_Previews: PreviewProvider {
             AboutView()
         }
         .previewLayout(.fixed(width: 280, height: 150))
+    }
+}
+
+
+extension Bundle {
+    var releaseVersionNumber: String? {
+        return infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    var buildVersionNumber: String? {
+        return infoDictionary?["CFBundleVersion"] as? String
+    }
+    var releaseVersionNumberPretty: String {
+        return "v\(releaseVersionNumber ?? "1.0.0")"
+    }
+    var versionAndBuildPretty: String {
+        return "DEV.\(Bundle.main.releaseVersionNumber ?? "3").\(Bundle.main.buildVersionNumber ?? "5")"
     }
 }
