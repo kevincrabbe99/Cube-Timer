@@ -155,7 +155,7 @@ struct DetailsView: View {
                                 HStack {
                                     
                                     VStack(alignment: .leading) {
-                                        LabelDisplay(label: "Compared to .Avg.")
+                                        LabelDisplay(label: "Compared to Avg.")
                                         TimeDisplay(label: controller.compareAvg)
                                     }
                                     .frame(alignment: .leading)
@@ -274,7 +274,7 @@ struct TimeDisplay: View {
                 .opacity(0.8)
                 .cornerRadius(3)
             
-            Text(label)
+            Text( LocalizedStringKey(label) )
                 .font(Font.custom(("Chivo-Regular"), size: 11))
                 .foregroundColor(Color.init("black_chocolate"))
         }
@@ -289,7 +289,7 @@ struct LabelDisplay: View {
     
     var body: some View {
         
-        Text(label)
+        Text( LocalizedStringKey(label) )
             .font(Font.custom(("Play-Bold"), size: 10))
             .offset(y: 6)
             .opacity(0.8)

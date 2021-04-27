@@ -23,7 +23,7 @@ struct DeleteVideoConfirmVieew: View {
         
         VStack {
             
-            Text("Are you sure you want to delete the saved video for: \((self.solveItem.getTimeCapture()?.getAsReadable())!)")
+            Text(LocalizedStringKey("Are you sure you want to delete the saved video for: \((self.solveItem.getTimeCapture()?.getAsReadable())!)"))
                 .font(Font.custom("Play-Bold", size: 24))
                 .padding(.leading, 20)
                 .padding(.trailing, 20)

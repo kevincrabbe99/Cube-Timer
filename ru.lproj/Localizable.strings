@@ -104,3 +104,48 @@
 "CREATE" = "СОЗДАЙТЕ";
 
 "Missing Puzzle Name" = "Недостающее Головоломка Имя";
+
+
+// V3.5
+
+"Deleted Records" = "Удаленные записи";
+"%lld records have been successfully deleted" = "%lld запись была успешно удалена";
+"Recording buffer updated" = "Буфер записи обновляется";
+"Video recordings will not stop for %lld seconds after the timer is stopped." = "Запись видео не прекращается в течение %lld секунд после остановки таймера.";
+"Recording Stop Buffer Timer" = "Запись стоп-буфер Таймер";
+"Select how many seconds the should pass after stopping the timer before the video recording gets cut off." = "Выберите, сколько секунд должно пройти после остановки таймера до записи видео получает отрезаны.";
+"Microphone permissions not granted" = "разрешения Микрофон не предоставляется";
+"Please enable microphone permissions whithin the device settings in order to use this feature." = "Пожалуйста, включите разрешения микрофона Whithin настроек устройства для того, чтобы использовать эту функцию.";
+"Camera permissions not granted" = "разрешения камеры не предоставляется";
+"Please enable camera permissions within the device settings in order to use this feature." = "Пожалуйста, включите разрешения камеры в настройках устройства для того, чтобы использовать эту функцию.";
+"Default to Camera On" = "По умолчанию для камеры On";
+"Choose whether the camera is enabled by default upon opening the app." = "Выберите, будет ли камера включена по умолчанию при открытии приложения.";
+"Camera default set to enabled" = "Камера набор по умолчанию включена";
+"Camera will initiate upon opening the app." = "Камера будет запускаться при открытии приложения.";
+"Camera default set to disabled" = "Камера по умолчанию установлено значение отключено";
+"Camera will not initiate upon opening the app." = "Камера не будет запускаться при открытии приложения.";
+"Recording Standby" = "Ожидать";
+"Recording" = "запись";
+"Recording..." = "Запись ...";
+"Recorded Time" = "Время записи";
+"Compared to .Avg" = "По сравнению с .Avg";
+"Compared to Med." = "По сравнению с Med.";
+"Compared to Best" = "По сравнению с Best";
+"Compared to Worst" = "По сравнению с Худшим";
+"Percentile" = "процентиль";
+"z-score" = "Z-балл";
+"Recorded Time" = "Время записи";
+"Are you sure you want to delete: %@" = "Вы уверены, что хотите удалить: %@";
+"Deleted Record" = "Исключен запись";
+"Successfully deleted a record." = "Успешно удалили запись.";
+"Deleted Video" = "Видео удалено";
+"Successfully deleted a video." = "Успешно удалено видео.";
+"Are you sure you want to delete the saved video for: %@" = "Вы уверены, что хотите удалить сохраненное видео: %@";
+"SAVE TO PHOTOS" = "SAVE TO ФОТО";
+"Video Saved!" = "Видео Сохраненный!";
+"Successfully saved video to camera roll!" = "Успешно сохранено видео камеры ролл!";
+"Switched Groups for Records" = "Импульсные группы для записей";
+"Moved %lld items to %a" = "Перемещенные элементы %lld в %a";
+
+
+

@@ -100,14 +100,14 @@ struct MainView: View {
                                 
                                 IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.init("very_dark_blue"), iconColor: Color.green, width: 20, height: 20)
                                 
-                                Text("Recording Standby")
+                                Text(LocalizedStringKey("Recording Standby"))
                                     .font(Font.custom("Play-Bold", size: 13))
                                     .foregroundColor(Color.init("mint_cream"))
                                     .offset(y: -1)
                             } else if cameraController.videoState == .recording {
                                 IconButton(icon: Image.init(systemName: "record.circle"), bgColor: Color.init("very_dark_blue"), iconColor: Color.red, width: 25, height: 25)
                                 
-                                Text(cameraController.recordingText)
+                                Text(LocalizedStringKey(cameraController.recordingText))
                                     .font(Font.custom("Play-Bold", size: 13))
                                     .foregroundColor(Color.init("mint_cream"))
                                     .offset(y: -1)

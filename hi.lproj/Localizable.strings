@@ -102,3 +102,43 @@
 "CREATE" = "सृजन करना";
 
 "Missing Puzzle Name" = "गुम पहेली नाम";
+
+
+// V 3.5
+"Deleted Records" = "हटाए गए रिकॉर्ड्स";
+"%lld records have been successfully deleted" = "%lld रिकॉर्ड सफलतापूर्वक नष्ट कर दिया गया है";
+"Recording buffer updated" = "रिकॉर्डिंग बफर अद्यतन";
+"Video recordings will not stop for %lld seconds after the timer is stopped." = "वीडियो रिकॉर्डिंग% %lld सेकंड के लिए बंद नहीं होगा के बाद टाइमर बंद कर दिया है।";
+"Recording Stop Buffer Timer" = "रिकॉर्डिंग बंद बफर टाइमर";
+"Select how many seconds the should pass after stopping the timer before the video recording gets cut off." = "चयन करें कि कितने सेकंड टाइमर रुकने से पहले वीडियो रिकॉर्डिंग काट हो जाता है के बाद पास करना चाहिए।";
+"Microphone permissions not granted" = "माइक्रोफोन अनुमतियाँ प्रदान नहीं किए गए";
+"Please enable microphone permissions whithin the device settings in order to use this feature." = "इस सुविधा का उपयोग करने के लिए उपकरण सेटिंग whithin माइक्रोफोन अनुमतियाँ सक्षम करें।";
+"Camera permissions not granted" = "कैमरा अनुमतियां दी नहीं";
+"Please enable camera permissions within the device settings in order to use this feature." = "इस सुविधा का उपयोग करने के लिए उपकरण सेटिंग के भीतर कैमरा अनुमतियाँ सक्षम करें।";
+"Default to Camera On" = "कैमरा डिफ़ॉल्ट रूप से चालू";
+"Choose whether the camera is enabled by default upon opening the app." = "चुनें कि कैमरा एप्लिकेशन खोलने पर डिफ़ॉल्ट रूप से सक्षम है।";
+"Camera default set to enabled" = "सक्षम करने के लिए कैमरा डिफ़ॉल्ट सेट";
+"Camera will initiate upon opening the app." = "कैमरा ऐप खोलने पर आरंभ हो जाएगा।";
+"Camera default set to disabled" = "कैमरा डिफ़ॉल्ट अक्षम पर सेट";
+"Camera will not initiate upon opening the app." = "कैमरा ऐप खोलने पर नहीं करेगा।";
+"Recording Standby" = "रिकॉर्डिंग स्टैंडबाय";
+"Recording" = "रिकॉर्डिंग";
+"Recording..." = "रिकॉर्डिंग ...";
+"Recorded Time" = "रिकॉर्डेड समय";
+"Compared to .Avg" = ".Avg की तुलना";
+"Compared to Med." = "मेड की तुलना में।";
+"Compared to Best" = "बेस्ट की तुलना";
+"Compared to Worst" = "सबसे बुरा की तुलना में";
+"Percentile" = "प्रतिशतता";
+"z-score" = "जेड स्कोर";
+"Recorded Time" = "रिकॉर्डेड समय";
+"Are you sure you want to delete: %@" = "क्या आप वाकई को हटाना चाहते हैं: %@";
+"Deleted Record" = "हटाए गए रिकॉर्ड";
+"Successfully deleted a record." = "सफलतापूर्वक एक रिकॉर्ड नष्ट।";
+"Deleted Video" = "हटाया गया वीडियो";
+"Successfully deleted a video." = "सफलतापूर्वक एक वीडियो हटा दिया।";
+"Are you sure you want to delete the saved video for: %@" = "क्या आप वाकई के लिए बचा लिया वीडियो को हटाना चाहते हैं: %@";
+"SAVE TO PHOTOS" = "बचाने के लिए फ़ोटो";
+"Video Saved!" = "वीडियो सहेजी गयी!";
+"Successfully saved video to camera roll!" = "सफलतापूर्वक कैमरा रोल करने के लिए वीडियो को बचाया!";
+//"Switched Groups for Records" = "रिकॉर्ड्स के लिए स्विचड समूह";

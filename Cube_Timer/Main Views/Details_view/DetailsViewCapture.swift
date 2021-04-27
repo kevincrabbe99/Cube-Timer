@@ -34,7 +34,7 @@ struct DetailsViewCapture: View {
                     HStack {
                         if controller.hasSolveItem {
                             
-                            Text(controller.getReadableDate() ?? "Deleted Solve ERROR @903k")
+                            Text(LocalizedStringKey(controller.getReadableDate() ?? "Deleted Solve ERROR @903k"))
                                 .font(Font.custom("Play-Bold", size: 14))
                                 .opacity(0.7)
                             
@@ -101,7 +101,7 @@ struct DetailsViewCapture: View {
                                     Spacer()
                                     
                                     VStack(alignment: .trailing) {
-                                        Text("Recorded Time")
+                                        Text(LocalizedStringKey("Recorded Time"))
                                             .font(Font.custom(("Play-Bold"), size: 10))
                                             .offset(y: 6)
                                         
@@ -125,7 +125,7 @@ struct DetailsViewCapture: View {
                                 HStack {
                                     
                                     VStack(alignment: .leading) {
-                                        LabelDisplay(label: "Compared to .Avg.")
+                                        LabelDisplay(label: "Compared to Avg.")
                                         TimeDisplay(label: controller.compareAvg)
                                     }
                                     .frame(alignment: .leading)
@@ -202,6 +202,7 @@ struct DetailsViewCapture: View {
             }  // end if
             
         }
+       // .environment(\.locale, .init(identifier: "es")) // DEV USE ONLY
     }
     
 }

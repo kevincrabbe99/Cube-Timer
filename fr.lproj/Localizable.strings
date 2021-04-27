@@ -102,3 +102,47 @@
 "CREATE" = "CRÉER";
 
 "Missing Puzzle Name" = "Nom Puzzle manquant";
+
+
+
+
+// V 3.5
+
+"Deleted Records" = "Enregistrements supprimés";
+"%lld records have been successfully deleted" = "Des dossiers de %lld ont été supprimés avec succès";
+"Recording buffer updated" = "tampon d'enregistrement mis à jour";
+"Video recordings will not stop for %lld seconds after the timer is stopped." = "Les enregistrements vidéo ne s'interrompra secondes% %lld après le chronomètre est arrêté.";
+"Recording Stop Buffer Timer" = "Arrêter l'enregistrement tampon minuterie";
+"Select how many seconds the should pass after stopping the timer before the video recording gets cut off." = "Sélectionnez le nombre de secondes doit passer après l'arrêt de la minuterie avant l'enregistrement vidéo est coupé.";
+"Microphone permissions not granted" = "autorisations de microphone ne bénéficient pas";
+"Please enable microphone permissions whithin the device settings in order to use this feature." = "S'il vous plaît activer les autorisations de microphone ESSOR les réglages de l'appareil afin d'utiliser cette fonctionnalité.";
+"Camera permissions not granted" = "autorisations de l'appareil photo ne bénéficient pas";
+"Please enable camera permissions within the device settings in order to use this feature." = "S'il vous plaît activer les autorisations de caméra dans les paramètres de l'appareil afin d'utiliser cette fonctionnalité.";
+"Default to Camera On" = "Par défaut à la caméra sur";
+"Choose whether the camera is enabled by default upon opening the app." = "Choisissez si l'appareil photo est activé par défaut lors de l'ouverture de l'application.";
+"Camera default set to enabled" = "Caméra défaut Actives";
+"Camera will initiate upon opening the app." = "Caméra initiera à l'ouverture de l'application.";
+"Camera default set to disabled" = "par défaut de l'appareil photo réglé sur désactivé";
+"Camera will not initiate upon opening the app." = "Caméra ne lancera pas à l'ouverture de l'application.";
+"Recording Standby" = "Etre prêt...";
+"Recording" = "Enregistrement";
+"Recording..." = "Enregistrement...";
+"Recorded Time" = "Heure d'enregistrement";
+"Compared to .Avg" = "Par rapport à .Avg";
+"Compared to Med." = "Par rapport à Med.";
+"Compared to Best" = "Par rapport Best";
+"Compared to Worst" = "Par rapport au pire";
+"Percentile" = "centile";
+"z-score" = "z-score";
+"Recorded Time" = "Heure d'enregistrement";
+"Are you sure you want to delete: %@" = "Êtes-vous sûr de vouloir supprimer: %@";
+"Deleted Record" = "supprimé enregistrement";
+"Successfully deleted a record." = "Supprimé avec succès un enregistrement.";
+"Deleted Video" = "Vidéo supprimée";
+"Successfully deleted a video." = "Supprimé avec succès une vidéo.";
+"Are you sure you want to delete the saved video for: %@" = "Êtes-vous sûr de vouloir supprimer la vidéo enregistrée pour: %@";
+"SAVE TO PHOTOS" = "PHOTOS DE SAUVER";
+"Video Saved!" = "Vidéo enregistrée!";
+"Successfully saved video to camera roll!" = "Enregistrée avec succès vidéo sur rouleau appareil photo!";
+"Switched Groups for Records" = "Groupes commutées pour les documents";
+"Moved %lld items to %a" = "Déplacé articles %lld un %a";

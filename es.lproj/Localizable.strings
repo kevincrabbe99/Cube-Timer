@@ -103,3 +103,73 @@
 "CREATE" = "CREAR";
 
 "Missing Puzzle Name" = "Nombre que falta del rompecabezas";
+
+
+/* V 3.5 */
+
+
+/* Alert Description after deleting selected records, via AllSolvesController */
+"Deleted Records" = "Registros Borrados";
+"%lld records have been successfully deleted" = "%lld registros se han eliminado correctamente";
+
+/* Alert for when recording buffer changes */
+"Recording buffer updated" = "Búfer de Grabación Actualiza";
+"Video recordings will not stop for %lld seconds after the timer is stopped." = "Las grabaciones de vídeo no se detendrán por segundo %lld después de que el temporizador se detiene.";
+
+/* Settings Label for recording buffer */
+"Recording Stop Buffer Timer" = "Detener la grabación del temporizador Buffer";
+"Select how many seconds the should pass after stopping the timer before the video recording gets cut off." = "Seleccione el número de segundos que el debe pasar después de detener el temporizador antes de la grabación de vídeo se corta.";
+
+/*
+ *  Settings Default to Camera On
+ */
+"Default to Camera On" = "Por defecto a la cámara En";
+"Choose whether the camera is enabled by default upon opening the app." = "Elegir si la cámara está activada por defecto al abrir la aplicación.";
+
+/* Alert Mic Perms denied */
+"Microphone permissions not granted" = "Permisos de micrófono que no se conceden";
+"Please enable microphone permissions whithin the device settings in order to use this feature." = "Por favor, activa permisos micrófono whithin la configuración del dispositivo con el fin de utilizar esta función.";
+/* Camera Mic Perms denied */
+"Camera permissions not granted" = "Permisos de cámara que no se conceden";
+"Please enable camera permissions within the device settings in order to use this feature." = "Por favor, activa permisos de cámara dentro de la configuración del dispositivo con el fin de utilizar esta función.";
+
+/* Alert Set def camera enabled ON */
+"Camera default set to enabled" = "conjunto predeterminado permitido a la cámara";
+"Camera will initiate upon opening the app." = "Cámara iniciará al abrir la aplicación.";
+
+/* Alert Set def camera enabled OFF */
+"Camera default set to disabled" = "cámara por defecto configurado para discapacitados";
+"Camera will not initiate upon opening the app." = "La cámara no iniciará al abrir la aplicación.";
+
+/* Recording Symbols */
+"Recording Standby" = "espera de grabación";
+"Recording" = "Grabación";
+"Recording..." = "Grabación...";
+
+/* Detail View Labels */
+"Recorded Time" = "Hora de grabación";
+"Compared to Avg." = "En comparación con .Avg";
+"Compared to Med." = "En comparación con Med.";
+"Compared to Best" = "En comparación con la mejor";
+"Compared to Worst" = "En comparación con peor";
+"Percentile" = "percentil";
+"z-score" = "z-score";
+
+/* Delete a single solve, via Details View */
+"Are you sure you want to delete: %@" = "¿Seguro que quiere borrar: %@";
+"Deleted Record" = "de registros suprimidos";
+"Successfully deleted a record." = "Se ha eliminado el récord.";
+
+/* Delete Video Confirmations */
+"Deleted Video" = "eliminado de vídeo";
+"Successfully deleted a video." = "Se han eliminado los vídeos.";
+"Are you sure you want to delete the saved video for: %@" = "¿Seguro que desea eliminar el vídeo guardado para: %@";
+"SAVE TO PHOTOS" = "GUARDAR EN FOTUS";
+
+/* Save video */
+"Video Saved!" = "Vídeo Guardado!";
+"Successfully saved video to camera roll!" = "Se ha guardado correctamente vídeo a rollo de la cámara!";
+
+/* Alert Moving item to diffent groups */
+"Switched Groups for Records" = "Grupos de conmutación de los Registros";
+"Moved %lld items to %@" = "Movido artículos %lld un %@";

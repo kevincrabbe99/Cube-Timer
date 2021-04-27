@@ -38,7 +38,7 @@ struct AlertView: View {
                                         .font(Font.custom("Play-Bold", size: 15))
                                 }
                                 
-                                Text(LocalizedStringKey(controller.text))
+                                controller.descLabel // kinda localized in caller
                                     .font(Font.custom("Play-Regular", size: 13))
                             }
                             

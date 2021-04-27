@@ -204,7 +204,7 @@ class SettingsController: ObservableObject {
         
         // if statement stops from running upon init
         if newBufferTime != self.recordingBufferTime {
-            alertController.makeAlert(icon: Image(systemName: "timer"), title: "Recording buffer updated", text: "Video recordings will not stop for \(newBufferTime) seconds after the timer is stopped.")
+            alertController.makeAlert(icon: Image(systemName: "timer"), title: "Recording buffer updated", text: Text("Video recordings will not stop for \(newBufferTime, specifier: "%lld") seconds after the timer is stopped."))
         }
         
         self.recordingBufferTime = newBufferTime

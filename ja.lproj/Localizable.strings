@@ -49,7 +49,7 @@
 "1M" = "1M";
 "3M" = "3M";
 "1Y" = "1A";
-"ALL" = "すべて";
+"ALL" = "ALL";
 
 
 "SETTINGS" = "設定";
@@ -103,3 +103,45 @@
 "CREATE" = "CREATE";
 
 "Missing Puzzle Name" = "Nombre que falta del rompecabezas";
+
+
+// V3.5
+
+"Deleted Records" = "削除されたレコード";
+"%lld records have been successfully deleted" = "％lldレコードが正常に削除されました";
+"Recording buffer updated" = "録音バッファ更新";
+"Video recordings will not stop for %lld seconds after the timer is stopped." = "録音は %lld 秒間停止しません";
+"Recording Stop Buffer Timer" = "記録停止緩衝タイマー";
+"Select how many seconds the should pass after stopping the timer before the video recording gets cut off." = "ビデオ録画が切断される前にタイマーを停止した後に渡す必要がある秒数を選択します。";
+"Microphone permissions not granted" = "マイクの権限が付与されていません";
+"Please enable microphone permissions whithin the device settings in order to use this feature." = "この機能を使用するためには、デバイスの設定whithinマイクの権限を有効にしてください。";
+"Camera permissions not granted" = "カメラの権限が付与されていません";
+"Please enable camera permissions within the device settings in order to use this feature." = "この機能を使用するためには、デバイスの設定内のカメラの権限を有効にしてください。";
+"Default to Camera On" = "カメラのデフォルトへ";
+"Choose whether the camera is enabled by default upon opening the app." = "カメラがアプリを開くと、デフォルトで有効になっているかどうかを選択します。";
+"Camera default set to enabled" = "有効にするにはカメラのデフォルトセット";
+"Camera will initiate upon opening the app." = "カメラアプリを開くと開始します。";
+"Camera default set to disabled" = "カメラのデフォルトは無効に設定され";
+"Camera will not initiate upon opening the app." = "カメラアプリを開くと開始しません。";
+"Recording Standby" = "録音待機";
+"Recording" = "録音";
+"Recording..." = "録音...";
+"Recorded Time" = "録画時間";
+"Compared to .Avg" = ".Avgと比較すると";
+"Compared to Med." = "メッドと比較すると。";
+"Compared to Best" = "ベストに比べて";
+"Compared to Worst" = "最悪のと比較すると";
+"Percentile" = "パーセンタイル";
+"z-score" = "Zスコア";
+"Recorded Time" = "録画時間";
+"Are you sure you want to delete: %lld" = "あなたが削除してもよろしいです：％の %lld";
+"Deleted Record" = "削除されたレコード";
+"Successfully deleted a record." = "首尾よくレコードを削除しました。";
+"Deleted Video" = "削除された動画";
+"Successfully deleted a video." = "首尾よく動画を削除しました。";
+"Are you sure you want to delete the saved video for: %@" = "あなたはあなたがのために保存した動画を削除したいです：%@";
+"SAVE TO PHOTOS" = "SAVE TO PHOTOS";
+"Video Saved!" = "動画を保存！";
+"Successfully saved video to camera roll!" = "成功裏にカメラロールにビデオを保存！";
+"Switched Groups for Records" = "レコードのスイッチドグループ";
+"Moved %lld items to %a" = "%a に移動％の %lld アイテム";

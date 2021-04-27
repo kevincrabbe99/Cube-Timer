@@ -18,7 +18,10 @@ class EditSolveController: ObservableObject {
     public func setCtTo(ct: CubeType, solves: [SolveItem]) {
         solvesData.setCtTo(ct: ct, solves: solves)
         allSolvesController.updateSolves()
-        self.alertController.makeAlert(icon: Image.init(systemName: "arrow.turn.down.right"), title: "Switched Groups for Records", text: "Moved \(allSolvesController.selected.count) items to \(ct.descrip)")
+        self.alertController.makeAlert(icon: Image.init(systemName: "arrow.turn.down.right"),
+                                       title: "Switched Groups for Records",
+                                       text: Text("Moved \(allSolvesController.selected.count, specifier: "%lld") items to \(ct.descrip)")
+        )
         //allSolvesController.selected = [] // clear the selected array
     }
     

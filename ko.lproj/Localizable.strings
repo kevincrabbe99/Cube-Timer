@@ -103,3 +103,45 @@
 "CREATE" = "창조하다";
 
 "Missing Puzzle Name" = "누락 된 퍼즐 이름";
+
+
+
+// V 3.5
+"Deleted Records" = "삭제 기록";
+"%lld records have been successfully deleted" = "%lld 레코드가 성공적으로 삭제되었습니다";
+"Recording buffer updated" = "기록 버퍼 업데이트";
+"Video recordings will not stop for %lld seconds after the timer is stopped." = "타이머가 정지 한 후 비디오 녹음 %의 %lld 의 초 동안 멈추지 않을 것입니다.";
+"Recording Stop Buffer Timer" = "녹화를 중지 버퍼 타이머";
+"Select how many seconds the should pass after stopping the timer before the video recording gets cut off." = "(가) 비디오 녹화가 중단되기 전에 타이머를 중지 한 후 통과해야하는 시간 (초)을 선택합니다.";
+"Microphone permissions not granted" = "마이크 권한은 부여되지";
+"Please enable microphone permissions whithin the device settings in order to use this feature." = "이 기능을 사용하려면 장치 설정 이내에서 마이크 권한을 활성화하십시오.";
+"Camera permissions not granted" = "카메라 권한이 부여되지";
+"Please enable camera permissions within the device settings in order to use this feature." = "이 기능을 사용하려면 장치 설정에서 카메라 권한을 활성화하십시오.";
+"Default to Camera On" = "카메라에에 기본";
+"Choose whether the camera is enabled by default upon opening the app." = "카메라 응용 프로그램을 열 때 기본적으로 사용 여부를 선택합니다.";
+"Camera default set to enabled" = "카메라 기본 설정 활성화에";
+"Camera will initiate upon opening the app." = "카메라 앱을 열 때 시작합니다.";
+"Camera default set to disabled" = "카메라 기본값은 비활성화로 설정";
+"Camera will not initiate upon opening the app." = "카메라 앱을 열 때 시작되지 않습니다.";
+"Recording Standby" = "녹화 대기";
+"Recording" = "녹음";
+"Recording..." = "녹음...";
+"Recorded Time" = "녹화 시간";
+"Compared to .Avg" = ".Avg에 비해";
+"Compared to Med." = "메드 비교.";
+"Compared to Best" = "가장 비교";
+"Compared to Worst" = "최악의 비교";
+"Percentile" = "백분위 수";
+"z-score" = "Z 점수";
+"Recorded Time" = "녹화 시간";
+"Are you sure you want to delete: %@" = "당신은 당신이 삭제할 수 있습니다 %의 %@";
+"Deleted Record" = "삭제 기록";
+"Successfully deleted a record." = "성공적으로 기록을 삭제.";
+"Deleted Video" = "삭제 된 동영상";
+"Successfully deleted a video." = "성공적으로 비디오를 삭제.";
+"Are you sure you want to delete the saved video for: %@" = "당신은 확실히 당신이 저장된 비디오를 삭제하려면 위치 : %@";
+"SAVE TO PHOTOS" = "SAVE TO 사진";
+"Video Saved!" = "비디오 저장!";
+"Successfully saved video to camera roll!" = "성공적으로 카메라 롤에 동영상을 저장!";
+"Switched Groups for Records" = "기록에 대한 전환 그룹";
+"Moved %lld items to %a" = "% A와 이전 %의 %lld 항목";

@@ -188,7 +188,7 @@ class SolveHandler: ObservableObject {
         
         
         // alert that solves have been deleted
-        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Records", text: "\(allSolvesController.selected.count) records have been successfully deleted ", duration: 3, iconColor: Color.init("black_chocolate"))
+        alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Records", text: Text("\(allSolvesController.selected.count, specifier: "%lld") records have been successfully deleted"), duration: 3, iconColor: Color.init("black_chocolate"))
         
         
         // loop through and call read delete method for all
@@ -221,7 +221,7 @@ class SolveHandler: ObservableObject {
             
             
             // delete video file
-            self.deleteVideoFor(solveItem: s)
+            self.deleteVideoFor(solveItem: s, alert: false)
             
             // delete SolvesFromTimeframe() reference
             self.solvesByTimeFrame.delete(s)
@@ -251,7 +251,7 @@ class SolveHandler: ObservableObject {
     /*
      *  just deleted the video reference and file
      */
-    public func deleteVideoFor(solveItem: SolveItem) {
+    public func deleteVideoFor(solveItem: SolveItem, alert: Bool = true) {
         if solveItem.hasVideo {
             
             let urlToDelete = DocumentDirectory.getVideosDirectory().appendingPathComponent(solveItem.videoName!)
@@ -259,7 +259,10 @@ class SolveHandler: ObservableObject {
             if FileManager.default.fileExists(atPath: urlToDelete.path) {
                 do {
                     try FileManager.default.removeItem(at: urlToDelete)
+                    
+                    if alert {
                     alertController.makeAlert(icon: Image.init(systemName: "minus"), title: "Deleted Video", text: "Successfully deleted a video.", duration: 3, iconColor: Color.init("black_chocolate"))
+                    }
                     print("Success deleting movie file for this solve.")
                 } catch {
                     print("Error deleting movie file for this solve.")
