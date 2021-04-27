@@ -108,6 +108,19 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
         self.selected = false
     }
     
+    /*
+     * force select
+     */
+    public func forceSelect() {
+        hapticGenerator.notificationOccurred(.success)
+        self.selected = true
+        allSolvesController.forceSelect(self)
+    }
+    
+    public func forceUnselect() {
+        self.selected = false
+        allSolvesController.forceUnSelect(self)
+    }
     
     public func updateSelfFromObj() {
         self.time = si.getTimeCapture()!

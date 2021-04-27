@@ -50,6 +50,29 @@ class TimeGroupController: ObservableObject, Identifiable {
         update()
     }
 
+    public func tgLabelTapped() {
+    
+        if !isAllSelected() {
+            for sec in solveElementControllers {
+                sec.forceSelect()
+            }
+        } else {
+            for sec in solveElementControllers {
+                sec.forceUnselect()
+            }
+        }
+        
+    }
+    
+    private func isAllSelected() -> Bool {
+        for sec in solveElementControllers {
+            if !sec.selected {
+                return false
+            }
+        }
+        return true
+    }
+    
     
     public func update() {
         

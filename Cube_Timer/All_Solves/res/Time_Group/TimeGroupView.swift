@@ -30,21 +30,27 @@ struct TimeGroupView: View {
                     
                     
                     /*
-                     *  right side, where the time labels are
+                     *  left side, where the time labels are
                      */
                     if allSolvesController.order == .time {
-                        ZStack {
-                            Text(LocalizedStringKey(controller.tg.rawValue))
-                                .font(Font.custom("Play-Regular", size: 10))
-                                .foregroundColor(.init("mint_cream"))
-                                .opacity(0.8)
-                                /*
-                                .fontWeight(.bold)
-                                .font(.system(size: 13))
-                                */
+                        Button {
+                            controller.tgLabelTapped()
+                        } label: {
+                            
+                            ZStack {
+                                Text(LocalizedStringKey(controller.tg.rawValue))
+                                    .multilineTextAlignment(.trailing
+                                    )
+                                    .font(Font.custom("Play-Regular", size: 10))
+                                    .foregroundColor(.init("mint_cream"))
+                                    .opacity(0.8)
+                            }
+                            
                         }
+                        .padding([.trailing], 5)
                         .frame(width: 50, height: controller.height, alignment: .topTrailing)
                         .offset(y: 10)
+                        
                     }
                     
                     /*

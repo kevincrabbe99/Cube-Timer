@@ -366,6 +366,21 @@ class AllSolvesController: ObservableObject {
         }
     }
     
+    /*
+     * Force should only be used when selecting via the TG label
+     */
+    public func forceSelect(_ sec: SolveElementController) {
+        self.selecting = true // set to true just incase
+        self.selected.append(sec)
+    }
+    public func forceUnSelect(_ sec: SolveElementController) {
+        self.selected = selected.filter { $0 != sec }
+        if selected.count == 0 {
+            self.selecting = false
+            lightTap.impactOccurred()
+        }
+    }
+    
     func getSolvesOrderedByTimeMS() -> [SolveItem] {
         return solves.sorted(by:{ $0.timeMS < $1.timeMS })
     }
