@@ -130,7 +130,7 @@
 "Recording" = "记录";
 "Recording..." = "记录...";
 "Recorded Time" = "记录时间";
-"Compared to .Avg" = "相较于.AVG";
+"Compared to Avg." = "相较于Avg.";
 "Compared to Med." = "相比于地中海。";
 "Compared to Best" = "相比于最佳";
 "Compared to Worst" = "相较于最差";
@@ -148,3 +148,8 @@
 "Successfully saved video to camera roll!" = "已成功地保存视频，相机胶卷！";
 "Switched Groups for Records" = "交换组的记录";
 "Moved %lld items to %a" = "感动 %lld 项目一 ％a";
+
+"Select Language" = "选择语言";
+"Select which language you would like this app to use." = "选择你想这个应用程序要使用的语言。";
+"Changed Default Language" = "更改默认语言";
+"Changed language to %@" = "改变语言 ％@";

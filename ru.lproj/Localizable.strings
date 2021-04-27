@@ -128,7 +128,7 @@
 "Recording" = "запись";
 "Recording..." = "Запись ...";
 "Recorded Time" = "Время записи";
-"Compared to .Avg" = "По сравнению с .Avg";
+"Compared to Avg." = "По сравнению с Avg.";
 "Compared to Med." = "По сравнению с Med.";
 "Compared to Best" = "По сравнению с Best";
 "Compared to Worst" = "По сравнению с Худшим";
@@ -148,4 +148,8 @@
 "Moved %lld items to %a" = "Перемещенные элементы %lld в %a";
 
 
+"Select Language" = "Выберите язык";
+"Select which language you would like this app to use." = "Выберите язык, который вы хотели бы это приложение, чтобы использовать.";
+"Changed Default Language" = "Измененный Язык по умолчанию";
+"Changed language to %@" = "Измененный язык %@";
 

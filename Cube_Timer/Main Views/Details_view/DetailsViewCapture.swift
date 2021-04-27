@@ -11,6 +11,7 @@ struct DetailsViewCapture: View {
   
     @EnvironmentObject var cvc: ContentViewController
     @EnvironmentObject var controller: DetailsViewController
+    @EnvironmentObject var settingsController: SettingsController
     
     
     var body: some View {
@@ -202,7 +203,7 @@ struct DetailsViewCapture: View {
             }  // end if
             
         }
-       // .environment(\.locale, .init(identifier: "es")) // DEV USE ONLY
+        .environment(\.locale, .init(identifier: settingsController.getDefaultLanguage))
     }
     
 }

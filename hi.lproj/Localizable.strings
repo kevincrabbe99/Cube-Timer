@@ -125,7 +125,7 @@
 "Recording" = "रिकॉर्डिंग";
 "Recording..." = "रिकॉर्डिंग ...";
 "Recorded Time" = "रिकॉर्डेड समय";
-"Compared to .Avg" = ".Avg की तुलना";
+"Compared to Avg." = "Avg. की तुलना";
 "Compared to Med." = "मेड की तुलना में।";
 "Compared to Best" = "बेस्ट की तुलना";
 "Compared to Worst" = "सबसे बुरा की तुलना में";
@@ -142,3 +142,8 @@
 "Video Saved!" = "वीडियो सहेजी गयी!";
 "Successfully saved video to camera roll!" = "सफलतापूर्वक कैमरा रोल करने के लिए वीडियो को बचाया!";
 //"Switched Groups for Records" = "रिकॉर्ड्स के लिए स्विचड समूह";
+
+"Select Language" = "भाषा का चयन करें";
+"Select which language you would like this app to use." = "का चयन करें जो भाषा आप इस एप्लिकेशन का उपयोग करना चाहते हैं।";
+"Changed Default Language" = "बदली गई डिफ़ॉल्ट भाषा";
+"Changed language to %@" = "% करने के लिए भाषा बदल %@";

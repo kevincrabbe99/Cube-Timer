@@ -148,7 +148,7 @@
 
 /* Detail View Labels */
 "Recorded Time" = "Hora de grabación";
-"Compared to Avg." = "En comparación con .Avg";
+"Compared to Avg." = "En comparación con Avg.";
 "Compared to Med." = "En comparación con Med.";
 "Compared to Best" = "En comparación con la mejor";
 "Compared to Worst" = "En comparación con peor";
@@ -173,3 +173,9 @@
 /* Alert Moving item to diffent groups */
 "Switched Groups for Records" = "Grupos de conmutación de los Registros";
 "Moved %lld items to %@" = "Movido artículos %lld un %@";
+
+"Select Language" = "Seleccione el idioma";
+"Select which language you would like this app to use." = "Seleccionar el idioma que desea que esta aplicación utilice.";
+"Changed Default Language" = "Cambiado idioma predeterminado";
+"Changed language to %@" = "Cambiado el lenguaje para %@";
+

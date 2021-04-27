@@ -9,6 +9,18 @@ import Foundation
 import SwiftUI
 import Firebase
 
+enum LanguageOption: String {
+    case English = "en"
+    case Chinese = "zh"
+    case Japanese = "ja"
+    case Spanish = "es"
+    case French = "fr"
+    case German = "de"
+    case Russian = "ru"
+    case Korian = "ko"
+    case Hindi = "hi"
+}
+
 class SettingsController: ObservableObject {
     
     var alertController: AlertController!
@@ -19,6 +31,7 @@ class SettingsController: ObservableObject {
     @Published var oneButtonMode: Bool = true
     @Published var defaultVideoOn: Bool = false
     @Published var recordingBufferTime: Int = 3
+    @Published var defaultLanguage: LanguageOption = .English
     
     // about stuff
     @Published var aboutState: Bool = false // changethis
@@ -88,8 +101,61 @@ class SettingsController: ObservableObject {
             Analytics.setUserProperty("3", forName: "recording_buffer_time")
         }
         
+        // check for default language
+        if let langVal = defaults.object(forKey: "default_language") as? String {
+            // set from user defaults
+            self.defaultLanguage = getLangOptFromString( langVal )
+        } else {
+            print("No value in default_language")
+            // get users language
+            if let langStr = Locale.current.languageCode {
+                defaults.set(langStr, forKey: "default_language")
+                self.defaultLanguage = getLangOptFromString( langStr )
+            } else {
+                defaults.set("en", forKey: "default_language")
+                self.defaultLanguage = getLangOptFromString( "en" )
+            }
+            
+            
+            // set analytics
+            Analytics.setUserProperty(defaultLanguage.rawValue, forName: "default_language")
+        }
+        
     }
     
+    /*
+     * Returns correct format for current language
+     */
+    var getDefaultLanguage: String {
+        return defaultLanguage.rawValue
+    }
+    
+    private func getLangOptFromString(_ str: String) -> LanguageOption {
+        
+        switch str {
+        case "en":
+            return .English
+        case "zh":
+            return .Chinese
+        case "ja":
+            return .Japanese
+        case "es":
+            return .Spanish
+        case "fr":
+            return .French
+        case "de":
+            return .German
+        case "ru":
+            return .Russian
+        case "ko":
+            return .Korian
+        case "hi":
+            return .Hindi
+        default:
+            return .English
+        }
+        
+    }
     
     
     /*
@@ -212,6 +278,30 @@ class SettingsController: ObservableObject {
         
         // set analytics
         Analytics.setUserProperty("\(newBufferTime)", forName: "recording_buffer_time")
+        
+    }
+    
+    
+    /*
+     * sets time for stop recording buffer
+     */
+    public func setLanguage(to: LanguageOption) {
+        print("setting language to ", to)
+        
+        let newLanguage = to
+        let defaults = UserDefaults.standard
+        lightTap.impactOccurred()
+        
+        // if statement stops from running upon init
+        if self.defaultLanguage != newLanguage {
+            alertController.makeAlert(icon: Image(systemName: "timer"), title: "Changed Default Language", text: Text("Changed language to \(newLanguage.rawValue)"))
+        }
+        
+        self.defaultLanguage = newLanguage
+        defaults.set(self.defaultLanguage.rawValue, forKey: "default_language")
+        
+        // set analytics
+        Analytics.setUserProperty("\(defaultLanguage)", forName: "default_language")
         
     }
     

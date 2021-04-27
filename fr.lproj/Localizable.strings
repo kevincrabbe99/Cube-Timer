@@ -128,7 +128,7 @@
 "Recording" = "Enregistrement";
 "Recording..." = "Enregistrement...";
 "Recorded Time" = "Heure d'enregistrement";
-"Compared to .Avg" = "Par rapport à .Avg";
+"Compared to Avg." = "Par rapport à Avg.";
 "Compared to Med." = "Par rapport à Med.";
 "Compared to Best" = "Par rapport Best";
 "Compared to Worst" = "Par rapport au pire";
@@ -146,3 +146,9 @@
 "Successfully saved video to camera roll!" = "Enregistrée avec succès vidéo sur rouleau appareil photo!";
 "Switched Groups for Records" = "Groupes commutées pour les documents";
 "Moved %lld items to %a" = "Déplacé articles %lld un %a";
+
+
+"Select Language" = "Choisir la langue";
+"Select which language you would like this app to use." = "Sélectionnez la langue que vous souhaitez application d'utiliser.";
+"Changed Default Language" = "Changement de langue par défaut";
+"Changed language to %@" = "Changement de langue %@";

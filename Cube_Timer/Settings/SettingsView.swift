@@ -13,6 +13,9 @@ struct SettingsView: View {
     @EnvironmentObject var cvc: ContentViewController
     
     
+ 
+    @State private var selectedLanguage = LanguageOption.English
+    
     var doublePressToStopLabel: String {
         if controller.requireDoublePressToStop {
             return "YES"
@@ -46,6 +49,7 @@ struct SettingsView: View {
     }
     
     var recordingBufferOptions = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    var allLanguageOptions: [LanguageOption] = [.English, .Spanish, .Japanese, .Chinese, .Russian, .German, .French, .Korian, .Hindi]
     @State private var selectedRecordingBufferTime = 3
     
     let gradient = Gradient(colors: [.init("very_dark_black"), .init("dark_black")])
@@ -148,6 +152,41 @@ struct SettingsView: View {
                                     })
                                     
                                     
+                                    HStack {
+                                        VStack {
+                                            Text(LocalizedStringKey("Select Language"))
+                                                .fontWeight(.bold)
+                                                .font(Font.custom("Dosis-Bold", size: 19))
+                                                .frame(width: 220, alignment: .leading)
+                                            Text(LocalizedStringKey("Select which language you would like this app to use."))
+                                                //.font(.system(size:12))
+                                                .font(Font.custom("Dosis", size: 13))
+                                                .frame(width: 220, alignment: .leading)
+                                                .opacity(0.8)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        ZStack {
+                                            Picker("", selection: $selectedLanguage) {
+                                                ForEach(allLanguageOptions, id: \.self) {
+                                                    Text(String($0.rawValue))
+                                                        .font(Font.custom("Play-Bold", size: 14))
+                                                        .foregroundColor(Color.init("mint_cream"))
+                                                }
+                                            }
+                                            .frame(width: 40, height: 80)
+                                            .clipped()
+                                            .onChange(of: selectedLanguage) { (value) in
+                                                controller.setLanguage(to: value)
+                                            }
+                                        }
+                                        .frame(width: 60)
+                                        .offset(x: 3)
+                                        
+                                    }
+                                    .padding(.bottom, 10)
+                                    
                                 }
                                 .padding(.trailing, 5)
                             }
@@ -178,6 +217,7 @@ struct SettingsView: View {
             } // end zstack bg
         }.onAppear() {
             self.selectedRecordingBufferTime = controller.recordingBufferTime
+            self.selectedLanguage = controller.defaultLanguage
         } // end geo
     }
 }

@@ -127,7 +127,7 @@
 "Recording" = "녹음";
 "Recording..." = "녹음...";
 "Recorded Time" = "녹화 시간";
-"Compared to .Avg" = ".Avg에 비해";
+"Compared to Avg." = "Avg.에 비해";
 "Compared to Med." = "메드 비교.";
 "Compared to Best" = "가장 비교";
 "Compared to Worst" = "최악의 비교";
@@ -145,3 +145,9 @@
 "Successfully saved video to camera roll!" = "성공적으로 카메라 롤에 동영상을 저장!";
 "Switched Groups for Records" = "기록에 대한 전환 그룹";
 "Moved %lld items to %a" = "% A와 이전 %의 %lld 항목";
+
+"Select Language" = "언어 선택";
+"Select which language you would like this app to use." = "이 응용 프로그램을 사용하고자하는 언어를 선택합니다.";
+"Changed Default Language" = "변경 기본 언어";
+"Changed language to %@" = "로 언어를 변경 %@";
+

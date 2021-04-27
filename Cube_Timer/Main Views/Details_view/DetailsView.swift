@@ -13,7 +13,7 @@ struct DetailsView: View {
     @EnvironmentObject var cvc: ContentViewController
     @EnvironmentObject var controller: DetailsViewController
     @EnvironmentObject var alertController: AlertController
-    
+    @EnvironmentObject var settingsController: SettingsController
     
     var body: some View {
         ZStack {
@@ -244,6 +244,7 @@ struct DetailsView: View {
         let capView = DetailsViewCapture()
             .environmentObject(cvc)
             .environmentObject(controller)
+            .environmentObject(settingsController)
         
         let capImage = capView.snapshot()
         

@@ -127,7 +127,7 @@
 "Recording" = "録音";
 "Recording..." = "録音...";
 "Recorded Time" = "録画時間";
-"Compared to .Avg" = ".Avgと比較すると";
+"Compared to Avg." = "Avg.と比較すると";
 "Compared to Med." = "メッドと比較すると。";
 "Compared to Best" = "ベストに比べて";
 "Compared to Worst" = "最悪のと比較すると";
@@ -145,3 +145,9 @@
 "Successfully saved video to camera roll!" = "成功裏にカメラロールにビデオを保存！";
 "Switched Groups for Records" = "レコードのスイッチドグループ";
 "Moved %lld items to %a" = "%a に移動％の %lld アイテム";
+
+"Select Language" = "言語を選択する";
+"Select which language you would like this app to use." = "あなたは、このアプリを使用したい言語を選択しています。";
+"Changed Default Language" = "変更既定の言語";
+"Changed language to %@" = "％に言語を変更しました %@";
+
