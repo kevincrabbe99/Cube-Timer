@@ -377,7 +377,6 @@ class AllSolvesController: ObservableObject {
         self.selected = selected.filter { $0 != sec }
         if selected.count == 0 {
             self.selecting = false
-            lightTap.impactOccurred()
         }
     }
     

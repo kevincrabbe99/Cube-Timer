@@ -12,6 +12,9 @@ import SwiftUI
 class TimeGroupController: ObservableObject, Identifiable {
     
     var allSolvesController: AllSolvesController!
+    let lightTap = UIImpactFeedbackGenerator(style: .light)
+    
+    let hapticGenerator = UINotificationFeedbackGenerator()
     
     var id: UUID
     @Published var solveElementControllers: [SolveElementController] = []
@@ -53,10 +56,12 @@ class TimeGroupController: ObservableObject, Identifiable {
     public func tgLabelTapped() {
     
         if !isAllSelected() {
+            hapticGenerator.notificationOccurred(.success)
             for sec in solveElementControllers {
                 sec.forceSelect()
             }
         } else {
+            lightTap.impactOccurred()
             for sec in solveElementControllers {
                 sec.forceUnselect()
             }

@@ -16,7 +16,6 @@
 		7B4719E7256C2E8A009FFFEA /* BarGraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4719E6256C2E8A009FFFEA /* BarGraphController.swift */; };
 		7B4A1731253E8D0A0036A30D /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A1730253E8D0A0036A30D /* Persistance.swift */; };
 		7B4D8F2C2617A42A00F3E116 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D8F2B2617A42A00F3E116 /* CameraView.swift */; };
-		7B4D8F342617A5D200F3E116 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D8F332617A5D200F3E116 /* CameraController.swift */; };
 		7B55C62E2596F29C0076B913 /* AllSolvesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55C62D2596F29B0076B913 /* AllSolvesController.swift */; };
 		7B6073F4258E4FFF00D188CF /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073F3258E4FFF00D188CF /* PopupController.swift */; };
 		7B6073FC258E500700D188CF /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6073FB258E500700D188CF /* PopupView.swift */; };
@@ -1308,7 +1307,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cube Timer/Cube Timer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Cube_Timer/Preview Content\"";
 				DEVELOPMENT_TEAM = X4H69T3Q68;
 				ENABLE_PREVIEWS = YES;
@@ -1334,7 +1333,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cube Timer/Cube Timer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Cube_Timer/Preview Content\"";
 				DEVELOPMENT_TEAM = X4H69T3Q68;
 				ENABLE_PREVIEWS = YES;

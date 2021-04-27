@@ -112,7 +112,6 @@ class SolveElementController: ObservableObject, Identifiable, Equatable {
      * force select
      */
     public func forceSelect() {
-        hapticGenerator.notificationOccurred(.success)
         self.selected = true
         allSolvesController.forceSelect(self)
     }
