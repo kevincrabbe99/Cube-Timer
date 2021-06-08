@@ -535,6 +535,7 @@ class SolveHandler: ObservableObject {
         }else {
             barGraphController.updateBars()        // updates self.bars to be the correct height
         }
+        barGraphController.updateBars()
         updateBest()        // updates self.best
         updateLast3()       // updates self.last3
         updateAverage()     // updates self.average

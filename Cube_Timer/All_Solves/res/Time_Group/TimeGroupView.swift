@@ -11,11 +11,22 @@ struct TimeGroupView: View {
     
     @ObservedObject var controller: TimeGroupController // this is set via AllSolvesView upon printing
     
-    var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 5), count: (!UIDevice.IsIpad ? 8 : 15))
+    static var columns: Int {
+        if UIDevice.IsIpad {
+            return 15
+        } else if UIDevice.hasNotch {
+            return 8
+        } else {
+            return 6
+        }
+    }
+    
     @EnvironmentObject var allSolvesController: AllSolvesController
     
     
     var body: some View {
+        
+        var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 5), count: TimeGroupView.columns)
         
         if controller.allSolvesController.count != 0 { // only show group if there are existing solves
             

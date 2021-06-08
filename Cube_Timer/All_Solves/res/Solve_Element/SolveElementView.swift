@@ -111,6 +111,7 @@ struct SolveElementView: View {
                  *  apply a RED DOT if the solve has a video saved
                  */
                 if controller.si.hasVideo {
+               // if Int.random(in: 1..<10) < 5 {
                     IconButton(icon: Image.init(systemName: "circle.fill"), bgColor: Color.clear, iconColor: Color.init("red"), width: 10, height: 10)
                         .offset(x: 16.5, y: -8)
                 }

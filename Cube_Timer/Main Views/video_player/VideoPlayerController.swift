@@ -91,6 +91,7 @@ class VideoPlayerController: ObservableObject {
         let df = DateFormatter()
         df.dateFormat = "MMM dd, yyyy hh:mm:ss"
         
+        
         if let timestamp = solveItem?.timestamp {
             return df.string(from: timestamp)
         } else {

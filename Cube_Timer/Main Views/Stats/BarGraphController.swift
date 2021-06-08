@@ -153,25 +153,15 @@ class BarGraphController: ObservableObject {
         
         highlightLastSolvesBar() // highlight the last bar added
         
+        
+        /*
+         *  Updates the display, highlighting the average bar
+         */
         let averageBarIndex = getBarIndexWhichIncludesAverage(barIntervals: barIntervals)
         if averageBarIndex != -1 {
             highlightBar(index: averageBarIndex, color: Color.init("yellow"))
         }
 
-    }
-    
-    /*
-     *  Returns a double representing the number of solves in the heighest bar
-     *  Called by self.updateBars()
-     */
-    private func getMaxBarHeight(_ ar: [[SolveItem]]) -> Double {
-        var maxCount:Double = -1
-        for i in ar {
-            if i.count > Int(maxCount) {
-                maxCount = Double(i.count)
-            }
-        }
-        return maxCount
     }
     
     /*
@@ -188,6 +178,21 @@ class BarGraphController: ObservableObject {
             barControllers[barIndex].highlight(Color.init("red"));
         }
     }
+    
+    /*
+     *  Returns a double representing the number of solves in the heighest bar
+     *  Called by self.updateBars()
+     */
+    private func getMaxBarHeight(_ ar: [[SolveItem]]) -> Double {
+        var maxCount:Double = -1
+        for i in ar {
+            if i.count > Int(maxCount) {
+                maxCount = Double(i.count)
+            }
+        }
+        return maxCount
+    }
+    
     
     private func highlightBar(index: Int, color: Color) {
         print("hightlighting bar, ", index)

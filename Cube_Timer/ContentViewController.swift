@@ -103,6 +103,7 @@ class ContentViewController: ObservableObject {
     public func openDetails(solveItem: SolveItem) {
         
         print("opening_details for SolveItem: ", solveItem.timeMS)
+        self.closeVideo() // just incase they delete it
         self.detailsViewController.goto(solveItem: solveItem)
         self.showingDetails = true
         

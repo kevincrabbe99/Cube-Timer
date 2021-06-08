@@ -108,7 +108,7 @@ struct AllSolvesView: View {
                             
                             Spacer()
                             
-                          //  if controller.solves.count  > 0 {
+                            if !UIDevice.IsIpad { // if the device is NOT an iPad
                                 HStack {
                                     VStack {
                                         StatLabelVertical(label: "SOLVES", value: (controller.hasSolves ? String(controller.count ?? 0) : "-"))
@@ -125,7 +125,26 @@ struct AllSolvesView: View {
                                         StatLabelVertical(label: "MEDIAN", value: (controller.hasSolves ? TimeCapture(controller.median).getAsReadable() : "-"))
                                     }
                                 }
-                         //   }
+                            } else { // if the device is an IPAD
+                                VStack {
+                                    Group {
+                                        StatLabelVertical(label: "SOLVES", value: (controller.hasSolves ? String(controller.count ?? 0) : "-"))
+                                        Spacer()
+                                        StatLabelVertical(label: "AVERAGE", value: (controller.hasSolves ? TimeCapture(controller.average ?? 0).getAsReadable() : "-"))
+                                        Spacer()
+                                        StatLabelVertical(label: "STD. DEV", value: (controller.hasSolves ? TimeCapture(controller.stdDev!).getAsReadable() : "-"))
+                                        Spacer()
+                                    }
+                                    Group {
+                                        StatLabelVertical(label: "BEST", value: (controller.hasSolves ? controller.best!.getTimeCapture()?.getAsReadable() as! String  : "-"))
+                                        Spacer()
+                                        StatLabelVertical(label: "WORST", value: (controller.hasSolves ? controller.worst!.getTimeCapture()?.getAsReadable() as! String : "-"))
+                                        Spacer()
+                                        StatLabelVertical(label: "MEDIAN", value: (controller.hasSolves ? TimeCapture(controller.median).getAsReadable() : "-"))
+                                    }
+                                }
+                                .padding(.leading, 20)
+                            }
                             
                             
                             
